@@ -221,7 +221,8 @@ class Master_advance extends CI_Controller
                 'app_gm_tgl' => $gmtgl,
                 'app_keuangan_ket' => $row->app_keuangan_ket,
                 'app_hd_ket' => $row->app_hd_ket,
-                'app_gm_ket' => $row->app_gm_ket
+                'app_gm_ket' => $row->app_gm_ket,
+                'app_user_id'=>$row->app_user_id
                 //'' => $row->
 
 
@@ -323,6 +324,13 @@ class Master_advance extends CI_Controller
                     'jumlah' => $tmpJumlah
                 );
                 $query = $this->master_advance_m->insertCpa($data);
+                $dataTerpakai  = array(
+                    'terpakai' => $tmpJumlah
+                );
+                $query = $this->master_advance_m->updateBudgetCflowTerpakai($tmpKodeCflow,$tahun,$idProyek,$dataTerpakai);
+                $query = $this->master_advance_m->updateBudgetCflowSaldo($tmpKodeCflow,$tahun,$idProyek);
+                $query = $this->master_advance_m->updateBudgetKdPerkTerpakai($tmpKodePerk,$tahun,$idProyek,$dataTerpakai);
+                $query = $this->master_advance_m->updateBudgetKdPerkSaldo($tmpKodePerk,$tahun,$idProyek);
             }
         }
 
@@ -344,20 +352,14 @@ class Master_advance extends CI_Controller
 
     function ubah()
     {
-        /* $kywId			= trim($this->input->post('kywId'));
-        $namaKyw			= trim($this->input->post('namaKyw'));
-        $deptKyw		= trim($this->input->post('deptKyw'));
-
-        $data = array(
-            'nama_kyw'		        	=>$namaKyw,
-            'dept_kyw'		        	=>$deptKyw
-        ); */
         $idAdv = trim($this->input->post('idAdvance'));
         $idKyw = trim($this->input->post('kywId'));
         $uangMuka = str_replace(',', '', trim($this->input->post('uangMuka')));
         $idProyek = trim($this->input->post('proyek'));
         $idKurs = trim($this->input->post('kurs'));
         $nilaiKurs = str_replace(',', '', trim($this->input->post('nilaiKurs')));
+        $tglTrans = trim($this->input->post('tglTrans'));
+        $tglTrans = date('Y-m-d', strtotime($tglTrans));
         $tglJT = trim($this->input->post('tglJT'));
         $tglJT = date('Y-m-d', strtotime($tglJT));
         $payTo = trim($this->input->post('payTo'));
@@ -370,6 +372,10 @@ class Master_advance extends CI_Controller
         $dokSSP = trim($this->input->post('dokSSP_in'));
         $dokSSPK = trim($this->input->post('dokSSPK_in'));
         $dokSBJ = trim($this->input->post('dokSBJ_in'));
+
+        $bulan = date('m', strtotime($tglTrans));//$tglTrans->format("m");
+        $tahun = date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
+
         //$ket			= trim($this->input->post(''));
         $data = array(
             'id_kyw' => $idKyw,
@@ -416,6 +422,13 @@ class Master_advance extends CI_Controller
                     'jumlah' => $tmpJumlah
                 );
                 $query = $this->master_advance_m->insertCpa($data);
+                $dataTerpakai  = array(
+                    'terpakai' => $tmpJumlah
+                );
+                $query = $this->master_advance_m->updateBudgetCflowTerpakai($tmpKodeCflow,$tahun,$idProyek,$dataTerpakai);
+                $query = $this->master_advance_m->updateBudgetCflowSaldo($tmpKodeCflow,$tahun,$idProyek);
+                $query = $this->master_advance_m->updateBudgetKdPerkTerpakai($tmpKodePerk,$tahun,$idProyek,$dataTerpakai);
+                $query = $this->master_advance_m->updateBudgetKdPerkSaldo($tmpKodePerk,$tahun,$idProyek);
             }
         } else {
             $query = $this->master_advance_m->deleteCpa($idAdv);
@@ -464,7 +477,30 @@ class Master_advance extends CI_Controller
         }
         $this->output->set_output(json_encode($array));
     }
+    function sign(){
+        $this->CI =& get_instance();
+        $idAdvance	= trim($this->input->post('idAdvance'));
+        $flag  		= $this->session->userdata('id_kyw');
+        $data = array(
+            'app_user_id' => $flag
+        );
+        $model 		= $this->master_advance_m->updateAdv($data,$idAdvance);
 
+        if($model){
+            $array = array(
+                'act'	=>1,
+                'tipePesan'=>'success',
+                'pesan' =>'Data berhasil di Approve.'
+            );
+        }else{
+            $array = array(
+                'act'	=>0,
+                'tipePesan'=>'error',
+                'pesan' =>'Data gagal di Approve.'
+            );
+        }
+        $this->output->set_output(json_encode($array));
+    }
     function cetak($idAdv)
     {
         if ($this->auth->is_logged_in() == false) {

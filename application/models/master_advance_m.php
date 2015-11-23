@@ -48,7 +48,7 @@ class Master_advance_m extends CI_Model {
 	}
 	public function getDescAdv($idAdv)
 	{
-		$this->db->select ( 'ma.id_kyw, mk.nama_kyw, md.nama_dept, ma.jml_uang, ma.id_proyek, ma.id_kurs, ma.nilai_kurs, ma.tgl_trans, ma.tgl_jt, ma.pay_to, ma.nama_akun_bank, ma.no_akun_bank, ma.nama_bank, ma.keterangan, ma.dok_po, ma.dok_sp, ma.dok_ssp, ma.dok_sspk, ma.dok_sbj, ma.app_keuangan_id, ma.app_hd_id, ma.app_gm_id, ma.app_keuangan_status, ma.app_hd_status, ma.app_gm_status, ma.app_keuangan_tgl, ma.app_hd_tgl, ma.app_gm_tgl, ma.app_keuangan_ket, ma.app_hd_ket, ma.app_gm_ket' );
+		$this->db->select ( 'ma.id_kyw, mk.nama_kyw, md.nama_dept, ma.jml_uang, ma.id_proyek, ma.id_kurs, ma.nilai_kurs, ma.tgl_trans, ma.tgl_jt, ma.pay_to, ma.nama_akun_bank, ma.no_akun_bank, ma.nama_bank, ma.keterangan, ma.dok_po, ma.dok_sp, ma.dok_ssp, ma.dok_sspk, ma.dok_sbj, ma.app_keuangan_id, ma.app_hd_id, ma.app_gm_id, ma.app_keuangan_status, ma.app_hd_status, ma.app_gm_status, ma.app_keuangan_tgl, ma.app_hd_tgl, ma.app_gm_tgl, ma.app_keuangan_ket, ma.app_hd_ket,ma.app_user_id, ma.app_gm_ket' );
 		$this->db->from('master_advance ma');
 		$this->db->join('master_karyawan mk', 'ma.id_kyw=mk.id_kyw', 'LEFT');
 		$this->db->join('master_dept md', 'mk.dept_kyw=md.id_dept', 'LEFT');
@@ -149,6 +149,61 @@ class Master_advance_m extends CI_Model {
 			return true;
 		}
     }
+	function updateBudgetCflowTerpakai($tmpKodeCflow,$tahun,$idProyek,$data){
+		$this->db->trans_begin();
+		$query1 = $this->db->where('kode_cflow', $tmpKodeCflow);
+		$query2 = $this->db->where('tahun', $tahun);
+		$query3 = $this->db->where('id_proyek', $idProyek);
+		$query4 = $this->db->update('budget_cflow', $data);
+
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return false;
+		}
+		else{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+	function updateBudgetCflowSaldo($tmpKodeCflow,$tahun,$idProyek){
+		$sql2  = "update budget_cflow set saldo= (saldo  - terpakai) where kode_cflow = '$tmpKodeCflow' and id_proyek = '$idProyek' and tahun = '$tahun'";
+		$query = $this->db->query($sql2);
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return false;
+		}
+		else{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+	function updateBudgetKdPerkTerpakai($tmpKodePerk,$tahun,$idProyek,$data){
+		$this->db->trans_begin();
+		$query1 = $this->db->where('kode_perk', $tmpKodePerk);
+		$query2 = $this->db->where('tahun', $tahun);
+		$query3 = $this->db->where('id_proyek', $idProyek);
+		$query4 = $this->db->update('budget_perkiraan', $data);
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return false;
+		}
+		else{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+	function updateBudgetKdPerkSaldo($tmpKodePerk,$tahun,$idProyek){
+		$sql2  = "update budget_perkiraan set saldo= (saldo  - terpakai) where kode_perk = '$tmpKodePerk' and id_proyek = '$idProyek' and tahun = '$tahun'";
+		$query = $this->db->query($sql2);
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return false;
+		}
+		else{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
 	function updateAdv($data,$advId){
 		$this->db->trans_begin();
 		$query1 = $this->db->where('id_advance', $advId);
@@ -206,14 +261,25 @@ class Master_advance_m extends CI_Model {
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}
+	/*function getCflowTerpakai(){
+		$sql ="select ";
+	}*/
 	function cetak_cpa_detail($idAdv){
+		$sql="select a.*,b.nama_cflow, c.tahun,c.id_proyek,c.kode_cflow,
+			  (c.jan+c.feb+c.mar+c.apr+c.mei+c.jun+c.jul+c.agu+c.sep+c.okt+c.nov+c.des) as anggaran,c.terpakai,c.saldo from cpa a
+			  left join master_cashflow b on a.kode_cflow=b.kode_cflow
+			  left join budget_cflow c on a.kode_cflow=c.kode_cflow where a.id_master = '".$idAdv."'";
+		$query=$this->db->query($sql);
+		return $query->result(); // returning rows, not row
+	}
+	/*function cetak_cpa_detail($idAdv){
 		$sql="select a.*,b.nama_perk, c.tahun,c.id_proyek,c.kode_perk, 
 			  (c.jan+c.feb+c.mar+c.apr+c.mei+c.jun+c.jul+c.agu+c.sep+c.okt+c.nov+c.des) as anggaran,c.terpakai,c.saldo from cpa a
 			  left join perkiraan b on a.kode_perk=b.kode_perk 
 			  left join budget_perkiraan c on a.kode_perk=c.kode_perk where a.id_master = '".$idAdv."'";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
-	}
+	}*/
 	
 }
 

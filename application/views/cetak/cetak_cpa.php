@@ -123,7 +123,7 @@
 	 $totalSisa = 0;
 	 foreach($detail as $d){
 	 ?>
-	 <tr><td rowspan="2"><?php echo $d->kode_perk; ?></td><td style="border-bottom: 0px;"><?php echo $d->nama_perk; ?></td><td rowspan="2"><?php echo number_format($d->anggaran,2,",","."); ?></td>
+	 <tr><td rowspan="2"><?php echo $d->kode_cflow; ?></td><td style="border-bottom: 0px;"><?php echo $d->nama_cflow; ?></td><td rowspan="2"><?php echo number_format($d->anggaran,2,",","."); ?></td>
 	 <td rowspan="2"><?php echo number_format($d->terpakai,2,",","."); ?></td><td rowspan="2"><?php echo number_format($d->jumlah,2,",","."); ?></td>
 	 <td rowspan="2"><?php echo number_format($d->saldo,2,",","."); ?></td></tr>
 	 <tr><td style="border-top: 0px;"><?php echo $d->keterangan; ?></td></tr>

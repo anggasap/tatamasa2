@@ -73,6 +73,7 @@ class Budgeti_perk extends CI_Controller
     function ubah(){
     	$kode_perk			= trim($this->input->post('kode_perk'));
         $proyek			    = trim($this->input->post('id_proyek'));
+		$tahun				= trim($this->input->post('tahun'));
         $jan                = str_replace(',', '', trim($this->input->post('jan')));
         $feb                = str_replace(',', '', trim($this->input->post('feb')));
         $mar                = str_replace(',', '', trim($this->input->post('mar')));
@@ -86,7 +87,7 @@ class Budgeti_perk extends CI_Controller
         $nov                = str_replace(',', '', trim($this->input->post('nov')));
         $des                = str_replace(',', '', trim($this->input->post('des')));
         $total              = $jan + $feb + $mar + $apr + $mei +$jun + $jul + $agu + $sep + $okt + $nov + $des;
-    	//$ket			= trim($this->input->post(''));
+    	//$ket				= trim($this->input->post(''));
     	$data = array(
     			'jan'		        	=>str_replace(',', '', trim($this->input->post('jan'))),
     			'feb'		        	=>str_replace(',', '', trim($this->input->post('feb'))),
@@ -102,7 +103,7 @@ class Budgeti_perk extends CI_Controller
     			'des'		        	=>str_replace(',', '', trim($this->input->post('des')))
     			//        		''		        	=>$,
     	);
-    	$model = $this->budgeti_perk_m->update($data,$total,$kode_perk,$proyek);
+    	$model = $this->budgeti_perk_m->update($data,$total,$kode_perk,$proyek,$tahun);
     	if($model){
     		$array = array(
     			'act'	=>1,

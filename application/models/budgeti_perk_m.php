@@ -41,7 +41,7 @@ class Budgeti_perk_m extends CI_Model {
 		return $query->result(); // returning rows, not row
 	}
 	
-	function update($data,$total,$kode_perk,$proyek){
+	function update($data,$total,$kode_perk,$proyek,$tahun){
 		$this->db->trans_begin();
 		//$query1 = $this->db->where('kode_perk', $kode_perk);
 //		$query2 = $this->db->update('budget_perkiraan', $data);
@@ -51,7 +51,7 @@ class Budgeti_perk_m extends CI_Model {
         $saldo_sbl = $row[0]->saldo_sbl;
         $sql2  = "update budget_perkiraan set jan = '$data[jan]', feb = '$data[feb]', mar = $data[mar], apr = $data[apr], 
         mei = '$data[mei]', jun = '$data[jun]', jul = '$data[jul]', agu = '$data[agu]', sep = '$data[sep]', okt = '$data[okt]',
-        nov = '$data[nov]', des = '$data[des]', saldo= (saldo + '$total' - terpakai - '$saldo_sbl') where kode_perk = '$kode_perk' and id_proyek = '$proyek'";
+        nov = '$data[nov]', des = '$data[des]', saldo= (saldo + '$total' - terpakai - '$saldo_sbl') where kode_perk = '$kode_perk' and id_proyek = '$proyek' and tahun = '$tahun'";
         $query = $this->db->query($sql2);
 		if ($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();

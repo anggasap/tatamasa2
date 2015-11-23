@@ -17,8 +17,7 @@
                 <div class="actions">
                     <a href="javascript:;" class="btn btn-default btn-sm" onclick="cetak();">
                         <i class="fa fa-print"></i> Cetak </a>
-                    <a class="btn btn-icon-only btn-default btn-sm fullscreen" href="javascript:;"
-                       data-original-title="" title="">
+                    <a class="btn btn-icon-only btn-default btn-sm fullscreen" href="javascript:;" data-original-title="" title="">
                     </a>
                 </div>
 
@@ -36,7 +35,7 @@
             <div class="portlet-body">
                 <div>
                 	<span id="event_result">
-                    
+
                     </span>
                 </div>
                 <form role="form" method="post"
@@ -46,42 +45,33 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>No Jurnal Advance </label>
-
                                     <div class="input-group">
-
+                                        <div class="input-icon">
                                             <input id="id_idJAdvance" required="required" class="form-control input-sm"
                                                    type="text" name="idJAdvance" readonly/>
                                             <input id="id_id" type="hidden" name="id">
-                                        <span class="input-group-btn">
+                                        </div>
+                                    <span class="input-group-btn">
                                         <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelJAdv"
                                            id="id_btnModal" data-toggle="modal">
                                             <i class="fa fa-search fa-fw"/></i>
                                         </a>
-                                        </span>
+                                    </span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <label>No Advance </label>
-                                            <div class="input-group">
-
-                                                    <input id="id_idAdvance" required="required"
-                                                           class="form-control input-sm"
-                                                           type="text" name="idAdvance" readonly/>
-                                                <span class="input-group-btn">
-                                                    <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelAdv"
-                                                    id="id_btnModal" data-toggle="modal">
-                                                        <i class="fa fa-search fa-fw"/></i>
-                                                    </a>
-                                                </span>
-                                            </div>
+                                    <label>No Advance </label>
+                                    <div class="input-group">
+                                        <div class="input-icon">
+                                            <input id="id_idAdvance" required="required" class="form-control input-sm"
+                                                   type="text" name="idAdvance" readonly/>
                                         </div>
-                                        <div class="col-md-5">
-                                                <label>Tgl Request</label>
-                                                <input id="id_tglReq" required="required" class="form-control input-sm"
-                                                       type="text" name="tglReq" readonly/>
-                                        </div>
+                                    <span class="input-group-btn">
+                                        <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelAdv"
+                                           id="id_btnModal" data-toggle="modal">
+                                            <i class="fa fa-search fa-fw"/></i>
+                                        </a>
+                                    </span>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -97,13 +87,19 @@
                                     <input id="id_deptKyw" required="required" class="form-control input-sm"
                                            type="text" name="deptKyw" readonly/>
                                 </div>
-                            </div>
-                            <!--end <div class="col-md-6"> 1 -->
-                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Dibayarkan ke</label>
                                     <input id="id_payTo" required="required" class="form-control input-sm"
                                            type="text" name="payTo" readonly/>
+                                </div>
+
+                            </div>
+                            <!--end <div class="col-md-6"> 1 -->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Jumlah uang muka</label>
+                                    <input id="id_uangMuka" required="required" class="form-control nomor input-sm"
+                                           type="text" name="uangMuka" readonly/>
                                 </div>
                                 <div class="form-group">
                                     <label>Nama pemilik akun bank</label>
@@ -120,30 +116,38 @@
                                     <input id="id_namaBank" required="required" class="form-control input-sm"
                                            type="text" name="namaBank" readonly/>
                                 </div>
+                                <div class="form-group">
+                                    <label>Kode Cash Out</label>
+                                    <input id="id_kodeCashOut" required="required" class="form-control input-sm"
+                                           type="text" name="kodeCashOut" readonly/>
+                                </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Kode Perk (Akun GL)</label>
-                                    <input id="id_kodePerk" required="required" class="form-control input-sm"
-                                           type="text" name="kodePerk" readonly/>
+                                    <label>Episode No.</label>
+                                    <input id="id_episodeNo" required="required" class="form-control input-sm"
+                                           type="text" name="episodeNo" placeholder="Episode nomor"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>Kode Cash Flow</label>
-                                    <input id="id_kodeCFlow" required="required" class="form-control input-sm"
-                                           type="text" name="kodeCFlow" placeholder=""/>
+                                    <label>Check / Giro No. </label>
+                                    <input id="id_checkGiro" required="required" class="form-control input-sm"
+                                           type="text" name="checkGiro" placeholder="Nomor check / giro"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>Proyek</label>
-                                    <input id="id_proyek" required="required" class="form-control date-picker input-sm"
-                                           data-date-format="dd-mm-yyyy"
-                                           type="text" name="proyek" placeholder=""/>
+                                    <label>Date</label>
+                                    <input id="id_tgl" required="required" class="form-control date-picker input-sm" data-date-format="dd-mm-yyyy"
+                                           type="text" name="tgl" placeholder="dd-mm-yyyy"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>Jenis Advance </label>
-                                    <input id="id_jnsAdv" required="required" class="form-control input-sm"
-                                           type="text" name="jnsAdv" placeholder=""/>
+                                    <label>Amount</label>
+                                    <input id="id_amount" required="required" class="form-control nomor input-sm"
+                                           type="text" name="amount" placeholder="amount"/>
                                 </div>
-
+                                <div class="form-group">
+                                    <label>Original Amount</label>
+                                    <input id="id_originalAmount" required="required" class="form-control nomor input-sm"
+                                           type="text" name="originalAmount" placeholder="Original amount" />
+                                </div>
                             </div>
                         </div>
                         <!-- HIDDEN INPUT -->
@@ -155,41 +159,11 @@
                     <!-- ROW 2 -->
                     <div class="row">
                         <div class="form-body">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Keterangan</label>
-                                    <textarea rows="2" cols="" name="keterangan" id="id_keterangan"
-                                              class="form-control input-sm" readonly/>
+                                    <textarea rows="2" cols="" name="keterangan"  id="id_keterangan" class="form-control input-sm" readonly/>
                                     </textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Jumlah </label>
-                                    <input id="id_jnsAdv" required="required" class="form-control input-sm"
-                                           type="text" name="jnsAdv" placeholder=""/>
-                                </div>
-                                <div class="form-group">
-                                    <label>Terpakai </label>
-                                    <input id="id_jnsAdv" required="required" class="form-control input-sm"
-                                           type="text" name="jnsAdv" placeholder=""/>
-                                </div>
-                                <div class="form-group">
-                                    <label>Sisa/lebih </label>
-                                    <input id="id_jnsAdv" required="required" class="form-control input-sm"
-                                           type="text" name="jnsAdv" placeholder=""/>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>No settlement </label>
-                                    <input id="id_jnsAdv" required="required" class="form-control input-sm"
-                                           type="text" name="jnsAdv" placeholder=""/>
-                                </div>
-                                <div class="form-group">
-                                    <label>Tanggal </label>
-                                    <input id="id_jnsAdv" required="required" class="form-control input-sm"
-                                           type="text" name="jnsAdv" placeholder=""/>
                                 </div>
                             </div>
                         </div>
@@ -320,8 +294,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-body">
-                                <table class="table table-striped table-bordered table-hover text_kanan"
-                                       id="idTabelAdv">
+                                <table class="table table-striped table-bordered table-hover text_kanan" id="idTabelAdv">
                                     <thead>
                                     <tr>
                                         <th>
@@ -369,29 +342,28 @@
 <script src="<?php echo base_url('metronic/global/plugins/respond.min.js'); ?>"></script>
 <script src="<?php echo base_url('metronic/global/plugins/excanvas.min.js'); ?>"></script>
 <![endif]-->
-<?php echo $this->session->userdata('jqueryJS'); ?>
-<?php echo $this->session->userdata('jquery-migrateJS'); ?>
+<?php echo  $this->session->userdata('jqueryJS'); ?>
+<?php echo  $this->session->userdata('jquery-migrateJS'); ?>
 <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-<?php echo $this->session->userdata('jquery-uiJS'); ?>
-<?php echo $this->session->userdata('bootstrapJS'); ?>
-<?php echo $this->session->userdata('bootstrap-hover-dropdownJS'); ?>
-<?php echo $this->session->userdata('jquery-slimscrollJS'); ?>
-<?php echo $this->session->userdata('jquery-blockuiJS'); ?>
-<?php echo $this->session->userdata('jquery-cokieJS'); ?>
-<?php echo $this->session->userdata('jquery-uniformJS'); ?>
-<?php echo $this->session->userdata('bootstrap-switchJS'); ?>
+<?php echo  $this->session->userdata('jquery-uiJS'); ?>
+<?php echo  $this->session->userdata('bootstrapJS'); ?>
+<?php echo  $this->session->userdata('bootstrap-hover-dropdownJS'); ?>
+<?php echo  $this->session->userdata('jquery-slimscrollJS'); ?>
+<?php echo  $this->session->userdata('jquery-blockuiJS'); ?>
+<?php echo  $this->session->userdata('jquery-cokieJS'); ?>
+<?php echo  $this->session->userdata('jquery-uniformJS'); ?>
+<?php echo  $this->session->userdata('bootstrap-switchJS'); ?>
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<?php echo $this->session->userdata('toastrJS'); ?>
-<?php echo $this->session->userdata('select2JS'); ?>
-<?php echo $this->session->userdata('jquery-dataTablesJS'); ?>
-<?php echo $this->session->userdata('dataTables-bootstrapJS'); ?>
+<?php echo  $this->session->userdata('toastrJS'); ?>
+<?php echo  $this->session->userdata('select2JS'); ?>
+<?php echo  $this->session->userdata('jquery-dataTablesJS'); ?>
+<?php echo  $this->session->userdata('dataTables-bootstrapJS'); ?>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- END CORE PLUGINS -->
-<?php echo $this->session->userdata('metronicJS'); ?>
-<?php echo $this->session->userdata('layoutJS'); ?>
-<?php echo $this->session->userdata('demoJS'); ?>
-<script src="<?php echo base_url('metronic/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'); ?>"
-        type="text/javascript"></script>
+<?php echo  $this->session->userdata('metronicJS'); ?>
+<?php echo  $this->session->userdata('layoutJS'); ?>
+<?php echo  $this->session->userdata('demoJS'); ?>
+<script src="<?php echo base_url('metronic/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('metronic/additional/start.js'); ?>" type="text/javascript"></script>
 <script>
     jQuery(document).ready(function () {
@@ -422,11 +394,11 @@
             table.dataTable({
                 "ajax": "<?php  echo base_url("/jurnal_adv/getPpAll"); ?>",
                 "columns": [
-                    {"data": "idPp"},
-                    {"data": "idAdv"},
-                    {"data": "namaKyw"},
-                    {"data": "dept"},
-                    {"data": "jmlUang"}
+                    { "data": "idPp" },
+                    { "data": "idAdv" },
+                    { "data": "namaKyw" },
+                    { "data": "dept" },
+                    { "data": "jmlUang" }
                 ],
                 // Internationalisation. For more info refer to http://datatables.net/manual/i18n
                 "language": {
@@ -445,8 +417,8 @@
 
                 "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
                 "lengthMenu": [
-                    [5, 10, 15, 20, -1],
-                    [5, 10, 15, 20, "All"] // change per page values here
+                    [5, 10,15, 20, -1],
+                    [5, 10,15, 20, "All"] // change per page values here
                 ],
                 // set the initial value
                 "pageLength": 5,
@@ -455,13 +427,13 @@
                     "search": "Cari: ",
                     "lengthMenu": "  _MENU_ records",
                     "paginate": {
-                        "previous": "Prev",
+                        "previous":"Prev",
                         "next": "Next",
                         "last": "Last",
                         "first": "First"
                     }
                 },
-                "aaSorting": [[0, 'asc']/*, [5,'desc']*/],
+                "aaSorting": [[0,'asc']/*, [5,'desc']*/],
                 "columnDefs": [{  // set default column settings
                     'orderable': true,
                     "searchable": true,
@@ -503,9 +475,9 @@
                 getDescAdv(idAdv);
                 getDescJadv(idJadv);
                 $('#btnCloseModalDataJadv').trigger('click');
-                $('#id_btnSimpan').attr("disabled", true);
-                $('#id_btnHapus').attr("disabled", false);
-                $('#id_btnUbah').attr("disabled", false);
+                $('#id_btnSimpan').attr("disabled",true);
+                $('#id_btnHapus').attr("disabled",false);
+                $('#id_btnUbah').attr("disabled",false);
             });
 
             tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
@@ -516,9 +488,9 @@
             table.dataTable({
                 "ajax": "<?php  echo base_url("/master_advance/getAdvAll"); ?>",
                 "columns": [
-                    {"data": "idAdv"},
-                    {"data": "namaReq"},
-                    {"data": "jmlUang"}
+                    { "data": "idAdv" },
+                    { "data": "namaReq" },
+                    { "data": "jmlUang" }
                 ],
                 // Internationalisation. For more info refer to http://datatables.net/manual/i18n
                 "language": {
@@ -537,8 +509,8 @@
 
                 "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
                 "lengthMenu": [
-                    [5, 10, 15, 20, -1],
-                    [5, 10, 15, 20, "All"] // change per page values here
+                    [5, 10,15, 20, -1],
+                    [5, 10,15, 20, "All"] // change per page values here
                 ],
                 // set the initial value
                 "pageLength": 5,
@@ -547,13 +519,13 @@
                     "search": "Cari: ",
                     "lengthMenu": "  _MENU_ records",
                     "paginate": {
-                        "previous": "Prev",
+                        "previous":"Prev",
                         "next": "Next",
                         "last": "Last",
                         "first": "First"
                     }
                 },
-                "aaSorting": [[0, 'asc']/*, [5,'desc']*/],
+                "aaSorting": [[0,'asc']/*, [5,'desc']*/],
                 "columnDefs": [{  // set default column settings
                     'orderable': true,
                     "searchable": true,
@@ -591,12 +563,12 @@
                 var idAdv = $(this).find("td").eq(0).html();
                 $('#id_idAdvance').val(idAdv);
                 $a = $('#id_idJAdvance').val();
-                if ($a == '') {
-                    $('#id_btnUbah').attr("disabled", true);
-                    $('#id_btnHapus').attr("disabled", true);
-                } else {
-                    $('#id_btnUbah').attr("disabled", false);
-                    $('#id_btnHapus').attr("disabled", false);
+                if($a == ''){
+                    $('#id_btnUbah').attr("disabled",true);
+                    $('#id_btnHapus').attr("disabled",true);
+                }else{
+                    $('#id_btnUbah').attr("disabled",false);
+                    $('#id_btnHapus').attr("disabled",false);
                 }
                 $('#btnCloseModalDataAdv').trigger('click');
                 $('#id_idAdvance').val(idAdv);
@@ -623,44 +595,44 @@
     //Ready Doc
     btnStart();
     readyToStart();
-    $("#id_idAdvance").focus();
+    $("#id_namaKyw").focus();
 
-    $("#id_btnSimpan").click(function () {
+    $( "#id_btnSimpan" ).click(function() {
         $('#idTmpAksiBtn').val('1');
     });
 
-    $('#id_btnUbah').click(function () {
+    $('#id_btnUbah').click(function(){
         $('#idTmpAksiBtn').val('2');
     });
-    $('#id_btnHapus').click(function () {
+    $('#id_btnHapus').click(function(){
         $('#idTmpAksiBtn').val('3');
     });
-    $('#id_btnBatal').click(function () {
+    $('#id_btnBatal').click(function(){
         btnStart();
         startCheckBox();
         resetForm();
         readyToStart();
     });
-    $("#id_idAdvance").focusout(function () {
-        var idAdv = $(this).val();
+    $( "#id_idAdvance" ).focusout(function() {
+        var idAdv	= $(this).val();
         getDescAdv(idAdv);
     });
-    $("#id_tglJT").focusout(function () {
-        if ($(this).val() != '') {
+    $( "#id_tglJT" ).focusout(function() {
+        if($(this).val()!=''){
             var tgl = $(this).val();
             //alert(tgl);
-            var vbl = "#id_tglJT";
-            validatedate(tgl, vbl);
+            var vbl= "#id_tglJT";
+            validatedate(tgl,vbl);
         }
 
     });
-    function getDescAdv(idAdv) {
+    function getDescAdv(idAdv){
         ajaxModal();
         if (idAdv != '') {
             $.post("<?php echo site_url('/jurnal_adv/getDescAdvCashFlow'); ?>",
                 {
                     'idAdv': idAdv
-                }, function (data) {
+                },function (data) {
                     if (data.baris == 1) {
                         $('#id_kywId').val(data.id_kyw);
                         $('#id_namaKyw').val(data.nama_kyw);
@@ -673,21 +645,21 @@
                         $('#id_namaBank').val(data.nama_bank);
                         $('#id_keterangan').val(data.keterangan);
                         $('#id_kodeCashOut').val(data.cashOut);
-                    } else {
+                    }else{
                         alert('Data tidak ditemukan!');
                         $('#id_btnBatal').trigger('click');
                     }
                 }, "json");
         }
     }
-    function getDescJadv(idJadv) {
+    function getDescJadv(idJadv){
         ajaxModal();
         if (idJadv != '') {
             console.log(idJadv);
             $.post("<?php echo site_url('/jurnal_adv/getDescJadv'); ?>",
                 {
                     'idJadv': idJadv
-                }, function (data) {
+                },function (data) {
                     console.log(data);
                     if (data.baris == 1) {
                         $('#id_id').val(data.id);
@@ -697,62 +669,62 @@
                         $('#id_tgl').val(data.tanggal);
                         $('#id_amount').val(data.amount);
                         $('#id_originalAmount').val(data.original_amount);
-                    } else {
+                    }else{
                         alert('Data tidak ditemukan!');
                         $('#id_btnBatal').trigger('click');
                     }
                 }, "json");
         }
     }
-    function ajaxSubmitJAdvance() {
+    function ajaxSubmitJAdvance(){
         ajaxModal();
         $.ajax({
-            type: "POST",
+            type:"POST",
             dataType: "json",
-            url: "<?php echo base_url(); ?>jurnal_adv/simpan",
-            data: dataString,
+            url:"<?php echo base_url(); ?>jurnal_adv/simpan",
+            data:dataString,
 
-            success: function (data) {
+            success:function (data) {
                 $('#id_Reload').trigger('click');
                 $('#id_btnBatal').trigger('click');
                 readyToStart();
                 startCheckBox()
-                UIToastr.init(data.tipePesan, data.pesan);
+                UIToastr.init(data.tipePesan,data.pesan);
             }
 
         });
         event.preventDefault();
     }
-    function ajaxUbahJAdvance() {
+    function ajaxUbahJAdvance(){
         ajaxModal();
         $.ajax({
-            type: "POST",
+            type:"POST",
             dataType: "json",
-            url: "<?php echo base_url(); ?>jurnal_adv/ubah",
-            data: dataString,
+            url:"<?php echo base_url(); ?>jurnal_adv/ubah",
+            data:dataString,
 
-            success: function (data) {
+            success:function (data) {
                 $('#id_Reload').trigger('click');
                 $('#id_btnBatal').trigger('click');
-                UIToastr.init(data.tipePesan, data.pesan);
+                UIToastr.init(data.tipePesan,data.pesan);
             }
 
         });
         event.preventDefault();
     }
-    function ajaxHapusJAdvance() {
+    function ajaxHapusJAdvance(){
         ajaxModal();
-        var idJAdvance = $('#id_idJAdvance').val();
-        idJAdvance = idJAdvance.trim();
+        var idJAdvance	= $('#id_idJAdvance').val();
+        idJAdvance		= idJAdvance.trim();
         $.ajax({
-            type: "POST",
+            type:"POST",
             dataType: "json",
-            url: "<?php echo base_url(); ?>jurnal_adv/hapus",
-            data: {idJAdvance: idJAdvance},
-            success: function (data) {
+            url:"<?php echo base_url(); ?>jurnal_adv/hapus",
+            data:{idJAdvance : idJAdvance},
+            success:function (data) {
                 $('#id_Reload').trigger('click');
                 $('#id_btnBatal').trigger('click');
-                UIToastr.init(data.tipePesan, data.pesan);
+                UIToastr.init(data.tipePesan,data.pesan);
             }
 
         });
@@ -760,36 +732,36 @@
     }
     $('#id_formJAdvance').submit(function (event) {
         dataString = $("#id_formJAdvance").serialize();
-        var aksiBtn = $('#idTmpAksiBtn').val();
-        if (aksiBtn == '1') {
+        var aksiBtn       = $('#idTmpAksiBtn').val();
+        if(aksiBtn == '1'){
             var r = confirm('Anda yakin menyimpan data ini?');
-            if (r == true) {
+            if (r== true){
                 ajaxSubmitJAdvance();
-            } else {//if(r)
+            }else{//if(r)
                 return false;
             }
-        } else if (aksiBtn == '2') {
+        }else if(aksiBtn == '2'){
             var r = confirm('Anda yakin merubah data ini?');
-            if (r == true) {
+            if (r== true){
                 ajaxUbahJAdvance();
-            } else {//if(r)
+            }else{//if(r)
                 return false;
             }
-        } else if (aksiBtn == '3') {
+        }else if(aksiBtn == '3'){
             var r = confirm('Anda yakin menghapus data ini?');
-            if (r == true) {
+            if (r== true){
                 ajaxHapusJAdvance();
-            } else {//if(r)
+            }else{//if(r)
                 return false;
             }
         }
     });
-    function cetak() {
+    function cetak(){
         var idJadv = $('#id_id').val();
-        if (idJadv == '') {
+        if(idJadv == ''){
             alert('Silahkan pilih Id Perintah Pembayaran');
-        } else {
-            window.open("<?php echo base_url('jurnal_adv/cetak/'); ?>/" + idJadv, '_blank');
+        }else{
+            window.open("<?php echo base_url('jurnal_adv/cetak/'); ?>/"+idJadv, '_blank');
         }
     }
 </script>

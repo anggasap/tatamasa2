@@ -73,6 +73,7 @@ class Budgeti_cflow extends CI_Controller
     function ubah(){
     	$kode_cflow			= trim($this->input->post('kode_cflow'));
         $proyek			= trim($this->input->post('id_proyek'));
+		$tahun			= trim($this->input->post('tahun'));
         $jan                = str_replace(',', '', trim($this->input->post('jan')));
         $feb                = str_replace(',', '', trim($this->input->post('feb')));
         $mar                = str_replace(',', '', trim($this->input->post('mar')));
@@ -102,7 +103,7 @@ class Budgeti_cflow extends CI_Controller
     			'des'		        	=>str_replace(',', '', trim($this->input->post('des')))
     			//        		''		        	=>$,
     	);
-    	$model = $this->budgeti_cflow_m->update($data,$total,$kode_cflow,$proyek);
+    	$model = $this->budgeti_cflow_m->update($data,$total,$kode_cflow,$proyek,$tahun);
     	if($model){
     		$array = array(
     			'act'	=>1,

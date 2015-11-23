@@ -189,8 +189,7 @@
                                 <div class="form-group">
                                     <label>Keterangan</label>
                                     <textarea rows="2" cols="" name="keterangan" id="id_keterangan"
-                                              class="form-control input-sm">
-                                    </textarea>
+                                              class="form-control input-sm"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -458,6 +457,9 @@
                                 <button name="btnHapus" class="btn red" id="id_btnHapus">
                                     <!--<i class="fa fa-trash"></i>-->
                                     Hapus
+                                </button>
+                                <button name="btnSign" class="btn purple" id="id_btnSign">
+                                    Sign
                                 </button>
                                 <button id="id_btnBatal" type="button" class="btn default">Batal</button>
                                 <button id="id_btnCPA" type="button" class="btn green" data-target="#idDivCPA"
@@ -1052,6 +1054,7 @@
                 $(this).parents('tr').toggleClass("active");
             });
             table.on('click', 'tbody tr', function () {
+                $('#id_btnBatal').trigger('click');
                 var idAdv = $(this).find("td").eq(0).html();
                 $('#id_idAdvance').val(idAdv);
 
@@ -1300,6 +1303,9 @@
     });
     $('#id_btnHapus').click(function () {
         $('#idTmpAksiBtn').val('3');
+    });
+    $("#id_btnSign").click(function () {
+        $('#idTmpAksiBtn').val('4');
     });
     $('#id_btnBatal').click(function () {
         btnStart();
@@ -1570,7 +1576,12 @@
                             $("#uniform-id_dokSBJ span").removeClass("checked");
                             $('#id_dokSBJ_in').val('0');
                         }
-
+                        if(data.app_user_id == '0'){
+                            $('#id_btnSign').attr("disabled",false);
+                        }else{
+                            $('#id_btnSign').attr("disabled",true);
+                            $('#id_btnUbah').attr("disabled",true);
+                        }
                         $('#id_appKeuanganId').val(data.app_keuangan_id);
                         $('#id_appKeuanganStatus').val(data.app_keuangan_status);
                         $('#id_appKeuanganTgl').val(data.app_keuangan_tgl);
@@ -1707,6 +1718,25 @@
         });
         event.preventDefault();
     }
+    function ajaxSignAdvance(){
+        ajaxModal();
+        var idAdvance	= $('#id_idAdvance').val();
+        idAdvance		= idAdvance.trim();
+        var flag		= '1';
+
+        $.ajax({
+            type:"POST",
+            dataType: "json",
+            url:"<?php echo base_url(); ?>master_advance/sign",
+            data:{idAdvance : idAdvance, flag : flag},
+            success:function (data) {
+                UIToastr.init(data.tipePesan,data.pesan);
+                $('#id_btnSign').attr("disabled",true);
+            }
+
+        });
+        event.preventDefault();
+    }
     $('#id_formAdvance').submit(function (event) {
         dataString = $("#id_formAdvance").serialize();
         var aksiBtn = $('#idTmpAksiBtn').val();
@@ -1729,6 +1759,13 @@
             if (r == true) {
                 ajaxHapusAdvance();
             } else {//if(r)
+                return false;
+            }
+        }else if(aksiBtn == '4'){
+            var r = confirm('Anda yakin sign data ini?');
+            if (r== true){
+                ajaxSignAdvance();
+            }else{//if(r)
                 return false;
             }
         }

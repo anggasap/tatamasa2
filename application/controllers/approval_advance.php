@@ -23,9 +23,6 @@ class Approval_advance extends CI_Controller
 	}
 	
 	function home(){
-		if($this->auth->is_logged_in () == false){
-			$this->login();
-		}else{
 			$menuId = $this->home_m->get_menu_id('approval_advance/home');
 			$data['menu_id'] = $menuId[0]->menu_id;
 			$data['menu_parent'] = $menuId[0]->parent;
@@ -39,7 +36,6 @@ class Approval_advance extends CI_Controller
 			
 			$this->template->set ( 'title', $data['menu_nama'] );
 			$this->template->load ( 'template/template3', 'approval/approval_advance_v',$data );
-		}
 	}
 	
     function approval(){
