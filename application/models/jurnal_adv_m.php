@@ -13,6 +13,24 @@ class Jurnal_adv_m extends CI_Model {
 		}
 		return $rows; // returning rows, not row
 	}
+	public function getJnsAdvanceAll() {
+		$rows 		=	array(); //will hold all results
+		$sql		=	"select * from type_advance order by id_account asc ";
+		$query		=	$this->db->query($sql);
+		foreach($query->result_array() as $row){
+			$rows[] = $row; //add the fetched result to the result array;
+		}
+		return $rows; // returning rows, not row
+	}
+	public function getKaryawanAll() {
+		$rows 		=	array(); //will hold all results
+		$sql		=	"select * from master_karyawan order by id_kyw asc ";
+		$query		=	$this->db->query($sql);
+		foreach($query->result_array() as $row){
+			$rows[] = $row; //add the fetched result to the result array;
+		}
+		return $rows; // returning rows, not row
+	}
 	public function getAdvAll()
 	{
 		$sql="SELECT ma.id_advance,mk.nama_kyw, ma.jml_uang from master_advance ma left join master_karyawan mk on ma.id_kyw = mk.id_kyw";
@@ -59,8 +77,10 @@ class Jurnal_adv_m extends CI_Model {
 	}
 	public function getDescJadva($idJadv)
 	{
-		$this->db->select('id,id_pp,tgl_pp,id_advance,episodeNo,check_giro,tanggal,amount,original_amount');
-		$this->db->from('perintah_pembayaran');
+		$this->db->select('p.id_pp,p.tgl_trans,p.id_advance,p.jumlah,p.kode_perk,p.kode_cflow,p.type_adv,pk.kode_alt,pk.nama_perk,mc.kode_alt as kode_altCflow,mc.nama_cflow');
+		$this->db->from('perintah_pembayaran p');
+		$this->db->join('perkiraan pk', 'p.kode_perk=pk.kode_perk', 'LEFT');
+		$this->db->join('master_cashflow mc', 'p.kode_cflow=mc.kode_cflow', 'LEFT');
 		$this->db->where('id_pp',$idJadv );
 		$query = $this->db->get();
 		if($query->num_rows()== '1'){
@@ -83,7 +103,7 @@ class Jurnal_adv_m extends CI_Model {
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}
-	function getIdPp(){
+	/*function getIdPp(){
 		$sql= "select id from perintah_pembayaran";
 		$query = $this->db->query($sql);
 		$jml = $query->num_rows();
@@ -92,15 +112,33 @@ class Jurnal_adv_m extends CI_Model {
 		$th = substr($tahun,-2);
 		$bulan = date('m');
 		if($jml == 0){
-			$id_adv = "0001";
+			$id_adv = "000001";
 			return $kode.' '.$id_adv.'-'.$th.$bulan;
 		}else{
-			$sql= "select max(right(id,4)) as id_pp from perintah_pembayaran";
+			$sql= "select max(right(id,6)) as id_pp from perintah_pembayaran";
 			$query = $this->db->query($sql);
 			$hasil = $query->result();
 			$id_adv =  $hasil[0]->id_pp;
-			$id_adv = sprintf('%04u',$id_adv+1);
+			$id_adv = sprintf('%06u',$id_adv+1);
 			return $kode.' '.$id_adv.'-'.$th.$bulan;
+		}
+	}*/
+	public function getIdPp($bulan,$tahun){
+		$sql= "select id_pp from perintah_pembayaran where MONTH(tgl_trans)='$bulan' and YEAR(tgl_trans)='$tahun'";
+		$query = $this->db->query($sql);
+		$jml = $query->num_rows();
+		$kode = "ADV";
+		$th = substr($tahun,-2);
+		if($jml == 0){
+			$id_adv = "0000001";
+			return $kode."-".$id_adv."-".$bulan.$th;
+		}else{
+			$sql= "select max(substring(id_pp,5,7)) as id_pp from perintah_pembayaran";
+			$query = $this->db->query($sql);
+			$hasil = $query->result();
+			$id_pp =  $hasil[0]->id_pp;
+			$id_pp = sprintf('%07u',$id_pp+1);
+			return $kode."-".$id_pp."-".$bulan.$th;
 		}
 	}
 	public function insertJadv($data){

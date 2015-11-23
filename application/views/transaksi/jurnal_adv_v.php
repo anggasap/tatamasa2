@@ -45,19 +45,26 @@
                         <div class="form-body">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>No Jurnal Advance </label>
-
-                                    <div class="input-group">
-
-                                            <input id="id_idJAdvance" required="required" class="form-control input-sm"
-                                                   type="text" name="idJAdvance" readonly/>
-                                            <input id="id_id" type="hidden" name="id">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <label>No PP</label>
+                                            <div class="input-group">
+                                                <input id="id_idJAdvance" required="required" class="form-control input-sm"
+                                                       type="text" name="idJAdvance" readonly/>
+                                                <input id="id_id" type="hidden" name="id">
                                         <span class="input-group-btn">
                                         <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelJAdv"
                                            id="id_btnModal" data-toggle="modal">
                                             <i class="fa fa-search fa-fw"/></i>
                                         </a>
                                         </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label>Tgl PP</label>
+                                            <input id="id_tgltrans" required="required" class="form-control input-sm "
+                                                   type="text" name="tgltrans" readonly/>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -65,7 +72,6 @@
                                         <div class="col-md-7">
                                             <label>No Advance </label>
                                             <div class="input-group">
-
                                                     <input id="id_idAdvance" required="required"
                                                            class="form-control input-sm"
                                                            type="text" name="idAdvance" readonly/>
@@ -102,8 +108,15 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Dibayarkan ke</label>
-                                    <input id="id_payTo" required="required" class="form-control input-sm"
-                                           type="text" name="payTo" readonly/>
+                                    <?php
+                                    $data = array();
+                                    $data[''] = '';
+                                    foreach ($payto as $row):
+                                        $data[$row['id_kyw']] = $row['nama_kyw'];
+                                    endforeach;
+                                    echo form_dropdown('payto', $data, '',
+                                        'disabled id="id_payTo" class="form-control input-sm"');
+                                    ?>
                                 </div>
                                 <div class="form-group">
                                     <label>Nama pemilik akun bank</label>
@@ -123,27 +136,62 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label>Proyek</label>
+                                    <?php
+                                    $data = array();
+                                    $data[''] = '';
+                                    foreach ($proyek as $row):
+                                        $data[$row['id_proyek']] = $row['nama_proyek'];
+                                    endforeach;
+                                    echo form_dropdown('proyek', $data, '',
+                                        'id="id_proyek" class="form-control input-sm"');
+                                    ?>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Jenis Advance</label>
+                                    <?php
+                                    $data = array();
+                                    $data[''] = '';
+                                    foreach ($jnsadvance as $row):
+                                        $data[$row['id_account']] = $row['nama_account'];
+                                    endforeach;
+                                    echo form_dropdown('jnsadvance', $data, '',
+                                        'id="id_jnsadvance" class="form-control input-sm"');
+                                    ?>
+                                </div>
+                                <div class="form-group">
                                     <label>Kode Perk (Akun GL)</label>
-                                    <input id="id_kodePerk" required="required" class="form-control input-sm"
-                                           type="text" name="kodePerk" readonly/>
+                                    <div class="input-group">
+                                        <input id="id_kodePerk" required="required"
+                                               class="form-control input-sm"
+                                               type="text" name="kodePerk" readonly/>
+                                                <span class="input-group-btn">
+                                                    <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelPerk"
+                                                       id="id_btnModal" data-toggle="modal">
+                                                        <i class="fa fa-search fa-fw"/></i>
+                                                    </a>
+                                                </span>
+                                    </div>
+                                    <span id="id_kodeAlt" class="textkosong"></span>
+                                    <span id="id_namaPerk" class="textkosong"></span>
                                 </div>
                                 <div class="form-group">
                                     <label>Kode Cash Flow</label>
-                                    <input id="id_kodeCFlow" required="required" class="form-control input-sm"
-                                           type="text" name="kodeCFlow" placeholder=""/>
+                                    <div class="input-group">
+                                        <input id="id_kodeCflow" required="required"
+                                               class="form-control input-sm"
+                                               type="text" name="kodeCflow" readonly/>
+                                                <span class="input-group-btn">
+                                                    <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelCflow"
+                                                       id="id_btnModal" data-toggle="modal">
+                                                        <i class="fa fa-search fa-fw"/></i>
+                                                    </a>
+                                                </span>
+                                    </div>
+                                    <span id="id_kodeAltCflow" class="textkosong"></span>
+                                    <span id="id_namaCflow" class="textkosong"></span>
                                 </div>
-                                <div class="form-group">
-                                    <label>Proyek</label>
-                                    <input id="id_proyek" required="required" class="form-control date-picker input-sm"
-                                           data-date-format="dd-mm-yyyy"
-                                           type="text" name="proyek" placeholder=""/>
-                                </div>
-                                <div class="form-group">
-                                    <label>Jenis Advance </label>
-                                    <input id="id_jnsAdv" required="required" class="form-control input-sm"
-                                           type="text" name="jnsAdv" placeholder=""/>
-                                </div>
-
                             </div>
                         </div>
                         <!-- HIDDEN INPUT -->
@@ -152,6 +200,7 @@
 
                     </div>
                     <!--END ROW 1 -->
+                    <hr>
                     <!-- ROW 2 -->
                     <div class="row">
                         <div class="form-body">
@@ -166,30 +215,30 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Jumlah </label>
-                                    <input id="id_jnsAdv" required="required" class="form-control input-sm"
-                                           type="text" name="jnsAdv" placeholder=""/>
+                                    <input id="id_jumlah" class="form-control input-sm nomor"
+                                           type="text" name="jumlah" placeholder="" readonly/>
                                 </div>
                                 <div class="form-group">
                                     <label>Terpakai </label>
-                                    <input id="id_jnsAdv" required="required" class="form-control input-sm"
-                                           type="text" name="jnsAdv" placeholder=""/>
+                                    <input id="id_terpakai"  class="form-control input-sm nomor"
+                                           type="text" name="terpakai" placeholder=""/>
                                 </div>
                                 <div class="form-group">
                                     <label>Sisa/lebih </label>
-                                    <input id="id_jnsAdv" required="required" class="form-control input-sm"
-                                           type="text" name="jnsAdv" placeholder=""/>
+                                    <input id="id_sisa"  class="form-control input-sm nomor"
+                                           type="text" name="sisa" placeholder="" readonly/>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>No settlement </label>
-                                    <input id="id_jnsAdv" required="required" class="form-control input-sm"
-                                           type="text" name="jnsAdv" placeholder=""/>
+                                    <input id="id_noSettlement" class="form-control input-sm"
+                                           type="text" name="noSettlement" placeholder=""/>
                                 </div>
                                 <div class="form-group">
                                     <label>Tanggal </label>
-                                    <input id="id_jnsAdv" required="required" class="form-control input-sm"
-                                           type="text" name="jnsAdv" placeholder=""/>
+                                    <input id="id_tglSettlement" class="form-control input-sm"
+                                           type="text" name="tglSettlement" placeholder=""/>
                                 </div>
                             </div>
                         </div>
@@ -198,8 +247,6 @@
                     <!-- ROW 3 -->
 
                     <!--END ROW 3 -->
-
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-actions">
@@ -362,6 +409,116 @@
     <!-- /.modal-dialog -->
 </div>
 <!--  END  MODAL Data Karyawan -->
+<!--  MODAL Data Perkiraan -->
+<div class="modal fade draggable-modal" id="idDivTabelPerk" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Data Perkiraan</h4>
+            </div>
+            <div class="modal-body">
+                <div class="scroller" style="height:400px; ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button id="id_ReloadPerk" style="display: none;"></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-body">
+                                <table class="table table-striped table-bordered table-hover text_kanan"
+                                       id="idTabelPerk">
+                                    <thead>
+                                    <tr>
+                                        <th width='10%' align='left'>Kd Perk</th>
+                                        <th width='10%' align='left'>Kd Alt</th>
+                                        <th width='50%' align='left'>Nama Perk</th>
+                                        <th width='10%' align='center'>Level</th>
+                                        <th width='10%' align='center'>Type</th>
+                                        <th width='10%' align='center'>DK</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                    <tfoot>
+
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end col-12 -->
+                    </div>
+                    <!-- END ROW-->
+                </div>
+                <!-- END SCROLLER-->
+            </div>
+            <!-- END MODAL BODY-->
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal" id="btnCloseModalPerk">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--  END  MODAL Data Perkiraan -->
+<!--  MODAL Data Cash FLow -->
+<div class="modal fade draggable-modal" id="idDivTabelCflow" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Data Cash Flow</h4>
+            </div>
+            <div class="modal-body">
+                <div class="scroller" style="height:400px; ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button id="id_ReloadCflow" style="display: none;"></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-body">
+                                <table class="table table-striped table-bordered table-hover text_kanan"
+                                       id="idTabelCflow">
+                                    <thead>
+                                    <tr>
+                                        <th width='15%' align='left'>Kd Cflow</th>
+                                        <th width='15%' align='left'>Kd Alt</th>
+                                        <th width='50%' align='left'>Nama Perk</th>
+                                        <th width='10%' align='center'>Level</th>
+                                        <th width='10%' align='center'>Type</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                    <tfoot>
+
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end col-12 -->
+                    </div>
+                    <!-- END ROW-->
+                </div>
+                <!-- END SCROLLER-->
+            </div>
+            <!-- END MODAL BODY-->
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal" id="btnCloseModalCflow">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--  END  MODAL Cash Flow -->
 
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <!-- BEGIN CORE PLUGINS -->
@@ -601,7 +758,200 @@
                 $('#btnCloseModalDataAdv').trigger('click');
                 $('#id_idAdvance').val(idAdv);
                 $('#id_idAdvance').focus();
-                $('#id_userId').focus();
+            });
+
+            tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+        }
+        var initTable3 = function () {
+            //var table = $('#id_TabelPerk');
+            // begin first table
+            var table = $('#idTabelPerk').dataTable({
+                "ajax": "<?php  echo base_url("/master_perkiraan/getAllPerkiraan"); ?>",
+                "columns": [
+                    {"data": "kode_perk"},
+                    {"data": "kode_alt"},
+                    {"data": "nama_perk"},
+                    {"data": "level"},
+                    {"data": "type"},
+                    {"data": "dk"}
+                ],
+                // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+                "language": {
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    },
+                    "emptyTable": "No data available in table",
+                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                    "infoEmpty": "No entries found",
+                    "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                    "lengthMenu": "Show _MENU_ entries",
+                    "search": "Search:",
+                    "zeroRecords": "No matching records found"
+                },
+                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+                "lengthMenu": [
+                    [5, 10, 15, 20, -1],
+                    [5, 10, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "pageLength": 5,
+                "pagingType": "bootstrap_full_number",
+                "language": {
+                    "search": "Cari: ",
+                    "lengthMenu": "  _MENU_ records",
+                    "paginate": {
+                        "previous": "Prev",
+                        "next": "Next",
+                        "last": "Last",
+                        "first": "First"
+                    }
+                },
+                // "aaSorting": [[4,'desc'], [5,'desc']],
+                "columnDefs": [{  // set default column settings
+                    'orderable': true,
+                    'type': 'string',
+                    'targets': [0]
+                }, {
+                    "searchable": true,
+                    "targets": [0]
+                }],
+                "order": [
+                    [0, "asc"]
+                ] // set first column as a default sort by asc
+            });
+
+            var tableWrapper = jQuery('#id_TabelPerk_wrapper');
+
+            table.find('.group-checkable').change(function () {
+                var set = jQuery(this).attr("data-set");
+                var checked = jQuery(this).is(":checked");
+                jQuery(set).each(function () {
+                    if (checked) {
+                        $(this).attr("checked", true);
+                        $(this).parents('tr').addClass("active");
+                    } else {
+                        $(this).attr("checked", false);
+                        $(this).parents('tr').removeClass("active");
+                    }
+                });
+                jQuery.uniform.update(set);
+            });
+            $('#id_Reload').click(function () {
+                table.api().ajax.reload();
+            });
+            table.on('click', 'tbody tr', function () {
+                var typePerk = $(this).find("td").eq(4).html();
+                if(typePerk == 'D'){
+                    var kodePerk = $(this).find("td").eq(0).html();
+                    $('#id_kodePerk').val(kodePerk);
+                    var kodeAlt = $(this).find("td").eq(1).html();
+                    $('#id_kodeAlt').text(kodeAlt);
+                    var namaPerk = $(this).find("td").eq(2).html();
+                    $('#id_namaPerk').text(namaPerk);
+
+                    $("#btnCloseModalPerk").trigger("click");
+                }else{
+                    alert("Tidak diijinkan pilih kode induk.");
+                }
+
+
+            });
+
+            tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+        }
+        var initTable4 = function () {
+            //var table = $('#id_TabelPerk');
+            // begin first table
+            var table = $('#idTabelCflow').dataTable({
+                "ajax": "<?php  echo base_url("/master_cflow/getAllCflow"); ?>",
+                "columns": [
+                    {"data": "kode_cflow"},
+                    {"data": "kode_alt"},
+                    {"data": "nama_cflow"},
+                    {"data": "level"},
+                    {"data": "type"}
+                ],
+                // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+                "language": {
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    },
+                    "emptyTable": "No data available in table",
+                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                    "infoEmpty": "No entries found",
+                    "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                    "lengthMenu": "Show _MENU_ entries",
+                    "search": "Search:",
+                    "zeroRecords": "No matching records found"
+                },
+                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+                "lengthMenu": [
+                    [5, 10, 15, 20, -1],
+                    [5, 10, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "pageLength": 5,
+                "pagingType": "bootstrap_full_number",
+                "language": {
+                    "search": "Cari: ",
+                    "lengthMenu": "  _MENU_ records",
+                    "paginate": {
+                        "previous": "Prev",
+                        "next": "Next",
+                        "last": "Last",
+                        "first": "First"
+                    }
+                },
+                // "aaSorting": [[4,'desc'], [5,'desc']],
+                "columnDefs": [{  // set default column settings
+                    'orderable': true,
+                    'type': 'string',
+                    'targets': [0]
+                }, {
+                    "searchable": true,
+                    "targets": [0]
+                }],
+                "order": [
+                    [0, "asc"]
+                ] // set first column as a default sort by asc
+            });
+
+            var tableWrapper = jQuery('#id_TabelPerk_wrapper');
+
+            table.find('.group-checkable').change(function () {
+                var set = jQuery(this).attr("data-set");
+                var checked = jQuery(this).is(":checked");
+                jQuery(set).each(function () {
+                    if (checked) {
+                        $(this).attr("checked", true);
+                        $(this).parents('tr').addClass("active");
+                    } else {
+                        $(this).attr("checked", false);
+                        $(this).parents('tr').removeClass("active");
+                    }
+                });
+                jQuery.uniform.update(set);
+            });
+            $('#id_Reload').click(function () {
+                table.api().ajax.reload();
+            });
+            table.on('click', 'tbody tr', function () {
+                var typeCF = $(this).find("td").eq(4).html();
+                if(typeCF == 'D'){
+                    var kodeCflow = $(this).find("td").eq(0).html();
+                    $('#id_kodeCflow').val(kodeCflow);
+                    var kodeAlt = $(this).find("td").eq(1).html();
+                    $('#id_kodeAltCflow').text(kodeAlt);
+                    var namaCflow = $(this).find("td").eq(2).html();
+                    $('#id_namaCflow').text(namaCflow);
+
+                    $("#btnCloseModalCflow").trigger("click");
+                }else{
+                    alert("Tidak diijinkan pilih kode induk.");
+                }
+
 
             });
 
@@ -616,6 +966,8 @@
                 }
                 initTable1();
                 initTable2();
+                initTable3();
+                initTable4();
             }
         };
     }();
@@ -623,6 +975,7 @@
     //Ready Doc
     btnStart();
     readyToStart();
+    tglTransStart();
     $("#id_idAdvance").focus();
 
     $("#id_btnSimpan").click(function () {
@@ -640,6 +993,8 @@
         startCheckBox();
         resetForm();
         readyToStart();
+        tglTransStart();
+        $('.textkosong').text('');
     });
     $("#id_idAdvance").focusout(function () {
         var idAdv = $(this).val();
@@ -666,13 +1021,14 @@
                         $('#id_namaKyw').val(data.nama_kyw);
                         $('#id_deptKyw').val(data.nama_dept);
                         $('#id_uangMuka').val(data.jml_uang);
-                        $('#id_tglJT').val(data.tgl_jt);
+                        $('#id_tglReq').val(data.tgl_trans);
                         $('#id_payTo').val(data.pay_to);
                         $('#id_namaPemilikAkunBank').val(data.nama_akun_bank);
                         $('#id_noAkunBank').val(data.no_akun_bank);
                         $('#id_namaBank').val(data.nama_bank);
                         $('#id_keterangan').val(data.keterangan);
-                        $('#id_kodeCashOut').val(data.cashOut);
+                        $('#id_proyek').val(data.id_proyek);
+                        $('#id_jumlah').val(data.jml_uang);
                     } else {
                         alert('Data tidak ditemukan!');
                         $('#id_btnBatal').trigger('click');
@@ -683,20 +1039,23 @@
     function getDescJadv(idJadv) {
         ajaxModal();
         if (idJadv != '') {
-            console.log(idJadv);
+            //console.log(idJadv);
             $.post("<?php echo site_url('/jurnal_adv/getDescJadv'); ?>",
                 {
                     'idJadv': idJadv
                 }, function (data) {
-                    console.log(data);
+                   // console.log(data);
                     if (data.baris == 1) {
-                        $('#id_id').val(data.id);
                         $('#id_idJAdvance').val(data.id_pp);
-                        $('#id_episodeNo').val(data.episode_no);
-                        $('#id_checkGiro').val(data.checkGiro);
+                        $('#id_idAdvance').val(data.id_advance);
                         $('#id_tgl').val(data.tanggal);
-                        $('#id_amount').val(data.amount);
-                        $('#id_originalAmount').val(data.original_amount);
+                        $('#id_jnsadvance').val(data.type_adv);
+                        $('#id_kodePerk').val(data.kodePerk);
+                        $('#id_kodeAlt').text(data.kodeAlt);
+                        $('#id_namaPerk').text(data.namaPerk);
+                        $('#id_kodeCflow').val(data.kodeCflow);
+                        $('#id_kodeAltCflow').text(data.kodeAltCflow);
+                        $('#id_namaCflow').text(data.namaCflow);
                     } else {
                         alert('Data tidak ditemukan!');
                         $('#id_btnBatal').trigger('click');
@@ -715,6 +1074,7 @@
             success: function (data) {
                 $('#id_Reload').trigger('click');
                 $('#id_btnBatal').trigger('click');
+
                 readyToStart();
                 startCheckBox()
                 UIToastr.init(data.tipePesan, data.pesan);
