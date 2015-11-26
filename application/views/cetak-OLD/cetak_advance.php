@@ -98,7 +98,7 @@
 	 <tr><td>&nbsp;</td><td>Requester Name</td><td width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->nama_kyw; ?></td>&nbsp;<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td colspan="2">Dept. Head Approval</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td width="20%">Requesting Department</td><td width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->nama_dept; ?></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Name</td><td colspan="2" align="center" width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">
 	 <?php if($a->app_hd_status != '0'){
-	 $query = $this->db->query("select nama_kyw as nama from master_karyawan where id_kyw =".$a->app_hd_id."");
+	 $query = $this->db->query("select nama_kyw as nama from master_karyawan where id_kyw =".$a->id_kyw."");
 	 if($query->num_rows()== '1'){
 	 $g = $query->row()->nama;
 	 }else{
@@ -125,8 +125,8 @@
 	 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td>&nbsp;</td><td colspan="2" align="center">GM Internal Operation Approval</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td colspan="3" align="center">BOD Approval if over Rp 100 mio</td><td>&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td width="15%" align="">Name</td><td width="25%" align="center" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">
-	 <?php if($a->app_gm_status != '0'){
-	 $query = $this->db->query("select nama_kyw as nama from master_karyawan where id_kyw =".$a->app_gm_id."");
+	 <?php if($a->app_hd_status != '0'){
+	 $query = $this->db->query("select nama_kyw as nama from master_karyawan where id_kyw =".$a->app_hd_id."");
 	 if($query->num_rows()== '1'){
 	 $g = $query->row()->nama;
 	 }else{
@@ -167,7 +167,7 @@
 	 <tr><td>&nbsp;</td><td width="2%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php if($a->dok_sp == '1'){ echo 'V';}else{ echo '';}?></td><td width="20%" colspan="6">Surat Penawaran</td><td>&nbsp;</td><td width="2%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php if($a->dok_sspk == '1'){ echo 'V';}else{ echo '';}?></td><td width="25%" colspan="3"> Sesuai Surat Perintah Kerja (SPK)</td><td>&nbsp;</td><td width="2%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td colspan="6"></td><td>&nbsp;</td></tr>
 	 <tr><td colspan="24">&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td width="2%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td  width="20%" colspan="7">Catatan Penggunaan Anggaran (CPA)</td><td>&nbsp;</td><td colspan="5">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td width="2%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td colspan="3">Lain - lain</td><td colspan="3">&nbsp;</td></tr>
-	 <tr><td>&nbsp;</td><td>&nbsp;</td><td width="2%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php if($a->inout_budget == '0'){ echo 'V';}else{ echo '';}?></td><td colspan="3">Within Budget</td><td>&nbsp;</td><td width="2%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php if($a->inout_budget == '1'){ echo 'V';}else{ echo '';}?></td><td colspan="3">Out of Budget</td><td colspan="10">&nbsp;</td></tr>
+	 <tr><td>&nbsp;</td><td>&nbsp;</td><td width="2%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td colspan="3">Within Budget</td><td>&nbsp;</td><td width="2%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td colspan="3">Out of Budget</td><td colspan="10">&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td colspan="4" style="font-weight: bold;">Catatan :</td><td colspan="19">&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td colspan="20" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td>&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td colspan="20" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td>&nbsp;</td></tr>

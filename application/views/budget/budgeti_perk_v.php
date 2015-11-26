@@ -277,6 +277,7 @@
                 	
                 } */
                 var id_proyek = $('#id_proyek').val();
+                var tahun = $('#tahun').val();
                 //var dataArray = new Array(12);//<== NEVER do this again, btw
                 oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
                 var kode_perk = jqInputs[0].value.trim();
@@ -313,7 +314,7 @@
         			type:"POST",
         			dataType: "json",
         			url:"<?php echo base_url(); ?>budgeti_perk/ubah",
-        			data:{kode_perk:kode_perk, id_proyek : id_proyek,
+        			data:{kode_perk:kode_perk, id_proyek : id_proyek, tahun : tahun,
 						  jan : jan, feb :feb, mar:mar, apr:apr, mei:mei, jun:jun, jul:jul, agt:agt, sep:sep, okt:okt, nov:nov, des:des
             			},
         			success:function (data) {

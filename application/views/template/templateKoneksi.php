@@ -36,7 +36,7 @@
 <link id="style_color" href="<?php echo base_url('metronic/admin/layout4/css/themes/light.css'); ?>" rel="stylesheet" type="text/css"/>
 <link href="<?php echo base_url('metronic/admin/layout4/css/custom.css'); ?>" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
-<link rel="shortcut icon" href="favicon.ico"/>
+    <link rel="shortcut icon" href="<?php echo base_url('metronic/img/mtm.ico'); ?>"/>
 <style type="text/css">
 .modal_json {
   display:    none;

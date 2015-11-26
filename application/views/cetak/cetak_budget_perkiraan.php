@@ -25,20 +25,21 @@ $this->fpdf->Line(0.5,3.20,29.5,3.20);
 //$this->fpdf->Cell(19,1,'Header',0,0,'C');
 /* setting header table */
 $this->fpdf->SetFont('Times','B',10);
-$this->fpdf->Cell(1.5 , 0.5, 'Kode' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.3 , 0.5, 'Kode' , 0, 'LR', 'L');
 $this->fpdf->Cell(5.9 , 0.5, 'Nama Perkiraan' , 0, 'LR', 'L');
-$this->fpdf->Cell(1.9 , 0.5, 'Jan' , 0, 'LR', 'L');
-$this->fpdf->Cell(1.9 , 0.5, 'Feb' , 0, 'LR', 'L');
-$this->fpdf->Cell(1.9 , 0.5, 'Mar' , 0, 'LR', 'L');
-$this->fpdf->Cell(1.9 , 0.5, 'Apr' , 0, 'LR', 'L');
-$this->fpdf->Cell(1.9 , 0.5, 'Mei' , 0, 'LR', 'L');
-$this->fpdf->Cell(1.8 , 0.5, 'Jun' , 0, 'LR', 'L');
-$this->fpdf->Cell(1.8 , 0.5, 'Jul' , 0, 'LR', 'L');
-$this->fpdf->Cell(1.9 , 0.5, 'Aug' , 0, 'LR', 'L');
-$this->fpdf->Cell(1.9 , 0.5, 'Sep' , 0, 'LR', 'L');
-$this->fpdf->Cell(1.9 , 0.5, 'Oct' , 0, 'LR', 'L');
-$this->fpdf->Cell(1.8 , 0.5, 'Nov' , 0, 'LR', 'L');
-$this->fpdf->Cell(1.8 , 0.5, 'Des' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.7 , 0.5, 'Jan' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.7 , 0.5, 'Feb' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.7 , 0.5, 'Mar' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.7 , 0.5, 'Apr' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.7 , 0.5, 'Mei' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.7 , 0.5, 'Jun' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.7 , 0.5, 'Jul' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.7 , 0.5, 'Aug' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.7 , 0.5, 'Sep' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.7 , 0.5, 'Oct' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.7 , 0.5, 'Nov' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.7 , 0.5, 'Des' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.7 , 0.5, 'Total' , 0, 'LR', 'L');
 /* generate hasil query disini */
 $this->fpdf->Line(0.5 , 3.90 , 29.5 , 3.90);
 $this->fpdf->Line(0.5 , 3.95 , 29.5 , 3.95);
@@ -66,18 +67,38 @@ $this->fpdf->Cell(1.5 , 0.5, $b->kode_perk , 0, 'LR', 'L');
 					$a = '       '.$b->nama_perk;
 				}
 $this->fpdf->Cell(5.2, 0.5, $a , 0, 'LR', 'L');
-$this->fpdf->Cell(1.8 , 0.5, number_format($b->jan,2,",",".") , 0, 'LR', 'R');
-$this->fpdf->Cell(1.8 , 0.5, number_format($b->feb,2,",",".") , 0, 'LR', 'R');
-$this->fpdf->Cell(1.8 , 0.5, number_format($b->mar,2,",",".") , 0, 'LR', 'R');
-$this->fpdf->Cell(1.8 , 0.5, number_format($b->apr,2,",",".") , 0, 'LR', 'R');
-$this->fpdf->Cell(1.8 , 0.5, number_format($b->mei,2,",",".") , 0, 'LR', 'R');
-$this->fpdf->Cell(1.9 , 0.5, number_format($b->jun,2,",",".") , 0, 'LR', 'R');
-$this->fpdf->Cell(1.9 , 0.5, number_format($b->jul,2,",",".") , 0, 'LR', 'R');
-$this->fpdf->Cell(1.9 , 0.5, number_format($b->agu,2,",",".") , 0, 'LR', 'R');
-$this->fpdf->Cell(1.9 , 0.5, number_format($b->sep,2,",",".") , 0, 'LR', 'R');
-$this->fpdf->Cell(1.9 , 0.5, number_format($b->okt,2,",",".") , 0, 'LR', 'R');
-$this->fpdf->Cell(1.9 , 0.5, number_format($b->nov,2,",",".") , 0, 'LR', 'R');
-$this->fpdf->Cell(1.9 , 0.5, number_format($b->des,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($b->jan)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($b->feb)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($b->mar)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($b->apr)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($b->mei)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($b->jun)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($b->jul)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($b->agu)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($b->sep)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($b->okt)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($b->nov)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($b->des)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format($b->total_right/1000,2,",",".") , 0, 'LR', 'R');
+}
+foreach($total as $t){
+$this->fpdf->Ln();
+$this->fpdf->SetFont('Times','B',8);
+$this->fpdf->Cell(1.5 , 0.5, '' , 0, 'LR', 'L');
+$this->fpdf->Cell(5.2 , 0.5, 'Total' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($t->jan)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($t->feb)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($t->mar)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($t->apr)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($t->mei)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($t->jun)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($t->jul)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($t->agu)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($t->sep)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($t->okt)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($t->nov)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format(round($t->des)/1000,2,",",".") , 0, 'LR', 'R');
+$this->fpdf->Cell(1.7 , 0.5, number_format($t->total/1000,2,",",".") , 0, 'LR', 'R');
 }
 /* setting posisi footer 3 cm dari bawah */
 /* generate pdf jika semua konstruktor, data yang akan ditampilkan, dll sudah selesai */

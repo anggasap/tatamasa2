@@ -275,6 +275,7 @@
                 	
                 } */
                 var id_proyek = $('#id_proyek').val();
+                var tahun = $('#tahun').val();
                 oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
                 var kode_cflow = jqInputs[0].value.trim();
                 oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);// nama cflow
@@ -304,16 +305,18 @@
                 var des = jqInputs[13].value;
                 oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 14, false);
                 oTable.fnDraw();
+                //alert(jan+feb+mar+apr+mei+jun+jul+agt+sep+okt+nov+des);
                 //console.log(bulan);
                 $.ajax({
         			type:"POST",
         			dataType: "json",
         			url:"<?php echo base_url(); ?>budgeti_cflow/ubah",
-        			data:{kode_cflow:kode_cflow, id_proyek : id_proyek,
+        			data:{kode_cflow:kode_cflow, id_proyek : id_proyek, tahun : tahun,
 						  jan : jan, feb :feb, mar:mar, apr:apr, mei:mei, jun:jun, jul:jul, agt:agt, sep:sep, okt:okt, nov:nov, des:des
             			},
         			success:function (data) {
         				UIToastr.init(data.tipePesan,data.pesan);
+                        //alert(data.act);
         			}
         	
         		});

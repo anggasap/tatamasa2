@@ -92,7 +92,7 @@
 <!-- END PAGE CONTENT-->
 <!--  MODAL Data Karyawan -->
 <div class="modal fade draggable-modal" id="idDivAppAdv" tabindex="-1" role="basic" aria-hidden="true">
-<div class="modal-dialog  modal-lg">
+<div class="modal-dialog  modal-full">
 <div class="modal-content">
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="btnCloseModalAppAdv"></button>
@@ -120,19 +120,51 @@
                 <input id="id_deptKyw" required="required" class="form-control input-sm" type="text" name="deptKyw"
                        readonly/>
             </div>
-
+            <div class="form-group">
+                <label>Proyek</label>
+                <input id="id_proyek" required="required" class="form-control  input-sm"
+                       type="text" name="proyek" readonly/>
+            </div>
         </div>
         <!--end <div class="col-md-6"> 1 -->
         <div class="col-md-4">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Kurs</label>
+                        <input id="id_kurs" class="form-control  input-sm"
+                               type="text" name="kurs" readonly/>
+
+                    </div>
+                    <div class="col-md-6">
+                        <label>Nilai Kurs</label>
+                        <input id="id_nilaiKurs"
+                               class="form-control input-sm nomor"
+                               type="text" name="nilaiKurs" readonly/>
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
                 <label>Jumlah uang muka</label>
                 <input id="id_uangMuka" required="required" class="form-control  input-sm nomor"
                        type="text" name="uangMuka" readonly/>
             </div>
             <div class="form-group">
-                <label>Tanggal Jatuh Tempo</label>
-                <input id="id_tglJT" required="required" class="form-control input-sm"
-                       type="text" name="tglJT" placeholder="dd-mm-yyyy" readonly/>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Tanggal Pengajuan</label>
+                        <input id="id_tgltrans"
+                               class="form-control input-sm hitunghari"
+                               type="text" name="tglTrans" readonly/>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Tanggal Jatuh Tempo</label>
+                        <input id="id_tglJT" data-date-format="dd-mm-yyyy"
+                               class="form-control hitunghari date-picker input-sm"
+                               type="text" name="tglJT" placeholder="dd-mm-yyyy" readonly/>
+                    </div>
+
+                </div>
             </div>
 
             <div class="form-group">
@@ -164,17 +196,33 @@
 </div>
 <!--END ROW 1 -->
 <!-- ROW 2 -->
-<div class="row">
-    <div class="form-body">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label>Keterangan</label>
-                <textarea rows="2" cols="" name="keterangan" id="id_keterangan" class="form-control input-sm" readonly>
-                </textarea>
+    <div class="row">
+        <div class="form-body">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Keterangan</label>
+                                    <textarea rows="2" cols="" name="keterangan" id="id_keterangan"
+                                              class="form-control input-sm" readonly></textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Catatan penggunaan anggaran</label>
+
+                    <div class="checkbox-list">
+                        <label>
+                            <input type="checkbox" value="1" name="wBudget" id="id_wBudget" class="chkbudget"/>
+                            Within Budget </label>
+                        <input type="text" name="inoutBudget_in" id="id_inoutBudget_in" class="nomor1 inbudget">
+                        <label>
+                            <input type="checkbox" value="1" name="oBudget" id="id_oBudget" class="chkbudget" />
+                            Out of Budget </label>
+                        <!--<input type="text" name="oBudget_in" id="id_oBudget_in" class="nomor1 inbudget">-->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 <!--END ROW 2 -->
 <!-- ROW 3 -->
 <div class="row">
@@ -224,463 +272,475 @@
     </div>
 </div>
 <!--END ROW 3 -->
-<?php if ($this->session->userdata('usergroup') == '5') { ?>
-    <div class="row">
-        <div class="col-md-12">
-            <label><strong>Approval Dept Keuangan</strong></label>
+    <?php if ($this->session->userdata('usergroup') == '5') { ?>
+        <div class="row">
+            <div class="col-md-12">
+                <label><strong>Approval Dept Keuangan</strong></label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="form-body">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <input id="id_appKeuanganId" class="form-control input-sm"
-                           type="text" name="appKeuanganId" readonly/>
+        <div class="row">
+            <div class="form-body">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input id="id_appKeuanganId" class="form-control input-sm"
+                               type="text" name="appKeuanganId" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <select id="id_appKeuanganStatus" class="form-control input-sm" name="appKeuanganStatus">
-                        <option value="1">Approve</option>
-                        <option value="2">Reject</option>
-                        <option value="3">Paid</option>
-                    </select>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select id="id_appKeuanganStatus" class="form-control input-sm approvalselect"
+                                name="appKeuanganStatus">
+                            <option value="1">Approve</option>
+                            <option value="2">Reject</option>
+                            <option value="3">Paid</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <input id="id_appKeuanganTgl" class="form-control input-sm"
-                           type="text" name="appKeuanganTgl" readonly />
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input id="id_appKeuanganTgl" class="form-control input-sm"
+                               type="text" name="appKeuanganTgl" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
+                <div class="col-md-5">
+                    <div class="form-group">
                     <textarea rows="2" cols="" name="appKeuanganKet" id="id_appKeuanganKet"
-                              class="form-control input-sm" placeholder="Keterangan" required>
+                              class="form-control input-sm keterangan" placeholder="Keterangan">
                     </textarea>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <label><strong>Approval Head Dept.</strong></label>
+        <div class="row">
+            <div class="col-md-12">
+                <label><strong>Approval Head Dept.</strong></label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="form-body">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <input id="id_appHDId" class="form-control  input-sm"
-                           type="text" name="appHDId" readonly/>
+        <div class="row">
+            <div class="form-body">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input id="id_appHDId" class="form-control  input-sm"
+                               type="text" name="appHDId" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <select id="id_appHDStatus" class="form-control input-sm" name="appHDStatus" disabled>
-                        <option value="1">Approve</option>
-                        <option value="2">Reject</option>
-                        <option value="3">Paid</option>
-                    </select>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select id="id_appHDStatus" class="form-control input-sm" name="appHDStatus"
+                                disabled>
+                            <option value="1">Approve</option>
+                            <option value="2">Reject</option>
+                            <option value="3">Paid</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <input id="id_appHDTgl" class="form-control input-sm"
-                           type="text" name="appHDTgl" readonly/>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input id="id_appHDTgl" class="form-control input-sm"
+                               type="text" name="appHDTgl" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
+                <div class="col-md-5">
+                    <div class="form-group">
                     <textarea rows="2" cols="" readonly placeholder="Keterangan" name="appHDKet" id="id_appHDKet"
-                              class="form-control input-sm" required>
+                              class="form-control input-sm" >
                     </textarea>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <label><strong>Approval General Manager</strong></label>
+        <div class="row">
+            <div class="col-md-12">
+                <label><strong>Approval General Manager</strong></label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="form-body">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <input id="id_appGMId" class="form-control input-sm"
-                           type="text" name="appGMId" readonly/>
+        <div class="row">
+            <div class="form-body">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input id="id_appGMId" class="form-control input-sm"
+                               type="text" name="appGMId" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <select id="id_appGMStatus" class="form-control  input-sm" name="appGMStatus" disabled>
-                        <option value="1">Approve</option>
-                        <option value="2">Reject</option>
-                        <option value="3">Paid</option>
-                    </select>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select id="id_appGMStatus" class="form-control  input-sm"
+                                name="appGMStatus" disabled>
+                            <option value="1">Approve</option>
+                            <option value="2">Reject</option>
+                            <option value="3">Paid</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <input id="id_appGMTgl" class="form-control input-sm"
-                           type="text" name="appGMTgl" readonly/>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input id="id_appGMTgl" class="form-control input-sm"
+                               type="text" name="appGMTgl" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
+                <div class="col-md-5">
+                    <div class="form-group">
                     <textarea rows="2" cols="" readonly placeholder="Keterangan" name="appGMKet" id="id_appGMKet"
-                              class="form-control input-sm" required>
+                              class="form-control input-sm" >
                     </textarea>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-<?php } ?>
-<?php if ($this->session->userdata('usergroup') == '3') { ?>
-    <div class="row">
-        <div class="col-md-12">
-            <label><strong>Approval Dept Keuangan</strong></label>
+    <?php } ?>
+    <?php if ($this->session->userdata('usergroup') == '3') { ?>
+        <div class="row">
+            <div class="col-md-12">
+                <label><strong>Approval Dept Keuangan</strong></label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="form-body">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <input id="id_appKeuanganId" class="form-control input-sm"
-                           type="text" name="appKeuanganId" readonly/>
+        <div class="row">
+            <div class="form-body">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input id="id_appKeuanganId" class="form-control input-sm"
+                               type="text" name="appKeuanganId" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <select id="id_appKeuanganStatus" disabled class="form-control input-sm" name="appKeuanganStatus">
-                        <option value="1">Approve</option>
-                        <option value="2">Reject</option>
-                        <option value="3">Paid</option>
-                    </select>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select id="id_appKeuanganStatus" disabled class="form-control input-sm"
+                                name="appKeuanganStatus">
+                            <option value="1">Approve</option>
+                            <option value="2">Reject</option>
+                            <option value="3">Paid</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <input id="id_appKeuanganTgl" class="form-control input-sm"
-                           type="text" name="appKeuanganTgl" readonly/>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input id="id_appKeuanganTgl" class="form-control input-sm"
+                               type="text" name="appKeuanganTgl" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
+                <div class="col-md-5">
+                    <div class="form-group">
                     <textarea rows="2" cols="" readonly name="appKeuanganKet" id="id_appKeuanganKet"
-                              class="form-control input-sm" placeholder="Keterangan" required>
+                              class="form-control input-sm" placeholder="Keterangan" >
                     </textarea>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <label><strong>Approval Head Dept.</strong></label>
+        <div class="row">
+            <div class="col-md-12">
+                <label><strong>Approval Head Dept.</strong></label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="form-body">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <input id="id_appHDId" class="form-control  input-sm"
-                           type="text" name="appHDId" readonly/>
+        <div class="row">
+            <div class="form-body">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input id="id_appHDId" class="form-control  input-sm"
+                               type="text" name="appHDId" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <select id="id_appHDStatus" class="form-control input-sm" name="appHDStatus">
-                        <option value="1">Approve</option>
-                        <option value="2">Reject</option>
-                        <option value="3">Paid</option>
-                    </select>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select id="id_appHDStatus" class="form-control input-sm approvalselect"
+                                name="appHDStatus">
+                            <option value="1">Approve</option>
+                            <option value="2">Reject</option>
+                            <option value="3">Paid</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <input id="id_appHDTgl" class="form-control input-sm"
-                           type="text" name="appHDTgl" readonly/>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input id="id_appHDTgl" class="form-control input-sm"
+                               type="text" name="appHDTgl" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
+                <div class="col-md-5">
+                    <div class="form-group">
                     <textarea rows="2" cols="" placeholder="Keterangan" name="appHDKet" id="id_appHDKet"
-                              class="form-control input-sm" required>
+                              class="form-control input-sm keterangan" >
                     </textarea>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <label><strong>Approval General Manager</strong></label>
+        <div class="row">
+            <div class="col-md-12">
+                <label><strong>Approval General Manager</strong></label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="form-body">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <input id="id_appGMId" class="form-control input-sm"
-                           type="text" name="appGMId" readonly/>
+        <div class="row">
+            <div class="form-body">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input id="id_appGMId" class="form-control input-sm"
+                               type="text" name="appGMId" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <select id="id_appGMStatus" class="form-control  input-sm" name="appGMStatus" disabled>
-                        <option value="1">Approve</option>
-                        <option value="2">Reject</option>
-                        <option value="3">Paid</option>
-                    </select>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select id="id_appGMStatus" class="form-control  input-sm"
+                                name="appGMStatus" disabled>
+                            <option value="1">Approve</option>
+                            <option value="2">Reject</option>
+                            <option value="3">Paid</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <input id="id_appGMTgl" class="form-control input-sm"
-                           type="text" name="appGMTgl" readonly/>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input id="id_appGMTgl" class="form-control input-sm"
+                               type="text" name="appGMTgl" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
+                <div class="col-md-5">
+                    <div class="form-group">
                     <textarea rows="2" cols="" readonly placeholder="Keterangan" name="appGMKet" id="id_appGMKet"
-                              class="form-control input-sm" required>
+                              class="form-control input-sm" >
                     </textarea>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-<?php
-}
-if ($this->session->userdata('usergroup') == '4') {
-    ?>
-    <div class="row">
-        <div class="col-md-12">
-            <label><strong>Approval Dept Keuangan</strong></label>
+        <?php
+    }
+    if ($this->session->userdata('usergroup') == '4') {
+        ?>
+        <div class="row">
+            <div class="col-md-12">
+                <label><strong>Approval Dept Keuangan</strong></label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="form-body">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <input id="id_appKeuanganId" class="form-control input-sm"
-                           type="text" name="appKeuanganId" readonly/>
+        <div class="row">
+            <div class="form-body">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input id="id_appKeuanganId" class="form-control input-sm"
+                               type="text" name="appKeuanganId" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <select id="id_appKeuanganStatus" disabled class="form-control input-sm" name="appKeuanganStatus">
-                        <option value="1">Approve</option>
-                        <option value="2">Reject</option>
-                        <option value="3">Paid</option>
-                    </select>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select id="id_appKeuanganStatus" disabled class="form-control input-sm"
+                                name="appKeuanganStatus">
+                            <option value="1">Approve</option>
+                            <option value="2">Reject</option>
+                            <option value="3">Paid</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <input id="id_appKeuanganTgl" class="form-control input-sm"
-                           type="text" name="appKeuanganTgl" readonly/>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input id="id_appKeuanganTgl" class="form-control input-sm"
+                               type="text" name="appKeuanganTgl" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
+                <div class="col-md-5">
+                    <div class="form-group">
                     <textarea rows="2" cols="" readonly name="appKeuanganKet" id="id_appKeuanganKet"
-                              class="form-control input-sm" placeholder="Keterangan" required>
+                              class="form-control input-sm" placeholder="Keterangan" >
                     </textarea>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <label><strong>Approval Head Dept.</strong></label>
+        <div class="row">
+            <div class="col-md-12">
+                <label><strong>Approval Head Dept.</strong></label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="form-body">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <input id="id_appHDId" class="form-control  input-sm"
-                           type="text" name="appHDId" readonly/>
+        <div class="row">
+            <div class="form-body">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input id="id_appHDId" class="form-control  input-sm"
+                               type="text" name="appHDId" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <select id="id_appHDStatus" disabled class="form-control input-sm" name="appHDStatus">
-                        <option value="1">Approve</option>
-                        <option value="2">Reject</option>
-                        <option value="3">Paid</option>
-                    </select>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select id="id_appHDStatus" disabled class="form-control input-sm"
+                                name="appHDStatus">
+                            <option value="1">Approve</option>
+                            <option value="2">Reject</option>
+                            <option value="3">Paid</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <input id="id_appHDTgl" class="form-control input-sm"
-                           type="text" name="appHDTgl" readonly/>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input id="id_appHDTgl" class="form-control input-sm"
+                               type="text" name="appHDTgl" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
+                <div class="col-md-5">
+                    <div class="form-group">
                     <textarea rows="2" cols="" readonly placeholder="Keterangan" name="appHDKet" id="id_appHDKet"
-                              class="form-control input-sm" required>
+                              class="form-control input-sm" >
                     </textarea>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <label><strong>Approval General Manager</strong></label>
+        <div class="row">
+            <div class="col-md-12">
+                <label><strong>Approval General Manager</strong></label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="form-body">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <input id="id_appGMId" class="form-control input-sm"
-                           type="text" name="appGMId" readonly/>
+        <div class="row">
+            <div class="form-body">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input id="id_appGMId" class="form-control input-sm"
+                               type="text" name="appGMId" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <select id="id_appGMStatus" class="form-control  input-sm" name="appGMStatus">
-                        <option value="1">Approve</option>
-                        <option value="2">Reject</option>
-                        <option value="3">Paid</option>
-                    </select>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select id="id_appGMStatus" class="form-control  input-sm approvalselect"
+                                name="appGMStatus">
+                            <option value="1">Approve</option>
+                            <option value="2">Reject</option>
+                            <option value="3">Paid</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <input id="id_appGMTgl" class="form-control input-sm"
-                           type="text" name="appGMTgl" readonly/>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input id="id_appGMTgl" class="form-control input-sm keterangan"
+                               type="text" name="appGMTgl" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
+                <div class="col-md-5">
+                    <div class="form-group">
                     <textarea rows="2" cols="" placeholder="Keterangan" name="appGMKet" id="id_appGMKet"
-                              class="form-control input-sm" required>
+                              class="form-control input-sm" >
                     </textarea>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-<?php
-}
-if ($this->session->userdata('usergroup_desc') == 'Admin') {
-    ?>
-    <div class="row">
-        <div class="col-md-12">
-            <label><strong>Approval Dept Keuangan</strong></label>
+        <?php
+    }
+    if ($this->session->userdata('usergroup_desc') == 'Admin') {
+        ?>
+        <div class="row">
+            <div class="col-md-12">
+                <label><strong>Approval Dept Keuangan</strong></label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="form-body">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <input id="id_appKeuanganId" class="form-control input-sm"
-                           type="text" name="appKeuanganId" readonly/>
+        <div class="row">
+            <div class="form-body">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input id="id_appKeuanganId" class="form-control input-sm"
+                               type="text" name="appKeuanganId" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <select id="id_appKeuanganStatus" disabled class="form-control input-sm" name="appKeuanganStatus">
-                        <option value="1">Approve</option>
-                        <option value="2">Reject</option>
-                        <option value="3">Paid</option>
-                    </select>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select id="id_appKeuanganStatus" disabled class="form-control input-sm"
+                                name="appKeuanganStatus">
+                            <option value="1">Approve</option>
+                            <option value="2">Reject</option>
+                            <option value="3">Paid</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <input id="id_appKeuanganTgl" class="form-control input-sm"
-                           type="text" name="appKeuanganTgl" readonly/>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input id="id_appKeuanganTgl" class="form-control input-sm"
+                               type="text" name="appKeuanganTgl" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    <textarea rows="2" cols="" readonly placeholder="Keterangan" name="appKeuanganKet" id="id_appKeuanganKet"
+                <div class="col-md-5">
+                    <div class="form-group">
+                    <textarea rows="2" cols="" readonly placeholder="Keterangan" name="appKeuanganKet"
+                              id="id_appKeuanganKet"
                               class="form-control input-sm">
                     </textarea>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <label><strong>Approval Head Dept.</strong></label>
+        <div class="row">
+            <div class="col-md-12">
+                <label><strong>Approval Head Dept.</strong></label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="form-body">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <input id="id_appHDId" class="form-control  input-sm"
-                           type="text" name="appHDId" readonly/>
+        <div class="row">
+            <div class="form-body">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input id="id_appHDId" class="form-control  input-sm"
+                               type="text" name="appHDId" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <select id="id_appHDStatus" disabled class="form-control input-sm" name="appHDStatus">
-                        <option value="1">Approve</option>
-                        <option value="2">Reject</option>
-                        <option value="3">Paid</option>
-                    </select>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select id="id_appHDStatus" disabled class="form-control input-sm"
+                                name="appHDStatus">
+                            <option value="1">Approve</option>
+                            <option value="2">Reject</option>
+                            <option value="3">Paid</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <input id="id_appHDTgl" class="form-control input-sm"
-                           type="text" name="appHDTgl" readonly/>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input id="id_appHDTgl" class="form-control input-sm"
+                               type="text" name="appHDTgl" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
+                <div class="col-md-5">
+                    <div class="form-group">
                     <textarea rows="2" cols="" readonly placeholder="Keterangan" name="appHDKet" id="id_appHDKet"
                               class="form-control input-sm">
                     </textarea>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <label><strong>Approval General Manager</strong></label>
+        <div class="row">
+            <div class="col-md-12">
+                <label><strong>Approval General Manager</strong></label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="form-body">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <input id="id_appGMId" class="form-control input-sm"
-                           type="text" name="appGMId" readonly/>
+        <div class="row">
+            <div class="form-body">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input id="id_appGMId" class="form-control input-sm"
+                               type="text" name="appGMId" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <select id="id_appGMStatus" disabled
-                            class="form-control  input-sm" name="appGMStatus">
-                        <option value="1">Approve</option>
-                        <option value="2">Reject</option>
-                        <option value="3">Paid</option>
-                    </select>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select id="id_appGMStatus" disabled
+                                class="form-control  input-sm" name="appGMStatus">
+                            <option value="1">Approve</option>
+                            <option value="2">Reject</option>
+                            <option value="3">Paid</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <input id="id_appGMTgl" class="form-control input-sm"
-                           type="text" name="appGMTgl" readonly/>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input id="id_appGMTgl" class="form-control input-sm"
+                               type="text" name="appGMTgl" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
+                <div class="col-md-5">
+                    <div class="form-group">
                     <textarea rows="2" cols="" readonly placeholder="Keterangan" name="appGMKet" id="id_appGMKet"
                               class="form-control input-sm">
                     </textarea>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-<?php } ?>
+    <?php } ?>
 <div class="row">
 </div>
 <!-- END SCROLLER-->
@@ -870,10 +930,28 @@ function ajax_submit_tambah() {
     });
     event.preventDefault();
 }
+$('form input:checkbox').attr("disabled",true);
+$(".approvalselect").change(function () {
+    var app = $(".approvalselect").val();
+    if(app == '2'){
+        $('.keterangan').attr("required",true);
+    }else{
+        $('.keterangan').attr("required",false);
+    }
 
+});
 $('#FormApprovalAdv').submit(function (event) {
     dataString = $("#FormApprovalAdv").serialize();
-    var r = confirm('Anda yakin menyimpan data ini?');
+    var budget = $('#id_inoutBudget_in').val();
+    var app = $(".approvalselect").val();
+    //alert(app);
+
+    if(budget == '1' && app == '2'){
+        var r = confirm('Request over budget.\nAnda yakin menyimpan data ini?');
+    }else{
+        var r = confirm('Anda yakin menyimpan data ini?');
+    }
+
     if (r) {
         ajax_submit_tambah();
     } else {//if(r)
@@ -892,11 +970,14 @@ function getDescAdv(id) {
             }, function (data) {
                 //console.log(data);
                 if (data.baris == 1) {
-
                     $('#id_kywId').val(data.id_kyw);
                     $('#id_namaKyw').val(data.nama_kyw);
                     $('#id_deptKyw').val(data.nama_dept);
                     $('#id_uangMuka').val(data.jml_uang);
+                    $('#id_proyek').val(data.nama_proyek);
+                    $('#id_kurs').val(data.id_kurs);
+                    $('#id_nilaiKurs').val(data.nilai_kurs);
+                    $('#id_tgltrans').val(data.tgl_trans);
                     $('#id_tglJT').val(data.tgl_jt);
                     $('#id_idPayTo').val(data.pay_to);
                     $('#id_namaPayTo').val(data.nama_pay_to);
@@ -904,6 +985,16 @@ function getDescAdv(id) {
                     $('#id_noAkunBank').val(data.no_akun_bank);
                     $('#id_namaBank').val(data.nama_bank);
                     $('#id_keterangan').val(data.keterangan);
+                    $("#uniform-id_wBudget span").removeClass("checked");
+                    $("#uniform-id_oBudget span").removeClass("checked");
+                    $('.inbudget').val('');
+                    if(data.inout_budget == '0'){
+                        $("#uniform-id_wBudget span").addClass("checked");
+                        $('#id_inoutBudget_in').val('0');
+                    }else{
+                        $("#uniform-id_oBudget span").addClass("checked");
+                        $('#id_inoutBudget_in').val('1');
+                    }
                     //Untuk divisi keuangan
                     if(idUserGroup == '5'){
                         if (data.app_keuangan_id == '') {

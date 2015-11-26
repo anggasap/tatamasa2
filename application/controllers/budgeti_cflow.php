@@ -81,7 +81,7 @@ class Budgeti_cflow extends CI_Controller
         $mei                = str_replace(',', '', trim($this->input->post('mei')));
         $jun                = str_replace(',', '', trim($this->input->post('jun')));
         $jul                = str_replace(',', '', trim($this->input->post('jul')));
-        $agu                = str_replace(',', '', trim($this->input->post('agu')));
+        $agu                = str_replace(',', '', trim($this->input->post('agt')));
         $sep                = str_replace(',', '', trim($this->input->post('sep')));
         $okt                = str_replace(',', '', trim($this->input->post('okt')));
         $nov                = str_replace(',', '', trim($this->input->post('nov')));
@@ -128,9 +128,11 @@ class Budgeti_cflow extends CI_Controller
 			$data['nama'] = 'PT BERKAH GRAHA MANDIRI';
 			$data['tower'] = 'Beltway Office Park Tower Lt. 5';
 			$data['alamat'] = 'Jl. TB Simatung No. 41 - Pasar Minggu - Jakarta Selatan';
-			$data['laporan'] = 'Laporan Budget Cash Flow';
+			$proyek = $this->budgeti_cflow_m->getNamaProyek2($idProyek);
+			$data['laporan'] = 'Laporan Budget Cash Flow - '.$proyek.' - '.$tahun;
 			$data['user'] = $this->session->userdata('username');
 			$data['all'] = $this->budgeti_cflow_m->getBudgetCflow($tahun,$idProyek);
+			$data['total'] = $this->budgeti_cflow_m->getTotalPerk($tahun,$idProyek);
 			$this->load->view('cetak/cetak_budget_cash_flow',$data);
     	}
 	}

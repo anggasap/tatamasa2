@@ -175,13 +175,13 @@
 </div>
 
 <!-- END PAGE CONTENT-->
-<!--  MODAL Data Karyawan -->
+<!--  MODAL Data Supplier -->
 <div class="modal fade draggable-modal" id="idDivTabelSpl" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog  modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Data User</h4>
+                <h4 class="modal-title">Data Supplier</h4>
             </div>
             <div class="modal-body">
                 <div class="scroller" style="height:400px; ">
@@ -240,7 +240,7 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<!--  END  MODAL Data Karyawan -->
+<!--  END  MODAL Data Supplier -->
 <!--  MODAL Data Perkiraan -->
 <div class="modal fade draggable-modal" id="idDivTabelPerk" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog  modal-lg">

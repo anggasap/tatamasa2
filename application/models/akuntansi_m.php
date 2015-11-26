@@ -3,7 +3,7 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class Master_advance_m extends CI_Model {
+class Akuntansi_m extends CI_Model {
 	public function getProyek() {
 		$rows 		=	array(); //will hold all results
 		$sql		=	"select * from master_proyek order by id_proyek asc ";

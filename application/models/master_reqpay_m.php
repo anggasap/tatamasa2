@@ -27,10 +27,11 @@ class Master_reqpay_m extends CI_Model {
 	} */
 	public function getDescReqpay($idReqpay)
 	{
-		$this->db->select ( 'mr.id_kyw, mk.nama_kyw, md.nama_dept, mr.no_invoice, mr.no_po, mr.jml_uang, mr.tgl_jt, mr.pay_to, mr.nama_akun_bank, mr.no_akun_bank, mr.nama_bank, mr.keterangan, mr.dok_fpe, mr.dok_kuitansi, mr.dok_fpa, mr.dok_po, mr.dok_suratjalan,mr.dok_lappenerimaanbrg,mr.dok_bast, mr.dok_bap, mr.dok_cop, mr.dok_ssp, mr.dok_sspk, mr.dok_sbj, mr.app_keuangan_id, mr.app_hd_id, mr.app_gm_id, mr.app_keuangan_status, mr.app_hd_status, mr.app_gm_status, mr.app_keuangan_tgl, mr.app_hd_tgl, mr.app_gm_tgl, mr.app_keuangan_ket, mr.app_hd_ket, mr.app_gm_ket' );
+		$this->db->select ( 'mr.id_kyw, mk.nama_kyw, md.nama_dept, mr.no_invoice, mr.no_po, mr.jml_uang,mr.id_proyek, mr.id_kurs, mr.nilai_kurs, mr.tgl_jt, mr.pay_to,ms.nama_spl, ms.nama_akun_bank, ms.no_akun_bank, ms.nama_bank, mr.keterangan, mr.dok_fpe, mr.dok_kuitansi, mr.dok_fpa, mr.dok_po, mr.dok_suratjalan,mr.dok_lappenerimaanbrg,mr.dok_bast, mr.dok_bap, mr.dok_cop, mr.dok_ssp, mr.dok_sspk, mr.dok_sbj, mr.app_keuangan_id, mr.app_hd_id, mr.app_gm_id, mr.app_keuangan_status, mr.app_hd_status, mr.app_gm_status, mr.app_keuangan_tgl, mr.app_hd_tgl, mr.app_gm_tgl, mr.app_keuangan_ket, mr.app_hd_ket, mr.app_gm_ket' );
 		$this->db->from('master_reqpay mr');
 		$this->db->join('master_karyawan mk', 'mr.id_kyw=mk.id_kyw', 'LEFT');
 		$this->db->join('master_dept md', 'mk.dept_kyw=md.id_dept', 'LEFT');
+		$this->db->join('master_supplier ms', 'mr.pay_to=ms.id_spl', 'LEFT');
 		$this->db->where ( 'mr.id_reqpay', $idReqpay );
 //		$this->db->where ( 'T.STATUS_AKTIF <>', 3 );
 		$query = $this->db->get ();
@@ -41,10 +42,11 @@ class Master_reqpay_m extends CI_Model {
 		}
 		
 	}
-	public function getIdReqpay(){
-		$sql= "select id_reqpay from master_reqpay";
+	public function getIdReqpay($bulan,$tahun){
+		/*$sql= "select id_reqpay from master_reqpay";
 		$query = $this->db->query($sql);
 		$jml = $query->num_rows();
+		$kode = "RP";
 		if($jml == 0){
 			$id_reqpay = "000001";
 			return $id_reqpay;
@@ -55,6 +57,22 @@ class Master_reqpay_m extends CI_Model {
 			$id_reqpay =  $hasil[0]->id_reqpay;
 			$id_reqpay = sprintf('%06u',$id_reqpay+1);
 			return $id_reqpay;
+		}*/
+		$sql= "select id_reqpay from master_reqpay where MONTH(tgl_trans)='$bulan' and YEAR(tgl_trans)='$tahun'";
+		$query = $this->db->query($sql);
+		$jml = $query->num_rows();
+		$kode = "RP";
+		$th = substr($tahun,-2);
+		if($jml == 0){
+			$id_adv = "0000001";
+			return $kode."-".$id_adv."-".$bulan.$th;
+		}else{
+			$sql= "select max(substring(id_reqpay,4,7)) as id_rp from master_reqpay";
+			$query = $this->db->query($sql);
+			$hasil = $query->result();
+			$id_adv =  $hasil[0]->id_rp;
+			$id_adv = sprintf('%07u',$id_adv+1);
+			return $kode."-".$id_adv."-".$bulan.$th;
 		}
 	}
 	public function insertReqpay($data){

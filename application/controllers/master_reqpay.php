@@ -9,6 +9,7 @@ class Master_reqpay extends CI_Controller
 
 		$this->load->model('home_m');
 		$this->load->model('master_reqpay_m');
+		$this->load->model('master_advance_m');
 		session_start ();
 	}
 	public function index(){
@@ -31,6 +32,8 @@ class Master_reqpay extends CI_Controller
 		$this->auth->restrict ($data['menu_id']);
 		$this->auth->cek_menu ( $data['menu_id'] );
         //$data['dept'] = $this->master_advance_m->get_dept();
+		$data['proyek'] = $this->master_advance_m->getProyek();
+		$data['kurs'] = $this->master_advance_m->getKurs();
        
 		if(isset($_POST["btnSimpan"])){
 			$this->simpan();
@@ -93,8 +96,12 @@ class Master_reqpay extends CI_Controller
 						'no_invoice'=>$row->no_invoice,
 						'no_po'=>$row->no_po,
 						'jml_uang' => $jml_uang,
+						'id_proyek' => $row->id_proyek,
+						'id_kurs' => $row->id_kurs,
+						'nilai_kurs' => $row->nilai_kurs,
 						'tgl_jt' => $tgl_jt,
 						'pay_to' => $row->pay_to,
+						'nama_spl' => $row->nama_spl,
 						'nama_akun_bank' => $row->nama_akun_bank,
 						'no_akun_bank' => $row->no_akun_bank,
 						'nama_bank' => $row->nama_bank,
@@ -138,22 +145,49 @@ class Master_reqpay extends CI_Controller
         $noInv			= trim($this->input->post('noInvoice'));
         $noPO			= trim($this->input->post('noPO'));
         $uang			= str_replace(',', '', trim($this->input->post('uang')));
+		$idProyek = trim($this->input->post('proyek'));
+		$idKurs = trim($this->input->post('kurs'));
+		$nilaiKurs = str_replace(',', '', trim($this->input->post('nilaiKurs')));
+		$tglTrans = trim($this->input->post('tglTrans'));
+		$tglTrans = date('Y-m-d', strtotime($tglTrans));
         $tglJT			= trim($this->input->post('tglJT'));
         $tglJT 			= date ( 'Y-m-d', strtotime ( $tglJT ) );
-        $payTo			= trim($this->input->post('payTo'));
+        $payTo			= trim($this->input->post('splId'));
         $namaPemilikAkunBank			= trim($this->input->post('namaPemilikAkunBank'));
         $noAkunBank			= trim($this->input->post('noAkunBank'));
         $namaBank			= trim($this->input->post('namaBank'));
         $ket			= trim($this->input->post('keterangan'));
+
+		$dokFPE			= trim($this->input->post('dokFPe_in'));
+		$dokKuitansi	= trim($this->input->post('dokKuitansi_in'));
+		$dokPA			= trim($this->input->post('dokPa_in'));
+		$dokPO 			= trim($this->input->post('dokPO_in'));
+		$dokSuratJalan	= trim($this->input->post('dokSuratJalan_in'));
+		$dokPB			= trim($this->input->post('dokPenBrg_in'));
+		$dokBAST		= trim($this->input->post('dokBAST_in'));
+		$dokBAP			= trim($this->input->post('dokBAP_in'));
+		$dokCOP			= trim($this->input->post('dokCOP_in'));
+		$dokSSP			= trim($this->input->post('dokSSP_in'));
+		$dokSSPK		= trim($this->input->post('dokSSPK_in'));
+		$dokSBJ			= trim($this->input->post('dokSBJ_in'));
+
         //$ket			= trim($this->input->post(''));
-                
-        $modelidReqpay = $this->master_reqpay_m->getIdReqpay();
+
+		$bulan = date('m', strtotime($tglTrans));//$tglTrans->format("m");
+		$tahun = date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
+
+
+		$modelidReqpay = $this->master_reqpay_m->getIdReqpay($bulan,$tahun);
         $data = array(
             'id_reqpay'		      		=>$modelidReqpay,
             'id_kyw'		        	=>$idKyw,
         	'no_invoice'		        =>$noInv,
         	'no_po'		        		=>$noPO,
             'jml_uang'		        	=>$uang,
+			'id_proyek' 				=> $idProyek,
+			'id_kurs' 					=> $idKurs,
+			'nilai_kurs' 				=> $nilaiKurs,
+			'tgl_trans'					=>$tglTrans,
         	'tgl_jt'		        	=>$tglJT,
         	'pay_to'		        	=>$payTo,
         	'nama_akun_bank'		    =>$namaPemilikAkunBank,
@@ -196,9 +230,14 @@ class Master_reqpay extends CI_Controller
         $noInv			= trim($this->input->post('noInvoice'));
         $noPO			= trim($this->input->post('noPO'));
         $uang			= str_replace(',', '', trim($this->input->post('uang')));
+		$idProyek = trim($this->input->post('proyek'));
+		$idKurs = trim($this->input->post('kurs'));
+		$nilaiKurs = str_replace(',', '', trim($this->input->post('nilaiKurs')));
+		$tglTrans 		= trim($this->input->post('tglTrans'));
+		$tglTrans 		= date('Y-m-d', strtotime($tglTrans));
         $tglJT			= trim($this->input->post('tglJT'));
         $tglJT 			= date ( 'Y-m-d', strtotime ( $tglJT ) );
-        $payTo			= trim($this->input->post('payTo'));
+		$payTo			= trim($this->input->post('splId'));
         $namaPemilikAkunBank			= trim($this->input->post('namaPemilikAkunBank'));
         $noAkunBank			= trim($this->input->post('noAkunBank'));
         $namaBank			= trim($this->input->post('namaBank'));
@@ -209,6 +248,10 @@ class Master_reqpay extends CI_Controller
         		'no_invoice'		        =>$noInv,
         		'no_po'		        		=>$noPO,
         		'jml_uang'		        	=>$uang,
+				'id_proyek' 				=> $idProyek,
+				'id_kurs' 					=> $idKurs,
+				'nilai_kurs'				=> $nilaiKurs,
+				'tgl_trans'					=>$tglTrans,
         		'tgl_jt'		        	=>$tglJT,
         		'pay_to'		        	=>$payTo,
         		'nama_akun_bank'		    =>$namaPemilikAkunBank,
