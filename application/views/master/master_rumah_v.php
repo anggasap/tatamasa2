@@ -17,7 +17,7 @@ table#idTabelRumah td:nth-child(5) {
             <div class="portlet-title">
                 <div class="caption">
                     <i class="fa fa-cogs  font-red-sunglo"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase">Data Proyek</span>
+                    <span class="caption-subject font-red-sunglo bold uppercase">Data Rumah</span>
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -54,7 +54,13 @@ table#idTabelRumah td:nth-child(5) {
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            
+                                            <label>Status jual</label>
+                                            <select id="id_statusJual" class="form-control  input-sm"
+                                                    name="statusJual" disabled >
+                                                <option value="0">Available</option>
+                                                <option value="1">Booked</option>
+                                                <option value="2">Terjual</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

@@ -30,12 +30,10 @@
                 <form role="form" method="post" class="cls_from_sec_karyawan"
                       action="<?php echo base_url('master_karyawan/home'); ?>" id="id_formKyw">
                     <div class="row">
-
                         <div class="form-body">
                             <div class="col-md-6">
 								<div class="form-group">
                                     <label>Id Karyawan </label>
-
                                     <div class="input-group">
                                         <div class="input-icon">
                                             <i class="fa fa-list fa-fw"></i>
