@@ -78,6 +78,8 @@ class Master_rumah extends CI_Controller
                         'id_proyek' => $row->id_proyek,
 						'nama_proyek'=>$row->nama_proyek,
 						'nama_rumah'=>$row->nama_rumah,
+						'type'=>$row->tipe,
+						'blok'=>$row->blok,
 						'luas' => $luas,
                         'harga' =>$harga
 						//'' => $row->
@@ -91,14 +93,18 @@ class Master_rumah extends CI_Controller
     function simpan(){
         $idProyek			= trim($this->input->post('proyekId'));
         $namaRumah		    = trim($this->input->post('namaRumah'));
+		$typeRumah		    = trim($this->input->post('typeRumah'));
+		$blokRumah		    = trim($this->input->post('blokRumah'));
         $luasRumah		    = str_replace(',', '', trim($this->input->post('luasRumah')));
         $hargaRumah		    = str_replace(',', '', trim($this->input->post('hargaRumah')));
                
-        $modelidrumah = $this->master_rumah_m->getIdRumah();
+        $modelidrumah = $this->master_rumah_m->getIdRumah($idProyek);
         $data = array(
             'id_rumah'		      		=>$modelidrumah,
             'id_proyek'		      		=>$idProyek,
             'nama_rumah'		        =>$namaRumah,
+			'tipe'		        =>$typeRumah,
+			'blok'		        =>$blokRumah,
             'luas'		        =>$luasRumah,
             'harga'		        =>$hargaRumah
         );
@@ -122,14 +128,18 @@ class Master_rumah extends CI_Controller
     	$rumahId			= trim($this->input->post('rumahId'));
     	$idProyek			= trim($this->input->post('proyekId'));
         $namaRumah		    = trim($this->input->post('namaRumah'));
+		$typeRumah		    = trim($this->input->post('typeRumah'));
+		$blokRumah		    = trim($this->input->post('blokRumah'));
         $luasRumah		    = str_replace(',', '', trim($this->input->post('luasRumah')));
         $hargaRumah		    = str_replace(',', '', trim($this->input->post('hargaRumah')));
     	 
     	$data = array(
-            'id_proyek'		      		=>$idProyek,
-            'nama_rumah'		        =>$namaRumah,
-            'luas'		        =>$luasRumah,
-            'harga'		        =>$hargaRumah
+				'id_proyek'		      		=>$idProyek,
+				'nama_rumah'		        =>$namaRumah,
+				'tipe'		        =>$typeRumah,
+				'blok'		        =>$blokRumah,
+				'luas'		        =>$luasRumah,
+				'harga'		        =>$hargaRumah
         );
     	
     	$model = $this->master_rumah_m->ubah($data,$rumahId);

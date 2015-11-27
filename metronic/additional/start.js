@@ -6,6 +6,7 @@ function tglTransStart(){
 	$('#id_tgltrans').val(tgltrans.trim());
 }
 function readyToStart(){
+	//alert("");
 	$(".nomor").val("0.00");
     $(".nomor").focus(function(){
 	    if ($(this).val() == '0.00') {

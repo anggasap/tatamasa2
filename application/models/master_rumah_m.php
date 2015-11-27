@@ -11,7 +11,7 @@ class Master_rumah_m extends CI_Model {
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}
-	public function getIdRumah(){
+	/*public function getIdRumah(){
 		$sql= "select id_rumah from master_rumah";
 		$query = $this->db->query($sql);
 		$jml = $query->num_rows();
@@ -25,6 +25,23 @@ class Master_rumah_m extends CI_Model {
 			$id_rumah =  $hasil[0]->id_rumah;
 			$id_rumah = sprintf('%03u',$id_rumah+1);
 			return $id_rumah;
+		}
+	}*/
+	public function getIdRumah($id_proyek){
+		$sql= "select id_rumah from master_rumah where id_proyek='$id_proyek'";
+		$query = $this->db->query($sql);
+		$jml = $query->num_rows();
+		$kode = $id_proyek;
+		if($jml == 0){
+			$id_adv = "001";
+			return $kode."-".$id_adv;
+		}else{
+			$sql= "select max(substring(id_rumah,5,3)) as id_adv from master_rumah where id_proyek='$id_proyek'";
+			$query = $this->db->query($sql);
+			$hasil = $query->result();
+			$id_adv =  $hasil[0]->id_adv;
+			$id_adv = sprintf('%03u',$id_adv+1);
+			return $kode."-".$id_adv;
 		}
 	}
     public function getDescRumah($idRumah)

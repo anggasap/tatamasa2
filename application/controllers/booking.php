@@ -1,14 +1,14 @@
 <?php
 if( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Master_proyek extends CI_Controller
+class Booking extends CI_Controller
 {
 	function __construct()
 	{
 		parent::__construct();
 
 		$this->load->model('home_m');
-		$this->load->model('master_proyek_m');
+		$this->load->model('booking_m');
 		session_start ();
 	}
 	public function index(){
@@ -24,7 +24,7 @@ class Master_proyek extends CI_Controller
 	}
 	
 	function home(){
-		$menuId = $this->home_m->get_menu_id('master_proyek/home');
+		$menuId = $this->home_m->get_menu_id('booking/home');
 		$data['menu_id'] = $menuId[0]->menu_id;
 		$data['menu_parent'] = $menuId[0]->parent;
 		$data['menu_nama'] = $menuId[0]->menu_nama;
@@ -43,37 +43,48 @@ class Master_proyek extends CI_Controller
 			$data['menu_all'] = $this->user_m->get_menu_all(0);
 			
 			$this->template->set ( 'title', $data['menu_nama'] );
-			$this->template->load ( 'template/template3', 'master/master_proyek_v',$data );
+			$this->template->load ( 'template/template3', 'transaksi/booking_v',$data );
 		}
 	}
-	public function getProyekAll(){
+	public function getCustomerAll(){
 		$this->CI =& get_instance();//and a.kcab_id<>'1100'
-		$rows = $this->master_proyek_m->getProyekAll();
+		$rows = $this->booking_m->getCustomerAll();
 		$data['data'] = array();
 		foreach( $rows as $row ) {
+		  //$harga = number_format(trim($row->harga),2);
 			$array = array(
-					'idProyek' => trim($row->id_proyek),
-					'namaProyek' => trim($row->nama_proyek),
-					'qtyRumah'	=>trim($row->qty_rumah)
+					'id_cust' => trim($row->id_cust),
+					'nama_cust' => trim($row->nama_cust),
+                    'alamat' => trim($row->alamat),
+                    'no_id' => trim($row->no_id),
+                    'no_hp' => trim($row->no_hp),
+					'no_telp'=>trim($row->no_telp)
 			);
 	
 			array_push($data['data'],$array);
 		}
 		$this->output->set_output(json_encode($data));
 	}
-    function simpan(){
-        $namaProyek			= trim($this->input->post('namaProyek'));
-		$qtyRumah			= str_replace(',', '', trim($this->input->post('jmlRumah')));
-        //$deptProyek		= trim($this->input->post('deptProyek'));
-       
-        $modelidProyek = $this->master_proyek_m->getIdProyek();
-        $data = array(
-            'id_proyek'		    =>$modelidProyek,
-            'nama_proyek'		=>$namaProyek,
-			'qty_rumah'			=>$qtyRumah
 
+    function simpan(){
+
+        $namaCustomer	= trim($this->input->post('namaCustomer'));
+		$alamat		    = trim($this->input->post('alamat'));
+		$noId		    = trim($this->input->post('noId'));
+        $noHp		    = trim($this->input->post('noHp'));
+        $noTelp		    = trim($this->input->post('noTelp'));
+               
+        $modelidcust = $this->booking_m->getIdCustomer();
+
+        $data = array(
+            'id_cust'		    =>$modelidcust,
+            'nama_cust'		    =>$namaCustomer,
+            'alamat'		    =>$alamat,
+			'no_id'		        =>$noId,
+			'no_hp'		        =>$noHp,
+            'no_telp'		    =>$noTelp
         );
-        $model = $this->master_proyek_m->simpan($data);
+        $model = $this->booking_m->simpan($data);
         if($model){
     		$array = array(
     			'act'	=>1,
@@ -90,16 +101,22 @@ class Master_proyek extends CI_Controller
         $this->output->set_output(json_encode($array));
     }
     function ubah(){
-    	$proyekId			= trim($this->input->post('proyekId'));
-    	$namaProyek			= trim($this->input->post('namaProyek'));
-		$qtyRumah			= str_replace(',', '', trim($this->input->post('jmlRumah')));
-    	 
-    	$data = array(
-            'nama_proyek'		        	=>$namaProyek,
-			'qty_rumah'			=>$qtyRumah
-        );
+		$idCustomer	= trim($this->input->post('customerId'));
+		$namaCustomer	= trim($this->input->post('namaCustomer'));
+		$alamat		    = trim($this->input->post('alamat'));
+		$noId		    = trim($this->input->post('noId'));
+		$noHp		    = trim($this->input->post('noHp'));
+		$noTelp		    = trim($this->input->post('noTelp'));
+
+		$data = array(
+				'nama_cust'		    =>$namaCustomer,
+				'alamat'		    =>$alamat,
+				'no_id'		        =>$noId,
+				'no_hp'		        =>$noHp,
+				'no_telp'		    =>$noTelp
+		);
     	
-    	$model = $this->master_proyek_m->ubah($data,$proyekId);
+    	$model = $this->booking_m->ubah($data,$idCustomer);
     	if($model){
     		$array = array(
     			'act'	=>1,
@@ -117,8 +134,8 @@ class Master_proyek extends CI_Controller
     }
     function hapus(){
     	$this->CI =& get_instance();
-    	$proyekId			= trim($this->input->post('idProyek'));
-        $model = $this->master_proyek_m->hapus( $proyekId);
+    	$idCustomer			= trim($this->input->post('idCustomer'));
+        $model = $this->booking_m->hapus( $idCustomer);
         if($model){
       			$array = array(
       					'act'	=>1,
@@ -133,12 +150,12 @@ class Master_proyek extends CI_Controller
       			);
       		}
         
-    	//$cekMasterAdv	= $this->master_proyek_m->cekMasterAdvance($kywId);
-//    	$cekMasterReqpay	= $this->master_proyek_m->cekMasterReqpay($kywId);
-//    	$cekMasterReimpay	= $this->master_proyek_m->cekMasterReimpay($kywId);
+    	//$cekMasterAdv	= $this->booking_m->cekMasterAdvance($kywId);
+//    	$cekMasterReqpay	= $this->master_customer_m->cekMasterReqpay($kywId);
+//    	$cekMasterReimpay	= $this->master_customer_m->cekMasterReimpay($kywId);
     	/**
  * if($cekMasterAdv == true && $cekMasterReqpay ==true && $cekMasterReimpay ==true){
- *     		$model = $this->master_proyek_m->deleteProyek( $kywId);
+ *     		$model = $this->master_customer_m->deleteProyek( $kywId);
  *     		if($model){
  *     			$array = array(
  *     					'act'	=>1,
