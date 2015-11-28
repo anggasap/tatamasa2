@@ -125,7 +125,14 @@
 	 ?>
 	 <tr><td rowspan="2"><?php echo $d->kode_cflow; ?></td><td style="border-bottom: 0px;"><?php echo $d->nama_cflow; ?></td><td rowspan="2"><?php echo number_format($d->anggaran,2,",","."); ?></td>
 	 <td rowspan="2"><?php echo number_format($d->terpakai,2,",","."); ?></td><td rowspan="2"><?php echo number_format($d->jumlah,2,",","."); ?></td>
-	 <td rowspan="2"><?php echo number_format($d->saldo,2,",","."); ?></td></tr>
+	 <td rowspan="2"><?php 
+	 if($totalSisa <= 0){
+		$sld = str_replace('-', '', $d->saldo);	
+		echo '('.number_format($sld,2,",",".").')'; 
+	 }else{ 
+		echo number_format($totalSisa,2,",",".");
+	 }
+	 ?></td></tr>
 	 <tr><td style="border-top: 0px;"><?php echo $d->keterangan; ?></td></tr>
 	 <?php 
 	 $totalAng = $totalAng + $d->anggaran;
@@ -134,8 +141,27 @@
 	 $totalSisa = $totalSisa + $d->saldo;
 	 } ?>
 	 <tr><td colspan="2">Total Request</td><td><?php echo number_format($totalAng,2,",","."); ?></td><td><?php echo number_format($totalTer,2,",","."); ?></td>
-	 <td><?php echo number_format($totalJum,2,",","."); ?></td><td><?php echo number_format($totalSisa,2,",","."); ?></td></tr>
-	 <tr><td colspan="6"><?php  if (Terbilang($totalSisa) == ''){ echo '';}else{ echo Terbilang($totalSisa).' rupiah';} ?></td></tr>
+	 <td><?php echo number_format($totalJum,2,",","."); ?></td>
+	 <td><?php 
+	 if($totalSisa <= 0){
+		$ts = str_replace('-', '', $totalSisa);	
+		echo '('.number_format($ts,2,",",".").')'; 
+	 }else{ 
+		echo number_format($totalSisa,2,",",".");
+	 } ?></td></tr>
+	 <tr><td colspan="6">
+	 <?php  
+	 if($totalSisa == ''){ 
+			echo '';
+	 }else{ 
+		if($totalSisa <= 0){
+			$ts = str_replace('-', '', $totalSisa); 
+			echo 'minus '.Terbilang($ts).' rupiah';	
+		}else{
+			echo Terbilang($totalSisa).' rupiah';
+		}	
+	 }
+		 ?></td></tr>
 	</table>
 	<br/>
 	<table class="tableizer-table4">

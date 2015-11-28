@@ -214,7 +214,6 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Dokumen Verifikasi</label>
-
                                     <div class="checkbox-list">
                                         <label>
                                             <input type="checkbox" value="1" name="dokPO" id="id_dokPO"> Purchase Order
@@ -852,9 +851,7 @@
         type="text/javascript"></script>
 <script src="<?php echo base_url('metronic/admin/pages/scripts/components-pickers.js'); ?>"
         type="text/javascript"></script>
-
-
-<script src="<?php echo base_url('metronic/additional/start.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/additional/start.js');?>" type="text/javascript"></script>
 <script>
     jQuery(document).ready(function () {
         Metronic.init(); // init metronic core components
@@ -1412,6 +1409,7 @@
         $('#id_btnAddCpa').attr("disabled", false);
         $('#id_btnUpdateCpa').attr("disabled", true);
         $('#id_btnRemoveCpa').attr("disabled", true);
+		$('#id_btnSign').attr("disabled",true);
     }
     $('#id_btnAddCpa').click(function () {
         var i = $('#idTxtTempLoop').val();
@@ -1508,10 +1506,6 @@
         kosongCPA();
         btnCpaStart();
     });
-    function cetak() {
-        var idAdvance = $('#id_idAdvance').val();
-        window.open("<?php echo base_url('master_advance/cetak/'); ?>/" + idAdvance, '_blank');
-    }
     function getDescAdv(idAdv) {
         ajaxModal();
         if (idAdv != '') {
@@ -1776,9 +1770,9 @@
     });
     function cetak() {
         var idAdvance = $('#id_idAdvance').val();
-        if (idAdvance == '') {
+        if(idAdvance == ''){
             alert('Silahkan pilih ID Advance');
-        } else {
+        }else{
             window.open("<?php echo base_url('master_advance/cetak/'); ?>/" + idAdvance, '_blank');
         }
     }
@@ -1810,7 +1804,6 @@
                 $('#id_tglJT').focus();
             }
         }
-
     });
 
 </script>

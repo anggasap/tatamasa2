@@ -240,7 +240,7 @@ class Master_advance extends CI_Controller
         $rows = $this->master_advance_m->getDescAdv($idAdv);
         if ($rows) {
             foreach ($rows as $row)
-                $tgl_jt = date('d-m-Y', strtotime($row->tgl_jt));
+            $tgl_jt = date('d-m-Y', strtotime($row->tgl_jt));
             $tglTrans = date('d-m-Y', strtotime($row->tgl_trans));
             $jml_uang = number_format($row->jml_uang, 2);
             $nama_pay_to = $this->master_advance_m->getPayTo($row->pay_to);
@@ -382,26 +382,26 @@ class Master_advance extends CI_Controller
 
     function simpan()
     {
-        $idKyw = trim($this->input->post('kywId'));
-        $uangMuka = str_replace(',', '', trim($this->input->post('uangMuka')));
-        $idProyek = trim($this->input->post('proyek'));
-        $idKurs = trim($this->input->post('kurs'));
-        $nilaiKurs = str_replace(',', '', trim($this->input->post('nilaiKurs')));
-        $idKyw = trim($this->input->post('kywId'));
-        $tglTrans = trim($this->input->post('tglTrans'));
-        $tglTrans = date('Y-m-d', strtotime($tglTrans));
-        $tglJT = trim($this->input->post('tglJT'));
-        $tglJT = date('Y-m-d', strtotime($tglJT));
-        $payTo = trim($this->input->post('payTo'));
+        $idKyw 		= trim($this->input->post('kywId'));
+        $uangMuka 	= str_replace(',', '', trim($this->input->post('uangMuka')));
+        $idProyek 	= trim($this->input->post('proyek'));
+        $idKurs 	= trim($this->input->post('kurs'));
+        $nilaiKurs 	= str_replace(',', '', trim($this->input->post('nilaiKurs')));
+        $idKyw 		= trim($this->input->post('kywId'));
+        $tglTrans 	= trim($this->input->post('tglTrans'));
+        $tglTrans 	= date('Y-m-d', strtotime($tglTrans));
+        $tglJT 		= trim($this->input->post('tglJT'));
+        $tglJT 		= date('Y-m-d', strtotime($tglJT));
+        $payTo 		= trim($this->input->post('payTo'));
         $namaPemilikAkunBank = trim($this->input->post('namaPemilikAkunBank'));
         $noAkunBank = trim($this->input->post('noAkunBank'));
-        $namaBank = trim($this->input->post('namaBank'));
-        $ket = trim($this->input->post('keterangan'));
-        $dokPO = trim($this->input->post('dokPO_in'));
-        $dokSP = trim($this->input->post('dokSP_in'));
-        $dokSSP = trim($this->input->post('dokSSP_in'));
-        $dokSSPK = trim($this->input->post('dokSSPK_in'));
-        $dokSBJ = trim($this->input->post('dokSBJ_in'));
+        $namaBank 	= trim($this->input->post('namaBank'));
+        $ket 		= trim($this->input->post('keterangan'));
+        $dokPO 		= trim($this->input->post('dokPO_in'));
+        $dokSP 		= trim($this->input->post('dokSP_in'));
+        $dokSSP 	= trim($this->input->post('dokSSP_in'));
+        $dokSSPK 	= trim($this->input->post('dokSSPK_in'));
+        $dokSBJ 	= trim($this->input->post('dokSBJ_in'));
         //$ket			= trim($this->input->post(''));
 
         $bulan = date('m', strtotime($tglTrans));//$tglTrans->format("m");
@@ -455,7 +455,7 @@ class Master_advance extends CI_Controller
                 );
                 $query = $this->master_advance_m->insertCpa($data);
                 $totalCflow = $TotalC + $tmpJumlah;
-                $totalCPerk = $TotalP + $tmpJumlah;
+                $totalCperk = $TotalP + $tmpJumlah;
 
                 $dataTerpakaiCflow  = array(
                     'terpakai' => $totalCflow
@@ -470,8 +470,8 @@ class Master_advance extends CI_Controller
                 $query = $this->master_advance_m->updateBudgetKdPerkSaldo($tmpKodePerk,$tahun,$idProyek);
             }
             $tmpKodeCflow 	= trim($this->input->post($tKodeCflow));
-            $TotalC 		= $this->master_advance_m->get_total_cflow($tmpKodeCflow);
-            $total 			= $totalC - $totalCflow;
+            $TotalC 		= $this->master_advance_m->get_saldo_cflow($tmpKodeCflow);
+            $total 			= $TotalC - $totalCflow;
             $data = array(
                 'inout_budget' => '1'
             );
@@ -543,38 +543,53 @@ class Master_advance extends CI_Controller
             //        		''		        	=>$,
         );
         $model = $this->master_advance_m->updateAdv($data, $idAdv);
-
+		$model = $this->master_advance_m->deleteCpa($idAdv);
         $totJurnal = trim($this->input->post('txtTempLoop'));
         if ($totJurnal > 0) {
-            $query = $this->master_advance_m->deleteCpa($idAdv);
-
             for ($i = 1; $i <= $totJurnal; $i++) {
-                $tKodePerk = 'tempKodePerk' . $i;
+                $tKodePerk 	= 'tempKodePerk' . $i;
                 $tKodeCflow = 'tempKodeCflow' . $i;
-                $tJumlah = 'tempJumlah' . $i;
-                $tKet = 'tempKet' . $i;
+                $tJumlah 	= 'tempJumlah' . $i;
+                $tKet 		= 'tempKet' . $i;
 
-                $tmpKodePerk = trim($this->input->post($tKodePerk));
-                $tmpKodeCflow = trim($this->input->post($tKodeCflow));
-                $tmpJumlah = str_replace(',', '', trim($this->input->post($tJumlah)));
-                $tmpKet = trim($this->input->post($tKet));
-
+                $tmpKodePerk 	= trim($this->input->post($tKodePerk));
+                $tmpKodeCflow 	= trim($this->input->post($tKodeCflow));
+                $tmpJumlah 		= str_replace(',', '', trim($this->input->post($tJumlah)));
+                $tmpKet 		= trim($this->input->post($tKet));
+                $TotalC 		= $this->master_advance_m->get_terpakai_cflow($tmpKodeCflow);
+                $TotalP 		= $this->master_advance_m->get_terpakai_perk($tmpKodePerk);
                 $data = array(
                     'id_cpa' => 0,
-                    'id_master' => $idAdv,
-                    'kode_perk' => $tmpKodePerk,
-                    'kode_cflow' => $tmpKodeCflow,
-                    'keterangan' => $tmpKet,
-                    'jumlah' => $tmpJumlah
+                    'id_master' 	=> $idAdv,
+                    'kode_perk' 	=> $tmpKodePerk,
+                    'kode_cflow' 	=> $tmpKodeCflow,
+                    'keterangan' 	=> $tmpKet,
+                    'jumlah' 		=> $tmpJumlah
                 );
                 $query = $this->master_advance_m->insertCpa($data);
-                $dataTerpakai  = array(
-                    'terpakai' => $tmpJumlah
+                $totalCflow = $TotalC + $tmpJumlah;
+                $totalCperk = $TotalP + $tmpJumlah;
+
+                $dataTerpakaiCflow  = array(
+                    'terpakai' => $totalCflow
                 );
-                $query = $this->master_advance_m->updateBudgetCflowTerpakai($tmpKodeCflow,$tahun,$idProyek,$dataTerpakai);
+
+                $dataTerpakaiPerk  = array(
+                    'terpakai' => $totalCperk
+                );
+                $query = $this->master_advance_m->updateBudgetCflowTerpakai($tmpKodeCflow,$tahun,$idProyek,$dataTerpakaiCflow);
                 $query = $this->master_advance_m->updateBudgetCflowSaldo($tmpKodeCflow,$tahun,$idProyek);
-                $query = $this->master_advance_m->updateBudgetKdPerkTerpakai($tmpKodePerk,$tahun,$idProyek,$dataTerpakai);
+                $query = $this->master_advance_m->updateBudgetKdPerkTerpakai($tmpKodePerk,$tahun,$idProyek,$dataTerpakaiPerk);
                 $query = $this->master_advance_m->updateBudgetKdPerkSaldo($tmpKodePerk,$tahun,$idProyek);
+            }
+            $tmpKodeCflow 	= trim($this->input->post($tKodeCflow));
+            $TotalC 		= $this->master_advance_m->get_saldo_cflow($tmpKodeCflow);
+            $total 			= $TotalC - $totalCflow;
+            $data = array(
+                'inout_budget' => '1'
+            );
+            if ($total <= 0){
+                $model 			= $this->master_advance_m->updateAdv($data, $idAdv);
             }
         } else {
             $query = $this->master_advance_m->deleteCpa($idAdv);
@@ -659,16 +674,16 @@ class Master_advance extends CI_Controller
 
     function cetak_cpa($idAdv)
     {
-        if ($this->auth->is_logged_in() == false) {
+        if($this->auth->is_logged_in() == false){
             redirect('main/index');
-        } else {
+        }else{
             $data['advance'] = $this->master_advance_m->cetak_cpa($idAdv);
             $data['detail'] = $this->master_advance_m->cetak_cpa_detail($idAdv);
             $this->load->view('cetak/cetak_cpa', $data);
         }
     }
 
-    function cetak_pp($idAdv)
+    /*function cetak_pp($idAdv)
     {
         if ($this->auth->is_logged_in() == false) {
             redirect('main/index');
@@ -677,7 +692,7 @@ class Master_advance extends CI_Controller
             $data['detail'] = $this->master_advance_m->cetak_cpa_detail($idAdv);
             $this->load->view('cetak/cetak_cpa', $data);
         }
-    }
+    }*/
 
 
 }

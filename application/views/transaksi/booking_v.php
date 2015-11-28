@@ -57,26 +57,31 @@ table#idTabelRumah td:nth-child(5) {
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
+                                            <label>Nama customer </label>
                                             <input id="id_namaCustomer" required="required" class="form-control  input-sm"
-                                                   type="text" name="namaCustomer" placeholder="Nama customer" readonly />
+                                                   type="text" name="namaCustomer" placeholder="" readonly />
                                         </div>
                                         <div class="col-md-6">
+                                            <label>No Id customer </label>
                                             <input id="id_noId" required="required" class="form-control input-sm"
-                                                   type="text" name="noId" placeholder="No ID" readonly/>
+                                                   type="text" name="noId" placeholder="" readonly/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
+                                            <label>Alamat </label>
                                             <textarea rows="3" cols="" name="alamat" id="id_alamat"
-                                                      class="form-control input-sm" placeholder="Alamat" readonly></textarea>
+                                                      class="form-control input-sm" placeholder="" readonly></textarea>
                                         </div>
                                         <div class="col-md-6">
+                                            <label>No HP </label>
                                             <input id="id_noHp" required="required" class="form-control input-sm"
-                                                   type="text" name="noHp" placeholder="No HP" readonly/>
+                                                   type="text" name="noHp" placeholder="" readonly/>
+                                            <label>No Telp </label>
                                             <input id="id_noTelp" required="required" class="form-control input-sm"
-                                                   type="text" name="noTelp" placeholder="No Telp" readonly/>
+                                                   type="text" name="noTelp" placeholder="" readonly/>
                                         </div>
                                     </div>
                                 </div>
@@ -104,36 +109,42 @@ table#idTabelRumah td:nth-child(5) {
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
+                                            <label>Nama Rumah </label>
                                             <input id="id_namaRumah" required="required" class="form-control  input-sm"
-                                                   type="text" name="namaRumah" placeholder="Nama Rumah" readonly/>
+                                                   type="text" name="namaRumah" placeholder="" readonly/>
                                         </div>
                                         <div class="col-md-6">
+                                            <label>Nama proyek</label>
                                             <input id="id_namaProyek" required="required" class="form-control  input-sm"
-                                                   type="text" name="namaProyek" placeholder="Nama proyek" readonly/>
+                                                   type="text" name="namaProyek" placeholder="" readonly/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-4">
+                                            <label>Tipe rumah</label>
                                             <input id="id_typeRumah" required="required" class="form-control input-sm"
-                                                   type="text" name="typeRumah" placeholder="Tipe" readonly/>
+                                                   type="text" name="typeRumah" placeholder="" readonly/>
                                         </div>
                                         <div class="col-md-4">
+                                            <label>Blok</label>
                                             <input id="id_blokRumah" required="required" class="form-control input-sm"
-                                                   type="text" name="blokRumah" placeholder="Blok" readonly/>
+                                                   type="text" name="blokRumah" placeholder="" readonly/>
                                         </div>
                                         <div class="col-md-4">
+                                            <label>Luas</label>
                                             <input id="id_luasRumah" required="required" class="form-control input-sm"
-                                                   type="text" name="luasRumah" placeholder="Luas" readonly/>
+                                                   type="text" name="luasRumah" placeholder="" readonly/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-8">
+                                            <label>Harga</label>
                                             <input id="id_hargaRumah" required="required" class="form-control input-sm"
-                                                   type="text" name="hargaRumah" placeholder="Harga rumah" readonly/>
+                                                   type="text" name="hargaRumah" placeholder="" readonly/>
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +153,7 @@ table#idTabelRumah td:nth-child(5) {
 
                         </div>
 						<!-- HIDDEN INPUT -->
-						<input type="text" id="idTmpAksiBtn" class="hidden">
+						<!--<input type="text" id="idTmpAksiBtn" class="hidden">-->
 						<!-- END HIDDEN INPUT -->
                     </div>
                     <hr>
@@ -152,7 +163,13 @@ table#idTabelRumah td:nth-child(5) {
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Nominal Booking </label>
+                                            <label>Tanggal booking</label>
+                                            <input id="id_tgltrans" required="required"
+                                                   class="form-control input-sm"
+                                                   type="text" name="tglTrans" readonly/>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Nominal booking </label>
                                             <input id="id_hargaBooking" required="required" class="form-control nomor input-sm"
                                                    type="text" name="hargaBooking" placeholder=""/>
                                         </div>
@@ -162,6 +179,15 @@ table#idTabelRumah td:nth-child(5) {
                             <!--end <div class="col-md-6"> 1 -->
 
                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Keterangan </label>
+                                            <textarea rows="2" cols="" name="keterangan" id="id_keterangan"
+                                                      class="form-control input-sm" placeholder="" ></textarea>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
 
@@ -278,7 +304,7 @@ table#idTabelRumah td:nth-child(5) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Data Rumah</h4>
+                <h4 class="modal-title">Data Rumah Tersedia</h4>
             </div>
             <div class="modal-body">
                 <div class="scroller" style="height:400px; ">
@@ -598,6 +624,7 @@ table#idTabelRumah td:nth-child(5) {
     }();
     btnStart();
     readyToStart();
+    tglTransStart();
 	$("#id_namaProyek").focus();
     	
 	$( "#id_btnSimpan" ).click(function() {
@@ -614,7 +641,7 @@ table#idTabelRumah td:nth-child(5) {
 		btnStart();
         resetForm();
         readyToStart();
-        $('#id_btnModalProyek').attr('disabled',false);
+        tglTransStart();
 	});
     function getDescRumah(idRumah){
         ajaxModal();

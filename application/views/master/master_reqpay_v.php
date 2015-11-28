@@ -17,6 +17,8 @@
                 <div class="actions">
 					<a href="javascript:;" class="btn btn-default btn-sm" onclick="cetak();">
 					<i class="fa fa-print"></i> Cetak </a>
+					<a href="javascript:;" class="btn btn-default btn-sm" onclick="cetakcpa();">
+                        <i class="fa fa-print"></i> Cetak CPA</a>
 					<a class="btn btn-icon-only btn-default btn-sm fullscreen" href="javascript:;" data-original-title="" title="">
 					</a>
 				</div>
@@ -376,8 +378,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                         <textarea rows="2" cols="" name="keteranganCPA" id="id_keteranganCPA"
-                                                  class="form-control input-sm kosongCPA">
-                                        </textarea>
+                                                  class="form-control input-sm kosongCPA"></textarea>
 
                                                 </div>
                                                 <div class="form-group">
@@ -1134,7 +1135,7 @@
                 $('#id_btnSimpan').attr('disabled',true);
                 $('#id_btnUbah').attr("disabled",false);
                 $('#id_btnHapus').attr("disabled",false);
-
+				getDescCpa(idReqpay);
             }); 
 
             tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
@@ -1397,9 +1398,7 @@
                     [0, "asc"]
                 ] // set first column as a default sort by asc
             });
-
             var tableWrapper = jQuery('#id_TabelPerk_wrapper');
-
             table.find('.group-checkable').change(function () {
                 var set = jQuery(this).attr("data-set");
                 var checked = jQuery(this).is(":checked");
@@ -1431,10 +1430,7 @@
                 }else{
                     alert("Tidak diijinkan pilih kode induk.");
                 }
-
-
             });
-
             tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
         }
         
@@ -1658,6 +1654,7 @@
         $('#id_btnAddCpa').attr("disabled", false);
         $('#id_btnUpdateCpa').attr("disabled", true);
         $('#id_btnRemoveCpa').attr("disabled", true);
+		$('#id_btnSign').attr("disabled",true);
     }
     $('#id_btnAddCpa').click(function () {
         var i = $('#idTxtTempLoop').val();
@@ -1866,6 +1863,34 @@
 						$("#uniform-id_dokSBJ span").removeClass("checked");
 						$('#id_dokSBJ_in').val('0');
 					}
+					if(data.app_user_id == '0'){
+                        $('#id_btnSign').attr("disabled",false);
+					}else{
+						$('#id_btnSign').attr("disabled",true);
+						$('#id_btnUbah').attr("disabled",true);
+					}
+					if(data.inout_budget == '0'){
+						$("#uniform-id_wBudget span").addClass("checked");
+						$('#id_wBudget_in').val('1');
+					}else{
+						$("#uniform-id_oBudget span").addClass("checked");
+						$('#id_oBudget_in').val('1');
+					}
+					$('#id_appKeuanganId').val(data.app_keuangan_id);
+					$('#id_appKeuanganStatus').val(data.app_keuangan_status);
+					$('#id_appKeuanganTgl').val(data.app_keuangan_tgl);
+					$('#id_appKeuanganKet').val(data.app_keuangan_ket);
+
+					$('#id_appHDId').val(data.app_hd_id);
+					$('#id_appHDStatus').val(data.app_hd_status);
+					$('#id_appHDTgl').val(data.app_hd_tgl);
+					$('#id_appHDKet').val(data.app_hd_ket);
+
+					$('#id_appGMId').val(data.app_gm_id);
+					$('#id_appGMStatus').val(data.app_gm_status);
+					$('#id_appGMTgl').val(data.app_gm_tgl);
+					$('#id_appGMKet').val(data.app_gm_ket);
+												
 					/* 
 					$('#').val(data.); */					                    
 				}else{
@@ -1875,12 +1900,12 @@
 			}, "json");
 		}//if kd<>''
 	}
-    function getDescCpa(idAdv) {
+    function getDescCpa(idReqpay) {
         ajaxModal();
-        if (idAdv != '') {
-            $.post("<?php echo site_url('/master_advance/getDescCpa'); ?>",
+        if (idReqpay != '') {
+            $.post("<?php echo site_url('/master_reqpay/getDescCpa'); ?>",
                 {
-                    'idAdv': idAdv
+                    'idReqpay': idReqpay
                 }, function (data) {
                     if (data.data_cpa.length > 0) {
                         $('#idTxtTempLoop').val(data.data_cpa.length);
@@ -1969,11 +1994,13 @@
 		ajaxModal();
 		var idReqpay	= $('#id_idReqpay').val();
 		idReqpay		= idReqpay.trim();
+		var tempLoop = $('#idTxtTempLoop').val();
+        tempLoop = tempLoop.trim();
 		$.ajax({
 			type:"POST",
 			dataType: "json",
 			url:"<?php echo base_url(); ?>master_reqpay/hapus",
-			data:{idReqpay : idReqpay},
+			data:{idReqpay : idReqpay, tempLoop : tempLoop},
 			success:function (data) {
 				$('#id_ReloadReqpay').trigger('click');
 				$('#id_btnBatal').trigger('click');
@@ -2007,8 +2034,34 @@
 			 }else{//if(r)
 				return false;
 			}
+        }else if(aksiBtn == '4'){
+            var r = confirm('Anda yakin sign data ini?');
+            if (r== true){
+                ajaxSignReqPay();
+            }else{//if(r)
+                return false;
+            }
         }
-    }); 
+    });
+	function ajaxSignReqPay(){
+        ajaxModal();
+        var idReqpay	= $('#id_idReqpay').val();
+        idReqpay		= idReqpay.trim();
+        var flag		= '1';
+
+        $.ajax({
+            type:"POST",
+            dataType: "json",
+            url:"<?php echo base_url(); ?>master_reqpay/sign",
+            data:{idReqpay : idReqpay, flag : flag},
+            success:function (data) {
+                UIToastr.init(data.tipePesan,data.pesan);
+                $('#id_btnSign').attr("disabled",true);
+            }
+
+        });
+        event.preventDefault();
+    }	
     function cetak(){
 		var idReqpay = $('#id_idReqpay').val();
 		if(idReqpay == ''){
@@ -2017,7 +2070,14 @@
 			window.open("<?php echo base_url('master_reqpay/cetak/'); ?>/"+idReqpay, '_blank');	
 		}
 	}
-    
+    function cetakcpa() {
+        var idReqpay = $('#id_idReqpay').val();
+		if(idReqpay == ''){
+            alert('Silahkan pilih ID Request for payment');
+        } else {
+            window.open("<?php echo base_url('master_reqpay/cetak_cpa/'); ?>/" + idReqpay, '_blank');
+        }
+    }
 </script>
 
 
