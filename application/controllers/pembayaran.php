@@ -109,7 +109,9 @@ class Pembayaran extends CI_Controller
     {
         $this->CI =& get_instance();
         $idPenj = $this->input->post('idPenj', TRUE);
-        $rows = $this->pembayaran_m->getAngsInfo2($idPenj);
+        $tglTrans = $this->input->post('tglTrans', TRUE);
+        $tglTrans 			= date('Y-m-d', strtotime($tglTrans));
+        $rows = $this->pembayaran_m->getAngsInfo2($idPenj,$tglTrans);
         if ($rows) {
             foreach ($rows as $row)
                 $array = array(
@@ -153,18 +155,23 @@ class Pembayaran extends CI_Controller
 
     function simpan()
     {
-        $idCustomer = trim($this->input->post('customerId'));
-        $rumahId = trim($this->input->post('rumahId'));
-
         $tglTrans = trim($this->input->post('tglTrans'));
         $tglTrans = date('Y-m-d', strtotime($tglTrans));
-        $jmlBayarKali =  str_replace(',', '', trim($this->input->post('jmlBayarKali')));
 
         $idPenj     = trim($this->input->post('idPenj'));
+        $keterangan 			= trim($this->input->post('keterangan'));
+        $jmlBayar 		= str_replace(',', '', trim($this->input->post('jmlBayar')));
 
-        $hargaRumah		    = str_replace(',', '', trim($this->input->post('hargaRumah')));
-        //1. jika belum booking maka insert 1 row
+        $data_trans = array(
+            'master_id'		=>$idPenj,
+            'tgl_trans'		=>$tglTrans,
+            'kode_trans'	=>'300',
+            'jml_trans'		=>$jmlBayar,
+            'keterangan'	=>$keterangan
 
+        );
+
+        $model_trans = $this->pembayaran_m->simpan_trans($data_trans);
 
         if ($model_trans) {
             $array = array(

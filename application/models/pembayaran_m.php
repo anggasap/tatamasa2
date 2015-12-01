@@ -6,7 +6,7 @@ if (! defined ( 'BASEPATH' ))
 class Pembayaran_m extends CI_Model {
 	public function getRumahAll()
 	{
-		$sql="SELECT r.*,p.nama_proyek,mj.master_id from master_rumah r left join master_proyek p on r.id_proyek = p.id_proyek left join master_jual mj on r.id_rumah = mj.id_rumah where r.status_jual = 2 ";
+		$sql="SELECT r.*,p.nama_proyek,mj.master_id from master_rumah r left join master_proyek p on r.id_proyek = p.id_proyek left join master_jual mj on r.id_rumah = mj.id_rumah where r.status_jual = 2 and mj.status_jual";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}
@@ -47,7 +47,7 @@ class Pembayaran_m extends CI_Model {
 		}
 
 	}
-	public function getAngsInfo2($idPenj)
+	public function getAngsInfo2($idPenj,$tglTrans)
 	{
 		$sql ="select queri.sisaAngs, queri.tagihan,queri.sdhdibayar from(
 				select (
@@ -56,7 +56,7 @@ class Pembayaran_m extends CI_Model {
 							(select coalesce(sum(jml_trans) ,0)  from trans_jual where kode_trans='300' and master_id='$idPenj')
 						)
 					) as sisaAngs,
-					(select coalesce(sum(jml_trans) ,0) from trans_jual where Month(tgl_trans)<= 3 and kode_trans='200' and master_id='$idPenj') as tagihan	,
+					(select coalesce(sum(jml_trans) ,0) from trans_jual where tgl_trans<= '$tglTrans' and kode_trans='200' and master_id='$idPenj') as tagihan	,
 					(select coalesce(sum(jml_trans) ,0) from trans_jual where  kode_trans='300' and master_id='$idPenj') as sdhdibayar
   				) as queri";
 		$query=$this->db->query($sql);
@@ -68,20 +68,6 @@ class Pembayaran_m extends CI_Model {
 
 	}
 
-
-	function ubahMasterJual($data,$idPenj){
-		$this->db->trans_begin();
-		$query1 = $this->db->where('master_id', $idPenj);
-		$query2 = $this->db->update('master_jual', $data);
-		if ($this->db->trans_status() === FALSE){
-			$this->db->trans_rollback();
-			return false;
-		}
-		else{
-			$this->db->trans_commit();
-			return true;
-		}
-	}
 	public function simpan_trans($data){
 
 		$this->db->trans_begin();

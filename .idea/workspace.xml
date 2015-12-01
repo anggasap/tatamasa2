@@ -35,11 +35,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pembayaran_v.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pembayaran_v.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/transaksi/pembayaran_v.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7394636">
-              <caret line="45" column="98" selection-start-line="45" selection-start-column="98" selection-end-line="45" selection-end-column="98" />
+            <state vertical-scroll-proportion="-4.8545456">
+              <caret line="449" column="12" selection-start-line="449" selection-start-column="12" selection-end-line="449" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -48,63 +48,30 @@
       <file leaf-file-name="pembayaran.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/pembayaran.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.0727272">
-              <caret line="90" column="48" selection-start-line="90" selection-start-column="48" selection-end-line="90" selection-end-column="48" />
+            <state vertical-scroll-proportion="-21.192308">
+              <caret line="173" column="40" selection-start-line="173" selection-start-column="40" selection-end-line="173" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pembayaran_m.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pembayaran_m.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/models/pembayaran_m.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.3363636">
-              <caret line="49" column="31" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.29122055">
+              <caret line="8" column="222" selection-start-line="8" selection-start-column="222" selection-end-line="8" selection-end-column="222" />
               <folding>
-                <marker date="1448953903065" expanded="true" signature="163:352" placeholder="SELECT r.*,p..master_rumah..." />
-                <marker date="1448953903065" expanded="true" signature="972:1562" placeholder="select queri..round..." />
-                <marker date="1448953903065" expanded="true" signature="1103:1545" placeholder="select round..." />
-                <marker date="1448953903065" expanded="true" signature="1133:1188" placeholder="select harga..master_jual..." />
-                <marker date="1448953903065" expanded="true" signature="1199:1297" placeholder="select coale..trans_jual..." />
-                <marker date="1448953903065" expanded="true" signature="1448:1533" placeholder="select count..trans_jual..." />
-                <marker date="1448953903065" expanded="true" signature="1744:2306" placeholder="select queri..round..." />
-                <marker date="1448953903065" expanded="true" signature="1808:2289" placeholder="select ( ( (..." />
-                <marker date="1448953903065" expanded="true" signature="1833:1888" placeholder="select harga..master_jual..." />
-                <marker date="1448953903065" expanded="true" signature="2176:2274" placeholder="select coale..trans_jual..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="booking_v.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/transaksi/booking_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.8461537">
-              <caret line="677" column="54" selection-start-line="677" selection-start-column="16" selection-end-line="677" selection-end-column="54" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="booking.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/booking.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="9.097561">
-              <caret line="88" column="14" selection-start-line="88" selection-start-column="14" selection-end-line="88" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="booking_m.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/models/booking_m.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.2075472">
-              <caret line="10" column="32" selection-start-line="9" selection-start-column="8" selection-end-line="10" selection-end-column="32" />
-              <folding>
-                <marker date="1448875075450" expanded="true" signature="160:279" placeholder="SELECT r.*,p..master_rumah..." />
-                <marker date="1448875075450" expanded="true" signature="417:511" placeholder="select maste..master_jual..." />
-                <marker date="1448875075450" expanded="true" signature="725:788" placeholder="select max(s..master_jual..." />
+                <marker date="1448956374301" expanded="true" signature="163:371" placeholder="SELECT r.*,p..master_rumah..." />
+                <marker date="1448956374301" expanded="true" signature="990:1580" placeholder="select queri..round..." />
+                <marker date="1448956374301" expanded="true" signature="1121:1563" placeholder="select round..." />
+                <marker date="1448956374301" expanded="true" signature="1151:1206" placeholder="select harga..master_jual..." />
+                <marker date="1448956374301" expanded="true" signature="1217:1315" placeholder="select coale..trans_jual..." />
+                <marker date="1448956374301" expanded="true" signature="1466:1551" placeholder="select count..trans_jual..." />
+                <marker date="1448956374301" expanded="true" signature="1772:2337" placeholder="select queri..round..." />
+                <marker date="1448956374301" expanded="true" signature="1836:2320" placeholder="select ( ( (..." />
+                <marker date="1448956374301" expanded="true" signature="1861:1916" placeholder="select harga..master_jual..." />
+                <marker date="1448956374301" expanded="true" signature="2061:2186" placeholder="select coale..trans_jual..." />
+                <marker date="1448956374301" expanded="true" signature="2207:2305" placeholder="select coale..trans_jual..." />
               </folding>
             </state>
           </provider>
@@ -179,9 +146,9 @@
         <option value="$PROJECT_DIR$/application/controllers/penjualan.php" />
         <option value="$PROJECT_DIR$/application/views/transaksi/penjualan_v.php" />
         <option value="$PROJECT_DIR$/application/views/transaksi/ccc.html" />
+        <option value="$PROJECT_DIR$/application/views/transaksi/pembayaran_v.php" />
         <option value="$PROJECT_DIR$/application/controllers/pembayaran.php" />
         <option value="$PROJECT_DIR$/application/models/pembayaran_m.php" />
-        <option value="$PROJECT_DIR$/application/views/transaksi/pembayaran_v.php" />
       </list>
     </option>
   </component>
@@ -306,29 +273,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tatamasa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tatamasa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="transaksi" />
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -796,14 +741,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/penjualan.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.26923">
-          <caret line="224" column="29" selection-start-line="224" selection-start-column="29" selection-end-line="224" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/penjualan_m.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-18.283018">
@@ -831,14 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/booking.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="9.097561">
-          <caret line="88" column="14" selection-start-line="88" selection-start-column="14" selection-end-line="88" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/booking_m.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.2075472">
@@ -851,38 +780,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/pembayaran_m.php">
+    <entry file="file://$PROJECT_DIR$/application/controllers/penjualan.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.3363636">
-          <caret line="49" column="31" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
-          <folding>
-            <marker date="1448953903065" expanded="true" signature="163:352" placeholder="SELECT r.*,p..master_rumah..." />
-            <marker date="1448953903065" expanded="true" signature="972:1562" placeholder="select queri..round..." />
-            <marker date="1448953903065" expanded="true" signature="1103:1545" placeholder="select round..." />
-            <marker date="1448953903065" expanded="true" signature="1133:1188" placeholder="select harga..master_jual..." />
-            <marker date="1448953903065" expanded="true" signature="1199:1297" placeholder="select coale..trans_jual..." />
-            <marker date="1448953903065" expanded="true" signature="1448:1533" placeholder="select count..trans_jual..." />
-            <marker date="1448953903065" expanded="true" signature="1744:2306" placeholder="select queri..round..." />
-            <marker date="1448953903065" expanded="true" signature="1808:2289" placeholder="select ( ( (..." />
-            <marker date="1448953903065" expanded="true" signature="1833:1888" placeholder="select harga..master_jual..." />
-            <marker date="1448953903065" expanded="true" signature="2176:2274" placeholder="select coale..trans_jual..." />
-          </folding>
+        <state vertical-scroll-proportion="4.6896553">
+          <caret line="168" column="18" selection-start-line="168" selection-start-column="13" selection-end-line="168" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/pembayaran.php">
+    <entry file="file://$PROJECT_DIR$/application/controllers/booking.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.0727272">
-          <caret line="90" column="48" selection-start-line="90" selection-start-column="48" selection-end-line="90" selection-end-column="48" />
+        <state vertical-scroll-proportion="-6.769231">
+          <caret line="73" column="66" selection-start-line="72" selection-start-column="8" selection-end-line="73" selection-end-column="66" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/transaksi/pembayaran_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7394636">
-          <caret line="45" column="98" selection-start-line="45" selection-start-column="98" selection-end-line="45" selection-end-column="98" />
+        <state vertical-scroll-proportion="-4.8545456">
+          <caret line="449" column="12" selection-start-line="449" selection-start-column="12" selection-end-line="449" selection-end-column="12" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/pembayaran.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.192308">
+          <caret line="173" column="40" selection-start-line="173" selection-start-column="40" selection-end-line="173" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/pembayaran_m.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29122055">
+          <caret line="8" column="222" selection-start-line="8" selection-start-column="222" selection-end-line="8" selection-end-column="222" />
+          <folding>
+            <marker date="1448956374301" expanded="true" signature="163:371" placeholder="SELECT r.*,p..master_rumah..." />
+            <marker date="1448956374301" expanded="true" signature="990:1580" placeholder="select queri..round..." />
+            <marker date="1448956374301" expanded="true" signature="1121:1563" placeholder="select round..." />
+            <marker date="1448956374301" expanded="true" signature="1151:1206" placeholder="select harga..master_jual..." />
+            <marker date="1448956374301" expanded="true" signature="1217:1315" placeholder="select coale..trans_jual..." />
+            <marker date="1448956374301" expanded="true" signature="1466:1551" placeholder="select count..trans_jual..." />
+            <marker date="1448956374301" expanded="true" signature="1772:2337" placeholder="select queri..round..." />
+            <marker date="1448956374301" expanded="true" signature="1836:2320" placeholder="select ( ( (..." />
+            <marker date="1448956374301" expanded="true" signature="1861:1916" placeholder="select harga..master_jual..." />
+            <marker date="1448956374301" expanded="true" signature="2061:2186" placeholder="select coale..trans_jual..." />
+            <marker date="1448956374301" expanded="true" signature="2207:2305" placeholder="select coale..trans_jual..." />
+          </folding>
         </state>
       </provider>
     </entry>

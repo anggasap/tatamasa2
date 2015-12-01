@@ -531,13 +531,12 @@
                 var idPenj          = $(this).find("td").eq(0).html();
                 var idRumah         = $(this).find("td").eq(1).html();
                 var namaProyek      = $(this).find("td").eq(2).html();
-
-
+                var tglTrans        = $('#id_tgltrans').val();
                 $('#id_rumahId').val(idRumah);
                 $('#id_namaProyek').val(namaProyek);
                 getDescRumahSelled(idRumah);
                 getAngsInfo1(idPenj);
-                getAngsInfo2(idPenj);
+                getAngsInfo2(idPenj,tglTrans);
                 //$('#').val();
                 $('#btnCloseModalDataRumah').trigger('click');
                 $('#id_rumahId').focus();
@@ -617,12 +616,13 @@
                 }, "json");
         }//if kd<>''
     }
-    function getAngsInfo2(idPenj) {
+    function getAngsInfo2(idPenj,tglTrans) {
         ajaxModal();
         if (idPenj != '') {
             $.post("<?php echo site_url('/pembayaran/getAngsInfo2'); ?>",
                 {
-                    'idPenj': idPenj
+                    'idPenj': idPenj,
+                    'tglTrans' :tglTrans
                 }, function (data) {
                     if (data.baris == 1) {
                         $('#id_sdhDibayar').val(number_format(data.sdhdibayar,2));
@@ -642,21 +642,18 @@
         $.ajax({
             type: "POST",
             dataType: "json",
-            url: "<?php echo base_url(); ?>penjualan/simpan",
+            url: "<?php echo base_url(); ?>pembayaran/simpan",
             data: dataString,
 
             success: function (data) {
                 $('#id_btnBatal').trigger('click');
                 $('#id_ReloadRumah').trigger('click');
-                $("#navitab_2_1").trigger('click');
                 UIToastr.init(data.tipePesan, data.pesan);
             }
 
         });
         event.preventDefault();
     }
-
-
 
     $('#id_formPembayaran').submit(function (event) {
         dataString = $("#id_formPembayaran").serialize();
@@ -667,8 +664,6 @@
         } else {//if(r)
             return false;
         }
-
-
     });
 
 </script>
