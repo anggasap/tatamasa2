@@ -338,6 +338,7 @@
     }();
 
     function ajax_submit_tambah() {
+        ajaxModal();
         $.ajax({
             type: "POST",
             url: "<?php echo base_url(); ?>approval_proyek/approval",
@@ -366,6 +367,7 @@
         dataString = $("#FormApprovalAdv").serialize();
         var r = confirm('Anda yakin menyimpan data ini?');
         if (r) {
+            $('#btnCloseModalDataUser').trigger('click');
             ajax_submit_tambah();
         } else {//if(r)
             return false;

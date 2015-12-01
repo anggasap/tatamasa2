@@ -80,31 +80,56 @@ class Booking extends CI_Controller
 		$luasRumah		    = str_replace(',', '', trim($this->input->post('luasRumah')));*/
 		$hargaRumah		    = str_replace(',', '', trim($this->input->post('hargaRumah')));
 
-		if($namaRumah =='' || $hargaRumah == 0){
+		if($namaRumah =='' || $hargaRumah <= 0){
 			$array = array(
 					'act'	=>0,
 					'tipePesan'=>'error',
 					'pesan' =>'Rumah gagal dibooking.<br>Silahkan lengkapi data master rumah terlebih dahulu.'
 			);
 		}else{
-			$data_master = array(
-					'booking'		    =>$hargaBooking,
+			// 1. Ubah status master Rumah
+			$data_master_rumah = array(
+					//'booking'		    =>$hargaBooking,
 					'status_jual'		=>'1'
+					/*
+					 * 0 default non aktif
+					 * 1 booking
+					 * 2 aktif
+					 * 3 lunas
+					 * 4 batal
+					 * */
 			);
 
-			$model_master = $this->booking_m->ubah($data_master,$rumahId);
+			$model_master = $this->booking_m->ubahRumah($data_master_rumah,$rumahId);
+			/*-------------------------------------------------------------------*/
+			// 2. Insert master jual status booking
+			$bulan = date('m', strtotime($tglTrans));//$tglTrans->format("m");
+			$tahun = date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
+			$modelidPenj = $this->booking_m->getIdPenj($bulan, $tahun);
 
-			$data_trans = array(
-					'tgl_trans'		=>$tglTrans,
-					'id_cust'		=>$idCustomer,
+			$data_master_jual = array(
+					'master_id'		=>$modelidPenj,
 					'id_rumah'		=>$rumahId,
-					'kode_trans'	=>'400',
+					'id_cust'		=>$idCustomer,
+					'tgl_trans'		=>$tglTrans,
+					'harga'			=>$hargaRumah,
+					'booking'		=>$hargaBooking
+
+			);
+
+			$model_masterJual = $this->booking_m->simpan_masterJual($data_master_jual);
+			/*-------------------------------------------------------------------*/
+			// 3. Insert to trans jual booking
+			$data_trans_jual = array(
+					'master_id'		=>$modelidPenj,
+					'tgl_trans'		=>$tglTrans,
+					'kode_trans'	=>'100',
 					'jml_trans'		=>$hargaBooking,
 					'keterangan'	=>$keterangan
 
 			);
 
-			$model_trans = $this->booking_m->simpan_trans($data_trans);
+			$model_transJual = $this->booking_m->simpan_transJual($data_trans_jual);
 
 			if($model_master){
 				$array = array(

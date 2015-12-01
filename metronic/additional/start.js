@@ -35,6 +35,13 @@ function readyToStart(){
 	});
     
 	$(".nomor1").val("0");
+	$(".nomor1").focus(function(){
+		if ($(this).val() == '0') {
+			$(this).val('');
+		}else{
+			this.select();
+		}
+	});
     $(".nomor1").focusout(function(){
         var val = $(this).val();
 	    if ($(this).val() == '') {

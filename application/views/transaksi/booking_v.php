@@ -37,58 +37,6 @@ table#idTabelRumah td:nth-child(5) {
                     <div class="row">
                         <div class="form-body">
                             <div class="col-md-6">
-								<div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Id customer </label>
-                                            <div class="input-group">
-                                                    <input id="id_customerId" required="required" class="form-control input-sm"
-                                                   type="text" name="customerId" readonly/>
-                                                <span class="input-group-btn">
-                                                    <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelCustomer"
-                                                    id="id_btnModalRmh" data-toggle="modal">
-                                                    <i class="fa fa-search fa-fw"/></i> 
-                                                    </a>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Nama customer </label>
-                                            <input id="id_namaCustomer" required="required" class="form-control  input-sm"
-                                                   type="text" name="namaCustomer" placeholder="" readonly />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>No Id customer </label>
-                                            <input id="id_noId" required="required" class="form-control input-sm"
-                                                   type="text" name="noId" placeholder="" readonly/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Alamat </label>
-                                            <textarea rows="3" cols="" name="alamat" id="id_alamat"
-                                                      class="form-control input-sm" placeholder="" readonly></textarea>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>No HP </label>
-                                            <input id="id_noHp" required="required" class="form-control input-sm"
-                                                   type="text" name="noHp" placeholder="" readonly/>
-                                            <label>No Telp </label>
-                                            <input id="id_noTelp" required="required" class="form-control input-sm"
-                                                   type="text" name="noTelp" placeholder="" readonly/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end <div class="col-md-6"> 1 -->
-
-                            <div class="col-md-6">
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -148,8 +96,60 @@ table#idTabelRumah td:nth-child(5) {
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
+                            <div class="col-md-6">
+								<div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Id customer </label>
+                                            <div class="input-group">
+                                                    <input id="id_customerId" required="required" class="form-control input-sm"
+                                                   type="text" name="customerId" readonly/>
+                                                <span class="input-group-btn">
+                                                    <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelCustomer"
+                                                    id="id_btnModalRmh" data-toggle="modal">
+                                                    <i class="fa fa-search fa-fw"/></i> 
+                                                    </a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Nama customer </label>
+                                            <input id="id_namaCustomer" required="required" class="form-control  input-sm"
+                                                   type="text" name="namaCustomer" placeholder="" readonly />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>No Id customer </label>
+                                            <input id="id_noId" required="required" class="form-control input-sm"
+                                                   type="text" name="noId" placeholder="" readonly/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Alamat </label>
+                                            <textarea rows="3" cols="" name="alamat" id="id_alamat"
+                                                      class="form-control input-sm" placeholder="" readonly></textarea>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>No HP </label>
+                                            <input id="id_noHp" required="required" class="form-control input-sm"
+                                                   type="text" name="noHp" placeholder="" readonly/>
+                                            <label>No Telp </label>
+                                            <input id="id_noTelp" required="required" class="form-control input-sm"
+                                                   type="text" name="noTelp" placeholder="" readonly/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end <div class="col-md-6"> 1 -->
+
 
                         </div>
 						<!-- HIDDEN INPUT -->

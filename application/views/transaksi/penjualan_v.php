@@ -35,11 +35,11 @@
                 </div>
                 <ul class="nav nav-pills">
                     <li class="active">
-                        <a href="#tab_2_1" data-toggle="tab">
+                        <a href="#tab_2_1" data-toggle="tab" id="navitab_2_1">
                             Info Rumah & Customer </a>
                     </li>
                     <li>
-                        <a href="#tab_2_2" data-toggle="tab">
+                        <a href="#tab_2_2" data-toggle="tab" id="navitab_2_1">
                             Pembayaran </a>
                     </li>
                     <li>
@@ -48,8 +48,7 @@
                     </li>
 
                 </ul>
-                <form method="post" class="cls_from_penjualan"
-                      action="<?php echo base_url('penjualan/home'); ?>" id="id_formPenjualan">
+                <form role="form" method="post" class="cls_from_penjualan"  id="id_formPenjualan">
                     <div class="tab-content">
                         <div class="tab-pane fade active in" id="tab_2_1">
                             <div class="row">
@@ -58,6 +57,7 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-6">
+
                                                     <label>Id rumah </label>
 
                                                     <div class="input-group">
@@ -201,13 +201,19 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Tanggal booking</label>
-                                                    <input id="id_tgltrans" required="required"
+                                                <div class="col-md-5">
+                                                    <label>Id Booking/Penj</label>
+                                                    <input id="id_idPenj"
                                                            class="form-control input-sm"
-                                                           type="text" name="tglTrans" readonly/>
+                                                           type="text" name="idPenj" readonly/>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-3">
+                                                    <label>Tgl booking</label>
+                                                    <input id="id_tglBooking" required="required"
+                                                           class="form-control input-sm"
+                                                           type="text" name="tglBooking" readonly/>
+                                                </div>
+                                                <div class="col-md-4">
                                                     <label>Nominal booking </label>
                                                     <input id="id_hargaBooking" required="required"
                                                            class="form-control nomor input-sm"
@@ -236,33 +242,33 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group" id="id_divDPPersen">
+                                                        <label>Tgl Realisasi</label>
+                                                        <input id="id_tgltrans" required="required"
+                                                               class="form-control input-sm date-picker"
+                                                               type="text" name="tglTrans"
+                                                               data-date-format="dd-mm-yyyy"/>
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-4">
                                                     <label>Tipe pembayaran</label>
                                                     <select id="id_tipePembayaran" class="form-control  input-sm"
                                                             name="tipePembayaran">
-                                                        <option value="0">Cash keras</option>
-                                                        <option value="1">Cash tempo</option>
-                                                        <option value="2">DP</option>
+                                                        <option value="1">Cash keras</option>
+                                                        <option value="2">Cash tempo</option>
+                                                        <option value="3">DP</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group" id="id_divJmlBayarKali">
-                                                        <label>Jml bayar </label>
+                                                        <label>Jml Angs </label>
                                                         <input id="id_jmlBayarKali" class="form-control nomor1 input-sm"
                                                                type="text" name="jmlBayarKali" placeholder=""/>
-                                                    </div>
-                                                    <div class="form-group" id="id_divDPPersen">
                                                         <label>% DP </label>
                                                         <input id="id_DPPersen" required="required"
                                                                class="form-control nomor1 input-sm"
                                                                type="text" name="DPPersen" placeholder=""/>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <div class="form-group" id="id_divDPRp">
-                                                        <label>Jml bayar </label>
-                                                        <input id="id_jmlBayarKali" class="form-control nomor1 input-sm"
-                                                               type="text" name="jmlBayarKali" placeholder=""/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -273,11 +279,28 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <div class="form-group" id="id_divDPRp">
+                                                    <div class="form-group">
                                                         <label>Harga jual</label>
                                                         <input id="id_hargaJual" class="form-control nomor input-sm"
                                                                type="text" name="hargaJual" placeholder="" readonly/>
                                                     </div>
+                                                </div>
+                                                <div class="col-md-6">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Harga jual (DP)</label>
+                                                        <input id="id_hargaJualDP" class="form-control nomor input-sm"
+                                                               type="text" name="hargaJualDP" placeholder="" readonly/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+
                                                 </div>
                                             </div>
                                         </div>
@@ -288,7 +311,7 @@
                         </div>
                         <div class="tab-pane fade" id="tab_2_3">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-body">
                                         <table class="table table-striped table-hover table-bordered"
                                                id="id_tabelJadwalBayar">
@@ -314,43 +337,43 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                </div>
-                                <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6">
+                                            <label class="hidden">Jadwal Focus :</label>
+                                            <input type="text" name="tempJadwalFocus"
+                                                   class="form-control nomor input-sm hidden" id="id_tempJadwalFocus"
+                                                   readonly>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Total :</label>
-                                            <input type="text" name="totalCPA"
-                                                   class="form-control nomor input-sm" id="idTotalCPA"
+                                            <input type="text" name="totalJadwal"
+                                                   class="form-control nomor input-sm" id="idTotalJadwal"
                                                    readonly>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="idTmpAksiBtn" class="hidden">
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-actions">
+
+                                        <button name="btnSimpan" class="btn blue" id="id_btnSimpan">
+                                            <!--<i class="fa fa-check"></i>--> Simpan
+                                        </button>
+                                        <button id="id_btnBatal" type="button" class="btn default">Batal</button>
+                                    </div>
+                                </div>
+
                             </div>
 
                         </div>
 
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-actions">
-
-                                <button name="btnSimpan" class="btn blue" id="id_btnSimpan">
-                                    <!--<i class="fa fa-check"></i>--> Simpan
-                                </button>
-                                <button name="btnUbah" onclick="" class="btn yellow" id="id_btnUbah">
-                                    <!--<i class="fa fa-edit"></i>--> Ubah
-                                </button>
-                                <button name="btnHapus" class="btn red" id="id_btnHapus">
-                                    <!--<i class="fa fa-trash"></i>-->
-                                    Hapus
-                                </button>
-                                <button id="id_btnBatal" type="button" class="btn default">Batal</button>
-                            </div>
-                        </div>
-
-                    </div>
+                    <!-- disini tombol actionnya diawali class row-->
                 </form>
             </div>
         </div>
@@ -534,11 +557,16 @@
 <?php echo $this->session->userdata('layoutJS'); ?>
 <?php echo $this->session->userdata('demoJS'); ?>
 <script src="<?php echo base_url('metronic/additional/start.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'); ?>"
+        type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/admin/pages/scripts/components-pickers.js'); ?>"
+        type="text/javascript"></script>
 <script>
     jQuery(document).ready(function () {
         Metronic.init(); // init metronic core components
         Layout.init(); // init current layout
         Demo.init(); // init demo features
+        ComponentsPickers.init();
         //UITree.init();
         TableManaged.init();
     });
@@ -772,16 +800,16 @@
     tglTransStart();
     $("#id_namaProyek").focus();
 
-    $("#id_btnSimpan").click(function () {
-        $('#idTmpAksiBtn').val('1');
+    /*$("#navitab_2_1").click(function () {
+        $('#idTmpAksiTab').val('1');
     });
 
-    $('#id_btnUbah').click(function () {
-        $('#idTmpAksiBtn').val('2');
+    $('#navitab_2_2').click(function () {
+        $('#idTmpAksiTab').val('2');
     });
-    $('#id_btnHapus').click(function () {
-        $('#idTmpAksiBtn').val('3');
-    });
+    $('#navitab_2_3').click(function () {
+        $('#idTmpAksiTab').val('3');
+    });*/
     $('#id_btnBatal').click(function () {
         btnStart();
         resetForm();
@@ -829,7 +857,9 @@
                         $('#id_luasRumah').val(data.luas);
                         $('#id_hargaRumah').val(data.harga);
                         $('#id_statusJual').val(data.status_jual);
+                        $('#id_idPenj').val(data.id_penj);
                         $('#id_hargaBooking').val(data.booking);
+                        $('#id_tglBooking').val(data.tgl_booking);
 
                         $('#id_customerId').val(data.id_cust);
                         $('#id_namaCustomer').val(data.nama_cust);
@@ -852,12 +882,13 @@
         $.ajax({
             type: "POST",
             dataType: "json",
-            url: "<?php echo base_url(); ?>booking/ubah",
+            url: "<?php echo base_url(); ?>penjualan/simpan",
             data: dataString,
 
             success: function (data) {
-                $('#id_ReloadRumah').trigger('click');
                 $('#id_btnBatal').trigger('click');
+                $('#id_ReloadRumah').trigger('click');
+                $("#navitab_2_1").trigger('click');
                 UIToastr.init(data.tipePesan, data.pesan);
             }
 
@@ -865,19 +896,169 @@
         event.preventDefault();
     }
     $('#navitab_2_3').click(function () {
+        $('#id_body_data').empty();
+
+        var table = $('#id_tabelJadwalBayar');
+        table.on('focus', '.nomor', function (e) {
+            if ($(this).val() == '0.00') {
+                $(this).val('');
+            } else {
+                this.select();
+                $("#id_tempJadwalFocus").val($(this).val());
+
+            }
+        });
+        table.on('focusout', '.nomor', function (e) {
+            if ($(this).val() == '') {
+                $(this).val('0.00');
+            } else {
+                var angka = $(this).val();
+                $(this).val(number_format(angka, 2));
+                var nilaiSkrg = parseFloat(CleanNumber(angka));
+                var totalJadwal = $('#idTotalJadwal').val();
+                totalJadwal = parseFloat(CleanNumber(totalJadwal));
+                var nilaiSbl = $("#id_tempJadwalFocus").val();
+                nilaiSbl = parseFloat(CleanNumber(nilaiSbl));
+                totalJadwal = totalJadwal - nilaiSbl + nilaiSkrg;
+                $('#idTotalJadwal').val(number_format(totalJadwal, 2));
+                //totalJadwal     =
+
+            }
+        });
+        table.on('keyup', '.nomor', function (e) {
+            var val = $(this).val();
+            if (isNaN(val)) {
+                val = val.replace(/[^0-9\.]/g, '');
+                if (val.split('.').length > 2)
+                    val = val.replace(/\.+$/, "");
+            }
+            $(this).val(val);
+        });
+
         var i = 1;
         var tipePembayaran = $('#id_tipePembayaran').val();
-        var hargaJual = $('#id_hargaJual').val();
-        if (tipePembayaran == '0') {
+        var tglRealisasi = $('#id_tgltrans').val();
+        //cash keras
+        if (tipePembayaran == '1') {
+            var hargaJual = $('#id_hargaJual').val();
 
             tr = '<tr class="listdata" id="tr' + i + '">';
             tr += '<td><input type="text" class="form-control input-sm" id="id_tempNo' + i + '" name="tempNo' + i + '" readonly="true" value="' + i + '"></td>';
-            tr += '<td><input type="text" class="form-control input-sm" id="id_tempTglTrans' + i + '" name="tempTglTrans' + i + '" readonly="true" value="' + i + '" ></td>';
+            tr += '<td><input type="text" class="form-control input-sm" id="id_tempTglJadwal' + i + '" name="tempTglJadwal' + i + '" readonly="true" value="' + tglRealisasi + '" ></td>';
             tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah' + i + '" name="tempJumlah' + i + '" readonly="true" value="' + hargaJual + '"></td>';
             tr += '</tr>';
             $('#id_body_data').append(tr);
+            // cash tempo
+        } else if (tipePembayaran == '2') {
 
-        }else{
+            var hargaJual = $('#id_hargaJual').val();
+            var total = 0;
+            var jmlAngs = $('#id_jmlBayarKali').val();
+            hargaJual = parseFloat(CleanNumber(hargaJual));
+            jmlAngs = parseFloat(CleanNumber(jmlAngs));
+            var angs = hargaJual / jmlAngs;
+            angs = Math.round(angs / 1000) * 1000;
+            var angsEnd = 0;// angsuran terakhir
+
+            var parts = tglRealisasi.split("-");// tanggal displit
+            var tglJadwal = new Date(parts[2], parts[1] - 1, parts[0]);
+
+            tglJadwal.setMonth(tglJadwal.getMonth() + 1);
+
+            for (var i = 1; i <= jmlAngs; i++) {
+
+                tglJadwal.setMonth(tglJadwal.getMonth() + 1);
+                var hari = tglJadwal.getDate();
+                var bulan = tglJadwal.getMonth();
+                var tahun = tglJadwal.getFullYear();
+
+                if (hari < 10) {
+                    hari = '0' + hari
+                }
+                if (bulan < 10) {
+                    bulan = '0' + bulan
+                }
+                tglJadwalString = hari + '-' + bulan + '-' + tahun;
+
+                if (i == jmlAngs) {
+                    angsEnd = hargaJual - total;
+
+                    tr = '<tr class="listdata" id="tr' + i + '">';
+                    tr += '<td><input type="text" class="form-control input-sm" id="id_tempNo' + i + '" name="tempNo' + i + '" readonly="true" value="' + i + '"></td>';
+                    tr += '<td><input type="text" class="form-control date-picker input-sm" id="id_tempTglJadwal' + i + '" name="tempTglJadwal' + i + '" value="' + tglJadwalString + '" ></td>';
+                    tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah' + i + '" name="tempJumlah' + i + '" value="' + number_format(angsEnd, 2) + '"></td>';
+                    tr += '</tr>';
+                    $('#id_body_data').append(tr);
+                    var total = total + angsEnd;
+                    $('#idTotalJadwal').val(number_format(total, 2));
+                } else {
+                    tr = '<tr class="listdata" id="tr' + i + '">';
+                    tr += '<td><input type="text" class="form-control input-sm" id="id_tempNo' + i + '" name="tempNo' + i + '" readonly="true" value="' + i + '"></td>';
+                    tr += '<td><input type="text" class="form-control date-picker input-sm" id="id_tempTglJadwal' + i + '" name="tempTglJadwal' + i + '" value="' + tglJadwalString + '" data-date-format="dd-mm-yyyy"></td>';
+                    tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah' + i + '" name="tempJumlah' + i + '" value="' + number_format(angs, 2) + '"></td>';
+                    tr += '</tr>';
+                    $('#id_body_data').append(tr);
+                    var total = total + angs;
+                    $('#idTotalJadwal').val(number_format(total, 2));
+                }
+
+            }
+
+        } else if (tipePembayaran == '3') {
+            var hargaJual = $('#id_hargaJualDP').val();
+            var total = 0;
+            var jmlAngs = $('#id_jmlBayarKali').val();
+            hargaJual = parseFloat(CleanNumber(hargaJual));
+            jmlAngs = parseFloat(CleanNumber(jmlAngs));
+            var angs = hargaJual / jmlAngs;
+            angs = Math.round(angs / 1000) * 1000;
+            var angsEnd = 0;// angsuran terakhir
+
+            var parts = tglRealisasi.split("-");// tanggal displit
+            var tglJadwal = new Date(parts[2], parts[1] - 1, parts[0]);
+
+            tglJadwal.setMonth(tglJadwal.getMonth() + 1);
+
+            for (var i = 1; i <= jmlAngs; i++) {
+
+                tglJadwal.setMonth(tglJadwal.getMonth() + 1);
+                var hari = tglJadwal.getDate();
+                var bulan = tglJadwal.getMonth();
+                var tahun = tglJadwal.getFullYear();
+
+                if (hari < 10) {
+                    hari = '0' + hari
+                }
+                if (bulan < 10) {
+                    bulan = '0' + bulan
+                }
+                tglJadwalString = hari + '-' + bulan + '-' + tahun;
+
+                if (i == jmlAngs) {
+                    angsEnd = hargaJual - total;
+
+                    tr = '<tr class="listdata" id="tr' + i + '">';
+                    tr += '<td><input type="text" class="form-control input-sm" id="id_tempNo' + i + '" name="tempNo' + i + '" readonly="true" value="' + i + '"></td>';
+                    tr += '<td><input type="text" class="form-control date-picker input-sm" id="id_tempTglJadwal' + i + '" name="tempTglJadwal' + i + '" value="' + tglJadwalString + '" ></td>';
+                    tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah' + i + '" name="tempJumlah' + i + '" value="' + number_format(angsEnd, 2) + '"></td>';
+                    tr += '</tr>';
+                    $('#id_body_data').append(tr);
+                    var total = total + angsEnd;
+                    $('#idTotalJadwal').val(number_format(total, 2));
+                } else {
+                    tr = '<tr class="listdata" id="tr' + i + '">';
+                    tr += '<td><input type="text" class="form-control input-sm" id="id_tempNo' + i + '" name="tempNo' + i + '" readonly="true" value="' + i + '"></td>';
+                    tr += '<td><input type="text" class="form-control date-picker input-sm" id="id_tempTglJadwal' + i + '" name="tempTglJadwal' + i + '" value="' + tglJadwalString + '" data-date-format="dd-mm-yyyy"></td>';
+                    tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah' + i + '" name="tempJumlah' + i + '" value="' + number_format(angs, 2) + '"></td>';
+                    tr += '</tr>';
+                    $('#id_body_data').append(tr);
+                    var total = total + angs;
+                    $('#idTotalJadwal').val(number_format(total, 2));
+                }
+
+            }
+
+        } else {
             $('#id_tipePembayaran').focus();
         }
     });
@@ -889,38 +1070,52 @@
         var hargaJual = hargaAwal - hargaBooking
         $('#id_hargaJual').val(number_format(hargaJual, 2));
     }
-    $('#id_formBooking').submit(function (event) {
-        dataString = $("#id_formBooking").serialize();
-        var aksiBtn = $('#idTmpAksiBtn').val();
+    function hitungHargaJualDP() {
+        var hargaAwal = $('#id_hargaRumah').val();
+        hargaAwal = parseFloat(CleanNumber(hargaAwal));
         var hargaBooking = $('#id_hargaBooking').val();
-        if (hargaBooking == '0.00') {
-            alert("Nominal booking tidak boleh 0.");
-            $('#id_hargaBooking').focus();
-            return false;
-        } else {
-            if (aksiBtn == '1') {
-                var r = confirm('Anda yakin menyimpan data ini?');
-                if (r == true) {
-                    ajaxSubmit();
-                } else {//if(r)
-                    return false;
-                }
-            } else if (aksiBtn == '2') {
-                var r = confirm('Anda yakin merubah data ini?');
-                if (r == true) {
-                    ajaxUbah();
-                } else {//if(r)
-                    return false;
-                }
-            } else if (aksiBtn == '3') {
-                var r = confirm('Anda yakin menghapus data ini?');
-                if (r == true) {
-                    ajaxHapus();
-                } else {//if(r)
-                    return false;
-                }
-            }
+        hargaBooking = parseFloat(CleanNumber(hargaBooking));
+        var hargaJual = hargaAwal - hargaBooking
+        var dp = $('#id_DPPersen').val();
+        dp = Math.round(parseFloat(CleanNumber(dp)) / 100 * hargaJual);
+        $('#id_hargaJualDP').val(number_format(dp, 2));
+    }
+
+    $("#id_tipePembayaran").change(function () {
+        var tipe = $(this).val();
+        if (tipe == '1') {
+            $('#id_jmlBayarKali').attr('readonly', true);
+            $('#id_DPPersen').attr('readonly', true);
+            $('#id_jmlBayarKali').val('0');
+            $('#id_DPPersen').val('0');
+            $('#id_hargaJualDP').val('0.00');
+            hitungHargaJual();
+        } else if (tipe == '2') {
+            $('#id_jmlBayarKali').attr('readonly', false);
+            $('#id_DPPersen').attr('readonly', true);
+            $('#id_DPPersen').val('0');
+
+            $('#id_hargaJualDP').val('0.00');
+            hitungHargaJual();
+        } else if (tipe == '3') {
+            $('#id_jmlBayarKali').attr('readonly', false);
+            $('#id_DPPersen').attr('readonly', false);
+            hitungHargaJualDP();
         }
+    });
+    $('#id_DPPersen').focusout(function () {
+        hitungHargaJualDP();
+    });
+    $('#id_formPenjualan').submit(function (event) {
+        dataString = $("#id_formPenjualan").serialize();
+        //var aksiTab = $('#idTmpAksiTab').val();
+        var r = confirm('Anda yakin menyimpan data ini?');
+        if (r == true) {
+            ajaxSubmit();
+        } else {//if(r)
+            return false;
+        }
+
 
     });
 
