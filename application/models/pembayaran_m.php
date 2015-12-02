@@ -56,7 +56,10 @@ class Pembayaran_m extends CI_Model {
 							(select coalesce(sum(jml_trans) ,0)  from trans_jual where kode_trans='300' and master_id='$idPenj')
 						)
 					) as sisaAngs,
-					(select coalesce(sum(jml_trans) ,0) from trans_jual where tgl_trans<= '$tglTrans' and kode_trans='200' and master_id='$idPenj') as tagihan	,
+					(
+						(select coalesce(sum(jml_trans) ,0) from trans_jual where tgl_trans<= '$tglTrans' and kode_trans='200' and master_id='$idPenj')-
+						(select coalesce(sum(jml_trans) ,0) from trans_jual where tgl_trans<= '$tglTrans' and kode_trans='300' and master_id='$idPenj')
+					 )as tagihan	,
 					(select coalesce(sum(jml_trans) ,0) from trans_jual where  kode_trans='300' and master_id='$idPenj') as sdhdibayar
   				) as queri";
 		$query=$this->db->query($sql);

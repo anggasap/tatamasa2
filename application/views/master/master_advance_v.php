@@ -360,9 +360,9 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="text" id="idTxtTempLoop" name="txtTempLoop"
-                                                           class="form-control nomor1 ">
+                                                           class="form-control nomor1 hidden">
                                                     <input type="text" id="idTxtTempJnsKode" name="txtTempJnsKode"
-                                                           class="form-control nomor1 ">
+                                                           class="form-control nomor1 hidden">
                                                     <input type="text" id="idTempUbahCPA" name="txtTempUbahCPA"
                                                            class="form-control nomor1 hidden">
                                                     <input type="text" id="idTempJumlahCPA" name="txtTempJumlahCPA"
@@ -1160,8 +1160,6 @@
                 }else{
                     alert("Tidak diijinkan pilih kode induk.");
                 }
-
-
             });
 
             tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
@@ -1716,7 +1714,8 @@
             success: function (data) {
                 $('#id_Reload').trigger('click');
                 $('#id_btnBatal').trigger('click');
-                $('#id_body_data').empty();
+
+
                 readyToStart();
                 startCheckBox();
                 UIToastr.init(data.tipePesan, data.pesan);

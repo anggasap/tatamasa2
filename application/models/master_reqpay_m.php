@@ -27,7 +27,7 @@ class Master_reqpay_m extends CI_Model {
 	} */
 	public function getDescReqpay($idReqpay)
 	{
-		$this->db->select ( 'mr.id_kyw, mk.nama_kyw, md.nama_dept, mr.no_invoice, mr.no_po, mr.jml_uang,mr.id_proyek, mr.id_kurs, mr.nilai_kurs, 
+		$this->db->select ( 'mr.id_kyw, mk.nama_kyw, md.nama_dept, mr.no_invoice, mr.no_po, mr.jml_uang,mr.id_proyek, mr.id_kurs, mr.nilai_kurs, mr.tgl_trans,
 		mr.tgl_jt, mr.pay_to,ms.nama_spl, ms.nama_akun_bank, ms.no_akun_bank, ms.nama_bank, mr.keterangan, mr.dok_fpe, mr.dok_kuitansi, mr.dok_fpa, 
 		mr.dok_po, mr.dok_suratjalan,mr.dok_lappenerimaanbrg,mr.dok_bast, mr.dok_bap, mr.dok_cop, mr.dok_ssp, mr.dok_sspk, mr.dok_sbj, 
 		mr.app_keuangan_id, mr.app_hd_id, mr.app_gm_id, mr.app_keuangan_status, mr.app_hd_status, mr.app_gm_status, mr.app_keuangan_tgl, mr.app_hd_tgl, 
@@ -119,31 +119,41 @@ class Master_reqpay_m extends CI_Model {
 			return true;
 		}
 	}
-	
+	public function getPayTo($idKyw){
+		$this->db->select('nama_kyw');
+		$this->db->from('master_karyawan');
+		$this->db->where('id_kyw',$idKyw);
+		$query = $this->db->get();
+		return $query->result();
+	}
 	public function getCDescCpa($idReqpay)
 	{
-		$this->db->select ( 'id_cpa,id_master,kode_perk,kode_cflow,keterangan,jumlah' );
+		/*$this->db->select ( 'id_cpa,id_master,kode_perk,kode_cflow,keterangan,jumlah' );
 		$this->db->from('cpa');
-		$this->db->where ( 'id_master', $idReqpay );
-//		
-		$query = $this->db->get ();
-		return $query->num_rows();	
+		$this->db->where ( 'id_master', $idReqpay );*/
+		$sql= "select * from cpa_perk where id_master = '$idReqpay' union select * from cpa_cflow where id_master = '$idReqpay' ";
+		$query = $this->db->query($sql);
+		return $query->num_rows();
 	}
     
     public function getDescCpa($idReqpay)
 	{
-		$this->db->select ( 'id_cpa,id_master,kode_perk,kode_cflow,keterangan,jumlah' );
+		/*$this->db->select ( 'id_cpa,id_master,kode_perk,kode_cflow,keterangan,jumlah' );
 		$this->db->from('cpa');
 		$this->db->where ( 'id_master', $idReqpay );
-//		$this->db->where ( 'T.STATUS_AKTIF <>', 3 );
-		$query = $this->db->get ();
-		
+		$query = $this->db->get ();*/
+		$sql= "select kode_perk as kode,1 as jns_kode, keterangan,jumlah from cpa_perk where id_master = '$idReqpay' union select kode_cflow as kode,2 as jns_kode, keterangan,jumlah  from cpa_cflow where id_master = '$idReqpay' ";
+		$query = $this->db->query($sql);
         $rows['data_cpa'] = $query->result();
 		return $rows;
         	
 	}
     function deleteCpa($idReqpay){
-		$this->db->trans_begin();
+		$this->db->trans_start();
+		$this->db->query("delete from cpa_perk where id_master ='$idReqpay'");
+		$this->db->query("delete from cpa_cflow where id_master ='$idReqpay'");
+		$this->db->trans_complete();
+		/*$this->db->trans_begin();
 		$query1	=	$this->db->where('id_master',$idReqpay);
 		$query2	=   $this->db->delete('cpa');
 		if ($this->db->trans_status() === FALSE){
@@ -153,11 +163,11 @@ class Master_reqpay_m extends CI_Model {
 		else{
 			$this->db->trans_commit();
 			return true;
-		}
+		}*/
 	}
-	function insertCpa($data){
-        $this->db->trans_begin();
-		$model = $this->db->insert('cpa', $data);
+	function insertCpaP($data){
+		$this->db->trans_begin();
+		$model = $this->db->insert('cpa_perk', $data);
 		if ($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
 			return false;
@@ -166,7 +176,19 @@ class Master_reqpay_m extends CI_Model {
 			$this->db->trans_commit();
 			return true;
 		}
-    }
+	}
+	function insertCpaC($data){
+		$this->db->trans_begin();
+		$model = $this->db->insert('cpa_cflow', $data);
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return false;
+		}
+		else{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
 	function updateBudgetCflowTerpakai($tmpKodeCflow,$tahun,$idProyek,$data){
 		$this->db->trans_begin();
 		$query1 = $this->db->where('kode_cflow', $tmpKodeCflow);
@@ -285,10 +307,9 @@ class Master_reqpay_m extends CI_Model {
 		return $query->result(); // returning rows, not row
 	}
 	function cetak_cpa_detail($idReqPay){
-		$sql="select a.*,b.nama_cflow, c.tahun,c.id_proyek,c.kode_cflow,
-			  (c.jan+c.feb+c.mar+c.apr+c.mei+c.jun+c.jul+c.agu+c.sep+c.okt+c.nov+c.des) as anggaran,c.terpakai,c.saldo from cpa a
-			  left join master_cashflow b on a.kode_cflow=b.kode_cflow
-			  left join budget_cflow c on a.kode_cflow=c.kode_cflow where a.id_master = '".$idReqPay."'";
+		$sql="select a.*, b.*, c.terpakai,c.saldo,(c.jan+c.feb+c.mar+c.apr+c.mei+c.jun+c.jul+c.agu+c.sep+c.okt+c.nov+c.des) as anggaran 
+				from cpa_cflow a left join master_cashflow b on a.kode_cflow = b.kode_cflow
+				left join budget_cflow c on a.kode_cflow = c.kode_cflow where a.id_master = '".$idReqPay."'";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}

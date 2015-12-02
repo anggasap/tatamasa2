@@ -31,7 +31,7 @@
                     </span>
                 </div>
                 <form role="form" method="post"
-                      action="<?php echo base_url('master_advance/home'); ?>" id="id_formAdvance">
+                      action="<?php echo base_url('akuntansi/home'); ?>" id="id_formAkuntansi">
                     <div class="row">
                         <div class="form-body">
                             <div class="col-md-3">
@@ -53,7 +53,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group request_in" id="div_idAdvance">
-                                    <label>Id Request </label>
+                                    <label>Id Advance </label>
                                     <div class="input-group">
                                         <input id="id_idAdvance" required="required" class="form-control input-sm"
                                                type="text" name="idAdvance" readonly/>
@@ -68,12 +68,24 @@
                                 <div class="form-group request_in"  id="div_idReqpay">
                                     <label>Id Request for Payment </label>
                                     <div class="input-group">
-
                                         <input id="id_idReqpay" required="required" class="form-control  input-sm"
                                                type="text" name="idReqpay" readonly/>
-
                                     <span class="input-group-btn">
                                         <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelReqpay"
+                                           id="id_btnModal" data-toggle="modal">
+                                            <i class="fa fa-search fa-fw"/></i>
+
+                                        </a>
+                                    </span>
+                                    </div>
+                                </div>
+                                <div class="form-group request_in"  id="div_idReimpay">
+                                    <label>Id Reimbursement </label>
+                                    <div class="input-group">
+                                        <input id="id_idReimpay" required="required" class="form-control  input-sm"
+                                               type="text" name="idReimpay" readonly/>
+                                    <span class="input-group-btn">
+                                        <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelReimpay"
                                            id="id_btnModal" data-toggle="modal">
                                             <i class="fa fa-search fa-fw"/></i>
 
@@ -261,6 +273,8 @@
                             <div class="form-group">
                                 <input type="text" id="idTxtTempLoop" name="txtTempLoop"
                                        class="form-control nomor1 hidden">
+                                <input type="text" id="idTxtTempJnsKode" name="txtTempJnsKode"
+                                       class="form-control nomor1 hidden">
                                 <input type="text" id="idTempUbahCPA" name="txtTempUbahCPA"
                                        class="form-control nomor1 hidden">
                                 <input type="text" id="idTempJumlahCPA" name="txtTempJumlahCPA"
@@ -290,12 +304,12 @@
                                     <thead>
                                     <tr>
                                         <th width="20%">
-                                            Kode Perk
+                                            Kode
                                         </th>
-                                        <th width="20%">
-                                            Kode CF
+                                        <th width="10%">
+                                            Jns kode
                                         </th>
-                                        <th width="40%">
+                                        <th width="50%">
                                             Keterangan
                                         </th>
                                         <th width="20%">
@@ -739,9 +753,7 @@
                 $('#btnCloseModalDataAdv').trigger('click');
                 $('#id_idAdvance').val(idAdv);
                 $('#id_idAdvance').focus();
-                $('#id_btnSimpan').attr('disabled', true);
-                $('#id_btnUbah').attr("disabled", false);
-                $('#id_btnHapus').attr("disabled", false);
+
                 $('#id_userId').focus();
                 getDescCpa(idAdv);
 
@@ -831,9 +843,6 @@
                 $('#id_idReqpay').val(idReqpay);
                 $('#id_idReqpay').focus();
                 $('#btnCloseModalDataReqpay').trigger('click');
-                $('#id_btnSimpan').attr('disabled',true);
-                $('#id_btnUbah').attr("disabled",false);
-                $('#id_btnHapus').attr("disabled",false);
 
             });
 
@@ -1125,23 +1134,23 @@
         $('#id_btnAddCpa').attr("disabled", false);
         $('#id_btnUpdateCpa').attr("disabled", true);
         $('#id_btnRemoveCpa').attr("disabled", true);
+        $('#id_btnSign').attr("disabled",true);
     }
     $('#id_btnAddCpa').click(function () {
         var i = $('#idTxtTempLoop').val();
-        if ($('#id_kodePerk').val() == '' && $('#id_kodeCflow').text() == '') {
-            alert("Akun GL tidak boleh kosong.");
-        } else {
+        //Jika Kode cflow saja
+        if ($('#id_kodePerk').val() == '' && $('#id_kodeCflow').val() != '') {
             var i = parseInt($('#idTxtTempLoop').val());
 
             i = i + 1;
-            var kodePerk = $('#id_kodePerk').val();
+            var jnsKode = $('#idTxtTempJnsKode').val();
             var kodeCflow = $('#id_kodeCflow').val();
             var ket = $('#id_keteranganCPA').val().trim();
             var jumlah = $('#id_jumlahCPA').val();
 
             tr = '<tr class="listdata" id="tr' + i + '">';
-            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKodePerk' + i + '" name="tempKodePerk' + i + '" readonly="true" value="' + kodePerk + '"></td>';
-            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKodeCflow' + i + '" name="tempKodeCflow' + i + '" readonly="true" value="' + kodeCflow + '" ></td>';
+            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKode' + i + '" name="tempKode' + i + '" readonly="true" value="' + kodeCflow + '" ></td>';
+            tr += '<td><input type="text" class="form-control input-sm" id="id_tempJenisKode' + i + '" name="tempJenisKode' + i + '" readonly="true" value="' + jnsKode + '"></td>';
             tr += '<td><input type="text" class="form-control input-sm" id="id_tempKet' + i + '" name="tempKet' + i + '" readonly="true" value="' + ket + '"></td>';
             tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah' + i + '" name="tempJumlah' + i + '" readonly="true" value="' + jumlah + '"></td>';
             tr += '</tr>';
@@ -1152,18 +1161,51 @@
             $('#id_body_data').append(tr);
             $('#idTxtTempLoop').val(i);
             kosongCPA();
+            //Jika kode perk aja
+        } else if ($('#id_kodePerk').val() != '' && $('#id_kodeCflow').val() == '') {
+            var i = parseInt($('#idTxtTempLoop').val());
+            i = i + 1;
+            var jnsKode = $('#idTxtTempJnsKode').val();
+            var kodePerk = $('#id_kodePerk').val();
+            var ket = $('#id_keteranganCPA').val().trim();
+            var jumlah = $('#id_jumlahCPA').val();
+
+            tr = '<tr class="listdata" id="tr' + i + '">';
+            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKode' + i + '" name="tempKode' + i + '" readonly="true" value="' + kodePerk + '"></td>';
+            tr += '<td><input type="text" class="form-control input-sm" id="id_tempJenisKode' + i + '" name="tempJenisKode' + i + '" readonly="true" value="' + jnsKode + '"></td>';
+            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKet' + i + '" name="tempKet' + i + '" readonly="true" value="' + ket + '"></td>';
+            tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah' + i + '" name="tempJumlah' + i + '" readonly="true" value="' + jumlah + '"></td>';
+            tr += '</tr>';
+            /*jumlahP = parseFloat(CleanNumber(jumlah));
+             var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
+             var total = totalP + jumlahP;
+             $('#idTotalCPA').val(number_format(total, 2));*/
+            $('#id_body_data').append(tr);
+            $('#idTxtTempLoop').val(i);
+            kosongCPA();
+        }else{
+            alert("Hanya boleh isi salah satu kode.");
         }
     });
 
     $("#id_tabelPerkCflow").on('click', 'tbody tr', function () {
-        var kodePerk = $(this).find("td input").eq(0).val();
-        var kodeCflow = $(this).find("td input").eq(1).val();
+        var kode = $(this).find("td input").eq(0).val();
+        var jnsKode = $(this).find("td input").eq(1).val();
         var ket = $(this).find("td input").eq(2).val();
         var jumlah = $(this).find("td input").eq(3).val();
-        $('#id_kodePerk').val(kodePerk);
-        $('#id_kodeCflow').val(kodeCflow);
-        $('#id_keteranganCPA').val(ket);
-        $('#id_jumlahCPA').val(jumlah);
+        //Jika jns kode == kode perk
+        if(jnsKode == '1'){
+            $('#id_kodePerk').val(kode);
+            $('#idTxtTempJnsKode').val(jnsKode);
+            $('#id_keteranganCPA').val(ket);
+            $('#id_jumlahCPA').val(jumlah);
+        }else{
+            $('#id_kodeCflow').val(kode);
+            $('#idTxtTempJnsKode').val(jnsKode);
+            $('#id_keteranganCPA').val(ket);
+            $('#id_jumlahCPA').val(jumlah);
+        }
+
 
         var idTr = $(this).attr('id');
         var noRow = idTr.replace('tr', '');
@@ -1183,36 +1225,43 @@
     }
     $('#id_btnUpdateCpa').click(function () {
         var noRow = $('#idTempUbahCPA').val();
-        var kodePerk = $('#id_kodePerk').val();
-        var kodeCflow = $('#id_kodeCflow').val();
+        var jnsKode = $('#idTxtTempJnsKode').val();
         var ket = $('#id_keteranganCPA').val();
         var jumlah = $('#id_jumlahCPA').val();
 
-        var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
-        var jumlahOld = parseFloat(CleanNumber($('#idTempJumlahCPA').val()));
-        var jumlahNew = parseFloat(CleanNumber(jumlah));
-        totalP = totalP - jumlahOld + jumlahNew;
+        if(jnsKode == '1'){
+            var kode = $('#id_kodePerk').val();
+        }else{
+            var kode = $('#id_kodeCflow').val();
+            var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
+            var jumlahOld = parseFloat(CleanNumber($('#idTempJumlahCPA').val()));
+            var jumlahNew = parseFloat(CleanNumber(jumlah));
+            totalP = totalP - jumlahOld + jumlahNew;
+            $('#idTotalCPA').val(number_format(totalP, 2));
+        }
 
-        $('#id_tempKodePerk' + noRow).val(kodePerk);
-        $('#id_tempKodeCflow' + noRow).val(kodeCflow);
+        $('#id_tempKode' + noRow).val(kode);
+        $('#id_tempJenisKode' + noRow).val(jnsKode);
         $('#id_tempKet' + noRow).val(ket);
         $('#id_tempJumlah' + noRow).val(jumlah);
-        $('#idTotalCPA').val(number_format(totalP, 2));
+
         kosongCPA();
         btnCpaStart();
     });
     $('#id_btnRemoveCpa').click(function () {
         var noRow = $('#idTempUbahCPA').val();
+        var jnsKode = $('#idTxtTempJnsKode').val();
         $('#tr' + noRow).remove();
         var i = $('#idTxtTempLoop').val();
         i = parseInt(i);
         i = i - 1;
         $('#idTxtTempLoop').val(i);
-
-        var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
-        var jumlahOld = parseFloat(CleanNumber($('#idTempJumlahCPA').val()));
-        totalP = totalP - jumlahOld;
-        $('#idTotalCPA').val(number_format(totalP, 2));
+        if(jnsKode == '2'){
+            var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
+            var jumlahOld = parseFloat(CleanNumber($('#idTempJumlahCPA').val()));
+            totalP = totalP - jumlahOld;
+            $('#idTotalCPA').val(number_format(totalP, 2));
+        }
 
         kosongCPA();
         btnCpaStart();
@@ -1296,21 +1345,24 @@
                         for (i = 0; i < data.data_cpa.length; i++) {
                             var x = i + 1;
                             //var idCpa           = data.data_cpa[i].id_cpa;
-                            var kodePerk = data.data_cpa[i].kode_perk;
-                            var kodeCflow = data.data_cpa[i].kode_cflow;
+                            var kode = data.data_cpa[i].kode;
+                            var jnsKode = data.data_cpa[i].jns_kode;
                             var ket = data.data_cpa[i].keterangan;
                             var jumlah = data.data_cpa[i].jumlah;
 
                             tr = '<tr class="listdata" id="tr' + x + '">';
-                            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKodePerk' + x + '" name="tempKodePerk' + x + '" readonly="true" value="' + kodePerk + '"></td>';
-                            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKodeCflow' + x + '" name="tempKodeCflow' + x + '" readonly="true" value="' + kodeCflow + '" ></td>';
+                            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKode' + x + '" name="tempKode' + x + '" readonly="true" value="' + kode + '"></td>';
+                            tr += '<td><input type="text" class="form-control input-sm" id="id_tempJenisKode' + x + '" name="tempJenisKode' + x + '" readonly="true" value="' + jnsKode + '" ></td>';
                             tr += '<td><input type="text" class="form-control input-sm" id="id_tempKet' + x + '" name="tempKet' + x + '" readonly="true" value="' + ket + '"></td>';
                             tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah' + x + '" name="tempJumlah' + x + '" readonly="true" value="' + number_format(jumlah, 2) + '"></td>';
                             tr += '</tr>';
-                            jumlahP = parseFloat(CleanNumber(jumlah));
-                            var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
-                            var total = totalP + jumlahP;
-                            $('#idTotalCPA').val(number_format(total, 2));
+                            if(jnsKode =='2'){
+                                jumlahP = parseFloat(CleanNumber(jumlah));
+                                var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
+                                var total = totalP + jumlahP;
+                                $('#idTotalCPA').val(number_format(total, 2));
+                            }
+
                             $('#id_body_data').append(tr);
                         }
                         /*
@@ -1380,27 +1432,27 @@
         event.preventDefault();
     }
 
-    $('#id_formAdvance').submit(function (event) {
-        dataString = $("#id_formAdvance").serialize();
+    $('#id_formAkuntansi').submit(function (event) {
+        dataString = $("#id_formAkuntansi").serialize();
         var aksiBtn = $('#idTmpAksiBtn').val();
         if (aksiBtn == '1') {
             var r = confirm('Anda yakin menyimpan data ini?');
             if (r == true) {
-                ajaxSubmitAdvance();
+                ajaxSubmit();
             } else {//if(r)
                 return false;
             }
         } else if (aksiBtn == '2') {
             var r = confirm('Anda yakin merubah data ini?');
             if (r == true) {
-                ajaxUbahAdvance();
+                ajaxUbah();
             } else {//if(r)
                 return false;
             }
         } else if (aksiBtn == '3') {
             var r = confirm('Anda yakin menghapus data ini?');
             if (r == true) {
-                ajaxHapusAdvance();
+                ajaxHapus();
             } else {//if(r)
                 return false;
             }

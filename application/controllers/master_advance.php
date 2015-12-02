@@ -486,9 +486,6 @@ class Master_advance extends CI_Controller
                         $model 			= $this->master_advance_m->updateAdv($data, $idAdv);
                     }
                 }
-
-
-
             }
 
         } else {

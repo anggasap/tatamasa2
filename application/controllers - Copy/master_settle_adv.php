@@ -9,6 +9,7 @@ class Master_settle_adv extends CI_Controller
 
 		$this->load->model('home_m');
 		$this->load->model('master_settle_adv_m');
+		$this->load->model('master_advance_m');
 		session_start ();
 	}
 	public function index(){
@@ -30,6 +31,7 @@ class Master_settle_adv extends CI_Controller
 		$data['menu_nama'] = $menuId[0]->menu_nama;
 		$this->auth->restrict ($data['menu_id']);
 		$this->auth->cek_menu ( $data['menu_id'] );
+		$data['proyek'] = $this->master_advance_m->getProyek();
         //$data['dept'] = $this->master_advance_m->get_dept();
        
 		if(isset($_POST["btnSimpan"])){
@@ -209,6 +211,7 @@ class Master_settle_adv extends CI_Controller
         $namaBank				= trim($this->input->post('namaBank'));
         $ket					= trim($this->input->post('keterangan'));
 		$tglTrans 				= $this->session->userdata('tgl_y');
+		$idProyek 	= trim($this->input->post('proyek'));
 		
 		$sld = str_replace('.00','',trim($this->input->post('advAmount')));
 		$slda = str_replace(',','', $sld);
@@ -244,17 +247,81 @@ class Master_settle_adv extends CI_Controller
         	'dok_lpjum'		        	=>trim($this->input->post('dokLPJUM_in'))
         );
         $model = $this->master_settle_adv_m->insertSettle($data);
-        if($model){
-        	$array = array(
-        			'act'	=>1,
-        			'notif' =>'<div class="Metronic-alerts alert alert-success fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Data berhasil disimpan.</div>'
-        	);
-        }else{
-        	$array = array(
-        			'act'	=>0,
-        			'notif' =>'<div class="Metronic-alerts alert alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Data gagal disimpan.</div>'
-        	);
-        }
+		$totJurnal = trim($this->input->post('txtTempLoop'));
+		if ($totJurnal > 0) {
+			for ($i = 1; $i <= $totJurnal; $i++) {
+				$tKode 	    = 'tempKode' . $i;
+				$tJnsKode   = 'tempJenisKode'.$i;
+				$tJumlah 	= 'tempJumlah' . $i;
+				$tKet 		= 'tempKet' . $i;
+
+				$tmpJnsKode 	    = trim($this->input->post($tJnsKode));
+				$tmpKode 	    = trim($this->input->post($tKode));
+				$tmpJumlah 		= str_replace(',', '', trim($this->input->post($tJumlah)));
+				$tmpKet 		= trim($this->input->post($tKet));
+				if($tmpJnsKode == '1'){
+					$TotalP 		= $this->master_settle_adv_m->get_terpakai_perk($tmpKode);
+					$data = array(
+							'id_cpa' => 0,
+							'id_master' 	=> $modelidSettle,
+							'kode_perk' 	=> $tmpKode,
+							'keterangan' 	=> $tmpKet,
+							'jumlah' 		=> $tmpJumlah
+
+					);
+					$query = $this->master_settle_adv_m->insertCpaP($data);
+					$totalCperk = $TotalP + $tmpJumlah;
+					$dataTerpakaiPerk  = array(
+							'terpakai' => $totalCperk
+					);
+					$query = $this->master_settle_adv_m->updateBudgetKdPerkTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiPerk);
+					$query = $this->master_settle_adv_m->updateBudgetKdPerkSaldo($tmpKode,$tahun,$idProyek);
+				}else{
+					$TotalC 		= $this->master_settle_adv_m->get_terpakai_cflow($tmpKode);
+					$data = array(
+							'id_cpa' => 0,
+							'id_master' 	=> $modelidSettle,
+							'kode_cflow' 	=> $tmpKode,
+							'keterangan' 	=> $tmpKet,
+							'jumlah' 		=> $tmpJumlah
+
+					);
+					$query = $this->master_settle_adv_m->insertCpaC($data);
+					$totalCflow = $TotalC + $tmpJumlah;
+					$dataTerpakaiCflow  = array(
+							'terpakai' => $totalCflow
+					);
+					$query = $this->master_settle_adv_m->updateBudgetCflowTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiCflow);
+					$query = $this->master_settle_adv_m->updateBudgetCflowSaldo($tmpKode,$tahun,$idProyek);
+
+					$tmpKodeCflow 	= trim($this->input->post($tKode));
+					$TotalC 		= $this->master_advance_m->get_saldo_cflow($tmpKodeCflow);
+					$total 			= $TotalC - $totalCflow;
+					$data = array(
+							'inout_budget' => '1'
+					);
+					if ($total <= 0){
+						$model 			= $this->master_advance_m->updateAdv($data, $modelidSettle);
+					}
+				}
+
+			}
+
+		}
+
+		if ($model) {
+			$array = array(
+					'act' => 1,
+					'tipePesan' => 'success',
+					'pesan' => 'Data berhasil disimpan.'
+			);
+		} else {
+			$array = array(
+					'act' => 0,
+					'tipePesan' => 'error',
+					'pesan' => 'Data gagal disimpan.'
+			);
+		}
         $this->output->set_output(json_encode($array));
     }
     function ubah(){

@@ -21,7 +21,7 @@ class Master_reimpay_m extends CI_Model {
 	}
 	public function getDescReimpay($idReimpay)
 	{
-		$this->db->select('mr.id_kyw, mk.nama_kyw, md.nama_dept, mr.no_invoice, mr.jml_uang, mr.tgl_jt, mr.pay_to, mr.nama_akun_bank, mr.no_akun_bank,
+		$this->db->select('mr.id_kyw, mk.nama_kyw, md.nama_dept, mr.no_invoice, mr.jml_uang, mr.id_proyek, mr.id_kurs, mr.nilai_kurs, mr.tgl_trans,, mr.tgl_jt, mr.pay_to, mr.nama_akun_bank, mr.no_akun_bank,
 		mr.nama_bank, mr.keterangan, mr.dok_fpe, mr.dok_kuitansi, mr.dok_fpa, mr.dok_po, mr.dok_suratjalan,mr.dok_lappenerimaanbrg,mr.dok_bast, 
 		mr.dok_pc, mr.dok_lpkk, mr.app_keuangan_id, mr.app_hd_id, mr.app_gm_id, mr.app_keuangan_status, mr.app_hd_status, mr.app_gm_status, 
 		mr.app_keuangan_tgl, mr.app_hd_tgl, mr.app_gm_tgl, mr.app_keuangan_ket, mr.app_hd_ket, mr.app_gm_ket, mr.app_user_id, mr.inout_budget' );
@@ -90,32 +90,29 @@ class Master_reimpay_m extends CI_Model {
 			return true;
 		}
 	}
-	public function getCDescCpa($idAdv)
+	public function getCDescCpa($idReimpay)
 	{
-		$this->db->select ( 'id_cpa,id_master,kode_perk,kode_cflow,keterangan,jumlah' );
-		$this->db->from('cpa');
-		$this->db->where ( 'id_master', $idAdv );
-//		
-		$query = $this->db->get ();
-		return $query->num_rows();	
+		$sql= "select * from cpa_perk where id_master = '$idReimpay' union select * from cpa_cflow where id_master = '$idReimpay' ";
+		$query = $this->db->query($sql);
+		return $query->num_rows();
 	}
-    
-    public function getDescCpa($idAdv)
+	public function getDescCpa($idReimpay)
 	{
-		$this->db->select ( 'id_cpa,id_master,kode_perk,kode_cflow,keterangan,jumlah' );
-		$this->db->from('cpa');
-		$this->db->where ( 'id_master', $idAdv );
-//		$this->db->where ( 'T.STATUS_AKTIF <>', 3 );
-		$query = $this->db->get ();
-		
-        $rows['data_cpa'] = $query->result();
+		$sql= "select kode_perk as kode,1 as jns_kode, keterangan,jumlah from cpa_perk where id_master = '$idReimpay' union select kode_cflow as kode,2 as jns_kode, keterangan,jumlah  from cpa_cflow where id_master = '$idReimpay' ";
+		$query = $this->db->query($sql);
+		$rows['data_cpa'] = $query->result();
 		return $rows;
-        	
+
 	}
-    function deleteCpa($IdAdv){
+    function deleteCpa($idReimpay){
+		$this->db->trans_start();
+		$this->db->query("delete from cpa_perk where id_master ='$idReimpay'");
+		$this->db->query("delete from cpa_cflow where id_master ='$idReimpay'");
+		$this->db->trans_complete();
+	}
+	function insertCpaP($data){
 		$this->db->trans_begin();
-		$query1	=	$this->db->where('id_master',$IdAdv);
-		$query2	=   $this->db->delete('cpa');
+		$model = $this->db->insert('cpa_perk', $data);
 		if ($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
 			return false;
@@ -125,9 +122,9 @@ class Master_reimpay_m extends CI_Model {
 			return true;
 		}
 	}
-	function insertCpa($data){
-        $this->db->trans_begin();
-		$model = $this->db->insert('cpa', $data);
+	function insertCpaC($data){
+		$this->db->trans_begin();
+		$model = $this->db->insert('cpa_cflow', $data);
 		if ($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
 			return false;
@@ -136,7 +133,7 @@ class Master_reimpay_m extends CI_Model {
 			$this->db->trans_commit();
 			return true;
 		}
-    }
+	}
 	function updateBudgetCflowTerpakai($tmpKodeCflow,$tahun,$idProyek,$data){
 		$this->db->trans_begin();
 		$query1 = $this->db->where('kode_cflow', $tmpKodeCflow);
@@ -190,6 +187,36 @@ class Master_reimpay_m extends CI_Model {
 		else{
 			$this->db->trans_commit();
 			return true;
+		}
+	}
+	function get_terpakai_perk($tmpKodePerk){
+		$sql="select terpakai from budget_perkiraan where kode_perk = '".$tmpKodePerk."'";
+		$query = $this->db->query($sql);
+		if($query->num_rows()== '1'){
+			$g = $query->row()->terpakai;
+			return $g;
+		}else{
+			return false;
+		}
+	}
+	function get_terpakai_cflow($tmpKodeCflow){
+		$sql="select terpakai from budget_cflow where kode_cflow = '".$tmpKodeCflow."'";
+		$query = $this->db->query($sql);
+		if($query->num_rows()== '1'){
+			$g = $query->row()->terpakai;
+			return $g;
+		}else{
+			return false;
+		}
+	}
+	function get_saldo_cflow($tmpKodeCflow){
+		$sql="select saldo from budget_cflow where kode_cflow = '".$tmpKodeCflow."'";
+		$query = $this->db->query($sql);
+		if($query->num_rows()== '1'){
+			$g = $query->row()->saldo;
+			return $g;
+		}else{
+			return false;
 		}
 	}
 }

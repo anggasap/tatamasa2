@@ -87,7 +87,80 @@ class Master_reqpay extends CI_Controller
 		if($rows){
 			foreach ( $rows as $row )
 				$tgl_jt = date ( 'd-m-Y', strtotime ( $row->tgl_jt ) );
+				$tglTrans = date('d-m-Y', strtotime($row->tgl_trans));
 				$jml_uang = number_format($row->jml_uang,2);
+				$nama_pay_to = $this->master_reqpay_m->getPayTo($row->pay_to);
+
+			$hd = $row->app_hd_id;
+			if ($hd == 0) {
+				$hdid = '';
+			} else {
+				$query = $this->db->query("select nama_kyw as nama from master_karyawan where id_kyw=" . $hd . "");
+				$hdid = $query->row()->nama;
+			}
+
+			$keuangan = $row->app_keuangan_id;
+			if ($keuangan == 0) {
+				$keuanganid = '';
+			} else {
+				$query = $this->db->query("select nama_kyw as nama from master_karyawan where id_kyw=" . $keuangan . "");
+				$keuanganid = $query->row()->nama;
+			}
+
+			$gm = $row->app_gm_id;
+			if ($gm == 0) {
+				$gmid = '';
+			} else {
+				$query = $this->db->query("select nama_kyw as nama from master_karyawan where id_kyw=" . $gm . "");
+				$gmid = $query->row()->nama;
+			}
+
+			$keutgl = $row->app_keuangan_tgl;
+			if ($keutgl == '0000-00-00') {
+				$keuangantgl = '';
+			} else {
+				$keuangantgl = date('d-m-Y', strtotime($row->app_keuangan_tgl));
+			}
+			$hedtgl = $row->app_hd_tgl;
+			if ($hedtgl == '0000-00-00') {
+				$hdtgl = '';
+			} else {
+				$hdtgl = date('d-m-Y', strtotime($row->app_keuangan_tgl));
+			}
+			$gemtgl = $row->app_gm_tgl;
+			if ($gemtgl == '0000-00-00') {
+				$gmtgl = '';
+			} else {
+				$gmtgl = date('d-m-Y', strtotime($row->app_gm_tgl));
+			}
+
+			if ($row->app_keuangan_status == '1') {
+				$keuanganStatus = 'Approve';
+			} elseif ($row->app_keuangan_status == '2') {
+				$keuanganStatus = 'Rejected';
+			} elseif ($row->app_keuangan_status == '3') {
+				$keuanganStatus = 'Paid';
+			} else {
+				$keuanganStatus = '';
+			}
+			if ($row->app_hd_status == '1') {
+				$hdStatus = 'Approve';
+			} elseif ($row->app_hd_status == '2') {
+				$hdStatus = 'Rejected';
+			} elseif ($row->app_hd_status == '3') {
+				$hdStatus = 'Paid';
+			} else {
+				$hdStatus = '';
+			}
+			if ($row->app_gm_status == '1') {
+				$gmStatus = 'Approve';
+			} elseif ($row->app_gm_status == '2') {
+				$gmStatus = 'Rejected';
+			} elseif ($row->app_gm_status == '3') {
+				$gmStatus = 'Paid';
+			} else {
+				$gmStatus = '';
+			}
 				$array = array (
 						'baris'=>1,
 						'id_kyw' 					=> $row->id_kyw,
@@ -101,6 +174,7 @@ class Master_reqpay extends CI_Controller
 						'nilai_kurs' 				=> $row->nilai_kurs,
 						'tgl_jt' 					=> $tgl_jt,
 						'pay_to' 					=> $row->pay_to,
+						//'nama_pay_to' => $nama_pay_to[0]->nama_kyw,
 						'nama_spl' 					=> $row->nama_spl,
 						'nama_akun_bank' 			=> $row->nama_akun_bank,
 						'no_akun_bank' 				=> $row->no_akun_bank,
@@ -118,20 +192,20 @@ class Master_reqpay extends CI_Controller
 						'dok_ssp'		        	=> $row->dok_ssp,
 						'dok_sspk'		        	=> $row->dok_sspk,
 						'dok_sbj'		        	=> $row->dok_sbj,
-						'app_keuangan_id' 			=> $row->app_keuangan_id,
-						'app_hd_id' 				=> $row->app_hd_id,
-						'app_gm_id' 				=> $row->app_gm_id,
-						'app_keuangan_status' 		=> $row->app_keuangan_status,
-						'app_hd_status' 			=> $row->app_hd_status,
-						'app_gm_status' 			=> $row->app_gm_status,
-						'app_keuangan_tgl' 			=> $row->app_keuangan_tgl,
-						'app_hd_tgl' 				=> $row->app_hd_tgl,
-						'app_gm_tgl' 				=> $row->app_gm_tgl,
-						'app_keuangan_ket' 			=> $row->app_keuangan_ket,
-						'app_hd_ket' 				=> $row->app_hd_ket,
-						'app_gm_ket' 				=> $row->app_gm_ket,
-						'app_user_id'				=> $row->app_user_id,
-						'inout_budget' 				=> $row->inout_budget
+						'app_keuangan_id' => $keuanganid,
+						'app_hd_id' => $hdid,
+						'app_gm_id' => $gmid,
+						'app_keuangan_status' => $keuanganStatus,
+						'app_hd_status' => $hdStatus,
+						'app_gm_status' => $gmStatus,
+						'app_keuangan_tgl' => $keuangantgl,
+						'app_hd_tgl' => $hdtgl,
+						'app_gm_tgl' => $gmtgl,
+						'app_keuangan_ket' => $row->app_keuangan_ket,
+						'app_hd_ket' => $row->app_hd_ket,
+						'app_gm_ket' => $row->app_gm_ket,
+						'app_user_id'=>$row->app_user_id,
+						'inout_budget' => $row->inout_budget
 				);
 		}else{
 			$array=array('baris'=>0);
@@ -152,8 +226,6 @@ class Master_reqpay extends CI_Controller
             $rows = $this->master_reqpay_m->getDescCpa($idReqpay);
             $this->output->set_output(json_encode($rows));
         }
-
-
     }
     function simpan(){
         $idKyw					= trim($this->input->post('kywId'));
@@ -225,7 +297,67 @@ class Master_reqpay extends CI_Controller
         $model = $this->master_reqpay_m->insertReqpay($data);
         
 		$totJurnal = trim($this->input->post('txtTempLoop'));
-        if ($totJurnal > 0) {
+		if ($totJurnal > 0) {
+			for ($i = 1; $i <= $totJurnal; $i++) {
+				$tKode 	    = 'tempKode' . $i;
+				$tJnsKode   = 'tempJenisKode'.$i;
+				$tJumlah 	= 'tempJumlah' . $i;
+				$tKet 		= 'tempKet' . $i;
+
+				$tmpJnsKode 	    = trim($this->input->post($tJnsKode));
+				$tmpKode 	    = trim($this->input->post($tKode));
+				$tmpJumlah 		= str_replace(',', '', trim($this->input->post($tJumlah)));
+				$tmpKet 		= trim($this->input->post($tKet));
+				if($tmpJnsKode == '1'){
+					$TotalP 		= $this->master_reqpay_m->get_terpakai_perk($tmpKode);
+					$data = array(
+							'id_cpa' => 0,
+							'id_master' 	=> $modelidReqpay,
+							'kode_perk' 	=> $tmpKode,
+							'keterangan' 	=> $tmpKet,
+							'jumlah' 		=> $tmpJumlah
+
+					);
+					$query = $this->master_reqpay_m->insertCpaP($data);
+					$totalCperk = $TotalP + $tmpJumlah;
+					$dataTerpakaiPerk  = array(
+							'terpakai' => $totalCperk
+					);
+					$query = $this->master_reqpay_m->updateBudgetKdPerkTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiPerk);
+					$query = $this->master_reqpay_m->updateBudgetKdPerkSaldo($tmpKode,$tahun,$idProyek);
+				}else{
+					$TotalC 		= $this->master_reqpay_m->get_terpakai_cflow($tmpKode);
+					$data = array(
+							'id_cpa' => 0,
+							'id_master' 	=> $modelidReqpay,
+							'kode_cflow' 	=> $tmpKode,
+							'keterangan' 	=> $tmpKet,
+							'jumlah' 		=> $tmpJumlah
+
+					);
+					$query = $this->master_reqpay_m->insertCpaC($data);
+					$totalCflow = $TotalC + $tmpJumlah;
+					$dataTerpakaiCflow  = array(
+							'terpakai' => $totalCflow
+					);
+					$query = $this->master_reqpay_m->updateBudgetCflowTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiCflow);
+					$query = $this->master_reqpay_m->updateBudgetCflowSaldo($tmpKode,$tahun,$idProyek);
+
+					$tmpKodeCflow 	= trim($this->input->post($tKode));
+					$TotalC 		= $this->master_reqpay_m->get_saldo_cflow($tmpKodeCflow);
+					$total 			= $TotalC - $totalCflow;
+					$data = array(
+							'inout_budget' => '1'
+					);
+					if ($total <= 0){
+						$model 			= $this->master_reqpay_m->updateReqpay($data, $modelidReqpay);
+					}
+				}
+
+			}
+
+		}
+        /*if ($totJurnal > 0) {
             for ($i = 1; $i <= $totJurnal; $i++) {
                 $tKodePerk 	= 'tempKodePerk' . $i;
                 $tKodeCflow = 'tempKodeCflow' . $i;
@@ -271,7 +403,7 @@ class Master_reqpay extends CI_Controller
             if ($total <= 0){
                 $model 			= $this->master_reqpay_m->updateReqpay($data, $modelidReqpay);
             }
-        }
+        }*/
 		if($model){
     		$array = array(
     			'act'	=>1,
@@ -288,26 +420,25 @@ class Master_reqpay extends CI_Controller
         $this->output->set_output(json_encode($array));
     }
     function ubah(){
-    	$idReqpay			= trim($this->input->post('idReqpay'));
-    	$idKyw			= trim($this->input->post('kywId'));
-        $noInv			= trim($this->input->post('noInvoice'));
-        $noPO			= trim($this->input->post('noPO'));
-        $uang			= str_replace(',', '', trim($this->input->post('uang')));
-		$idProyek = trim($this->input->post('proyek'));
-		$idKurs = trim($this->input->post('kurs'));
-		$nilaiKurs = str_replace(',', '', trim($this->input->post('nilaiKurs')));
-		$tglTrans 		= trim($this->input->post('tglTrans'));
-		$tglTrans 		= date('Y-m-d', strtotime($tglTrans));
-        $tglJT			= trim($this->input->post('tglJT'));
-        $tglJT 			= date ( 'Y-m-d', strtotime ( $tglJT ) );
-		$payTo			= trim($this->input->post('splId'));
-        $namaPemilikAkunBank			= trim($this->input->post('namaPemilikAkunBank'));
-        $noAkunBank			= trim($this->input->post('noAkunBank'));
-        $namaBank			= trim($this->input->post('namaBank'));
-        $ket			= trim($this->input->post('keterangan'));
-    	//$ket			= trim($this->input->post(''));
-		$bulan = date('m', strtotime($tglTrans));//$tglTrans->format("m");
-        $tahun = date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
+    	$idReqpay				= trim($this->input->post('idReqpay'));
+    	$idKyw					= trim($this->input->post('kywId'));
+        $noInv					= trim($this->input->post('noInvoice'));
+        $noPO					= trim($this->input->post('noPO'));
+        $uang					= str_replace(',', '', trim($this->input->post('uang')));
+		$idProyek 				= trim($this->input->post('proyek'));
+		$idKurs 				= trim($this->input->post('kurs'));
+		$nilaiKurs 				= str_replace(',', '', trim($this->input->post('nilaiKurs')));
+		$tglTrans 				= trim($this->input->post('tglTrans'));
+		$tglTrans 				= date('Y-m-d', strtotime($tglTrans));
+        $tglJT					= trim($this->input->post('tglJT'));
+        $tglJT 					= date ( 'Y-m-d', strtotime ( $tglJT ) );
+		$payTo					= trim($this->input->post('splId'));
+        $namaPemilikAkunBank	= trim($this->input->post('namaPemilikAkunBank'));
+        $noAkunBank				= trim($this->input->post('noAkunBank'));
+        $namaBank				= trim($this->input->post('namaBank'));
+        $ket					= trim($this->input->post('keterangan'));
+    	$bulan 					= date('m', strtotime($tglTrans));//$tglTrans->format("m");
+        $tahun 					= date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
 		
         $data = array(
         		'id_kyw'		        	=>$idKyw,
@@ -340,9 +471,70 @@ class Master_reqpay extends CI_Controller
         );
     	
     	$model = $this->master_reqpay_m->updateReqpay($data,$idReqpay);
-    	$model = $this->master_advance_m->deleteCpa($idReqpay);
+    	$model = $this->master_reqpay_m->deleteCpa($idReqpay);
 		$totJurnal = trim($this->input->post('txtTempLoop'));
-        if ($totJurnal > 0) {
+		if ($totJurnal > 0) {
+			for ($i = 1; $i <= $totJurnal; $i++) {
+				$tKode 	    = 'tempKode' . $i;
+				$tJnsKode   = 'tempJenisKode'.$i;
+				$tJumlah 	= 'tempJumlah' . $i;
+				$tKet 		= 'tempKet' . $i;
+
+				$tmpJnsKode 	    = trim($this->input->post($tJnsKode));
+				$tmpKode 	    = trim($this->input->post($tKode));
+				$tmpJumlah 		= str_replace(',', '', trim($this->input->post($tJumlah)));
+				$tmpKet 		= trim($this->input->post($tKet));
+				if($tmpJnsKode == '1'){
+					$TotalP 		= $this->master_reqpay_m->get_terpakai_perk($tmpKode);
+					$data = array(
+							'id_cpa' => 0,
+							'id_master' 	=> $idReqpay,
+							'kode_perk' 	=> $tmpKode,
+							'keterangan' 	=> $tmpKet,
+							'jumlah' 		=> $tmpJumlah
+
+					);
+					$query = $this->master_reqpay_m->insertCpaP($data);
+					$totalCperk = $TotalP + $tmpJumlah;
+					$dataTerpakaiPerk  = array(
+							'terpakai' => $totalCperk
+					);
+					$query = $this->master_reqpay_m->updateBudgetKdPerkTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiPerk);
+					$query = $this->master_reqpay_m->updateBudgetKdPerkSaldo($tmpKode,$tahun,$idProyek);
+				}else{
+					$TotalC 		= $this->master_reqpay_m->get_terpakai_cflow($tmpKode);
+					$data = array(
+							'id_cpa' => 0,
+							'id_master' 	=> $idReqpay,
+							'kode_cflow' 	=> $tmpKode,
+							'keterangan' 	=> $tmpKet,
+							'jumlah' 		=> $tmpJumlah
+
+					);
+					$query = $this->master_reqpay_m->insertCpaC($data);
+					$totalCflow = $TotalC + $tmpJumlah;
+					$dataTerpakaiCflow  = array(
+							'terpakai' => $totalCflow
+					);
+					$query = $this->master_reqpay_m->updateBudgetCflowTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiCflow);
+					$query = $this->master_reqpay_m->updateBudgetCflowSaldo($tmpKode,$tahun,$idProyek);
+
+					$tmpKodeCflow 	= trim($this->input->post($tKode));
+					$TotalC 		= $this->master_reqpay_m->get_saldo_cflow($tmpKodeCflow);
+					$total 			= $TotalC - $totalCflow;
+					$data = array(
+							'inout_budget' => '1'
+					);
+					if ($total <= 0){
+						$model 			= $this->master_reqpay_m->updateReqpay($data, $idReqpay);
+					}
+				}
+			}
+
+		} else {
+			$query = $this->master_reqpay_m->deleteCpa($idReqpay);
+		}
+        /*if ($totJurnal > 0) {
             for ($i = 1; $i <= $totJurnal; $i++) {
                 $tKodePerk 	= 'tempKodePerk' . $i;
                 $tKodeCflow = 'tempKodeCflow' . $i;
@@ -390,7 +582,7 @@ class Master_reqpay extends CI_Controller
             }
         }else{
 			$query = $this->master_reqpay_m->deleteCpa($idAdv);
-		}
+		}*/
 		if($model){
     		$array = array(
     			'act'	=>1,

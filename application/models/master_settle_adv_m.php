@@ -110,9 +110,9 @@ class Master_settle_adv_m extends CI_Model {
 			return true;
 		}
 	}
-    function insertCpa($data){
-        $this->db->trans_begin();
-		$model = $this->db->insert('cpa', $data);
+	function insertCpaP($data){
+		$this->db->trans_begin();
+		$model = $this->db->insert('cpa_perk', $data);
 		if ($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
 			return false;
@@ -121,7 +121,19 @@ class Master_settle_adv_m extends CI_Model {
 			$this->db->trans_commit();
 			return true;
 		}
-    }
+	}
+	function insertCpaC($data){
+		$this->db->trans_begin();
+		$model = $this->db->insert('cpa_cflow', $data);
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return false;
+		}
+		else{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
 	function updateBudgetCflowTerpakai($tmpKodeCflow,$tahun,$idProyek,$data){
 		$this->db->trans_begin();
 		$query1 = $this->db->where('kode_cflow', $tmpKodeCflow);

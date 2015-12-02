@@ -48,10 +48,10 @@ class Master_advance_m extends CI_Model {
 	}
 	public function getDescAdv($idAdv)
 	{
-		$this->db->select ( 'ma.id_kyw, mk.nama_kyw, md.nama_dept, ma.jml_uang, ma.id_proyek, ma.id_kurs, ma.nilai_kurs, ma.tgl_trans,
+		$this->db->select('ma.id_kyw, mk.nama_kyw, md.nama_dept, ma.jml_uang, ma.id_proyek, ma.id_kurs, ma.nilai_kurs, ma.tgl_trans,
 		ma.tgl_jt, ma.pay_to, ma.nama_akun_bank, ma.no_akun_bank, ma.nama_bank, ma.keterangan, ma.dok_po, ma.dok_sp, ma.dok_ssp, ma.dok_sspk,
 		ma.dok_sbj, ma.app_keuangan_id, ma.app_hd_id, ma.app_gm_id, ma.app_keuangan_status, ma.app_hd_status, ma.app_gm_status,
-		ma.app_keuangan_tgl, ma.app_hd_tgl, ma.app_gm_tgl, ma.app_keuangan_ket, ma.app_hd_ket,ma.app_user_id, ma.app_gm_ket,ma.inout_budget' );
+		ma.app_keuangan_tgl, ma.app_hd_tgl, ma.app_gm_tgl, ma.app_keuangan_ket, ma.app_hd_ket,ma.app_user_id, ma.app_gm_ket,ma.inout_budget');
 		$this->db->from('master_advance ma');
 		$this->db->join('master_karyawan mk', 'ma.id_kyw=mk.id_kyw', 'LEFT');
 		$this->db->join('master_dept md', 'mk.dept_kyw=md.id_dept', 'LEFT');
@@ -82,12 +82,8 @@ class Master_advance_m extends CI_Model {
 	}    
     public function getDescCpa($idAdv)
 	{
-		/*$this->db->select ( 'id_cpa,id_master,kode_perk,kode_cflow,keterangan,jumlah' );
-		$this->db->from('cpa');
-		$this->db->where ( 'id_master', $idAdv );
-
-		$query = $this->db->get ();*/
-		$sql= "select kode_perk as kode,1 as jns_kode, keterangan,jumlah from cpa_perk where id_master = '$idAdv' union select kode_cflow as kode,2 as jns_kode, keterangan,jumlah  from cpa_cflow where id_master = '$idAdv' ";
+		$sql= "select kode_perk as kode,1 as jns_kode, keterangan,jumlah from cpa_perk where id_master = '$idAdv' 
+				union select kode_cflow as kode,2 as jns_kode, keterangan,jumlah  from cpa_cflow where id_master = '$idAdv' ";
 		$query = $this->db->query($sql);
         $rows['data_cpa'] = $query->result();
 		return $rows;
@@ -280,10 +276,9 @@ class Master_advance_m extends CI_Model {
 		$sql ="select ";
 	}*/
 	function cetak_cpa_detail($idAdv){
-		$sql="select a.*,b.nama_cflow, c.tahun,c.id_proyek,c.kode_cflow,
-			  (c.jan+c.feb+c.mar+c.apr+c.mei+c.jun+c.jul+c.agu+c.sep+c.okt+c.nov+c.des) as anggaran,c.terpakai,c.saldo from cpa a
-			  left join master_cashflow b on a.kode_cflow=b.kode_cflow
-			  left join budget_cflow c on a.kode_cflow=c.kode_cflow where a.id_master = '".$idAdv."'";
+		$sql=" select a.*, b.*, c.terpakai,c.saldo,(c.jan+c.feb+c.mar+c.apr+c.mei+c.jun+c.jul+c.agu+c.sep+c.okt+c.nov+c.des) as anggaran 
+				from cpa_cflow a left join master_cashflow b on a.kode_cflow = b.kode_cflow
+				left join budget_cflow c on a.kode_cflow = c.kode_cflow where a.id_master = '".$idAdv."'";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}

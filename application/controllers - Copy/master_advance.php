@@ -105,134 +105,6 @@ class Master_advance extends CI_Controller
         $this->output->set_output(json_encode($array));
     }
 
-    /*function getDescAdv()
-    {
-        $this->CI =& get_instance();
-        $idAdv = $this->input->post('idAdv', TRUE);
-        $rows = $this->master_advance_m->getDescAdv($idAdv);
-        if ($rows) {
-            foreach ($rows as $row)
-                $tgl_jt = date('d-m-Y', strtotime($row->tgl_jt));
-            $tglTrans = date('d-m-Y', strtotime($row->tgl_trans));
-            $jml_uang = number_format($row->jml_uang, 2);
-            $nama_pay_to = $this->master_advance_m->getPayTo($row->pay_to);
-
-            $hd = $row->app_hd_id;
-            if ($hd == 0) {
-                $hdid = '';
-            } else {
-                $query = $this->db->query("select nama_kyw as nama from master_karyawan where id_kyw=" . $hd . "");
-                $hdid = $query->row()->nama;
-            }
-
-            $keuangan = $row->app_keuangan_id;
-            if ($keuangan == 0) {
-                $keuanganid = '';
-            } else {
-                $query = $this->db->query("select nama_kyw as nama from master_karyawan where id_kyw=" . $keuangan . "");
-                $keuanganid = $query->row()->nama;
-            }
-
-            $gm = $row->app_gm_id;
-            if ($gm == 0) {
-                $gmid = '';
-            } else {
-                $query = $this->db->query("select nama_kyw as nama from master_karyawan where id_kyw=" . $gm . "");
-                $gmid = $query->row()->nama;
-            }
-
-            $keutgl = $row->app_keuangan_tgl;
-            if ($keutgl == '0000-00-00') {
-                $keuangantgl = '';
-            } else {
-                $keuangantgl = date('d-m-Y', strtotime($row->app_keuangan_tgl));
-            }
-            $hedtgl = $row->app_hd_tgl;
-            if ($hedtgl == '0000-00-00') {
-                $hdtgl = '';
-            } else {
-                $hdtgl = date('d-m-Y', strtotime($row->app_keuangan_tgl));
-            }
-            $gemtgl = $row->app_gm_tgl;
-            if ($gemtgl == '0000-00-00') {
-                $gmtgl = '';
-            } else {
-                $gmtgl = date('d-m-Y', strtotime($row->app_gm_tgl));
-            }
-
-            if ($row->app_keuangan_status == '1') {
-                $keuanganStatus = 'Approve';
-            } elseif ($row->app_keuangan_status == '2') {
-                $keuanganStatus = 'Rejected';
-            } elseif ($row->app_keuangan_status == '3') {
-                $keuanganStatus = 'Paid';
-            } else {
-                $keuanganStatus = '';
-            }
-            if ($row->app_hd_status == '1') {
-                $hdStatus = 'Approve';
-            } elseif ($row->app_hd_status == '2') {
-                $hdStatus = 'Rejected';
-            } elseif ($row->app_hd_status == '3') {
-                $hdStatus = 'Paid';
-            } else {
-                $hdStatus = '';
-            }
-            if ($row->app_gm_status == '1') {
-                $gmStatus = 'Approve';
-            } elseif ($row->app_gm_status == '2') {
-                $gmStatus = 'Rejected';
-            } elseif ($row->app_gm_status == '3') {
-                $gmStatus = 'Paid';
-            } else {
-                $gmStatus = '';
-            }
-
-            $array = array(
-                'baris' => 1,
-                'id_kyw' => $row->id_kyw,
-                'nama_kyw' => $row->nama_kyw,
-                'nama_dept' => $row->nama_dept,
-                'jml_uang' => $jml_uang,
-                'id_proyek' => $row->id_proyek,
-                'id_kurs' => $row->id_kurs,
-                'nilai_kurs' => $row->nilai_kurs,
-                'tgl_trans' => $tglTrans,
-                'tgl_jt' => $tgl_jt,
-                'pay_to' => $row->pay_to,
-                'nama_pay_to' => $nama_pay_to[0]->nama_kyw,
-                'nama_akun_bank' => $row->nama_akun_bank,
-                'no_akun_bank' => $row->no_akun_bank,
-                'nama_bank' => $row->nama_bank,
-                'keterangan' => $row->keterangan,
-                'dok_po' => $row->dok_po,
-                'dok_sp' => $row->dok_sp,
-                'dok_ssp' => $row->dok_ssp,
-                'dok_sspk' => $row->dok_sspk,
-                'dok_sbj' => $row->dok_sbj,
-                'app_keuangan_id' => $keuanganid,
-                'app_hd_id' => $hdid,
-                'app_gm_id' => $gmid,
-                'app_keuangan_status' => $keuanganStatus,
-                'app_hd_status' => $hdStatus,
-                'app_gm_status' => $gmStatus,
-                'app_keuangan_tgl' => $keuangantgl,
-                'app_hd_tgl' => $hdtgl,
-                'app_gm_tgl' => $gmtgl,
-                'app_keuangan_ket' => $row->app_keuangan_ket,
-                'app_hd_ket' => $row->app_hd_ket,
-                'app_gm_ket' => $row->app_gm_ket,
-                'app_user_id'=>$row->app_user_id
-                //'' => $row->
-
-
-            );
-        } else {
-            $array = array('baris' => 0);
-        }
-
-        $this->output->set_output(json_encode($array));
-    }*/
     function getDescAdv()
     {
         $this->CI =& get_instance();
@@ -434,50 +306,63 @@ class Master_advance extends CI_Controller
         $totJurnal = trim($this->input->post('txtTempLoop'));
         if ($totJurnal > 0) {
             for ($i = 1; $i <= $totJurnal; $i++) {
-                $tKodePerk 	= 'tempKodePerk' . $i;
-                $tKodeCflow = 'tempKodeCflow' . $i;
+                $tKode 	    = 'tempKode' . $i;
+                $tJnsKode   = 'tempJenisKode'.$i;
                 $tJumlah 	= 'tempJumlah' . $i;
                 $tKet 		= 'tempKet' . $i;
 
-                $tmpKodePerk 	= trim($this->input->post($tKodePerk));
-                $tmpKodeCflow 	= trim($this->input->post($tKodeCflow));
+                $tmpJnsKode 	    = trim($this->input->post($tJnsKode));
+                $tmpKode 	    = trim($this->input->post($tKode));
                 $tmpJumlah 		= str_replace(',', '', trim($this->input->post($tJumlah)));
                 $tmpKet 		= trim($this->input->post($tKet));
-                $TotalC 		= $this->master_advance_m->get_terpakai_cflow($tmpKodeCflow);
-                $TotalP 		= $this->master_advance_m->get_terpakai_perk($tmpKodePerk);
-                $data = array(
-                    'id_cpa' => 0,
-                    'id_master' 	=> $modelidAdv,
-                    'kode_perk' 	=> $tmpKodePerk,
-                    'kode_cflow' 	=> $tmpKodeCflow,
-                    'keterangan' 	=> $tmpKet,
-                    'jumlah' 		=> $tmpJumlah
-                );
-                $query = $this->master_advance_m->insertCpa($data);
-                $totalCflow = $TotalC + $tmpJumlah;
-                $totalCperk = $TotalP + $tmpJumlah;
+                if($tmpJnsKode == '1'){
+                    $TotalP 		= $this->master_advance_m->get_terpakai_perk($tmpKode);
+                    $data = array(
+                        'id_cpa' => 0,
+                        'id_master' 	=> $modelidAdv,
+                        'kode_perk' 	=> $tmpKode,
+                        'keterangan' 	=> $tmpKet,
+                        'jumlah' 		=> $tmpJumlah
 
-                $dataTerpakaiCflow  = array(
-                    'terpakai' => $totalCflow
-                );
+                    );
+                    $query = $this->master_advance_m->insertCpaP($data);
+                    $totalCperk = $TotalP + $tmpJumlah;
+                    $dataTerpakaiPerk  = array(
+                        'terpakai' => $totalCperk
+                    );
+                    $query = $this->master_advance_m->updateBudgetKdPerkTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiPerk);
+                    $query = $this->master_advance_m->updateBudgetKdPerkSaldo($tmpKode,$tahun,$idProyek);
+                }else{
+                    $TotalC 		= $this->master_advance_m->get_terpakai_cflow($tmpKode);
+                    $data = array(
+                        'id_cpa' => 0,
+                        'id_master' 	=> $modelidAdv,
+                        'kode_cflow' 	=> $tmpKode,
+                        'keterangan' 	=> $tmpKet,
+                        'jumlah' 		=> $tmpJumlah
 
-                $dataTerpakaiPerk  = array(
-                    'terpakai' => $totalCperk
-                );
-                $query = $this->master_advance_m->updateBudgetCflowTerpakai($tmpKodeCflow,$tahun,$idProyek,$dataTerpakaiCflow);
-                $query = $this->master_advance_m->updateBudgetCflowSaldo($tmpKodeCflow,$tahun,$idProyek);
-                $query = $this->master_advance_m->updateBudgetKdPerkTerpakai($tmpKodePerk,$tahun,$idProyek,$dataTerpakaiPerk);
-                $query = $this->master_advance_m->updateBudgetKdPerkSaldo($tmpKodePerk,$tahun,$idProyek);
+                    );
+                    $query = $this->master_advance_m->insertCpaC($data);
+                    $totalCflow = $TotalC + $tmpJumlah;
+                    $dataTerpakaiCflow  = array(
+                        'terpakai' => $totalCflow
+                    );
+                    $query = $this->master_advance_m->updateBudgetCflowTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiCflow);
+                    $query = $this->master_advance_m->updateBudgetCflowSaldo($tmpKode,$tahun,$idProyek);
+
+                    $tmpKodeCflow 	= trim($this->input->post($tKode));
+                    $TotalC 		= $this->master_advance_m->get_saldo_cflow($tmpKodeCflow);
+                    $total 			= $TotalC - $totalCflow;
+                    $data = array(
+                        'inout_budget' => '1'
+                    );
+                    if ($total <= 0){
+                        $model 			= $this->master_advance_m->updateAdv($data, $modelidAdv);
+                    }
+                }
+
             }
-            $tmpKodeCflow 	= trim($this->input->post($tKodeCflow));
-            $TotalC 		= $this->master_advance_m->get_saldo_cflow($tmpKodeCflow);
-            $total 			= $TotalC - $totalCflow;
-            $data = array(
-                'inout_budget' => '1'
-            );
-            if ($total <= 0){
-                $model 			= $this->master_advance_m->updateAdv($data, $modelidAdv);
-            }
+
         }
 
         if ($model) {
@@ -547,50 +432,62 @@ class Master_advance extends CI_Controller
         $totJurnal = trim($this->input->post('txtTempLoop'));
         if ($totJurnal > 0) {
             for ($i = 1; $i <= $totJurnal; $i++) {
-                $tKodePerk 	= 'tempKodePerk' . $i;
-                $tKodeCflow = 'tempKodeCflow' . $i;
+                $tKode 	    = 'tempKode' . $i;
+                $tJnsKode   = 'tempJenisKode'.$i;
                 $tJumlah 	= 'tempJumlah' . $i;
                 $tKet 		= 'tempKet' . $i;
 
-                $tmpKodePerk 	= trim($this->input->post($tKodePerk));
-                $tmpKodeCflow 	= trim($this->input->post($tKodeCflow));
+                $tmpJnsKode 	    = trim($this->input->post($tJnsKode));
+                $tmpKode 	    = trim($this->input->post($tKode));
                 $tmpJumlah 		= str_replace(',', '', trim($this->input->post($tJumlah)));
                 $tmpKet 		= trim($this->input->post($tKet));
-                $TotalC 		= $this->master_advance_m->get_terpakai_cflow($tmpKodeCflow);
-                $TotalP 		= $this->master_advance_m->get_terpakai_perk($tmpKodePerk);
-                $data = array(
-                    'id_cpa' => 0,
-                    'id_master' 	=> $idAdv,
-                    'kode_perk' 	=> $tmpKodePerk,
-                    'kode_cflow' 	=> $tmpKodeCflow,
-                    'keterangan' 	=> $tmpKet,
-                    'jumlah' 		=> $tmpJumlah
-                );
-                $query = $this->master_advance_m->insertCpa($data);
-                $totalCflow = $TotalC + $tmpJumlah;
-                $totalCperk = $TotalP + $tmpJumlah;
+                if($tmpJnsKode == '1'){
+                    $TotalP 		= $this->master_advance_m->get_terpakai_perk($tmpKode);
+                    $data = array(
+                        'id_cpa' => 0,
+                        'id_master' 	=> $idAdv,
+                        'kode_perk' 	=> $tmpKode,
+                        'keterangan' 	=> $tmpKet,
+                        'jumlah' 		=> $tmpJumlah
 
-                $dataTerpakaiCflow  = array(
-                    'terpakai' => $totalCflow
-                );
+                    );
+                    $query = $this->master_advance_m->insertCpaP($data);
+                    $totalCperk = $TotalP + $tmpJumlah;
+                    $dataTerpakaiPerk  = array(
+                        'terpakai' => $totalCperk
+                    );
+                    $query = $this->master_advance_m->updateBudgetKdPerkTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiPerk);
+                    $query = $this->master_advance_m->updateBudgetKdPerkSaldo($tmpKode,$tahun,$idProyek);
+                }else{
+                    $TotalC 		= $this->master_advance_m->get_terpakai_cflow($tmpKode);
+                    $data = array(
+                        'id_cpa' => 0,
+                        'id_master' 	=> $idAdv,
+                        'kode_cflow' 	=> $tmpKode,
+                        'keterangan' 	=> $tmpKet,
+                        'jumlah' 		=> $tmpJumlah
 
-                $dataTerpakaiPerk  = array(
-                    'terpakai' => $totalCperk
-                );
-                $query = $this->master_advance_m->updateBudgetCflowTerpakai($tmpKodeCflow,$tahun,$idProyek,$dataTerpakaiCflow);
-                $query = $this->master_advance_m->updateBudgetCflowSaldo($tmpKodeCflow,$tahun,$idProyek);
-                $query = $this->master_advance_m->updateBudgetKdPerkTerpakai($tmpKodePerk,$tahun,$idProyek,$dataTerpakaiPerk);
-                $query = $this->master_advance_m->updateBudgetKdPerkSaldo($tmpKodePerk,$tahun,$idProyek);
+                    );
+                    $query = $this->master_advance_m->insertCpaC($data);
+                    $totalCflow = $TotalC + $tmpJumlah;
+                    $dataTerpakaiCflow  = array(
+                        'terpakai' => $totalCflow
+                    );
+                    $query = $this->master_advance_m->updateBudgetCflowTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiCflow);
+                    $query = $this->master_advance_m->updateBudgetCflowSaldo($tmpKode,$tahun,$idProyek);
+
+                    $tmpKodeCflow 	= trim($this->input->post($tKode));
+                    $TotalC 		= $this->master_advance_m->get_saldo_cflow($tmpKodeCflow);
+                    $total 			= $TotalC - $totalCflow;
+                    $data = array(
+                        'inout_budget' => '1'
+                    );
+                    if ($total <= 0){
+                        $model 			= $this->master_advance_m->updateAdv($data, $idAdv);
+                    }
+                }
             }
-            $tmpKodeCflow 	= trim($this->input->post($tKodeCflow));
-            $TotalC 		= $this->master_advance_m->get_saldo_cflow($tmpKodeCflow);
-            $total 			= $TotalC - $totalCflow;
-            $data = array(
-                'inout_budget' => '1'
-            );
-            if ($total <= 0){
-                $model 			= $this->master_advance_m->updateAdv($data, $idAdv);
-            }
+
         } else {
             $query = $this->master_advance_m->deleteCpa($idAdv);
         }
