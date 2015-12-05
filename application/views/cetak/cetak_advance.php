@@ -17,11 +17,8 @@
 		text-align: center;
 	}
 	#logo{
-		text-align: Left;
-		margin-bottom: 10px;
-	}
-	#logo img{
-		width: 200px;
+		text-align: center;
+		width: 170px;
 	}
 	table.tableizer-table2{
 		width: 100%;
@@ -84,9 +81,9 @@
   </head>
   <body>
 	<table class="judul">
-		<tr><th></th><th>PT BERKAH GRAHA MANDIRI</th></tr>
-		<tr><td rowspan="2"><img id="logo" src="<?php echo base_url('metronic/img/tatamasa_logo.png'); ?>"></td><td>Beltway Office Park Tower Lt. 5</td></tr>
-		<tr><td>Jl. TB Simatung No. 41 - Psr Minggu - Jakarta Selatan</td></tr>
+		<tr><td rowspan="3" align="center"><img id="logo" src="<?php echo base_url('metronic/img/logo_berkah.png'); ?>"></td><td style="font-size: 16px;font-weight: bold;">PT BERKAH GRAHA MANDIRI</td></tr>
+		<tr><td>Beltway Office Park Tower Lt. 5</td></tr>
+		<tr><td>Jl. TB Simatupang No. 41 - Pasar Minggu - Jakarta Selatan</td></tr>
 	</table>
 	<br/>
 	<table class="tableizer-table">
@@ -154,7 +151,7 @@
 	 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td colspan="2">Invoice No.</td><td width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td>&nbsp;<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Pay To</td><td width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->pay_to; ?></td><td>&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td colspan="2">PO No.</td><td width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Account Name</td><td width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->nama_akun_bank; ?></td><td>&nbsp;</td></tr>
-	 <tr><td>&nbsp;</td><td colspan="2">Ammount</td><td width="25%" align="right" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo number_format($a->jml_uang,2,",","."); ?></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Account No.</td><td width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->no_akun_bank; ?></td><td>&nbsp;</td></tr>
+	 <tr><td>&nbsp;</td><td colspan="2">Ammount</td><td width="25%" align="right" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo number_format($a->jml_uang,2,".",","); ?></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Account No.</td><td width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->no_akun_bank; ?></td><td>&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td colspan="2">Due Date</td><td width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->tgl_jt; ?></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>Bank</td><td width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->nama_bank; ?></td><td>&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td>Description</td><td>:</td><td colspan="12" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->keterangan; ?></td></tr>
 	 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>

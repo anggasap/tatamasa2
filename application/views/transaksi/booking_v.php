@@ -91,7 +91,7 @@ table#idTabelRumah td:nth-child(5) {
                                     <div class="row">
                                         <div class="col-md-8">
                                             <label>Harga</label>
-                                            <input id="id_hargaRumah" required="required" class="form-control input-sm"
+                                            <input id="id_hargaRumah" required="required" class="form-control input-sm nomor"
                                                    type="text" name="hargaRumah" placeholder="" readonly/>
                                         </div>
                                     </div>
@@ -329,7 +329,13 @@ table#idTabelRumah td:nth-child(5) {
                                             Nama Rumah
                                         </th>
                                         <th>
-                                            Luas
+                                            Blok
+                                        </th>
+                                        <th>
+                                            Tipe
+                                        </th>
+                                        <th>
+                                            Luas Tanah
                                         </th>
                                         <th>
                                             Harga
@@ -526,8 +532,10 @@ table#idTabelRumah td:nth-child(5) {
                     { "data": "id_rumah" },
                     { "data": "nama_proyek" },
                     { "data": "nama_rumah" },
+                    { "data": "blok" },
+                    { "data": "tipe" },
                     { "data": "luas" },
-                    { "data": "harga" },
+                    { "data": "harga" }
                 ],
                 // Internationalisation. For more info refer to http://datatables.net/manual/i18n
                 "language": {

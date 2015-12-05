@@ -1,14 +1,14 @@
 <?php
 if( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Laporan_nominatif extends CI_Controller
+class Laporan_tagihan extends CI_Controller
 {
 	function __construct()
 	{
 		parent::__construct();
 
 		$this->load->model('home_m');
-		$this->load->model('laporan_nominatif_m');
+		$this->load->model('laporan_tagihan_m');
 		$this->load->library('fpdf');
 		session_start();
 	}
@@ -23,7 +23,7 @@ class Laporan_nominatif extends CI_Controller
 	}
 	
 	function home(){
-		$menuId = $this->home_m->get_menu_id('laporan_nominatif/home');
+		$menuId = $this->home_m->get_menu_id('laporan_tagihan/home');
 		$data['menu_id'] = $menuId[0]->menu_id;
 		$data['menu_parent'] = $menuId[0]->parent;
 		$data['menu_nama'] = $menuId[0]->menu_nama;
@@ -39,8 +39,9 @@ class Laporan_nominatif extends CI_Controller
 		}else{
 			$data['multilevel'] = $this->user_m->get_data(0,$this->session->userdata('usergroup'));
 			$data['menu_all'] = $this->user_m->get_menu_all(0);
+			
 			$this->template->set ( 'title', $data['menu_nama'] );
-			$this->template->load ( 'template/template3', 'laporan/laporan_nominatif_v',$data );
+			$this->template->load ( 'template/template3', 'laporan/laporan_tagihan_v',$data );
 		}
 	}
 	
@@ -49,21 +50,19 @@ class Laporan_nominatif extends CI_Controller
     	if($this->auth->is_logged_in() == false){
     		redirect('main/index');
     	}else{
-			$tanggal1 	= $this->uri->segment(3);
-			$date1 		= new DateTime($tanggal1);
-			$tglAwal 	= $date1->format('Y-m-d'); 
+			$tanggal 		= $this->uri->segment(3);
+			$date1 			= new DateTime($tanggal);
+			$tglAwal 		= '2015-12-31';
 			
-			$data['list'] = $this->laporan_nominatif_m->getList($tglAwal);
-			
-			$data['datatanggal'] = 'Data Per Tanggal : '.$tanggal1;
+			$data['list'] = $this->laporan_tagihan_m->getAllArAdv($tglAwal);
 			define('FPDF_FONTPATH',$this->config->item('fonts_path'));
 			$data['image1'] = base_url('metronic/img/tatamasa_logo.jpg');	
 			$data['nama'] = 'PT BERKAH GRAHA MANDIRI';
 			$data['tower'] = 'Beltway Office Park Tower Lt. 5';
-			$data['alamat'] = 'Jl. TB Simatupang No. 41 - Pasar Minggu - Jakarta Selatan';
-			$data['laporan'] = 'Laporan Nominatif';
+			$data['alamat'] = 'Jl. TB Simatung No. 41 - Pasar Minggu - Jakarta Selatan';
+			$data['laporan'] = 'Rekap Tagihan Per Tanggal '.$tanggal;
 			$data['user'] = $this->session->userdata('username');
-    		$this->load->view('cetak/cetak_laporan_rekap_nominatif',$data);
+    		$this->load->view('cetak/cetak_laporan_tagihan',$data);
     	}
     }
 	/*

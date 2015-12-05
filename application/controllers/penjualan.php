@@ -158,10 +158,16 @@ class Penjualan extends CI_Controller
         $tglTrans = trim($this->input->post('tglTrans'));
         $tglTrans = date('Y-m-d', strtotime($tglTrans));
         $jmlBayarKali =  str_replace(',', '', trim($this->input->post('jmlBayarKali')));
+        $tipePembayaran = trim($this->input->post('tipePembayaran'));
 
         $idPenj     = trim($this->input->post('idPenj'));
 
         $hargaRumah		    = str_replace(',', '', trim($this->input->post('hargaRumah')));
+        //$hargaBooking		    = str_replace(',', '', trim($this->input->post('hargaBooking')));
+        $DPPersen           = str_replace(',', '', trim($this->input->post('DPPersen')));
+        $sisaDP		        = str_replace(',', '', trim($this->input->post('sisaDP')));
+        $KPR                = (100 - $DPPersen)/100 * $hargaRumah;
+        $hargaStlBooking		    = str_replace(',', '', trim($this->input->post('hargaStlBooking')));
         //1. jika belum booking maka insert 1 row
         if($idPenj == ''){
 
@@ -171,15 +177,31 @@ class Penjualan extends CI_Controller
 
             $idPenj = $this->booking_m->getIdPenj($bulan, $tahun);
 
-            $data_master_jual = array(
-                'master_id'		=>$idPenj,
-                'id_rumah'		=>$rumahId,
-                'id_cust'		=>$idCustomer,
-                'tgl_trans'		=>$tglTrans,
-                'harga'			=>$hargaRumah,
-                'status_jual'   =>2
+            if($tipePembayaran == '3'){
+                $data_master_jual = array(
+                    'master_id'		=>$idPenj,
+                    'id_rumah'		=>$rumahId,
+                    'id_cust'		=>$idCustomer,
+                    'tipe_bayar'    =>$tipePembayaran,
+                    'dp'            =>$DPPersen,
+                    'sisa_dp'       =>$KPR,
+                    'tgl_trans'		=>$tglTrans,
+                    'harga'			=>$sisaDP,
+                    'status_jual'   =>2
 
-            );
+                );
+            }else{
+                $data_master_jual = array(
+                    'master_id'		=>$idPenj,
+                    'id_rumah'		=>$rumahId,
+                    'id_cust'		=>$idCustomer,
+                    'tipe_bayar'    =>$tipePembayaran,
+                    'tgl_trans'		=>$tglTrans,
+                    'harga'			=>$hargaStlBooking,
+                    'status_jual'   =>2
+
+                );
+            }
             $model_masterJual = $this->booking_m->simpan_masterJual($data_master_jual);
 
             //Status rumah dirubah jadi 2
@@ -202,6 +224,24 @@ class Penjualan extends CI_Controller
             $data_master_jual = array(
                 'status_jual' => '2'
             );
+            if($tipePembayaran == '3'){
+                $data_master_jual = array(
+                    'tipe_bayar'    =>$tipePembayaran,
+                    'tgl_trans'		=>$tglTrans,
+                    'dp'            =>$DPPersen,
+                    'sisa_dp'       =>$KPR,
+                    'harga'			=>$sisaDP,
+                    'status_jual' => '2'
+                );
+
+            }else{
+                $data_master_jual = array(
+                    'tipe_bayar'    =>$tipePembayaran,
+                    'tgl_trans'		=>$tglTrans,
+                    'harga'			=>$hargaStlBooking,
+                    'status_jual' => '2'
+                );
+            }
             $model_masterJual = $this->penjualan_m->ubahMasterJual($data_master_jual, $idPenj);
 
             // status rumah di ubah ke 2

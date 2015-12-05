@@ -32,10 +32,11 @@ class Booking extends CI_Controller
 					'id_rumah' => trim($row->id_rumah),
 					'nama_proyek' => trim($row->nama_proyek),
 					'nama_rumah' => trim($row->nama_rumah),
+					'tipe'=>trim($row->tipe),
+					'blok'=>trim($row->blok),
 					'luas' => trim($row->luas),
 					'harga' => $harga
 			);
-
 			array_push($data['data'],$array);
 		}
 		$this->output->set_output(json_encode($data));
@@ -79,6 +80,7 @@ class Booking extends CI_Controller
 		$blokRumah		    = trim($this->input->post('blokRumah'));
 		$luasRumah		    = str_replace(',', '', trim($this->input->post('luasRumah')));*/
 		$hargaRumah		    = str_replace(',', '', trim($this->input->post('hargaRumah')));
+		$hargaStlBooking 	= $hargaRumah - $hargaBooking;
 
 		if($namaRumah =='' || $hargaRumah <= 0){
 			$array = array(
@@ -112,8 +114,9 @@ class Booking extends CI_Controller
 					'id_rumah'		=>$rumahId,
 					'id_cust'		=>$idCustomer,
 					'tgl_trans'		=>$tglTrans,
-					'harga'			=>$hargaRumah,
-					'booking'		=>$hargaBooking
+					'harga'			=>$hargaStlBooking,
+					'booking'		=>$hargaBooking,
+					'status_jual'		=>'1'
 
 			);
 

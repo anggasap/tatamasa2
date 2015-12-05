@@ -51,11 +51,13 @@ class Master_rumah extends CI_Controller
 		$rows = $this->master_rumah_m->getRumahAll();
 		$data['data'] = array();
 		foreach( $rows as $row ) {
-		  $harga = number_format(trim($row->harga),2);
+		  	$harga = number_format(trim($row->harga),2);
 			$array = array(
 					'id_rumah' => trim($row->id_rumah),
 					'nama_proyek' => trim($row->nama_proyek),
                     'nama_rumah' => trim($row->nama_rumah),
+					'tipe'=>trim($row->tipe),
+					'blok'=>trim($row->blok),
                     'luas' => trim($row->luas),
                     'harga' => $harga				
 			);

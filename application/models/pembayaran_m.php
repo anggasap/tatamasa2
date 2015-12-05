@@ -6,7 +6,7 @@ if (! defined ( 'BASEPATH' ))
 class Pembayaran_m extends CI_Model {
 	public function getRumahAll()
 	{
-		$sql="SELECT r.*,p.nama_proyek,mj.master_id from master_rumah r left join master_proyek p on r.id_proyek = p.id_proyek left join master_jual mj on r.id_rumah = mj.id_rumah where r.status_jual = 2 and mj.status_jual";
+		$sql="SELECT r.*,p.nama_proyek,mj.master_id,mj.harga as harga_deal from master_rumah r left join master_proyek p on r.id_proyek = p.id_proyek left join master_jual mj on r.id_rumah = mj.id_rumah where r.status_jual = 2 and mj.status_jual";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}

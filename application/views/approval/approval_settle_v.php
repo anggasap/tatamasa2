@@ -105,35 +105,13 @@
                             <div class="col-md-4">
 								<div class="form-group">
                                     <label>Id Settlement Of Payment </label>
-                                    <div class="input-group">
-                                        <div class="input-icon">
                                             <input id="id_idSettle" required="required" class="form-control input-sm"
                                                    type="text" name="idSettle" readonly/>
-                                        </div>
-										<span class="input-group-btn">
-											<a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelSettle"
-												id="id_btnModal" data-toggle="modal">
-												<i class="fa fa-search fa-fw"/></i>
-											</a>
-										</span>
-                                    </div>
-                                </div>
+								</div>
                                 <div class="form-group">
-                                <input id="id_kywId" required="required" class="form-control hidden"
-                                                   type="text" name="kywId" readonly/>
-                                    <label>Nama karyawan (Requester) </label>
-                                    <div class="input-group">
-                                        <div class="input-icon">
-                                            <input id="id_namaKyw" required="required" class="form-control input-sm"
+									<label>Nama karyawan (Requester) </label>
+                                        <input id="id_namaKyw" required="required" class="form-control input-sm"
                                                    type="text" name="namaKyw" readonly/>
-                                        </div>
-                                    <span class="input-group-btn">
-                                        <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelKyw"
-                                           id="id_btnModalKyw1" data-toggle="modal">
-                                            <i class="fa fa-search fa-fw"/></i>    
-                                        </a>
-                                    </span>
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Departemen/Bagian</label>
@@ -142,16 +120,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Id Advance </label>
-                                    <div class="input-group">
-                                        <input id="id_idAdvance" required="required" class="form-control input-sm"
-                                               type="text" name="idAdvance" readonly/>
-                                        <span class="input-group-btn">
-                                        <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelAdv"
-                                           id="id_btnModal" data-toggle="modal">
-                                            <i class="fa fa-search fa-fw"/></i>
-                                        </a>
-                                        </span>
-                                    </div>
+                                    <input id="id_idAdvance" required="required" class="form-control input-sm"
+                                               type="text" name="idAdvance" readonly/>        
                                 </div>
                             </div>
                             <!--end <div class="col-md-6"> 1 -->
@@ -164,7 +134,7 @@
                                 <div class="form-group">
                                     <label>Jumlah Pembayaran</label>
                                             <input id="id_paid" required="required" class="form-control input-sm nomor2"
-                                                   type="text" name="paid"/>
+                                                   type="text" name="paid" readonly/>
                                 </div>
                                 <div class="form-group">
                                     <label>Lebih(Kurang) Pembayaran</label>
@@ -174,39 +144,29 @@
                                 <div class="form-group">
                                     <label>Tanggal Jatuh Tempo</label>
                                             <input id="id_tglJT" required="required" class="form-control date-picker input-sm" 
-                                                   type="text" name="tglJT" placeholder="dd-mm-yyyy"/>
+                                                   type="text" name="tglJT" placeholder="dd-mm-yyyy" readonly/>
                                 </div>
                             </div>
                             <div class="col-md-4">
                             	<div class="form-group">
-                                    <input id="id_idPayTo" required="required" class="form-control input-sm hidden"
-                                           type="text" name="payTo" readonly/>
                                     <label>Dibayarkan ke</label>
-                                    <div class="input-group">
                                         <input id="id_namaPayTo" required="required" class="form-control input-sm"
                                                type="text" name="namapayTo" readonly/>
-                                    <span class="input-group-btn">
-                                        <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelKyw"
-                                           id="id_btnModalKyw2" data-toggle="modal">
-                                            <i class="fa fa-search fa-fw"/></i>
-                                        </a>
-                                    </span>
-                                    </div>
                                 </div>
 								<div class="form-group">
                                     <label>Nama pemilik akun bank</label>
                                             <input id="id_namaPemilikAkunBank" required="required" class="form-control input-sm"
-                                                   type="text" name="namaPemilikAkunBank"/>
+                                                   type="text" name="namaPemilikAkunBank" readonly/>
                                 </div>
                                 <div class="form-group">
                                     <label>No akun bank</label>
                                             <input id="id_noAkunBank" required="required" class="form-control input-sm"
-                                                   type="text" name="noAkunBank"/>
+                                                   type="text" name="noAkunBank" readonly/>
                                 </div>
                                 <div class="form-group">
                                     <label>Nama bank</label>
                                             <input id="id_namaBank" required="required" class="form-control input-sm"
-                                                   type="text" name="namaBank"/>
+                                                   type="text" name="namaBank" readonly/>
                                 </div>
                             </div>
                         </div>
@@ -222,7 +182,7 @@
                         	<div class="col-md-6">
                             	<div class="form-group">
                                     <label>Keterangan</label>
-                                    <textarea rows="2" cols="" name="keterangan"  id="id_keterangan" class="form-control input-sm">
+                                    <textarea rows="2" cols="" name="keterangan"  id="id_keterangan" class="form-control input-sm" readonly="true">
                                     </textarea>
                                 </div>
                             </div>
@@ -412,9 +372,9 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group">
-                    <textarea rows="2" cols="" readonly placeholder="Keterangan" name="appGMKet" id="id_appGMKet"
-                              class="form-control input-sm" >
-                    </textarea>
+											<textarea rows="2" cols="" readonly placeholder="Keterangan" name="appGMKet" id="id_appGMKet"
+												class="form-control input-sm" >
+											</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -452,9 +412,9 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group">
-                    <textarea rows="2" cols="" readonly name="appKeuanganKet" id="id_appKeuanganKet"
-                              class="form-control input-sm" placeholder="Keterangan" >
-                    </textarea>
+											<textarea rows="2" cols="" readonly name="appKeuanganKet" id="id_appKeuanganKet"
+											  class="form-control input-sm" placeholder="Keterangan" >
+											</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -490,9 +450,9 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group">
-                    <textarea rows="2" cols="" placeholder="Keterangan" name="appHDKet" id="id_appHDKet"
-                              class="form-control input-sm keterangan" >
-                    </textarea>
+										<textarea rows="2" cols="" placeholder="Keterangan" name="appHDKet" id="id_appHDKet"
+											class="form-control input-sm keterangan" >
+										</textarea>
                                         </div>
                                     </div>
                                 </div>

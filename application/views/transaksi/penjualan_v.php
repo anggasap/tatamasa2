@@ -226,7 +226,12 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-md-5">
+                                                    <label>Harga setelah booking</label>
+                                                    <input id="id_hargaStlBooking" class="form-control nomor input-sm"
+                                                           type="text" name="hargaStlBooking" placeholder="" readonly/>
+                                                </div>
+                                                <div class="col-md-7">
                                                     <label>Keterangan </label>
                                             <textarea rows="2" cols="" name="keterangan" id="id_keterangan"
                                                       class="form-control input-sm" placeholder="" readonly></textarea>
@@ -256,8 +261,8 @@
                                                     <select id="id_tipePembayaran" class="form-control  input-sm"
                                                             name="tipePembayaran">
                                                         <option value="1">Cash keras</option>
-                                                        <option value="2">Cash tempo</option>
-                                                        <option value="3">DP</option>
+                                                        <option value="2">Cash bertahap</option>
+                                                        <option value="3">DP/KPR</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-md-3">
@@ -280,13 +285,19 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Harga jual</label>
-                                                        <input id="id_hargaJual" class="form-control nomor input-sm"
-                                                               type="text" name="hargaJual" placeholder="" readonly/>
+                                                        <label>Harga (DP)</label>
+                                                        <input id="id_hargaJualDP" class="form-control nomor input-sm"
+                                                               type="text" name="hargaJualDP" placeholder="" readonly/>
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Sisa (DP)</label>
+                                                        <input id="id_sisaDP" class="form-control nomor input-sm"
+                                                               type="text" name="sisaDP" placeholder="" readonly/>
 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -294,9 +305,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Harga jual (DP)</label>
-                                                        <input id="id_hargaJualDP" class="form-control nomor input-sm"
-                                                               type="text" name="hargaJualDP" placeholder="" readonly/>
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -311,7 +320,7 @@
                         </div>
                         <div class="tab-pane fade" id="tab_2_3">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <div class="form-body">
                                         <table class="table table-striped table-hover table-bordered"
                                                id="id_tabelJadwalBayar">
@@ -798,7 +807,7 @@
     btnStart();
     readyToStart();
     tglTransStart();
-    $("#id_namaProyek").focus();
+    $("#id_rumah").focus();
 
     /*$("#navitab_2_1").click(function () {
         $('#idTmpAksiTab').val('1');
@@ -816,6 +825,7 @@
         readyToStart();
         tglTransStart();
         $('#id_body_data').empty();
+        $('#id_btnModalCust').attr('disabled', false);
     });
     function getDescRumah(idRumah) {
         ajaxModal();
@@ -833,7 +843,7 @@
                         $('#id_luasRumah').val(data.luas);
                         $('#id_hargaRumah').val(data.harga);
                         $('#id_statusJual').val(data.status_jual);
-                        hitungHargaJual();
+                        hitungHargaStlBooking();
                     } else {
                         alert('Data tidak ditemukan!');
                         $('#id_btnBatal').trigger('click');
@@ -868,7 +878,7 @@
                         $('#id_noHp').val(data.no_hp);
                         $('#id_noTelp').val(data.no_telp);
                         $('#id_btnModalCust').attr('disabled', true);
-                        hitungHargaJual();
+                        hitungHargaStlBooking();
                     } else {
                         alert('Data tidak ditemukan!');
                         $('#id_btnBatal').trigger('click');
@@ -940,7 +950,7 @@
         var tglRealisasi = $('#id_tgltrans').val();
         //cash keras
         if (tipePembayaran == '1') {
-            var hargaJual = $('#id_hargaJual').val();
+            var hargaJual = $('#id_hargaStlBooking').val();
 
             tr = '<tr class="listdata" id="tr' + i + '">';
             tr += '<td><input type="text" class="form-control input-sm" id="id_tempNo' + i + '" name="tempNo' + i + '" readonly="true" value="' + i + '"></td>';
@@ -951,7 +961,7 @@
             // cash tempo
         } else if (tipePembayaran == '2') {
 
-            var hargaJual = $('#id_hargaJual').val();
+            var hargaJual = $('#id_hargaStlBooking').val();
             var total = 0;
             var jmlAngs = $('#id_jmlBayarKali').val();
             hargaJual = parseFloat(CleanNumber(hargaJual));
@@ -975,8 +985,10 @@
                 if (hari < 10) {
                     hari = '0' + hari
                 }
-                if (bulan < 10) {
+                if (bulan < 10 && bulan >0) {
                     bulan = '0' + bulan
+                }else if(bulan == 0){
+                    bulan = '12';
                 }
                 tglJadwalString = hari + '-' + bulan + '-' + tahun;
 
@@ -1005,7 +1017,7 @@
             }
 
         } else if (tipePembayaran == '3') {
-            var hargaJual = $('#id_hargaJualDP').val();
+            var hargaJual = $('#id_sisaDP').val();
             var total = 0;
             var jmlAngs = $('#id_jmlBayarKali').val();
             hargaJual = parseFloat(CleanNumber(hargaJual));
@@ -1025,12 +1037,14 @@
                 var hari = tglJadwal.getDate();
                 var bulan = tglJadwal.getMonth();
                 var tahun = tglJadwal.getFullYear();
-
+                //alert(bulan);
                 if (hari < 10) {
                     hari = '0' + hari
                 }
-                if (bulan < 10) {
+                if (bulan < 10 && bulan >0) {
                     bulan = '0' + bulan
+                }else if(bulan == 0){
+                    bulan = '12';
                 }
                 tglJadwalString = hari + '-' + bulan + '-' + tahun;
 
@@ -1062,23 +1076,25 @@
             $('#id_tipePembayaran').focus();
         }
     });
-    function hitungHargaJual() {
+    function hitungHargaStlBooking() {
         var hargaAwal = $('#id_hargaRumah').val();
         hargaAwal = parseFloat(CleanNumber(hargaAwal));
         var hargaBooking = $('#id_hargaBooking').val();
         hargaBooking = parseFloat(CleanNumber(hargaBooking));
-        var hargaJual = hargaAwal - hargaBooking
-        $('#id_hargaJual').val(number_format(hargaJual, 2));
+        var hargaStlBooking = hargaAwal - hargaBooking
+        $('#id_hargaStlBooking').val(number_format(hargaStlBooking, 2));
     }
     function hitungHargaJualDP() {
         var hargaAwal = $('#id_hargaRumah').val();
         hargaAwal = parseFloat(CleanNumber(hargaAwal));
         var hargaBooking = $('#id_hargaBooking').val();
         hargaBooking = parseFloat(CleanNumber(hargaBooking));
-        var hargaJual = hargaAwal - hargaBooking
+        //var hargaJual = hargaAwal - hargaBooking
         var dp = $('#id_DPPersen').val();
-        dp = Math.round(parseFloat(CleanNumber(dp)) / 100 * hargaJual);
+        dp = Math.round(parseFloat(CleanNumber(dp)) / 100 * hargaAwal);
+        var sisadp = dp - hargaBooking;
         $('#id_hargaJualDP').val(number_format(dp, 2));
+        $('#id_sisaDP').val(number_format(sisadp, 2));
     }
 
     $("#id_tipePembayaran").change(function () {
@@ -1089,14 +1105,15 @@
             $('#id_jmlBayarKali').val('0');
             $('#id_DPPersen').val('0');
             $('#id_hargaJualDP').val('0.00');
-            hitungHargaJual();
+            $('#id_sisaDP').val('0.00');
+            hitungHargaStlBooking();
         } else if (tipe == '2') {
             $('#id_jmlBayarKali').attr('readonly', false);
             $('#id_DPPersen').attr('readonly', true);
             $('#id_DPPersen').val('0');
-
             $('#id_hargaJualDP').val('0.00');
-            hitungHargaJual();
+            $('#id_sisaDP').val('0.00');
+            hitungHargaStlBooking();
         } else if (tipe == '3') {
             $('#id_jmlBayarKali').attr('readonly', false);
             $('#id_DPPersen').attr('readonly', false);

@@ -64,6 +64,22 @@ class Master_settle_adv extends CI_Controller
 		}
 		$this->output->set_output(json_encode($data));
 	}
+	function getDescCpa()
+    {
+        $this->CI =& get_instance();
+        $idSettle = $this->input->post('idSettle', TRUE);
+        $crows = $this->master_settle_adv_m->getCDescCpa($idSettle);
+        if ($crows <= 0) {
+            $array = array('baris' => 0);
+            $rows['data_cpa'] = $array;
+            $this->output->set_output(json_encode($rows));
+        } else {
+            $rows = $this->master_settle_adv_m->getDescCpa($idSettle);
+            $this->output->set_output(json_encode($rows));
+        }
+
+
+    }
 	function getDescSettle(){
 		$this->CI =& get_instance();
 		$idSettle = $this->input->post('idSettle',TRUE);
@@ -160,11 +176,14 @@ class Master_settle_adv extends CI_Controller
 						'paidou'				=> $jml_uang_oupaid,
 						'tgl_jt' 				=> $tgl_jt,
 						'id_pay_to'				=> $row->pay_to,
+						'id_proyek'				=> $row->id_proyek,
 						'pay_to' 				=> $nama_pay_to,
 						'nama_akun_bank' 		=> $row->nama_akun_bank,
 						'no_akun_bank' 			=> $row->no_akun_bank,
+						'tgl_trans'				=> $row->tgl_trans,
 						'nama_bank' 			=> $row->nama_bank,
 						'keterangan' 			=> $row->keterangan,
+						'ketadv'				=> $row->ketadv,
 						'dok_fpe'		        => $row->dok_fpe,
 						'dok_kuitansi'		    => $row->dok_kuitansi,
 						'dok_fpa'		        => $row->dok_fpa,
@@ -247,67 +266,67 @@ class Master_settle_adv extends CI_Controller
         	'dok_lpjum'		        	=>trim($this->input->post('dokLPJUM_in'))
         );
         $model = $this->master_settle_adv_m->insertSettle($data);
+		
 		$totJurnal = trim($this->input->post('txtTempLoop'));
-		if ($totJurnal > 0) {
-			for ($i = 1; $i <= $totJurnal; $i++) {
-				$tKode 	    = 'tempKode' . $i;
-				$tJnsKode   = 'tempJenisKode'.$i;
-				$tJumlah 	= 'tempJumlah' . $i;
-				$tKet 		= 'tempKet' . $i;
+        if ($totJurnal > 0) {
+            for ($i = 1; $i <= $totJurnal; $i++) {
+                $tKode 	    = 'tempKode' . $i;
+                $tJnsKode   = 'tempJenisKode'.$i;
+                $tJumlah 	= 'tempJumlah' . $i;
+                $tKet 		= 'tempKet' . $i;
 
-				$tmpJnsKode 	    = trim($this->input->post($tJnsKode));
-				$tmpKode 	    = trim($this->input->post($tKode));
-				$tmpJumlah 		= str_replace(',', '', trim($this->input->post($tJumlah)));
-				$tmpKet 		= trim($this->input->post($tKet));
-				if($tmpJnsKode == '1'){
-					$TotalP 		= $this->master_settle_adv_m->get_terpakai_perk($tmpKode);
-					$data = array(
-							'id_cpa' => 0,
-							'id_master' 	=> $modelidSettle,
-							'kode_perk' 	=> $tmpKode,
-							'keterangan' 	=> $tmpKet,
-							'jumlah' 		=> $tmpJumlah
+                $tmpJnsKode 	    = trim($this->input->post($tJnsKode));
+                $tmpKode 	    = trim($this->input->post($tKode));
+                $tmpJumlah 		= str_replace(',', '', trim($this->input->post($tJumlah)));
+                $tmpKet 		= trim($this->input->post($tKet));
+                if($tmpJnsKode == '1'){
+                    $TotalP 		= $this->master_settle_adv_m->get_terpakai_perk($tmpKode);
+                    $data = array(
+                        'id_cpa' => 0,
+                        'id_master' 	=> $modelidSettle,
+                        'kode_perk' 	=> $tmpKode,
+                        'keterangan' 	=> $tmpKet,
+                        'jumlah' 		=> $tmpJumlah
 
-					);
-					$query = $this->master_settle_adv_m->insertCpaP($data);
-					$totalCperk = $TotalP + $tmpJumlah;
-					$dataTerpakaiPerk  = array(
-							'terpakai' => $totalCperk
-					);
-					$query = $this->master_settle_adv_m->updateBudgetKdPerkTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiPerk);
-					$query = $this->master_settle_adv_m->updateBudgetKdPerkSaldo($tmpKode,$tahun,$idProyek);
-				}else{
-					$TotalC 		= $this->master_settle_adv_m->get_terpakai_cflow($tmpKode);
-					$data = array(
-							'id_cpa' => 0,
-							'id_master' 	=> $modelidSettle,
-							'kode_cflow' 	=> $tmpKode,
-							'keterangan' 	=> $tmpKet,
-							'jumlah' 		=> $tmpJumlah
+                    );
+                    $query = $this->master_settle_adv_m->insertCpaP($data);
+                    $totalCperk = $TotalP + $tmpJumlah;
+                    $dataTerpakaiPerk  = array(
+                        'terpakai' => $totalCperk
+                    );
+                    $query = $this->master_settle_adv_m->updateBudgetKdPerkTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiPerk);
+                    $query = $this->master_settle_adv_m->updateBudgetKdPerkSaldo($tmpKode,$tahun,$idProyek);
+                }else{
+                    $TotalC 		= $this->master_settle_adv_m->get_terpakai_cflow($tmpKode);
+                    $data = array(
+                        'id_cpa' => 0,
+                        'id_master' 	=> $modelidSettle,
+                        'kode_cflow' 	=> $tmpKode,
+                        'keterangan' 	=> $tmpKet,
+                        'jumlah' 		=> $tmpJumlah
 
-					);
-					$query = $this->master_settle_adv_m->insertCpaC($data);
-					$totalCflow = $TotalC + $tmpJumlah;
-					$dataTerpakaiCflow  = array(
-							'terpakai' => $totalCflow
-					);
-					$query = $this->master_settle_adv_m->updateBudgetCflowTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiCflow);
-					$query = $this->master_settle_adv_m->updateBudgetCflowSaldo($tmpKode,$tahun,$idProyek);
+                    );
+                    $query = $this->master_settle_adv_m->insertCpaC($data);
+                    $totalCflow = $TotalC + $tmpJumlah;
+                    $dataTerpakaiCflow  = array(
+                        'terpakai' => $totalCflow
+                    );
+                    $query = $this->master_settle_adv_m->updateBudgetCflowTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiCflow);
+                    $query = $this->master_settle_adv_m->updateBudgetCflowSaldo($tmpKode,$tahun,$idProyek);
 
-					$tmpKodeCflow 	= trim($this->input->post($tKode));
-					$TotalC 		= $this->master_advance_m->get_saldo_cflow($tmpKodeCflow);
-					$total 			= $TotalC - $totalCflow;
-					$data = array(
-							'inout_budget' => '1'
-					);
-					if ($total <= 0){
-						$model 			= $this->master_advance_m->updateAdv($data, $modelidSettle);
-					}
-				}
-
-			}
-
-		}
+                    $tmpKodeCflow 	= trim($this->input->post($tKode));
+                    $TotalC 		= $this->master_settle_adv_m->get_saldo_cflow($tmpKodeCflow);
+                    $total 			= $TotalC - $totalCflow;
+                    $data = array(
+                        'inout_budget' => '1'
+                    );
+                    if ($total <= 0){
+                        $model 			= $this->master_settle_adv_m->updateSettle($data, $modelidSettle);
+                        //$this->master_settle_adv_m->updateSettle($data, $idSettle);
+                    }
+                }
+            }
+        }
 
 		if ($model) {
 			$array = array(
@@ -326,7 +345,8 @@ class Master_settle_adv extends CI_Controller
     }
     function ubah(){
     	$idSettle				= trim($this->input->post('idSettle'));
-    	$idKyw					= trim($this->input->post('kywId'));
+    	$idKyw					= trim($this->input->post('idKyw'));
+		$idProyek				= trim($this->input->post('proyek'));
         $idAdvance				= trim($this->input->post('idAdvance'));
         $paid					= str_replace(',', '', trim($this->input->post('paid')));
         $uangPaidou				= str_replace(',', '', trim($this->input->post('uangPaidou')));
@@ -338,6 +358,9 @@ class Master_settle_adv extends CI_Controller
         $namaBank				= trim($this->input->post('namaBank'));
         $ket					= trim($this->input->post('keterangan'));
 		$tglTrans 				= $this->session->userdata('tgl_y');
+		
+		$bulan = date('m', strtotime($tglTrans));//$tglTrans->format("m");
+        $tahun = date('Y', strtotime($tglTrans));
 		
 		$sld = str_replace('.00','',trim($this->input->post('advAmount')));
 		$slda = str_replace(',','', $sld);
@@ -371,18 +394,83 @@ class Master_settle_adv extends CI_Controller
         );
     	
     	$model = $this->master_settle_adv_m->updateSettle($data,$idSettle);
-    	if($model){
+    	
+		$this->master_settle_adv_m->deleteCpa($idSettle);
+        $totJurnal = trim($this->input->post('txtTempLoop'));
+        if ($totJurnal > 0) {
+            for ($i = 1; $i <= $totJurnal; $i++) {
+                $tKode 	    = 'tempKode' . $i;
+                $tJnsKode   = 'tempJenisKode'.$i;
+                $tJumlah 	= 'tempJumlah' . $i;
+                $tKet 		= 'tempKet' . $i;
+
+                $tmpJnsKode 	= trim($this->input->post($tJnsKode));
+                $tmpKode 	    = trim($this->input->post($tKode));
+                $tmpjml			= str_replace(',', '', trim($this->input->post($tJumlah)));
+				$tmpJumlah 		= str_replace('.00', '', $tmpjml);
+                $tmpKet 		= trim($this->input->post($tKet));
+                if($tmpJnsKode == '1'){
+                    $TotalP 		= $this->master_settle_adv_m->get_terpakai_perk($tmpKode);
+                    $data = array(
+                        'id_master' 	=> $idSettle,
+                        'kode_perk' 	=> $tmpKode,
+                        'keterangan' 	=> $tmpKet,
+                        'jumlah' 		=> $tmpJumlah
+                    );
+                    $query1 = $this->master_settle_adv_m->insertCpaP($data);
+                    $totalCperk = $TotalP + $tmpJumlah;
+                    $dataTerpakaiPerk  = array(
+                        'terpakai' => $totalCperk
+                    );
+                    $query2 = $this->master_settle_adv_m->updateBudgetKdPerkTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiPerk);
+                    $query3 = $this->master_settle_adv_m->updateBudgetKdPerkSaldo($tmpKode,$tahun,$idProyek);
+                }else{
+                    $TotalC 		= $this->master_settle_adv_m->get_terpakai_cflow($tmpKode);
+                    $data = array(
+                        'id_master' 	=> $idSettle,
+                        'kode_cflow' 	=> $tmpKode,
+                        'keterangan' 	=> $tmpKet,
+                        'jumlah' 		=> $tmpJumlah
+
+                    );
+                    $query4 = $this->master_settle_adv_m->insertCpaC($data);
+                    $totalCflow = $TotalC + $tmpJumlah;
+                    $dataTerpakaiCflow  = array(
+                        'terpakai' => $totalCflow
+                    );
+                    $query5 = $this->master_settle_adv_m->updateBudgetCflowTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiCflow);
+                    $query6 = $this->master_settle_adv_m->updateBudgetCflowSaldo($tmpKode,$tahun,$idProyek);
+
+                    $tmpKodeCflow 	= trim($this->input->post($tKode));
+                    $TotalC 		= $this->master_settle_adv_m->get_saldo_cflow($tmpKodeCflow);
+                    $total 			= $TotalC - $totalCflow;
+                    $data = array(
+                        'inout_budget' => '1'
+                    );
+                    if ($total <= 0){
+                        $query7 			= $this->master_settle_adv_m->updateSettle($data, $idSettle);
+                    }
+                }
+            }
+
+        } else {
+            $query = $this->master_settle_adv_m->deleteCpa($idSettle);
+        }
+		
+		if($model){
     		$array = array(
     				'act'	=>1,
-    				'notif' =>'<div class="Metronic-alerts alert alert-success fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Data berhasil diubah.</div>'
+    				'tipePesan'=>'success',
+					'pesan' =>'Data berhasil di Ubah.'
     		);
     	}else{
     		$array = array(
     				'act'	=>0,
-    				'notif' =>'<div class="Metronic-alerts alert alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Data gagal diubah.</div>'
+    				'tipePesan'=>'error',
+					'pesan' =>'Data Gagal di Ubah.'
     		);
     	}
-    	$this->output->set_output(json_encode($array));
+		$this->output->set_output(json_encode($array));
     }
     function hapus(){
     	$this->CI =& get_instance();
@@ -432,6 +520,16 @@ class Master_settle_adv extends CI_Controller
         } else {
             $data['settle'] = $this->master_settle_adv_m->getDescSettle($idSettle);
             $this->load->view('cetak/cetak_settlement', $data);
+        }
+    }
+	function cetak_cpa($idSettle)
+    {
+        if($this->auth->is_logged_in() == false){
+            redirect('main/index');
+        }else{
+            $data['settle'] = $this->master_settle_adv_m->cetak_cpa($idSettle);
+            $data['detail'] = $this->master_settle_adv_m->cetak_cpa_detail($idSettle);
+            $this->load->view('cetak/cetak_cpa_settle', $data);
         }
     }
 }

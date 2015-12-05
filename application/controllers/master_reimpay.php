@@ -526,7 +526,7 @@ class Master_reimpay extends CI_Controller
         }else{
             $data['advance'] = $this->master_reimpay_m->cetak_cpa($idReimPay);
             $data['detail'] = $this->master_reimpay_m->cetak_cpa_detail($idReimPay);
-            $this->load->view('cetak/cetak_cpa', $data);
+            $this->load->view('cetak/cetak_cpa_reimpay', $data);
         }
     }
 }

@@ -3,7 +3,7 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-class Master_advance_m extends CI_Model {
+class Kasir_m extends CI_Model {
 	public function getProyek() {
 		$rows 		=	array(); //will hold all results
 		$sql		=	"select * from master_proyek order by id_proyek asc ";
@@ -46,57 +46,73 @@ class Master_advance_m extends CI_Model {
 			return false;
 		}	
 	}
-	public function getDescAdv($idAdv)
+	/*public function getDescAdv($idAdv)
 	{
-		$this->db->select('ma.id_kyw, mk.nama_kyw, md.nama_dept, ma.jml_uang, ma.id_proyek, ma.id_kurs, ma.nilai_kurs, ma.tgl_trans,
-		ma.tgl_jt, ma.pay_to, ma.nama_akun_bank, ma.no_akun_bank, ma.nama_bank, ma.keterangan, ma.dok_po, ma.dok_sp, ma.dok_ssp, ma.dok_sspk,
-		ma.dok_sbj, ma.app_keuangan_id, ma.app_hd_id, ma.app_gm_id, ma.app_keuangan_status, ma.app_hd_status, ma.app_gm_status,
-		ma.app_keuangan_tgl, ma.app_hd_tgl, ma.app_gm_tgl, ma.app_keuangan_ket, ma.app_hd_ket,ma.app_user_id, ma.app_gm_ket,ma.inout_budget');
+		$this->db->select ( 'ma.id_kyw, mk.nama_kyw, md.nama_dept, ma.jml_uang, ma.id_proyek, ma.id_kurs, ma.nilai_kurs, ma.tgl_trans, ma.tgl_jt, ma.pay_to, ma.nama_akun_bank, ma.no_akun_bank, ma.nama_bank, ma.keterangan, ma.dok_po, ma.dok_sp, ma.dok_ssp, ma.dok_sspk, ma.dok_sbj, ma.app_keuangan_id, ma.app_hd_id, ma.app_gm_id, ma.app_keuangan_status, ma.app_hd_status, ma.app_gm_status, ma.app_keuangan_tgl, ma.app_hd_tgl, ma.app_gm_tgl, ma.app_keuangan_ket, ma.app_hd_ket,ma.app_user_id, ma.app_gm_ket' );
 		$this->db->from('master_advance ma');
 		$this->db->join('master_karyawan mk', 'ma.id_kyw=mk.id_kyw', 'LEFT');
 		$this->db->join('master_dept md', 'mk.dept_kyw=md.id_dept', 'LEFT');
 		$this->db->where ( 'ma.id_advance', $idAdv );
-		$query = $this->db->get();
+//		$this->db->where ( 'T.STATUS_AKTIF <>', 3 );
+		$query = $this->db->get ();
 		if($query->num_rows()== '1'){
-			return $query->result();
+			return $query->result ();
+		}else{
+			return false;
+		}	
+	}*/
+	public function getDescAdv($idAdv)
+	{
+		$this->db->select ( 'ma.id_kyw, mk.nama_kyw, md.nama_dept, ma.jml_uang, ma.id_proyek, ma.id_kurs, ma.nilai_kurs, ma.tgl_trans,
+		ma.tgl_jt, ma.pay_to, ma.nama_akun_bank, ma.no_akun_bank, ma.nama_bank, ma.keterangan, ma.dok_po, ma.dok_sp, ma.dok_ssp, ma.dok_sspk,
+		ma.dok_sbj, ma.app_keuangan_id, ma.app_hd_id, ma.app_gm_id, ma.app_keuangan_status, ma.app_hd_status, ma.app_gm_status,
+		ma.app_keuangan_tgl, ma.app_hd_tgl, ma.app_gm_tgl, ma.app_keuangan_ket, ma.app_hd_ket,ma.app_user_id, ma.app_gm_ket,ma.inout_budget' );
+		$this->db->from('master_advance ma');
+		$this->db->join('master_karyawan mk', 'ma.id_kyw=mk.id_kyw', 'LEFT');
+		$this->db->join('master_dept md', 'mk.dept_kyw=md.id_dept', 'LEFT');
+		$this->db->where ( 'ma.id_advance', $idAdv );
+//		$this->db->where ( 'T.STATUS_AKTIF <>', 3 );
+		$query = $this->db->get ();
+		if($query->num_rows()== '1'){
+			return $query->result ();
 		}else{
 			return false;
 		}
 	}
 	public function getPayTo($idKyw){
-		$this->db->select('nama_kyw');
+		$this->db->select ( 'nama_kyw' );
 		$this->db->from('master_karyawan');
-		$this->db->where('id_kyw',$idKyw);
-		$query = $this->db->get();
+		$this->db->where ( 'id_kyw', $idKyw);
+//
+		$query = $this->db->get ();
 		return $query->result();
 	}
     public function getCDescCpa($idAdv)
 	{
-		/*$this->db->select('id_cpa,id_master,kode_perk,kode_cflow,keterangan,jumlah');
+		$this->db->select ( 'id_cpa,id_master,kode_perk,kode_cflow,keterangan,jumlah' );
 		$this->db->from('cpa');
-		$this->db->where('id_master',$idAdv);
-		$query = $this->db->get();*/
-		$sql= "select * from cpa_perk where id_master = '$idAdv' union select * from cpa_cflow where id_master = '$idAdv' ";
-		$query = $this->db->query($sql);
+		$this->db->where ( 'id_master', $idAdv );
+//		
+		$query = $this->db->get ();
 		return $query->num_rows();	
-	}    
+	}
+    
     public function getDescCpa($idAdv)
 	{
-		$sql= "select kode_perk as kode,1 as jns_kode, keterangan,jumlah from cpa_perk where id_master = '$idAdv' 
-				union select kode_cflow as kode,2 as jns_kode, keterangan,jumlah  from cpa_cflow where id_master = '$idAdv' ";
-		$query = $this->db->query($sql);
+		$this->db->select ( 'id_cpa,id_master,kode_perk,kode_cflow,keterangan,jumlah' );
+		$this->db->from('cpa');
+		$this->db->where ( 'id_master', $idAdv );
+//		$this->db->where ( 'T.STATUS_AKTIF <>', 3 );
+		$query = $this->db->get ();
+		
         $rows['data_cpa'] = $query->result();
 		return $rows;
         	
 	}
     function deleteCpa($IdAdv){
-		$this->db->trans_start();
-		$this->db->query("delete from cpa_perk where id_master ='$IdAdv'");
-		$this->db->query("delete from cpa_cflow where id_master ='$IdAdv'");
-		$this->db->trans_complete();
-		/*$this->db->trans_begin();
+		$this->db->trans_begin();
 		$query1	=	$this->db->where('id_master',$IdAdv);
-		$query2	=   $this->db->delete('cpa_perk');
+		$query2	=   $this->db->delete('cpa');
 		if ($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
 			return false;
@@ -104,9 +120,10 @@ class Master_advance_m extends CI_Model {
 		else{
 			$this->db->trans_commit();
 			return true;
-		}*/
-	}    
-	function getIdAdv($bulan,$tahun){
+		}
+	}
+    
+	public function getIdAdv($bulan,$tahun){
 		$sql= "select id_advance from master_advance where MONTH(tgl_trans)='$bulan' and YEAR(tgl_trans)='$tahun'";
 		$query = $this->db->query($sql);
 		$jml = $query->num_rows();
@@ -124,7 +141,8 @@ class Master_advance_m extends CI_Model {
 			return $kode."-".$id_adv."-".$bulan.$th;
 		}
 	}
-	function insertAdv($data){	
+	public function insertAdv($data){
+		
 		$this->db->trans_begin();
 		$model = $this->db->insert('master_advance', $data);
 		if ($this->db->trans_status() === FALSE){
@@ -135,10 +153,11 @@ class Master_advance_m extends CI_Model {
 			$this->db->trans_commit();
 			return true;
 		}
+	
 	}
-    function insertCpaP($data){
+    function insertCpa($data){
         $this->db->trans_begin();
-		$model = $this->db->insert('cpa_perk', $data);
+		$model = $this->db->insert('cpa', $data);
 		if ($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
 			return false;
@@ -148,18 +167,6 @@ class Master_advance_m extends CI_Model {
 			return true;
 		}
     }
-	function insertCpaC($data){
-		$this->db->trans_begin();
-		$model = $this->db->insert('cpa_cflow', $data);
-		if ($this->db->trans_status() === FALSE){
-			$this->db->trans_rollback();
-			return false;
-		}
-		else{
-			$this->db->trans_commit();
-			return true;
-		}
-	}
 	function updateBudgetCflowTerpakai($tmpKodeCflow,$tahun,$idProyek,$data){
 		$this->db->trans_begin();
 		$query1 = $this->db->where('kode_cflow', $tmpKodeCflow);
@@ -243,7 +250,6 @@ class Master_advance_m extends CI_Model {
 	}
     function cetak_cpa($idAdv){
 		$sql="select a.*,b.nama_proyek,c.nama_kyw,d.nama_dept, 
-			(select e.nama_kyw from master_karyawan e where e.id_kyw = a.pay_to) as pay,
 			(select e.nama_kyw from master_karyawan e where e.id_kyw = a.app_keuangan_id) as financeName,
 			(select e.nama_kyw from master_karyawan e where e.id_kyw = a.app_hd_id) as hdName,
 			(select e.nama_kyw from master_karyawan e where e.id_kyw = a.app_gm_id) as gmName,
@@ -277,9 +283,10 @@ class Master_advance_m extends CI_Model {
 		$sql ="select ";
 	}*/
 	function cetak_cpa_detail($idAdv){
-		$sql=" select a.*, b.*, c.terpakai,c.saldo,(c.jan+c.feb+c.mar+c.apr+c.mei+c.jun+c.jul+c.agu+c.sep+c.okt+c.nov+c.des) as anggaran 
-				from cpa_cflow a left join master_cashflow b on a.kode_cflow = b.kode_cflow
-				left join budget_cflow c on a.kode_cflow = c.kode_cflow where a.id_master = '".$idAdv."'";
+		$sql="select a.*,b.nama_cflow, c.tahun,c.id_proyek,c.kode_cflow,
+			  (c.jan+c.feb+c.mar+c.apr+c.mei+c.jun+c.jul+c.agu+c.sep+c.okt+c.nov+c.des) as anggaran,c.terpakai,c.saldo from cpa a
+			  left join master_cashflow b on a.kode_cflow=b.kode_cflow
+			  left join budget_cflow c on a.kode_cflow=c.kode_cflow where a.id_master = '".$idAdv."'";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}

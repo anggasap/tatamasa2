@@ -1,12 +1,7 @@
 <!-- BEGIN PAGE BREADCRUMB -->
-<style type="text/css">
-table#idTabelRumah td:nth-child(4) {
-  text-align: right;
-}
-table#idTabelRumah td:nth-child(5) {
-  text-align: right;
-}
-</style>
+<!--
+
+-->
 <!-- END PAGE BREADCRUMB -->
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
@@ -17,7 +12,7 @@ table#idTabelRumah td:nth-child(5) {
             <div class="portlet-title">
                 <div class="caption">
                     <i class="fa fa-cogs  font-red-sunglo"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase">Data Rumah</span>
+                    <span class="caption-subject font-red-sunglo bold uppercase">Data Jenis Pembayaran</span>
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -32,100 +27,81 @@ table#idTabelRumah td:nth-child(5) {
                     
                     </span>
                 </div>
-                <form role="form" method="post" class="cls_from_rumah"
-                      action="<?php echo base_url('master_rumah/home'); ?>" id="id_formRumah">
+                <form role="form" method="post" class="cls_from_jnsbyr"
+                      action="<?php echo base_url('master_jnsbayar/home'); ?>" id="id_formJnsByr">
                     <div class="row">
 
                         <div class="form-body">
                             <div class="col-md-12">
 								<div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Id rumah </label>
+    									<div class="col-md-6">
+                                            <label>Kode pembayaran </label>
                                             <div class="input-group">
-                                                    <input id="id_rumahId" required="required" class="form-control input-sm"
-                                                   type="text" name="rumahId" readonly/>
+                                                <div class="input-icon">
+                                                    <i class="fa fa-list fa-fw"></i>
+                                                    <input id="id_jnsbyrId" required="required" class="form-control"
+                                                   type="text" name="jnsbyrId" readonly/>
+                                                </div>
                                                 <span class="input-group-btn">
-                                                    <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelRumah"
-                                                    id="id_btnModalRmh" data-toggle="modal">
-                                                    <i class="fa fa-search fa-fw"/></i> 
-                                                    </a>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>Status jual</label>
-                                            <select id="id_statusJual" class="form-control  input-sm"
-                                                    name="statusJual" disabled >
-                                                <option value="0">Available</option>
-                                                <option value="1">Booked</option>
-                                                <option value="2">Terjual</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Id proyek </label>
-                                            <div class="input-group">
-                                                    <input id="id_proyekId" required="required" class="form-control input-sm"
-                                                   type="text" name="proyekId" readonly/>
-                                                <span class="input-group-btn">
-                                                    <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelProyek"
-                                                    id="id_btnModalProyek" data-toggle="modal">
+                                                    <a href="#" class="btn btn-success" data-target="#idDivTabelJnsbyr"
+                                                    id="id_btnModal" data-toggle="modal">
                                                     <i class="fa fa-search fa-fw"/></i>
                                                     </a>
                                                 </span>
                                             </div>
                                         </div>
+                                    </div>    
+                                    
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label>Nama pembayaran</label>
+                                        
+                                            <input id="id_namaJnsbyr" required="required" class="form-control"
+                                                   type="text" name="namaJnsbyr"/>
+                                        
+                                </div>
+                                <div class="form-group">
+                                    <label>No rek bank</label>
+                                    <input id="id_norekBank" required="required" class="form-control"
+                                                   type="text" name="norekBank"/>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+    									<div class="col-md-6">
+                                            <label>No rek GL</label>
+                                            <div class="input-group">
+                                                <div class="input-icon">
+                                                    <i class="fa fa-list fa-fw"></i>
+                                                    <input id="id_GL" required="required" class="form-control "
+                                                   type="text" name="GL" readonly/>
+                                                </div>
+                                                <span class="input-group-btn">
+                                                    <a href="#" class="btn btn-success" data-target="#idDivTabelPerk"
+                                           id="id_btnModal" data-toggle="modal">
+                                                    <i class="fa fa-search fa-fw"/></i>
+                                           
+                                                    </a>
+                                                </span>
+                                            </div>
+                                        </div>
                                         <div class="col-md-6">
-                                            <label>Nama proyek</label>
-                                                    <input id="id_namaProyek" required="required" class="form-control  input-sm"
-                                                   type="text" name="namaProyek" readonly/>
                                         </div>
-                                    </div>
+                                    </div>    
                                 </div>
-                                <div class="form-group">
-                                    <label>Nama rumah</label>
-                                            <input id="id_namaRumah" required="required" class="form-control  input-sm"
-                                                   type="text" name="namaRumah"/>
+                                <div class="form-group">    
+                                            <input id="id_namaGL" readonly class="form-control"
+                                                   type="text" name="namaGL"/>
                                 </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label>Type</label>
-                                            <input id="id_typeRumah" required="required" class="form-control input-sm"
-                                                   type="text" name="typeRumah"/>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <label>Blok</label>
-                                            <input id="id_blokRumah" required="required" class="form-control input-sm"
-                                                   type="text" name="blokRumah"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label>Luas tanah</label>
-                                                    <input id="id_luasRumah" required="required" class="form-control nomor input-sm"
-                                                   type="text" name="luasRumah"/>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <label>Harga</label>
-                                                <input id="id_hargaRumah" required="required" class="form-control nomor input-sm"
-                                                   type="text" name="hargaRumah"/>
-                                        </div>
-                                    </div>
-                                </div>                               
+                                                                
                             </div>
                             <!--end <div class="col-md-6"> 1 -->
                             <!--
-                            <div class="col-md-6">
+<div class="col-md-6">
                                 
                             </div>
-                            -->
+-->
                         </div>
 						<!-- HIDDEN INPUT -->
 						<input type="text" id="idTmpAksiBtn" class="hidden">
@@ -147,7 +123,7 @@ table#idTabelRumah td:nth-child(5) {
                                     <!--<i class="fa fa-trash"></i>-->
                                     Hapus
                                 </button>
-                                <button id="id_btnBatal" type="button" class="btn default">Batal</button>
+                                <button id="id_btnBatal" type="reset" class="btn default">Batal</button>
                             </div>
                         </div>
 
@@ -172,47 +148,38 @@ table#idTabelRumah td:nth-child(5) {
 
 <!-- END PAGE CONTENT-->
 <!--  MODAL Data Karyawan -->
-<div class="modal fade draggable-modal" id="idDivTabelRumah" tabindex="-1" role="basic" aria-hidden="true">
+<div class="modal fade draggable-modal" id="idDivTabelJnsbyr" tabindex="-1" role="basic" aria-hidden="true">
 	<div class="modal-dialog  modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title">Data Rumah</h4>
+				<h4 class="modal-title">Data Account Advance</h4>
 			</div>
 			<div class="modal-body">
                     <div class="scroller" style="height:400px; ">
                         <div class="row">
                             <div class="col-md-12">
-                                <button id="id_ReloadRumah" style="display: none;"></button>
+                                <button id="id_Reload" style="display: none;"></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-body">
-                                    <table class="table table-striped table-bordered table-hover text_kanan" id="idTabelRumah">
+                                    <table class="table table-striped table-bordered table-hover text_kanan" id="idTabelJnsbyr">
                                         <thead>
                                         <tr>
                                             <th>
-                                                Id Rumah
+                                                Kode pemb
                                             </th>
                                             <th>
-                                                Nama Proyek
+                                                Nama pemb
                                             </th> 
                                             <th>
-                                                Nama Rumah
+                                                No Rek Bank
                                             </th>
                                             <th>
-                                                Blok
-                                            </th>
-                                            <th>
-                                                Tipe
-                                            </th>
-                                            <th>
-                                                Luas Tanah
-                                            </th>
-                                            <th>
-                                                Harga
-                                            </th>                                        
+                                                Kode GL
+                                            </th>                                           
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -234,7 +201,7 @@ table#idTabelRumah td:nth-child(5) {
                 </div>
                 <!-- END MODAL BODY-->
 			<div class="modal-footer">
-				<button type="button" class="btn default" data-dismiss="modal" id="btnCloseModalDataRumah">Close</button>
+				<button type="button" class="btn default" data-dismiss="modal" id="btnCloseModalJnsbyr">Close</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
@@ -243,42 +210,40 @@ table#idTabelRumah td:nth-child(5) {
 </div>
 <!--  END  MODAL Data Karyawan -->
 <!--  MODAL Data Karyawan -->
-<div class="modal fade draggable-modal" id="idDivTabelProyek" tabindex="-1" role="basic" aria-hidden="true">
+<div class="modal fade draggable-modal" id="idDivTabelPerk" tabindex="-1" role="basic" aria-hidden="true">
 	<div class="modal-dialog  modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title">Data Proyek</h4>
+				<h4 class="modal-title">Data Perkiraan</h4>
 			</div>
 			<div class="modal-body">
                     <div class="scroller" style="height:400px; ">
                         <div class="row">
                             <div class="col-md-12">
-                                <button id="id_ReloadProyek" style="display: none;"></button>
+                                <button id="id_Reload" style="display: none;"></button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-body">
-                                    <table class="table table-striped table-bordered table-hover text_kanan" id="idTabelProyek">
+                                    <table class="table table-striped table-bordered table-hover text_kanan" id="idTabelPerk">
                                         <thead>
-                                        <tr>
-                                            <th>
-                                                Id Proyek
-                                            </th>
-                                            <th>
-                                                Nama Proyek
-                                            </th>                                            
-                                        </tr>
-                                        </thead>
-                                        <tbody>
+                                    		<tr>
+                                        		<th width='10%' align='left'>Kd Perk</th>
+                                        		<th width='10%' align='left'>Kd Alt</th>
+                                        		<th width='50%' align='left'>Nama Perk</th>
+                                        		<th width='10%' align='center'>Level</th>
+                                        		<th width='10%' align='center'>Type</th>
+                                        		<th width='10%' align='center'>DK</th>
+                                    		</tr>
+                                    	</thead>
+                                    	<tbody>
 
+                                    	</tbody>
+                                    	<tfoot>
 
-                                        </tbody>
-                                        <tfoot>
-
-
-                                        </tfoot>
+                                    	</tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -290,7 +255,7 @@ table#idTabelRumah td:nth-child(5) {
                 </div>
                 <!-- END MODAL BODY-->
 			<div class="modal-footer">
-				<button type="button" class="btn default" data-dismiss="modal" id="btnCloseModalDataProyek">Close</button>
+				<button type="button" class="btn default" data-dismiss="modal" id="btnCloseModal">Close</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
@@ -298,33 +263,34 @@ table#idTabelRumah td:nth-child(5) {
 	<!-- /.modal-dialog -->
 </div>
 <!--  END  MODAL Data Karyawan -->
+
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
 <script src="<?php echo base_url('metronic/global/plugins/respond.min.js'); ?>"></script>
 <script src="<?php echo base_url('metronic/global/plugins/excanvas.min.js'); ?>"></script>
 <![endif]-->
-<?php echo  $this->session->userdata('jqueryJS'); ?>
-<?php echo  $this->session->userdata('jquery-migrateJS'); ?>
+<?php echo $this->session->userdata('jqueryJS'); ?>
+<?php echo $this->session->userdata('jquery-migrateJS'); ?>
 <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-<?php echo  $this->session->userdata('jquery-uiJS'); ?>
-<?php echo  $this->session->userdata('bootstrapJS'); ?>
-<?php echo  $this->session->userdata('bootstrap-hover-dropdownJS'); ?>
-<?php echo  $this->session->userdata('jquery-slimscrollJS'); ?>
-<?php echo  $this->session->userdata('jquery-blockuiJS'); ?>
-<?php echo  $this->session->userdata('jquery-cokieJS'); ?>
-<?php echo  $this->session->userdata('jquery-uniformJS'); ?>
-<?php echo  $this->session->userdata('bootstrap-switchJS'); ?>
+<?php echo $this->session->userdata('jquery-uiJS'); ?>
+<?php echo $this->session->userdata('bootstrapJS'); ?>
+<?php echo $this->session->userdata('bootstrap-hover-dropdownJS'); ?>
+<?php echo $this->session->userdata('jquery-slimscrollJS'); ?>
+<?php echo $this->session->userdata('jquery-blockuiJS'); ?>
+<?php echo $this->session->userdata('jquery-cokieJS'); ?>
+<?php echo $this->session->userdata('jquery-uniformJS'); ?>
+<?php echo $this->session->userdata('bootstrap-switchJS'); ?>
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<?php echo  $this->session->userdata('toastrJS'); ?>
-<?php echo  $this->session->userdata('select2JS'); ?>
-<?php echo  $this->session->userdata('jquery-dataTablesJS'); ?>
-<?php echo  $this->session->userdata('dataTables-bootstrapJS'); ?>
+<?php echo $this->session->userdata('toastrJS'); ?>
+<?php echo $this->session->userdata('select2JS'); ?>
+<?php echo $this->session->userdata('jquery-dataTablesJS'); ?>
+<?php echo $this->session->userdata('dataTables-bootstrapJS'); ?>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- END CORE PLUGINS -->
-<?php echo  $this->session->userdata('metronicJS'); ?>
-<?php echo  $this->session->userdata('layoutJS'); ?>
-<?php echo  $this->session->userdata('demoJS'); ?>
+<?php echo $this->session->userdata('metronicJS'); ?>
+<?php echo $this->session->userdata('layoutJS'); ?>
+<?php echo $this->session->userdata('demoJS'); ?>
 <script src="<?php echo base_url('metronic/additional/start.js'); ?>" type="text/javascript"></script>
 <script>
     jQuery(document).ready(function () {
@@ -345,19 +311,16 @@ table#idTabelRumah td:nth-child(5) {
 
         var initTable1 = function () {
 
-            var table = $('#idTabelRumah');
+            var table = $('#idTabelJnsbyr');
 
             // begin first table
             table.dataTable({
-                "ajax": "<?php  echo base_url("/master_rumah/getRumahAll"); ?>",
+                "ajax": "<?php echo base_url("/master_jnsbayar/getJnsbyrAll"); ?>",
                 "columns": [
-                    { "data": "id_rumah" },
-                    { "data": "nama_proyek" },
-                    { "data": "nama_rumah" },
-                    { "data": "blok" },
-                    { "data": "tipe" },
-                    { "data": "luas" },
-                    { "data": "harga" }
+                    { "data": "kodeBayar" },
+                    { "data": "namaKdBayar" },
+                    { "data": "norekBank" },
+                    { "data": "kodePerk" }
                 ],
                 // Internationalisation. For more info refer to http://datatables.net/manual/i18n
                 "language": {
@@ -404,7 +367,7 @@ table#idTabelRumah td:nth-child(5) {
                     [0, "asc"]
                 ] // set first column as a default sort by asc
             });
-            $('#id_ReloadRumah').click(function () {
+            $('#id_Reload').click(function () {
                 table.api().ajax.reload();
             });
 
@@ -429,30 +392,40 @@ table#idTabelRumah td:nth-child(5) {
                 $(this).parents('tr').toggleClass("active");
             });
             table.on('click', 'tbody tr', function () {
-                var idRumah = $(this).find("td").eq(0).html();
-                $('#id_rumahId').val(idRumah);
-                getDescRumah(idRumah);
+                var idAcc = $(this).find("td").eq(0).html();
+                var namaAcc = $(this).find("td").eq(1).html();
+                var norekAcc = $(this).find("td").eq(2).html();
+                var kodeGLAcc = $(this).find("td").eq(3).html();
+                                
+                $('#id_jnsbyrId').val(idAcc);
+                $('#id_namaJnsbyr').val(namaAcc);
+                $('#id_norekBank').val(norekAcc);
+                $('#id_GL').val(kodeGLAcc);
+                getDescGL(kodeGLAcc);
                 //$('#').val();
                 
-                $('#btnCloseModalDataRumah').trigger('click');
+                $('#btnCloseModalJnsbyr').trigger('click');
                 $('#id_btnSimpan').attr('disabled',true);
                 $('#id_btnUbah').attr("disabled",false);
                 $('#id_btnHapus').attr("disabled",false);
-                $('#id_rumahId').focus();
+                $('#id_jnsbyrId').focus();
+
             }); 
 
             tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
         }
         var initTable2 = function () {
-
-            var table = $('#idTabelProyek');
-
+            //var table = $('#id_TabelPerk');
             // begin first table
-            table.dataTable({
-                "ajax": "<?php  echo base_url("/master_proyek/getProyekAll"); ?>",
+            var table = $('#idTabelPerk').dataTable({
+                "ajax": "<?php  echo base_url("/master_perkiraan/getAllPerkiraan"); ?>",
                 "columns": [
-                    { "data": "idProyek" },
-                    { "data": "namaProyek" }
+                    { "data": "kode_perk" },
+                    { "data": "kode_alt" },
+                    { "data": "nama_perk" },
+                    { "data": "level" },
+                    { "data": "type" },
+                    { "data": "dk" }
                 ],
                 // Internationalisation. For more info refer to http://datatables.net/manual/i18n
                 "language": {
@@ -468,13 +441,10 @@ table#idTabelRumah td:nth-child(5) {
                     "search": "Search:",
                     "zeroRecords": "No matching records found"
                 },
-
                 "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-
-
                 "lengthMenu": [
-                    [5, 10,15, 20, -1],
-                    [5, 10,15, 20, "All"] // change per page values here
+                    [5, 10, 15, 20, -1],
+                    [5, 10, 15, 20, "All"] // change per page values here
                 ],
                 // set the initial value
                 "pageLength": 5,
@@ -489,21 +459,21 @@ table#idTabelRumah td:nth-child(5) {
                         "first": "First"
                     }
                 },
-                "aaSorting": [[0,'asc']/*, [5,'desc']*/],
+                // "aaSorting": [[4,'desc'], [5,'desc']],
                 "columnDefs": [{  // set default column settings
                     'orderable': true,
-                    "searchable": true,
+                    'type'      :'string',
                     'targets': [0]
+                }, {
+                    "searchable": true,
+                    "targets": [0]
                 }],
                 "order": [
                     [0, "asc"]
                 ] // set first column as a default sort by asc
             });
-            $('#id_ReloadProyek').click(function () {
-                table.api().ajax.reload();
-            });
 
-            var tableWrapper = jQuery('#example_wrapper');
+            var tableWrapper = jQuery('#id_TabelPerk_wrapper');
 
             table.find('.group-checkable').change(function () {
                 var set = jQuery(this).attr("data-set");
@@ -519,23 +489,18 @@ table#idTabelRumah td:nth-child(5) {
                 });
                 jQuery.uniform.update(set);
             });
-
-            table.on('change', 'tbody tr .checkboxes', function () {
-                $(this).parents('tr').toggleClass("active");
+            $('#id_Reload').click(function () {
+                table.api().ajax.reload();
             });
             table.on('click', 'tbody tr', function () {
-                var idProyek = $(this).find("td").eq(0).html();
-                var namaProyek = $(this).find("td").eq(1).html();
-
-                $('#id_proyekId').val(idProyek);
-                $('#id_namaProyek').val(namaProyek);
-                //$('#').val();
-                
-                $('#btnCloseModalDataProyek').trigger('click');
-                
-                $('#id_proyekId').focus();
-
-            }); 
+            	
+                	var kodePerk = $(this).find("td").eq(0).html();
+                    $('#id_GL').val(kodePerk);
+                    var namaPerk = $(this).find("td").eq(2).html();
+                    $('#id_namaGL').val(namaPerk);
+                    
+                	$( "#btnCloseModal" ).trigger( "click" );
+            });
 
             tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
         }
@@ -552,8 +517,7 @@ table#idTabelRumah td:nth-child(5) {
         };
     }();
     btnStart();
-    readyToStart();
-	$("#id_namaProyek").focus();
+	$("#id_namaJnsbyr").focus();
     	
 	$( "#id_btnSimpan" ).click(function() {
 		$('#idTmpAksiBtn').val('1');
@@ -567,26 +531,16 @@ table#idTabelRumah td:nth-child(5) {
 	});
 	$('#id_btnBatal').click(function(){
 		btnStart();
-        resetForm();
-        readyToStart();
-        $('#id_btnModalProyek').attr('disabled',false);
 	});
-	function getDescRumah(idRumah){
+	function getDescGL(idGL){
 		ajaxModal();
-		if (idRumah != '') {
-			$.post("<?php echo site_url('/master_rumah/getDescRumah'); ?>",
+		if (idGL != '') {
+			$.post("<?php echo site_url('/master_jnsbayar/getDescGL'); ?>",
 			{
-				'idRumah': idRumah
+				'idGL': idGL
 			},function (data) {
 				if (data.baris == 1) {
-					$('#id_proyekId').val(data.id_proyek);
-					$('#id_namaProyek').val(data.nama_proyek);
-					$('#id_namaRumah').val(data.nama_rumah);
-                    $('#id_typeRumah').val(data.type);
-                    $('#id_blokRumah').val(data.blok);
-					$('#id_luasRumah').val(data.luas);
-					$('#id_hargaRumah').val(data.harga);
-                    $('#id_btnModalProyek').attr('disabled',true);
+					$('#id_namaGL').val(data.nama_perk);					                    
 				}else{
 					alert('Data tidak ditemukan!');
 					$('#id_btnBatal').trigger('click');
@@ -599,11 +553,11 @@ table#idTabelRumah td:nth-child(5) {
 		$.ajax({
 			type:"POST",
 			dataType: "json",
-			url:"<?php echo base_url(); ?>master_rumah/simpan",
+			url:"<?php echo base_url(); ?>master_jnsbayar/simpan",
 			data:dataString,
 	
 			success:function (data) {
-				$('#id_ReloadRumah').trigger('click');
+				$('#id_Reload').trigger('click');
 				$('#id_btnBatal').trigger('click');
 				UIToastr.init(data.tipePesan,data.pesan);
 			}
@@ -616,11 +570,11 @@ table#idTabelRumah td:nth-child(5) {
 		$.ajax({
 			type:"POST",
 			dataType: "json",
-			url:"<?php echo base_url(); ?>master_rumah/ubah",
+			url:"<?php echo base_url(); ?>master_jnsbayar/ubah",
 			data:dataString,
 	
 			success:function (data) {
-				$('#id_ReloadRumah').trigger('click');
+				$('#id_Reload').trigger('click');
 				$('#id_btnBatal').trigger('click');
 				UIToastr.init(data.tipePesan,data.pesan);		
 			}
@@ -630,15 +584,15 @@ table#idTabelRumah td:nth-child(5) {
 	}
 	function ajaxHapus(){
 		ajaxModal();
-		var idRumah	= $('#id_rumahId').val();
-		idRumah		= idRumah.trim();
+		var idAcc	= $('#id_jnsbyrId').val();
+		idAcc		= idAcc.trim();
 		$.ajax({
 			type:"POST",
 			dataType: "json",
-			url:"<?php echo base_url(); ?>master_rumah/hapus",
-			data:{idRumah : idRumah},
+			url:"<?php echo base_url(); ?>master_jnsbayar/hapus",
+			data:{idAcc : idAcc},
 			success:function (data) {
-				$('#id_ReloadRumah').trigger('click');
+				$('#id_Reload').trigger('click');
 				$('#id_btnBatal').trigger('click');
 				UIToastr.init(data.tipePesan,data.pesan);			
 			}
@@ -646,8 +600,8 @@ table#idTabelRumah td:nth-child(5) {
 		});
 		event.preventDefault();
 	}
-    $('#id_formRumah').submit(function (event) {
-		dataString = $("#id_formRumah").serialize();
+    $('#id_formJnsByr').submit(function (event) {
+		dataString = $("#id_formJnsByr").serialize();
         var aksiBtn       = $('#idTmpAksiBtn').val();
         if(aksiBtn == '1'){
         	var r = confirm('Anda yakin menyimpan data ini?');

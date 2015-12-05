@@ -34,7 +34,7 @@ foreach($rumah as $r){
 	$this->fpdf->Ln();
 	$this->fpdf->Cell(2.5 , 0.5, 'Harga' , 0, 'LR', 'L');
 	$this->fpdf->Cell(0.5 , 0.5, '=' , 0, 'LR', 'L');
-	$this->fpdf->Cell(5 , 0.5, number_format($r->harga,2,',','.'),0,0,'L');
+	$this->fpdf->Cell(5 , 0.5, number_format($r->harga,2,'.',','),0,0,'L');
 	$this->fpdf->Ln();
 	$this->fpdf->Cell(2.5 , 0.5, 'nama' , 0, 'LR', 'L');
 	$this->fpdf->Cell(0.5 , 0.5, '=' , 0, 'LR', 'L');
@@ -58,12 +58,12 @@ foreach($list as $l)
 	$this->fpdf->SetFont('Times','',8);
 	$this->fpdf->Cell(4 , 0.5, $no , 1, 'LR', 'C');
 	$this->fpdf->Cell(6 , 0.5, tgl_indo($l->tgl_trans), 1, 'LR', 'C');
-	$this->fpdf->Cell(10 , 0.5, number_format($l->jml_trans,2,',','.'), 1, 'LR', 'C');
+	$this->fpdf->Cell(10 , 0.5, number_format($l->jml_trans,2,'.',','), 1, 'LR', 'C');
 	$no++;
 }
 /* setting posisi footer 3 cm dari bawah */
 /* generate pdf jika semua konstruktor, data yang akan ditampilkan, dll sudah selesai */
-$this->fpdf->Output("laporan_rekap_advance_".date('d-m-Y h:i:sa').".pdf","I");
+$this->fpdf->Output($laporan."_".date('d-m-Y h:i:sa').".pdf","I");
 
 function tgl_indo($tgl){
 		$tanggal = substr($tgl,8,2);

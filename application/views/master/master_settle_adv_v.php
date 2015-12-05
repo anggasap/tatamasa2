@@ -69,6 +69,8 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
+											<input id="id_idKyw" required="required" class="form-control hidden input-sm"
+                                                   type="text" name="idKyw" readonly/>
                                             <label>Nama karyawan </label>
                                             <input id="id_namaKyw" required="required" class="form-control input-sm"
                                                    type="text" name="namaKyw" readonly/>
@@ -139,7 +141,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label>Jumlah Pembayaran</label>
-                                            <input id="id_paid" required="required" class="form-control input-sm nomor nomor2"
+                                            <input id="id_paid" required="required" class="form-control input-sm kanan nomor2"
                                                    type="text" name="paid"/>
                                         </div>
 
@@ -1152,7 +1154,7 @@
                 $('#id_btnSimpan').attr('disabled', true);
                 $('#id_btnUbah').attr("disabled", false);
                 $('#id_btnHapus').attr("disabled", false);
-
+				getDescCpa(idSettle);
             });
             tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
         }
@@ -1787,7 +1789,7 @@
                     'idSettle': idSettle
                 }, function (data) {
                     if (data.baris == 1) {
-                        $('#id_kywId').val(data.id_kyw);
+						$('#id_idKyw').val(data.id_kyw);
                         $('#id_namaKyw').val(data.nama_kyw);
                         $('#id_deptKyw').val(data.nama_dept);
                         $('#id_idAdvance').val(data.idAdvance);
@@ -1795,12 +1797,15 @@
                         $('#id_paid').val(number_format(data.paid, 2));
                         $('#id_uangPaidou').val(number_format(data.paidou, 2));
                         $('#id_tglJT').val(data.tgl_jt);
+						$('#id_proyek').val(data.id_proyek);
                         $('#id_idPayTo').val(data.id_pay_to);
                         $('#id_namaPayTo').val(data.pay_to);
+						$('#id_tglAdv').val(data.tgl_trans);
                         $('#id_namaPemilikAkunBank').val(data.nama_akun_bank);
                         $('#id_noAkunBank').val(data.no_akun_bank);
                         $('#id_namaBank').val(data.nama_bank);
-                        $('#id_keterangan').val(data.keterangan);
+                        $('#id_keteranganAdv').val(data.ketadv);
+						$('#id_keterangan').val(data.keterangan);
 
                         if (data.dok_fpe == '1') {
                             $("#uniform-id_dokFPe span").addClass("checked");
@@ -1917,6 +1922,47 @@
                 }, "json");
         }//if kd<>''
     }
+	function getDescCpa(idSettle) {
+        ajaxModal();
+        if (idSettle != '') {
+            $.post("<?php echo site_url('/master_settle_adv/getDescCpa'); ?>",
+                {
+                    'idSettle': idSettle
+                }, function (data) {
+                    if (data.data_cpa.length > 0) {
+                        $('#idTxtTempLoop').val(data.data_cpa.length);
+                        for (i = 0; i < data.data_cpa.length; i++) {
+                            var x = i + 1;
+                            //var idCpa           = data.data_cpa[i].id_cpa;
+                            var kode = data.data_cpa[i].kode;
+                            var jnsKode = data.data_cpa[i].jns_kode;
+                            var ket = data.data_cpa[i].keterangan;
+                            var jumlah = data.data_cpa[i].jumlah;
+
+                            tr = '<tr class="listdata" id="tr' + x + '">';
+                            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKode' + x + '" name="tempKode' + x + '" readonly="true" value="' + kode + '"></td>';
+                            tr += '<td><input type="text" class="form-control input-sm" id="id_tempJenisKode' + x + '" name="tempJenisKode' + x + '" readonly="true" value="' + jnsKode + '" ></td>';
+                            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKet' + x + '" name="tempKet' + x + '" readonly="true" value="' + ket + '"></td>';
+                            tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah' + x + '" name="tempJumlah' + x + '" readonly="true" value="' + number_format(jumlah, 2) + '"></td>';
+                            tr += '</tr>';
+                            if(jnsKode =='2'){
+                                jumlahP = parseFloat(CleanNumber(jumlah));
+                                var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
+                                var total = totalP + jumlahP;
+                                $('#idTotalCPA').val(number_format(total, 2));
+                            }
+
+                            $('#id_body_data').append(tr);
+                        }
+                        /*
+                         $('#').val(data.); */
+                    } else {
+                        //alert('Data tidak ditemukan!');
+                        //$('#id_btnBatal').trigger('click');
+                    }
+                }, "json");
+        }//if kd<>''
+    }
     function getDescAdv(idAdv) {
         ajaxModal();
         if (idAdv != '') {
@@ -1925,7 +1971,7 @@
                     'idAdv': idAdv
                 }, function (data) {
                     if (data.baris == 1) {
-
+						//console.og(data);
                         $('#id_namaKyw').val(data.nama_kyw);
                         $('#id_deptKyw').val(data.nama_dept);
                         $('#id_proyek').val(data.id_proyek);
@@ -1988,7 +2034,7 @@
             success: function (data) {
                 $('#id_ReloadSettle').trigger('click');
                 $('#id_btnBatal').trigger('click');
-                UIToastr.init(data.tipePesan, data.pesan);
+				UIToastr.init(data.tipePesan, data.pesan);
             }
 
         });
@@ -2054,24 +2100,37 @@
             window.open("<?php echo base_url('master_settle_adv/cetak/'); ?>/" + idSettle, '_blank');
         }
     }
+	function cetakcpa() {
+        var idSettle = $('#id_idSettle').val();
+        if (idSettle == '') {
+            alert('Silahkan pilih ID Advance');
+        } else {
+            window.open("<?php echo base_url('master_settle_adv/cetak_cpa/'); ?>/" + idSettle, '_blank');
+        }
+    }
     $(".nomor2").focusout(function () {
         if ($(this).val() == '') {
             $(this).val('0.00');
         } else {
-            var angka = $(this).val();
+            var angka = $('#id_paid').val();
             var str = $('#id_advAmount').val();
-            var bayarAwal = str.replace('.00', '');
+            /*var bayarAwal = str.replace('.00', '');
             var bayar = bayarAwal.replace(',', '');
-            console.log(bayar);
-            $(this).val(number_format(angka, 2));
-            var hasil = bayar - angka;
+			var bayara = bayar.replace(',', '');*/
+
+            var bayara = parseFloat(CleanNumber(str));
+            angka = parseFloat(CleanNumber(angka));
+            var hasil = bayara - angka;
             if (hasil <= 0) {
+                //alert("min");
                 var h = hasil.toString();
                 var hsl = h.replace('-', '')
                 $('#id_uangPaidou').val('(' + number_format(hsl, 2) + ')');
             } else {
                 $('#id_uangPaidou').val(number_format(hasil, 2));
             }
+
+			$('#id_paid').val(number_format(angka, 2));
         }
     });
     $(".nomor2").keyup(function () {

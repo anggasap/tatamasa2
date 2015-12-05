@@ -24,7 +24,8 @@ class Master_reimpay_m extends CI_Model {
 		$this->db->select('mr.id_kyw, mk.nama_kyw, md.nama_dept, mr.no_invoice, mr.jml_uang, mr.id_proyek, mr.id_kurs, mr.nilai_kurs, mr.tgl_trans,, mr.tgl_jt, mr.pay_to, mr.nama_akun_bank, mr.no_akun_bank,
 		mr.nama_bank, mr.keterangan, mr.dok_fpe, mr.dok_kuitansi, mr.dok_fpa, mr.dok_po, mr.dok_suratjalan,mr.dok_lappenerimaanbrg,mr.dok_bast, 
 		mr.dok_pc, mr.dok_lpkk, mr.app_keuangan_id, mr.app_hd_id, mr.app_gm_id, mr.app_keuangan_status, mr.app_hd_status, mr.app_gm_status, 
-		mr.app_keuangan_tgl, mr.app_hd_tgl, mr.app_gm_tgl, mr.app_keuangan_ket, mr.app_hd_ket, mr.app_gm_ket, mr.app_user_id, mr.inout_budget' );
+		mr.app_keuangan_tgl, mr.app_hd_tgl, mr.app_gm_tgl, mr.app_keuangan_ket, mr.app_hd_ket, mr.app_gm_ket, mr.app_user_id, mr.inout_budget,
+		(select e.nama_kyw from master_karyawan e where e.id_kyw = mr.pay_to) as pay');
 		$this->db->from('master_reimpay mr');
 		$this->db->join('master_karyawan mk', 'mr.id_kyw=mk.id_kyw', 'LEFT');
 		$this->db->join('master_dept md', 'mk.dept_kyw=md.id_dept', 'LEFT');
@@ -218,6 +219,48 @@ class Master_reimpay_m extends CI_Model {
 		}else{
 			return false;
 		}
+	}
+	function cetak_cpa($idAdv){
+		$sql="select a.*,b.nama_proyek,c.nama_kyw,d.nama_dept,
+			(select e.nama_kyw from master_karyawan e where e.id_kyw = a.pay_to) as pay,
+			(select e.nama_kyw from master_karyawan e where e.id_kyw = a.app_keuangan_id) as financeName,
+			(select e.nama_kyw from master_karyawan e where e.id_kyw = a.app_hd_id) as hdName,
+			(select e.nama_kyw from master_karyawan e where e.id_kyw = a.app_gm_id) as gmName,
+			(
+			CASE 
+			 WHEN app_keuangan_status = '1' THEN 'Approve'
+			 WHEN app_keuangan_status = '2' THEN 'Reject'
+			 WHEN app_keuangan_status = '3' THEN 'Paid'
+			END) AS statusKeuangan,
+			(
+			CASE 
+			 WHEN app_hd_status = '1' THEN 'Approve'
+			 WHEN app_hd_status = '2' THEN 'Reject'
+			 WHEN app_hd_status = '3' THEN 'Paid'
+			END) AS statusHd,
+			(
+			CASE 
+			 WHEN app_gm_status = '1' THEN 'Approve'
+			 WHEN app_gm_status = '2' THEN 'Reject'
+			 WHEN app_gm_status = '3' THEN 'Paid'
+			END) AS statusGm 
+			from master_reimpay a 
+			left join master_proyek b on a.id_proyek = b.id_proyek
+			left join master_karyawan c on a.id_kyw = c.id_kyw
+			left join master_dept d on c.dept_kyw = d.id_dept
+			where a.id_reimpay = '".$idAdv."'";
+		$query=$this->db->query($sql);
+		return $query->result(); // returning rows, not row
+	}
+	/*function getCflowTerpakai(){
+		$sql ="select ";
+	}*/
+	function cetak_cpa_detail($idAdv){
+		$sql=" select a.*, b.*, c.terpakai,c.saldo,(c.jan+c.feb+c.mar+c.apr+c.mei+c.jun+c.jul+c.agu+c.sep+c.okt+c.nov+c.des) as anggaran 
+				from cpa_cflow a left join master_cashflow b on a.kode_cflow = b.kode_cflow
+				left join budget_cflow c on a.kode_cflow = c.kode_cflow where a.id_master = '".$idAdv."'";
+		$query=$this->db->query($sql);
+		return $query->result(); // returning rows, not row
 	}
 }
 

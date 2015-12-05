@@ -415,10 +415,10 @@
                                                         <thead>
                                                         <tr>
                                                             <th width="20%">
-                                                                Kode Perk
+                                                                Kode
                                                             </th>
                                                             <th width="20%">
-                                                                Kode CF
+                                                                Jenis Kode
                                                             </th>
                                                             <th width="40%">
                                                                 Keterangan

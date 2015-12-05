@@ -39,7 +39,7 @@ class Penjualan_m extends CI_Model {
 
 	public function getRumahAll()
 	{
-		$sql="SELECT r.*,p.nama_proyek from master_rumah r left join master_proyek p on r.id_proyek = p.id_proyek where status_jual = 0 or status_jual = 1";
+		$sql="SELECT r.*,p.nama_proyek from master_rumah r left join master_proyek p on r.id_proyek = p.id_proyek where status_jual = 0 or status_jual = 1 order by r.harga desc";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}

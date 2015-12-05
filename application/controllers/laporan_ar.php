@@ -55,7 +55,7 @@ class Laporan_ar extends CI_Controller
                 'idRumah' => trim($row->id_rumah),
                 'namaRumah' => trim($row->nama_rumah),
                 'proyek' => trim($row->nama_proyek),
-				'harga' => trim($row->harga)
+				'harga' => number_format(trim($row->harga),2,'.',',')
             );
             array_push($data['data'], $array);
         }
