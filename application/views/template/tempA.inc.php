@@ -14,8 +14,8 @@
 	<div class="page-header-inner">
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
-			<a href="index.html">
-			<img src="<?php echo base_url('metronic/img/tatamasa_logo.png'); ?>" alt="logo" class="logo-default"/>
+			<a href="index.html" style="width:90%;">
+				<img src="<?php echo base_url('metronic/img/logo_berkah.png'); ?>" style="width:80%;" alt="logo"/>
 			</a>
 			<div class="menu-toggler sidebar-toggler">
 				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->

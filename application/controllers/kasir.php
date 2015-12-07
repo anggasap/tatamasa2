@@ -78,20 +78,20 @@ class Kasir extends CI_Controller
         $rows = $this->kasir_m->getDescAdv($idAdv);
         if ($rows) {
             foreach ($rows as $row)
-                $jmlUang    = number_format($row->jml_uang, 2);
-                $tglTrans   = date('d-m-Y', strtotime($row->tgl_trans));
-                $tglJT      = date('d-m-Y', strtotime($row->tgl_jt));
+                $jmlUang = number_format($row->jml_uang, 2);
+            $tglTrans = date('d-m-Y', strtotime($row->tgl_trans));
+            $tglJT = date('d-m-Y', strtotime($row->tgl_jt));
             $array = array(
                 'baris' => 1,
                 'nama_kyw' => $row->nama_kyw,
-                'nama_dept' => $row->nama_dept,
+                'id_dept' => $row->id_dept,
                 'jml_uang' => $jmlUang,
                 'id_proyek' => $row->id_proyek,
                 'tgl_trans' => $tglTrans,
                 'tgl_jt' => $tglJT,
-                'kodePerkUM'=> $row->kode_perk,
-                'namaPerkUM'=> $row->nama_perk,
-                'keterangan'=> $row->keterangan
+                'kodePerkUM' => $row->kode_perk,
+                'namaPerkUM' => $row->nama_perk,
+                'keterangan' => $row->keterangan
                 //'' => $row->
             );
         } else {
@@ -100,6 +100,7 @@ class Kasir extends CI_Controller
 
         $this->output->set_output(json_encode($array));
     }
+
     function getDescKodeBayar()
     {
         $this->CI =& get_instance();
@@ -109,11 +110,32 @@ class Kasir extends CI_Controller
         if ($rows) {
             foreach ($rows as $row)
                 //$nilai_kurs = number_format($row->nilai_kurs, 2);
-            $array = array(
-                'baris' => 1,
-                'kodePerk' => $row->kode_perk,
-                'namaPerk' => $row->nama_perk
-            );
+                $array = array(
+                    'baris' => 1,
+                    'kodePerk' => $row->kode_perk,
+                    'namaPerk' => $row->nama_perk
+                );
+        } else {
+            $array = array('baris' => 0);
+        }
+
+        $this->output->set_output(json_encode($array));
+    }
+
+    function getCflow()
+    {
+        $this->CI =& get_instance();
+        $idAdv = $this->input->post('idAdv', TRUE);
+        $idAdv = trim($idAdv);
+        $rows = $this->kasir_m->getCflow($idAdv);
+        if ($rows) {
+            foreach ($rows as $row)
+                //$nilai_kurs = number_format($row->nilai_kurs, 2);
+                $array = array(
+                    'baris' => 1,
+                    'kodeCflow' => $row->kode_cflow,
+                    'namaCflow' => $row->nama_cflow
+                );
         } else {
             $array = array('baris' => 0);
         }
@@ -123,118 +145,81 @@ class Kasir extends CI_Controller
 
     function simpan()
     {
-        $idKyw = trim($this->input->post('kywId'));
-        $uangMuka = str_replace(',', '', trim($this->input->post('uangMuka')));
+        $jnsReq = trim($this->input->post('jnsReq'));
+
         $idProyek = trim($this->input->post('proyek'));
-        $idKurs = trim($this->input->post('kurs'));
-        $nilaiKurs = str_replace(',', '', trim($this->input->post('nilaiKurs')));
-        $idKyw = trim($this->input->post('kywId'));
-        $tglTrans = trim($this->input->post('tglTrans'));
-        $tglTrans = date('Y-m-d', strtotime($tglTrans));
-        $tglJT = trim($this->input->post('tglJT'));
-        $tglJT = date('Y-m-d', strtotime($tglJT));
-        $payTo = trim($this->input->post('payTo'));
-        $namaPemilikAkunBank = trim($this->input->post('namaPemilikAkunBank'));
-        $noAkunBank = trim($this->input->post('noAkunBank'));
-        $namaBank = trim($this->input->post('namaBank'));
+        $idDept = trim($this->input->post('dept'));
+        $kodePerk = trim($this->input->post('kodePerk'));
+        $kodeCflow = trim($this->input->post('kodeCflow'));
         $ket = trim($this->input->post('keterangan'));
-        $dokPO = trim($this->input->post('dokPO_in'));
-        $dokSP = trim($this->input->post('dokSP_in'));
-        $dokSSP = trim($this->input->post('dokSSP_in'));
-        $dokSSPK = trim($this->input->post('dokSSPK_in'));
-        $dokSBJ = trim($this->input->post('dokSBJ_in'));
-        //$ket			= trim($this->input->post(''));
+        $tglTrans = trim($this->input->post('tgltrans'));
+        $tglTrans = date('Y-m-d', strtotime($tglTrans));
 
         $bulan = date('m', strtotime($tglTrans));//$tglTrans->format("m");
         $tahun = date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
 
-        $modelidAdv = $this->master_advance_m->getIdAdv($bulan, $tahun);
-        $data = array(
-            'id_advance' => $modelidAdv,
-            'id_kyw' => $idKyw,
-            'jml_uang' => $uangMuka,
-            'id_proyek' => $idProyek,
-            'id_kurs' => $idKurs,
-            'nilai_kurs' => $nilaiKurs,
-            'tgl_trans' => $tglTrans,
-            'tgl_jt' => $tglJT,
-            'pay_to' => $payTo,
-            'nama_akun_bank' => $namaPemilikAkunBank,
-            'no_akun_bank' => $noAkunBank,
-            'nama_bank' => $namaBank,
-            'keterangan' => $ket,
-            'dok_po' => $dokPO,
-            'dok_sp' => $dokSP,
-            'dok_ssp' => $dokSSP,
-            'dok_sspk' => $dokSSPK,
-            'dok_sbj' => $dokSBJ
-//        		''		        	=>$,
-        );
-        $model = $this->master_advance_m->insertAdv($data);
+        $modelidPemb = $this->kasir_m->getIdPemb($bulan, $tahun);
+        //if ($jnsReq == '1') {
+            $id_master = trim($this->input->post('idAdvance'));
+            $jml_uang = str_replace(',', '', trim($this->input->post('uang')));
 
-        $totJurnal = trim($this->input->post('txtTempLoop'));
-        if ($totJurnal > 0) {
-            for ($i = 1; $i <= $totJurnal; $i++) {
-                $tKodePerk = 'tempKodePerk' . $i;
-                $tKodeCflow = 'tempKodeCflow' . $i;
-                $tJumlah = 'tempJumlah' . $i;
-                $tKet = 'tempKet' . $i;
-
-                $tmpKodePerk = trim($this->input->post($tKodePerk));
-                $tmpKodeCflow = trim($this->input->post($tKodeCflow));
-                $tmpJumlah = str_replace(',', '', trim($this->input->post($tJumlah)));
-                $tmpKet = trim($this->input->post($tKet));
-                $TotalC = $this->master_advance_m->get_terpakai_cflow($tmpKodeCflow);
-                $TotalP = $this->master_advance_m->get_terpakai_perk($tmpKodePerk);
-                $data = array(
-                    'id_cpa' => 0,
-                    'id_master' => $modelidAdv,
-                    'kode_perk' => $tmpKodePerk,
-                    'kode_cflow' => $tmpKodeCflow,
-                    'keterangan' => $tmpKet,
-                    'jumlah' => $tmpJumlah
+            $data_perk = array(
+                'trans_id' => $modelidPemb,
+                'tgl_trans' => $tglTrans,
+                'kode_jurnal' => 'ADV',
+                'master_id' => $id_master,
+                'id_proyek' => $idProyek,
+                'id_dept' => $idDept,
+                'kode_perk' => $kodePerk,
+                'debet' => $jml_uang,
+                'keterangan' => $ket,
+                //        		''		        	=>$,
+            );
+            $model = $this->kasir_m->insertAdvPerk($data_perk);
+            $data_perk = array(
+                'trans_id' => $modelidPemb,
+                'tgl_trans' => $tglTrans,
+                'kode_jurnal' => 'ADV',
+                'master_id' => $id_master,
+                'id_proyek' => $idProyek,
+                'id_dept' => $idDept,
+                'kode_perk' => $kodePerk,
+                'kredit' => $jml_uang,
+                'keterangan' => $ket,
+                //        		''		        	=>$,
+            );
+            $model = $this->kasir_m->insertAdvPerk($data_perk);
+            $data_cflow = array(
+                'trans_id' => $modelidPemb,
+                'tgl_trans' => $tglTrans,
+                'kode_jurnal' => 'ADV',
+                'master_id' => $id_master,
+                'id_proyek' => $idProyek,
+                'id_dept' => $idDept,
+                'kode_cflow' => $kodeCflow,
+                'saldo_akhir' => $jml_uang,
+                'keterangan' => $ket,
+                //        		''		        	=>$,
+            );
+            $model = $this->kasir_m->insertAdvCflow($data_cflow);
+            if ($model) {
+                $array = array(
+                    'act' => 1,
+                    'tipePesan' => 'success',
+                    'idPemb' => $modelidPemb,
+                    'pesan' => 'Data berhasil disimpan.'
                 );
-                $query = $this->master_advance_m->insertCpa($data);
-                $totalCflow = $TotalC + $tmpJumlah;
-                $totalCPerk = $TotalP + $tmpJumlah;
-
-                $dataTerpakaiCflow = array(
-                    'terpakai' => $totalCflow
+            } else {
+                $array = array(
+                    'act' => 0,
+                    'tipePesan' => 'error',
+                    'pesan' => 'Data gagal disimpan.'
                 );
-
-                $dataTerpakaiPerk = array(
-                    'terpakai' => $totalCperk
-                );
-                $query = $this->master_advance_m->updateBudgetCflowTerpakai($tmpKodeCflow, $tahun, $idProyek, $dataTerpakaiCflow);
-                $query = $this->master_advance_m->updateBudgetCflowSaldo($tmpKodeCflow, $tahun, $idProyek);
-                $query = $this->master_advance_m->updateBudgetKdPerkTerpakai($tmpKodePerk, $tahun, $idProyek, $dataTerpakaiPerk);
-                $query = $this->master_advance_m->updateBudgetKdPerkSaldo($tmpKodePerk, $tahun, $idProyek);
             }
-            $tmpKodeCflow = trim($this->input->post($tKodeCflow));
-            $TotalC = $this->master_advance_m->get_total_cflow($tmpKodeCflow);
-            $total = $totalC - $totalCflow;
-            $data = array(
-                'inout_budget' => '1'
-            );
-            if ($total <= 0) {
-                $model = $this->master_advance_m->updateAdv($data, $modelidAdv);
-            }
-        }
+            $this->output->set_output(json_encode($array));
+        //}
 
-        if ($model) {
-            $array = array(
-                'act' => 1,
-                'tipePesan' => 'success',
-                'pesan' => 'Data berhasil disimpan.'
-            );
-        } else {
-            $array = array(
-                'act' => 0,
-                'tipePesan' => 'error',
-                'pesan' => 'Data gagal disimpan.'
-            );
-        }
-        $this->output->set_output(json_encode($array));
+
     }
 
     function ubah()

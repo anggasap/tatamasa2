@@ -38,18 +38,8 @@
       <file leaf-file-name="kasir_v.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/transaksi/kasir_v.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33643124">
-              <caret line="778" column="61" selection-start-line="778" selection-start-column="24" selection-end-line="778" selection-end-column="61" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="start.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/metronic/additional/start.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="65" column="1" selection-start-line="65" selection-start-column="1" selection-end-line="65" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.7118959">
+              <caret line="424" column="45" selection-start-line="424" selection-start-column="45" selection-end-line="424" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -58,8 +48,8 @@
       <file leaf-file-name="kasir.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/kasir.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.769231">
-              <caret line="77" column="28" selection-start-line="77" selection-start-column="28" selection-end-line="77" selection-end-column="28" />
+            <state vertical-scroll-proportion="-17.653847">
+              <caret line="171" column="37" selection-start-line="171" selection-start-column="37" selection-end-line="171" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -68,12 +58,14 @@
       <file leaf-file-name="kasir_m.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/kasir_m.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.528302">
-              <caret line="31" column="48" selection-start-line="31" selection-start-column="48" selection-end-line="31" selection-end-column="48" />
+            <state vertical-scroll-proportion="-1.5283018">
+              <caret line="104" column="34" selection-start-line="104" selection-start-column="34" selection-end-line="104" selection-end-column="34" />
               <folding>
-                <marker date="1449463332375" expanded="true" signature="156:415" placeholder="select p.id_..perintah_pembayaran..." />
-                <marker date="1449463332375" expanded="true" signature="595:645" placeholder="select * fro..master_proyek..." />
-                <marker date="1449463332375" expanded="true" signature="933:981" placeholder="select * fro..type_bayar..." />
+                <marker date="1449482113746" expanded="true" signature="156:415" placeholder="select p.id_..perintah_pembayaran..." />
+                <marker date="1449482113746" expanded="true" signature="595:645" placeholder="select * fro..master_proyek..." />
+                <marker date="1449482113746" expanded="true" signature="933:981" placeholder="select * fro..type_bayar..." />
+                <marker date="1449482113746" expanded="true" signature="3056:3155" placeholder="select trans..trans_detail_perk..." />
+                <marker date="1449482113746" expanded="true" signature="3371:3440" placeholder="select max(s..trans_detail_perk..." />
               </folding>
             </state>
           </provider>
@@ -92,8 +84,8 @@
       <file leaf-file-name="master_advance_m.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/master_advance_m.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.26923">
-              <caret line="47" column="5" selection-start-line="36" selection-start-column="4" selection-end-line="47" selection-end-column="5" />
+            <state vertical-scroll-proportion="-3.7961166">
+              <caret line="137" column="5" selection-start-line="126" selection-start-column="4" selection-end-line="137" selection-end-column="5" />
               <folding>
                 <marker date="1449215872000" expanded="true" signature="212:262" placeholder="select * fro..master_proyek..." />
                 <marker date="1449215872000" expanded="true" signature="548:594" placeholder="select * fro..master_kurs..." />
@@ -128,8 +120,8 @@
       <file leaf-file-name="master_advance.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/master_advance.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.5636363">
-              <caret line="105" column="5" selection-start-line="88" selection-start-column="4" selection-end-line="105" selection-end-column="5" />
+            <state vertical-scroll-proportion="-3.2545455">
+              <caret line="281" column="52" selection-start-line="281" selection-start-column="47" selection-end-line="281" selection-end-column="52" />
               <folding>
                 <marker date="1449026856000" expanded="true" signature="4054:4124" placeholder="select nama_..master_karyawan..." />
                 <marker date="1449026856000" expanded="true" signature="4366:4442" placeholder="select nama_..master_karyawan..." />
@@ -856,10 +848,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/metronic/additional/start.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="1" selection-start-line="65" selection-start-column="1" selection-end-line="65" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/master/master_advance_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.890909">
+          <caret line="1438" column="39" selection-start-line="1438" selection-start-column="12" selection-end-line="1438" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/master_advance.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.5636363">
-          <caret line="105" column="5" selection-start-line="88" selection-start-column="4" selection-end-line="105" selection-end-column="5" />
+        <state vertical-scroll-proportion="-3.2545455">
+          <caret line="281" column="52" selection-start-line="281" selection-start-column="47" selection-end-line="281" selection-end-column="52" />
           <folding>
             <marker date="1449026856000" expanded="true" signature="4054:4124" placeholder="select nama_..master_karyawan..." />
             <marker date="1449026856000" expanded="true" signature="4366:4442" placeholder="select nama_..master_karyawan..." />
@@ -870,8 +878,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/master_advance_m.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.26923">
-          <caret line="47" column="5" selection-start-line="36" selection-start-column="4" selection-end-line="47" selection-end-column="5" />
+        <state vertical-scroll-proportion="-3.7961166">
+          <caret line="137" column="5" selection-start-line="126" selection-start-column="4" selection-end-line="137" selection-end-column="5" />
           <folding>
             <marker date="1449215872000" expanded="true" signature="212:262" placeholder="select * fro..master_proyek..." />
             <marker date="1449215872000" expanded="true" signature="548:594" placeholder="select * fro..master_kurs..." />
@@ -904,44 +912,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/kasir_m.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.528302">
-          <caret line="31" column="48" selection-start-line="31" selection-start-column="48" selection-end-line="31" selection-end-column="48" />
+        <state vertical-scroll-proportion="-1.5283018">
+          <caret line="104" column="34" selection-start-line="104" selection-start-column="34" selection-end-line="104" selection-end-column="34" />
           <folding>
-            <marker date="1449463332375" expanded="true" signature="156:415" placeholder="select p.id_..perintah_pembayaran..." />
-            <marker date="1449463332375" expanded="true" signature="595:645" placeholder="select * fro..master_proyek..." />
-            <marker date="1449463332375" expanded="true" signature="933:981" placeholder="select * fro..type_bayar..." />
+            <marker date="1449482113746" expanded="true" signature="156:415" placeholder="select p.id_..perintah_pembayaran..." />
+            <marker date="1449482113746" expanded="true" signature="595:645" placeholder="select * fro..master_proyek..." />
+            <marker date="1449482113746" expanded="true" signature="933:981" placeholder="select * fro..type_bayar..." />
+            <marker date="1449482113746" expanded="true" signature="3056:3155" placeholder="select trans..trans_detail_perk..." />
+            <marker date="1449482113746" expanded="true" signature="3371:3440" placeholder="select max(s..trans_detail_perk..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/kasir.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.769231">
-          <caret line="77" column="28" selection-start-line="77" selection-start-column="28" selection-end-line="77" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/master/master_advance_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.890909">
-          <caret line="1438" column="39" selection-start-line="1438" selection-start-column="12" selection-end-line="1438" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/metronic/additional/start.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="1" selection-start-line="65" selection-start-column="1" selection-end-line="65" selection-end-column="1" />
+        <state vertical-scroll-proportion="-17.653847">
+          <caret line="171" column="37" selection-start-line="171" selection-start-column="37" selection-end-line="171" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/transaksi/kasir_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33643124">
-          <caret line="778" column="61" selection-start-line="778" selection-start-column="24" selection-end-line="778" selection-end-column="61" />
+        <state vertical-scroll-proportion="0.7118959">
+          <caret line="424" column="45" selection-start-line="424" selection-start-column="45" selection-end-line="424" selection-end-column="45" />
           <folding />
         </state>
       </provider>

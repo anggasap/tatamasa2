@@ -103,6 +103,8 @@
                                     <label>Nama karyawan (Requester) </label>
                                     <input id="id_namaKyw" required="required" class="form-control input-sm"
                                            type="text" name="namaKyw" readonly/>
+                                    <input id="id_dept" required="required" class="form-control input-sm"
+                                           type="text" name="dept" readonly/>
                                 </div>
 
                             </div>
@@ -166,6 +168,32 @@
                                class="form-control nomor1 hidden">
                         <!-- END HIDDEN INPUT -->
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Keterangan</label>
+                                <textarea id="id_keterangan" class="form-control input-sm"
+                                       type="text" name="keterangan" cols="2" readonly/></textarea>
+
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>CFlow</label>
+                                <input id="id_kodeCflow"
+                                       class="form-control input-sm "
+                                       type="text" name="kodeCflow" placeholder="" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Nama CFlow</label>
+                                <input id="id_namaCflow"
+                                       class="form-control input-sm "
+                                       type="text" name="namaCflow" placeholder="" readonly/>
+                            </div>
+                        </div>
+                    </div>
                     <hr>
                     <div class="row">
                         <div class="col-md-2">
@@ -186,7 +214,7 @@
                                     $data[$row['kode_bayar']] = $row['nama_kdbayar'];
                                 endforeach;
                                 echo form_dropdown('kodebayar', $data, '',
-                                    'id="id_kodebayar" class="form-control input-sm select2me "');
+                                    'id="id_kodebayar" class="form-control input-sm select2me " required');
                                 ?>
                             </div>
                         </div>
@@ -280,16 +308,7 @@
                                 <button name="btnSimpan" class="btn blue" id="id_btnSimpan">
                                     <!--<i class="fa fa-check"></i>--> Simpan
                                 </button>
-                                <button name="btnUbah" onclick="" class="btn yellow" id="id_btnUbah">
-                                    <!--<i class="fa fa-edit"></i>--> Ubah
-                                </button>
-                                <button name="btnHapus" class="btn red" id="id_btnHapus">
-                                    <!--<i class="fa fa-trash"></i>-->
-                                    Hapus
-                                </button>
-
                                 <button id="id_btnBatal" type="button" class="btn default">Batal</button>
-
                             </div>
                         </div>
                     </div>
@@ -583,6 +602,7 @@
 
                 //$('#id_userId').focus();
                 getDescAdv(idAdv);
+                getCflow(idAdv);
 
             });
 
@@ -724,6 +744,8 @@
         tglTransStart();
 
         $('#id_body_data').empty();
+        $("#id_kodebayar").select2("val", "");
+        //$('#id_kodebayar').val('');
     });
     $("#id_idAdvance").focusout(function () {
         var idAdv = $(this).val();
@@ -780,8 +802,8 @@
 
                         var db = 0;
                         var kr = $('#id_uang').val();
-                        addRowDK(data.kodePerk,data.namaPerk,db,kr);
-                        id_totalDb
+                        addRowDKAdv(data.kodePerk,data.namaPerk,db,kr);
+                        $('#id_totalKr').val(number_format(kr,2));
                     } else {
                         alert('Data tidak ditemukan!');
                         $('#id_btnBatal').trigger('click');
@@ -789,7 +811,23 @@
                 }, "json");
         }//if kd<>''
     }
-
+    function getCflow(idAdv) {
+        ajaxModal();
+        if (idAdv != '') {
+            $.post("<?php echo site_url('/kasir/getCflow'); ?>",
+                {
+                    'idAdv': idAdv
+                }, function (data) {
+                    if (data.baris == 1) {
+                        $('#id_kodeCflow').val(data.kodeCflow);
+                        $('#id_namaCflow').val(data.namaCflow);
+                    } else {
+                        alert('Data tidak ditemukan!');
+                        $('#id_btnBatal').trigger('click');
+                    }
+                }, "json");
+        }//if kd<>''
+    }
     function getDescAdv(idAdv) {
         ajaxModal();
         if (idAdv != '') {
@@ -798,16 +836,18 @@
                     'idAdv': idAdv
                 }, function (data) {
                     if (data.baris == 1) {
-                        var namaPerkUM = data.namaPerkUM;
                         $('#id_namaKyw').val(data.nama_kyw);
                         $('#id_deptKyw').val(data.nama_dept);
                         $('#id_uang').val(data.jml_uang);
                         $('#id_proyek').val(data.id_proyek);
+                        $('#id_dept').val(data.id_dept);
                         $('#id_tglReq').val(data.tgl_trans);
                         $('#id_tglJT').val(data.tgl_jt);
+                        $('#id_keterangan').val(data.keterangan);
                         var db = data.jml_uang;
                         var kr = 0;
-                        addRowDK(data.kodePerkUM,data.namaPerkUM,db,kr);
+                        addRowDKAdv(data.kodePerkUM,data.namaPerkUM,db,kr);
+                        $('#id_totalDb').val(number_format(db,2));
                     } else {
                         alert('Data tidak ditemukan!');
                         $('#id_btnBatal').trigger('click');
@@ -845,7 +885,7 @@
                 }, "json");
         }//if kd<>''
     }
-    function addRowDK(kodePerk,namaPerk,Db,Kr) {
+    function addRowDKAdv(kodePerk,namaPerk,Db,Kr) {
         var i = $('#idTxtTempLoop').val();
         var x =  i + 1;
         tr = '<tr class="listdata" id="tr' + x + '">';
@@ -865,14 +905,15 @@
         $.ajax({
             type: "POST",
             dataType: "json",
-            url: "<?php echo base_url(); ?>akuntans/simpan",
+            url: "<?php echo base_url(); ?>kasir/simpan",
             data: dataString,
 
             success: function (data) {
-                $('#id_Reload').trigger('click');
-                $('#id_btnBatal').trigger('click');
-                $('#id_body_data').empty();
-                readyToStart();
+                //$('#id_Reload').trigger('click');
+                $('#id_idPemb').val(data.idPemb);
+                //$('#id_body_data').empty();
+                //readyToStart();
+                $('#id_btnSimpan').attr('disabled',true);
                 UIToastr.init(data.tipePesan, data.pesan);
             }
 
