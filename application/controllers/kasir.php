@@ -35,7 +35,7 @@ class Kasir extends CI_Controller
         $this->auth->restrict($data['menu_id']);
         $this->auth->cek_menu($data['menu_id']);
         $data['proyek'] = $this->master_advance_m->getProyek();
-        $data['kurs'] = $this->master_advance_m->getKurs();
+        $data['kodebayar'] = $this->kasir_m->getKodeBayar();
 
         if (isset($_POST["btnSimpan"])) {
             $this->simpan();
@@ -52,21 +52,73 @@ class Kasir extends CI_Controller
         }
     }
 
-    function getDescCpa()
+    public function getAdvAll()
+    {
+        $this->CI =& get_instance();//and a.kcab_id<>'1100'
+        $rows = $this->kasir_m->getAdvAll();
+        $data['data'] = array();
+        foreach ($rows as $row) {
+            $jmlUang = number_format($row->jml_uang, 2);
+            $array = array(
+                'idPp' => trim($row->id_pp),
+                'idAdv' => trim($row->id_advance),
+                'namaKyw' => trim($row->nama_kyw),
+                'dept' => trim($row->nama_dept),
+                'jmlUang' => $jmlUang
+            );
+            array_push($data['data'], $array);
+        }
+        $this->output->set_output(json_encode($data));
+    }
+
+    function getDescAdv()
     {
         $this->CI =& get_instance();
         $idAdv = $this->input->post('idAdv', TRUE);
-        $crows = $this->master_advance_m->getCDescCpa($idAdv);
-        if ($crows <= 0) {
-            $array = array('baris' => 0);
-            $rows['data_cpa'] = $array;
-            $this->output->set_output(json_encode($rows));
+        $rows = $this->kasir_m->getDescAdv($idAdv);
+        if ($rows) {
+            foreach ($rows as $row)
+                $jmlUang    = number_format($row->jml_uang, 2);
+                $tglTrans   = date('d-m-Y', strtotime($row->tgl_trans));
+                $tglJT      = date('d-m-Y', strtotime($row->tgl_jt));
+            $array = array(
+                'baris' => 1,
+                'nama_kyw' => $row->nama_kyw,
+                'nama_dept' => $row->nama_dept,
+                'jml_uang' => $jmlUang,
+                'id_proyek' => $row->id_proyek,
+                'tgl_trans' => $tglTrans,
+                'tgl_jt' => $tglJT,
+                'kodePerkUM'=> $row->kode_perk,
+                'namaPerkUM'=> $row->nama_perk,
+                'keterangan'=> $row->keterangan
+                //'' => $row->
+            );
         } else {
-            $rows = $this->master_advance_m->getDescCpa($idAdv);
-            $this->output->set_output(json_encode($rows));
+            $array = array('baris' => 0);
         }
 
+        $this->output->set_output(json_encode($array));
+    }
+    function getDescKodeBayar()
+    {
+        $this->CI =& get_instance();
+        $kdBayar = $this->input->post('kdBayar', TRUE);
+        $kdBayar = trim($kdBayar);
+        $rows = $this->kasir_m->getDescKodeBayar($kdBayar);
+        if ($rows) {
+            foreach ($rows as $row)
+                //$nilai_kurs = number_format($row->nilai_kurs, 2);
+            $array = array(
+                'baris' => 1,
+                'kodePerk' => $row->kode_perk,
+                'namaPerk' => $row->nama_perk
+            );
+        } else {
+            $array = array('baris' => 0);
+        }
 
+        $this->output->set_output(json_encode($array));
     }
 
     function simpan()
@@ -123,49 +175,49 @@ class Kasir extends CI_Controller
         $totJurnal = trim($this->input->post('txtTempLoop'));
         if ($totJurnal > 0) {
             for ($i = 1; $i <= $totJurnal; $i++) {
-                $tKodePerk 	= 'tempKodePerk' . $i;
+                $tKodePerk = 'tempKodePerk' . $i;
                 $tKodeCflow = 'tempKodeCflow' . $i;
-                $tJumlah 	= 'tempJumlah' . $i;
-                $tKet 		= 'tempKet' . $i;
+                $tJumlah = 'tempJumlah' . $i;
+                $tKet = 'tempKet' . $i;
 
-                $tmpKodePerk 	= trim($this->input->post($tKodePerk));
-                $tmpKodeCflow 	= trim($this->input->post($tKodeCflow));
-                $tmpJumlah 		= str_replace(',', '', trim($this->input->post($tJumlah)));
-                $tmpKet 		= trim($this->input->post($tKet));
-                $TotalC 		= $this->master_advance_m->get_terpakai_cflow($tmpKodeCflow);
-                $TotalP 		= $this->master_advance_m->get_terpakai_perk($tmpKodePerk);
+                $tmpKodePerk = trim($this->input->post($tKodePerk));
+                $tmpKodeCflow = trim($this->input->post($tKodeCflow));
+                $tmpJumlah = str_replace(',', '', trim($this->input->post($tJumlah)));
+                $tmpKet = trim($this->input->post($tKet));
+                $TotalC = $this->master_advance_m->get_terpakai_cflow($tmpKodeCflow);
+                $TotalP = $this->master_advance_m->get_terpakai_perk($tmpKodePerk);
                 $data = array(
                     'id_cpa' => 0,
-                    'id_master' 	=> $modelidAdv,
-                    'kode_perk' 	=> $tmpKodePerk,
-                    'kode_cflow' 	=> $tmpKodeCflow,
-                    'keterangan' 	=> $tmpKet,
-                    'jumlah' 		=> $tmpJumlah
+                    'id_master' => $modelidAdv,
+                    'kode_perk' => $tmpKodePerk,
+                    'kode_cflow' => $tmpKodeCflow,
+                    'keterangan' => $tmpKet,
+                    'jumlah' => $tmpJumlah
                 );
                 $query = $this->master_advance_m->insertCpa($data);
                 $totalCflow = $TotalC + $tmpJumlah;
                 $totalCPerk = $TotalP + $tmpJumlah;
 
-                $dataTerpakaiCflow  = array(
+                $dataTerpakaiCflow = array(
                     'terpakai' => $totalCflow
                 );
 
-                $dataTerpakaiPerk  = array(
+                $dataTerpakaiPerk = array(
                     'terpakai' => $totalCperk
                 );
-                $query = $this->master_advance_m->updateBudgetCflowTerpakai($tmpKodeCflow,$tahun,$idProyek,$dataTerpakaiCflow);
-                $query = $this->master_advance_m->updateBudgetCflowSaldo($tmpKodeCflow,$tahun,$idProyek);
-                $query = $this->master_advance_m->updateBudgetKdPerkTerpakai($tmpKodePerk,$tahun,$idProyek,$dataTerpakaiPerk);
-                $query = $this->master_advance_m->updateBudgetKdPerkSaldo($tmpKodePerk,$tahun,$idProyek);
+                $query = $this->master_advance_m->updateBudgetCflowTerpakai($tmpKodeCflow, $tahun, $idProyek, $dataTerpakaiCflow);
+                $query = $this->master_advance_m->updateBudgetCflowSaldo($tmpKodeCflow, $tahun, $idProyek);
+                $query = $this->master_advance_m->updateBudgetKdPerkTerpakai($tmpKodePerk, $tahun, $idProyek, $dataTerpakaiPerk);
+                $query = $this->master_advance_m->updateBudgetKdPerkSaldo($tmpKodePerk, $tahun, $idProyek);
             }
-            $tmpKodeCflow 	= trim($this->input->post($tKodeCflow));
-            $TotalC 		= $this->master_advance_m->get_total_cflow($tmpKodeCflow);
-            $total 			= $totalC - $totalCflow;
+            $tmpKodeCflow = trim($this->input->post($tKodeCflow));
+            $TotalC = $this->master_advance_m->get_total_cflow($tmpKodeCflow);
+            $total = $totalC - $totalCflow;
             $data = array(
                 'inout_budget' => '1'
             );
-            if ($total <= 0){
-                $model 			= $this->master_advance_m->updateAdv($data, $modelidAdv);
+            if ($total <= 0) {
+                $model = $this->master_advance_m->updateAdv($data, $modelidAdv);
             }
         }
 
@@ -257,13 +309,13 @@ class Kasir extends CI_Controller
                     'jumlah' => $tmpJumlah
                 );
                 $query = $this->master_advance_m->insertCpa($data);
-                $dataTerpakai  = array(
+                $dataTerpakai = array(
                     'terpakai' => $tmpJumlah
                 );
-                $query = $this->master_advance_m->updateBudgetCflowTerpakai($tmpKodeCflow,$tahun,$idProyek,$dataTerpakai);
-                $query = $this->master_advance_m->updateBudgetCflowSaldo($tmpKodeCflow,$tahun,$idProyek);
-                $query = $this->master_advance_m->updateBudgetKdPerkTerpakai($tmpKodePerk,$tahun,$idProyek,$dataTerpakai);
-                $query = $this->master_advance_m->updateBudgetKdPerkSaldo($tmpKodePerk,$tahun,$idProyek);
+                $query = $this->master_advance_m->updateBudgetCflowTerpakai($tmpKodeCflow, $tahun, $idProyek, $dataTerpakai);
+                $query = $this->master_advance_m->updateBudgetCflowSaldo($tmpKodeCflow, $tahun, $idProyek);
+                $query = $this->master_advance_m->updateBudgetKdPerkTerpakai($tmpKodePerk, $tahun, $idProyek, $dataTerpakai);
+                $query = $this->master_advance_m->updateBudgetKdPerkSaldo($tmpKodePerk, $tahun, $idProyek);
             }
         } else {
             $query = $this->master_advance_m->deleteCpa($idAdv);
@@ -311,61 +363,6 @@ class Kasir extends CI_Controller
             );
         }
         $this->output->set_output(json_encode($array));
-    }
-    function sign(){
-        $this->CI =& get_instance();
-        $idAdvance	= trim($this->input->post('idAdvance'));
-        $flag  		= $this->session->userdata('id_kyw');
-        $data = array(
-            'app_user_id' => $flag
-        );
-        $model 		= $this->master_advance_m->updateAdv($data,$idAdvance);
-
-        if($model){
-            $array = array(
-                'act'	=>1,
-                'tipePesan'=>'success',
-                'pesan' =>'Data berhasil di Approve.'
-            );
-        }else{
-            $array = array(
-                'act'	=>0,
-                'tipePesan'=>'error',
-                'pesan' =>'Data gagal di Approve.'
-            );
-        }
-        $this->output->set_output(json_encode($array));
-    }
-    function cetak($idAdv)
-    {
-        if ($this->auth->is_logged_in() == false) {
-            redirect('main/index');
-        } else {
-            $data['advance'] = $this->master_advance_m->getDescAdv($idAdv);
-            $this->load->view('cetak/cetak_advance', $data);
-        }
-    }
-
-    function cetak_cpa($idAdv)
-    {
-        if ($this->auth->is_logged_in() == false) {
-            redirect('main/index');
-        } else {
-            $data['advance'] = $this->master_advance_m->cetak_cpa($idAdv);
-            $data['detail'] = $this->master_advance_m->cetak_cpa_detail($idAdv);
-            $this->load->view('cetak/cetak_cpa', $data);
-        }
-    }
-
-    function cetak_pp($idAdv)
-    {
-        if ($this->auth->is_logged_in() == false) {
-            redirect('main/index');
-        } else {
-            $data['advance'] = $this->master_advance_m->cetak_cpa($idAdv);
-            $data['detail'] = $this->master_advance_m->cetak_cpa_detail($idAdv);
-            $this->load->view('cetak/cetak_cpa', $data);
-        }
     }
 
 
