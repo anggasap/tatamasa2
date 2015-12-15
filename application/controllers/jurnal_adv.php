@@ -51,7 +51,7 @@ class Jurnal_adv extends CI_Controller
 	
 	public function getAdvAll(){
 		$this->CI =& get_instance();//and a.kcab_id<>'1100'
-		$rows = $this->master_advance_m->getAdvAll();
+		$rows = $this->jurnal_adv_m->getAdvAll();
 		$data['data'] = array();
 		foreach( $rows as $row ) {
 			$jmlUang = number_format($row->jml_uang,2);
@@ -144,6 +144,22 @@ class Jurnal_adv extends CI_Controller
 		$this->output->set_output(json_encode($array));
 	}
 	
+	function getCashFlow(){
+		$this->CI =& get_instance();
+		$idAdv = $this->input->post ( 'idAdv', TRUE );
+		$rows = $this->jurnal_adv_m->getIdCf($idAdv);
+		if($rows){
+			foreach ( $rows as $row )
+				$array = array (
+						'baris'=>1,
+						'id_cf' => $row->kode_cflow
+				);
+		}else{
+			$array=array('baris'=>0);
+		}
+		$this->output->set_output(json_encode($array));
+	}
+	
 	function getDescJadv(){
 		$this->CI =& get_instance();
 		$idJadv = $this->input->post ('idJadv',TRUE);
@@ -153,18 +169,15 @@ class Jurnal_adv extends CI_Controller
 				$tgl = date ( 'd-m-Y',strtotime($row->tgl_trans));
 				$amount = number_format($row->jumlah,2);
 				$array = array(
-						'baris'=>1,
-						'id_pp' => $row->id_pp,
-						'id_advance' => $row->id_advance,
-						'tgl_trans'=>$tgl,
-                        'jumlah' => $amount,
-						'kodePerk'	=>$row->kode_perk,
-						'kodeAlt'	=>$row->kode_alt,
-						'namaPerk'	=>$row->nama_perk,
-						'kodeCflow'	=>$row->kode_cflow,
-						'kodeAltCflow'=>$row->kode_altCflow,
-						'namaCflow'	=>$row->nama_cflow,
-                        'type_adv' => $row->type_adv
+						'baris'			=>1,
+						'id_pp' 		=> $row->id_pp,
+						'id_advance' 	=> $row->id_advance,
+						'tgl_trans'		=> $tgl,
+                        'jumlah' 		=> $amount,
+						'id_account' 	=> $row->type_adv,
+						'nama_account' 	=> $row->nama_account,
+						'kode_bayar' 	=> $row->kode_bayar,
+						'nama_kdbayar'	=> $row->nama_kdbayar
 						);
 			}			
 		}else{
@@ -173,37 +186,52 @@ class Jurnal_adv extends CI_Controller
 		$this->output->set_output(json_encode($array));
 	}
 	
+	function getTypeAdv(){
+		$this->CI =& get_instance();//and a.kcab_id<>'1100'
+		$rows = $this->jurnal_adv_m->getTypeAdv();
+		$data['data'] = array();
+		foreach( $rows as $row ) {
+			$array = array(
+					'id_account' => trim($row->id_account),
+					'nama' => trim($row->nama_account),
+					'norek' =>  trim($row->nama_account),
+					'kode_perk' => trim($row->kode_perk),
+			);
+			array_push($data['data'],$array);
+		}
+		$this->output->set_output(json_encode($data));
+	}
+	
     function simpan(){
-
-        //$idPp			= trim($this->input->post('idJAdvance'));
-
-		//$episodeNo		= trim($this->input->post('episodeNo'));
-		//$cGiro			= trim($this->input->post('checkGiro'));
-		//$tglGiro		= trim($this->input->post('tgl'));
-		//$tglGiro 		= date('Y-m-d',strtotime($tglGiro));
-		$idAdv			= trim($this->input->post('idAdvance'));
-		$tglTrans			= trim($this->input->post('tgltrans'));//
-		$tglTrans = date('Y-m-d', strtotime($tglTrans));
+        $idAdv			= trim($this->input->post('idAdvance'));
+		$tglTrans		= trim($this->input->post('tgltrans'));//
+		$tglTrans 		= date('Y-m-d', strtotime($tglTrans));
 		$jumlah			= str_replace(',', '', trim($this->input->post('jumlah')));
-        $typeAdv		= trim($this->input->post('jnsadvance'));
-		$kodePerk		= trim($this->input->post('kodePerk'));
-		$kodeCflow		= trim($this->input->post('kodeCflow'));
-		$bulan = date('m', strtotime($tglTrans));//$tglTrans->format("m");
-		$tahun = date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
+        $typeAdv		= trim($this->input->post('idUm'));
+		$kodeBayar		= trim($this->input->post('kodeBayar'));
+		$bulan 			= date('m', strtotime($tglTrans));//$tglTrans->format("m");
+		$tahun 			= date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
 		$idPp 			= $this->jurnal_adv_m->getIdPp($bulan,$tahun);
-        $data = array(
+        $data_model1 = array(
             'id_pp'		      	=> $idPp,
             'tgl_trans'		    => $tglTrans,
             'id_advance'		=> $idAdv,
         	'jumlah'		    => $jumlah,
-        	'kode_perk'			=> $kodePerk,
-        	'kode_cflow'		=> $kodeCflow,
-        	'type_adv'			=> $typeAdv
+        	'type_adv'			=> $typeAdv,
+			'kode_bayar'		=> $kodeBayar
         );
-        $model = $this->jurnal_adv_m->insertJadv($data);
-        if($model){
+        $model1 = $this->jurnal_adv_m->insertJadv($data_model1);
+		/*Update status pp di master advance*/
+		if($model1){
+			$data_model2 = array(
+					'status_pp'		      	=> 1
+			);
+			$model2 = $this->jurnal_adv_m->updateAdv_statusPP($data_model2,$idAdv);
+		}
+        if($model1 && $model2){
     		$array = array(
     			'act'	=>1,
+				'id' 	=>$idPp,
     			'tipePesan'=>'success',
     			'pesan' =>'Data berhasil disimpan.'
     		);
@@ -218,37 +246,29 @@ class Jurnal_adv extends CI_Controller
     }
 	
     function ubah(){
-    	/*$idPp				= trim($this->input->post('idJAdvance'));
-		$idAdv				= trim($this->input->post('idAdvance'));
-        $tglPp				= date('Y-m-d');
-		$episodeNo			= trim($this->input->post('episodeNo'));
-		$cGiro				= trim($this->input->post('checkGiro'));
-		$tglGiro			= trim($this->input->post('tgl'));
-		$tglGiro 			= date('Y-m-d',strtotime($tglGiro));
-		$amount				= str_replace(',', '', trim($this->input->post('amount')));
-        $originalAmount		= str_replace(',', '', trim($this->input->post('originalAmount')));*/
-
-		$idPp				= trim($this->input->post('idJAdvance'));
+    	$idPp			= trim($this->input->post('idJAdvance'));
 		$idAdv			= trim($this->input->post('idAdvance'));
-		$tglTrans			= trim($this->input->post('tgltrans'));//
-		$tglTrans = date('Y-m-d', strtotime($tglTrans));
+		$tglTrans		= trim($this->input->post('tgltrans'));//
+		$tglTrans 		= date('Y-m-d', strtotime($tglTrans));
 		$jumlah			= str_replace(',', '', trim($this->input->post('jumlah')));
-		$typeAdv		= trim($this->input->post('jnsadvance'));
-		$kodePerk		= trim($this->input->post('kodePerk'));
-		$kodeCflow		= trim($this->input->post('kodeCflow'));
-
-        $data = array(
-				'tgl_trans'		    => $tglTrans,
-				'id_advance'		=> $idAdv,
-				'jumlah'		    => $jumlah,
-				'kode_perk'			=> $kodePerk,
-				'kode_cflow'		=> $kodeCflow,
-				'type_adv'			=> $typeAdv
+        $typeAdv		= trim($this->input->post('idUm'));
+		$kodeBayar		= trim($this->input->post('kodeBayar'));
+		$bulan 			= date('m', strtotime($tglTrans));//$tglTrans->format("m");
+		$tahun 			= date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
+		
+		$data = array(
+            'id_pp'		      	=> $idPp,
+            'tgl_trans'		    => $tglTrans,
+            'id_advance'		=> $idAdv,
+        	'jumlah'		    => $jumlah,
+        	'type_adv'			=> $typeAdv,
+			'kode_bayar'		=> $kodeBayar
         );
     	$model = $this->jurnal_adv_m->updateJadv($data,$idPp);
     	if($model){
     		$array = array(
     			'act'	=>1,
+				'id'	=> $idPp,
     			'tipePesan'=>'success',
     			'pesan' =>'Data berhasil diubah.'
     		);

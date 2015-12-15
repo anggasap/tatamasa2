@@ -13,16 +13,27 @@ class Master_settle_adv_m extends CI_Model {
 		}
 		return $rows; // returning rows, not row
 	}
+	public function getAdvAll()
+	{
+		$sql="SELECT ma.id_advance,mk.nama_kyw, ma.jml_uang
+			  from master_advance ma left join master_karyawan mk on ma.id_kyw = mk.id_kyw
+			  where status_settle = 0";
+		$query=$this->db->query($sql);
+		return $query->result(); // returning rows, not row
+	}
 	function getSettleAll()
 	{
-		$sql="SELECT ms.id_settle_adv,mk.nama_kyw, ms.jml_uang_paid from master_settle_adv ms left join master_karyawan mk on ms.id_kyw = mk.id_kyw";
+		$sql="SELECT ms.id_settle_adv,mk.nama_kyw, ma.jml_uang,ms.jml_uang_paid
+			  from master_settle_adv ms
+			  left join master_advance ma on ms.id_adv = ma.id_advance
+			  left join master_karyawan mk on ms.id_kyw = mk.id_kyw";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}
 	function getDescSettle($idSettle)
 	{
-		$this->db->select('mp.nama_proyek,mp.id_proyek, ma.tgl_trans,ma.jml_uang, mr.id_kyw, mk.nama_kyw, md.nama_dept, mr.id_adv,ma.jml_uang,mr.jml_uang_paid,mr.jml_uang_oupaid,
-		mr.tgl_jt, mr.pay_to, mr.nama_akun_bank, mr.no_akun_bank, mr.nama_bank, mr.keterangan,ma.keterangan as ketadv, mr.dok_fpe, 
+		$this->db->select('mp.nama_proyek,mp.id_proyek, ma.tgl_trans as tglTransAdv,ma.jml_uang, mr.id_kyw, mk.nama_kyw,md.id_dept, md.nama_dept, mr.id_adv,ma.jml_uang,mr.jml_uang_paid,mr.jml_uang_oupaid,
+		mr.tgl_trans as tglTransSt,mr.tgl_jt, mr.pay_to, mr.nama_akun_bank, mr.no_akun_bank, mr.nama_bank, mr.keterangan,ma.keterangan as ketadv, mr.dok_fpe,
 		mr.dok_kuitansi, mr.dok_fpa, mr.dok_po, mr.dok_suratjalan,mr.dok_lappenerimaanbrg, mr.dok_bast, 
 		mr.dok_bap, mr.dok_ssp, mr.dok_sspk, mr.dok_lpjum, mr.app_keuangan_id, mr.app_hd_id, mr.app_gm_id, 
 		mr.app_keuangan_status, mr.app_hd_status, mr.app_gm_status, mr.app_keuangan_tgl, mr.app_hd_tgl, 
@@ -47,33 +58,31 @@ class Master_settle_adv_m extends CI_Model {
 		$query = $this->db->get()->row()->nama_kyw;
 		return $query;
 	}
-    public function getCDescCpa($idAdv)
+	public function getCDescCpa($idSettle)
 	{
-		/*$this->db->select('id_cpa,id_master,kode_perk,kode_cflow,keterangan,jumlah');
+		$this->db->select ( 'id_cpa,id_master,kode_perk,kode_cflow,keterangan,jumlah' );
 		$this->db->from('cpa');
-		$this->db->where('id_master',$idAdv);
-		$query = $this->db->get();*/
-		$sql= "select * from cpa_perk where id_master = '$idAdv' union select * from cpa_cflow where id_master = '$idAdv' ";
-		$query = $this->db->query($sql);
-		return $query->num_rows();	
-	}    
-    public function getDescCpa($idAdv)
-	{
-		$sql= "select kode_perk as kode,1 as jns_kode, keterangan,jumlah from cpa_perk where id_master = '$idAdv' 
-				union select kode_cflow as kode,2 as jns_kode, keterangan,jumlah  from cpa_cflow where id_master = '$idAdv' ";
-		$query = $this->db->query($sql);
-        $rows['data_cpa'] = $query->result();
-		return $rows;
-        	
+		$this->db->where ( 'id_master', $idSettle );
+//
+		$query = $this->db->get ();
+		return $query->num_rows();
 	}
-    function deleteCpa($IdAdv){
-		$this->db->trans_start();
-		$this->db->query("delete from cpa_perk where id_master ='$IdAdv'");
-		$this->db->query("delete from cpa_cflow where id_master ='$IdAdv'");
-		$this->db->trans_complete();
-		/*$this->db->trans_begin();
-		$query1	=	$this->db->where('id_master',$IdAdv);
-		$query2	=   $this->db->delete('cpa_perk');
+	public function getDescCpa($idSettle)
+	{
+		$this->db->select ( 'id_cpa,id_master,kode_perk,kode_cflow,keterangan,jumlah' );
+		$this->db->from('cpa');
+		$this->db->where ( 'id_master', $idSettle );
+//		$this->db->where ( 'T.STATUS_AKTIF <>', 3 );
+		$query = $this->db->get ();
+
+		$rows['data_cpa'] = $query->result();
+		return $rows;
+
+	}
+	function deleteCpa($idSettle){
+		$this->db->trans_begin();
+		$query1	=	$this->db->where('id_master',$idSettle);
+		$query2	=   $this->db->delete('cpa');
 		if ($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
 			return false;
@@ -81,7 +90,7 @@ class Master_settle_adv_m extends CI_Model {
 		else{
 			$this->db->trans_commit();
 			return true;
-		}*/
+		}
 	}
 	function getIdSettle($bulan,$tahun){
 		$sql= "select id_settle_adv from master_settle_adv where MONTH(tgl_trans)='$bulan' and YEAR(tgl_trans)='$tahun'";
@@ -101,6 +110,18 @@ class Master_settle_adv_m extends CI_Model {
 			return $kode."-".$id_settle."-".$bulan.$th;
 		}
 	}
+	function insertCpa($data){
+		$this->db->trans_begin();
+		$model = $this->db->insert('cpa', $data);
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return false;
+		}
+		else{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
 	function insertSettle($data){	
 		$this->db->trans_begin();
 		$model = $this->db->insert('master_settle_adv', $data);
@@ -113,21 +134,10 @@ class Master_settle_adv_m extends CI_Model {
 			return true;
 		}
 	}
-	function insertCpaP($data){
+	function updateAdv_statusSettle($data_model2,$idAdvance){
 		$this->db->trans_begin();
-		$model = $this->db->insert('cpa_perk', $data);
-		if ($this->db->trans_status() === FALSE){
-			$this->db->trans_rollback();
-			return false;
-		}
-		else{
-			$this->db->trans_commit();
-			return true;
-		}
-	}
-	function insertCpaC($data){
-		$this->db->trans_begin();
-		$model = $this->db->insert('cpa_cflow', $data);
+		$query1 = $this->db->where('id_advance', $idAdvance);
+		$query2 = $this->db->update('master_advance', $data_model2);
 		if ($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
 			return false;

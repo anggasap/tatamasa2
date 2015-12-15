@@ -165,6 +165,7 @@ class Master_reqpay extends CI_Controller
 						'baris'=>1,
 						'id_kyw' 					=> $row->id_kyw,
 						'nama_kyw'					=> $row->nama_kyw,
+						'id_dept'					=> $row->id_dept,
 						'nama_dept'					=> $row->nama_dept,
 						'no_invoice'				=> $row->no_invoice,
 						'no_po'						=> $row->no_po,
@@ -172,6 +173,7 @@ class Master_reqpay extends CI_Controller
 						'id_proyek' 				=> $row->id_proyek,
 						'id_kurs' 					=> $row->id_kurs,
 						'nilai_kurs' 				=> $row->nilai_kurs,
+						'tgl_trans'					=> $tglTrans,
 						'tgl_jt' 					=> $tgl_jt,
 						'pay_to' 					=> $row->pay_to,
 						//'nama_pay_to' => $nama_pay_to[0]->nama_kyw,
@@ -297,113 +299,30 @@ class Master_reqpay extends CI_Controller
         $model = $this->master_reqpay_m->insertReqpay($data);
         
 		$totJurnal = trim($this->input->post('txtTempLoop'));
-		if ($totJurnal > 0) {
-			for ($i = 1; $i <= $totJurnal; $i++) {
-				$tKode 	    = 'tempKode' . $i;
-				$tJnsKode   = 'tempJenisKode'.$i;
-				$tJumlah 	= 'tempJumlah' . $i;
-				$tKet 		= 'tempKet' . $i;
+		if($totJurnal > 0){
+			for($i=1;$i<=$totJurnal;$i++){
+				$tKodePerk          = 'tempKodePerk'.$i;
+				$tKodeCflow         = 'tempKodeCflow'.$i;
+				$tJumlah            = 'tempJumlah'.$i;
+				$tKet               = 'tempKet'.$i;
 
-				$tmpJnsKode 	    = trim($this->input->post($tJnsKode));
-				$tmpKode 	    = trim($this->input->post($tKode));
-				$tmpJumlah 		= str_replace(',', '', trim($this->input->post($tJumlah)));
-				$tmpKet 		= trim($this->input->post($tKet));
-				if($tmpJnsKode == '1'){
-					$TotalP 		= $this->master_reqpay_m->get_terpakai_perk($tmpKode);
-					$data = array(
-							'id_cpa' => 0,
-							'id_master' 	=> $modelidReqpay,
-							'kode_perk' 	=> $tmpKode,
-							'keterangan' 	=> $tmpKet,
-							'jumlah' 		=> $tmpJumlah
+				$tmpKodePerk        = trim($this->input->post($tKodePerk ));
+				$tmpKodeCflow       = trim($this->input->post($tKodeCflow ));
+				$tmpJumlah          = str_replace(',', '', trim($this->input->post($tJumlah )));
+				$tmpKet             = trim($this->input->post($tKet ));
 
-					);
-					$query = $this->master_reqpay_m->insertCpaP($data);
-					$totalCperk = $TotalP + $tmpJumlah;
-					$dataTerpakaiPerk  = array(
-							'terpakai' => $totalCperk
-					);
-					$query = $this->master_reqpay_m->updateBudgetKdPerkTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiPerk);
-					$query = $this->master_reqpay_m->updateBudgetKdPerkSaldo($tmpKode,$tahun,$idProyek);
-				}else{
-					$TotalC 		= $this->master_reqpay_m->get_terpakai_cflow($tmpKode);
-					$data = array(
-							'id_cpa' => 0,
-							'id_master' 	=> $modelidReqpay,
-							'kode_cflow' 	=> $tmpKode,
-							'keterangan' 	=> $tmpKet,
-							'jumlah' 		=> $tmpJumlah
-
-					);
-					$query = $this->master_reqpay_m->insertCpaC($data);
-					$totalCflow = $TotalC + $tmpJumlah;
-					$dataTerpakaiCflow  = array(
-							'terpakai' => $totalCflow
-					);
-					$query = $this->master_reqpay_m->updateBudgetCflowTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiCflow);
-					$query = $this->master_reqpay_m->updateBudgetCflowSaldo($tmpKode,$tahun,$idProyek);
-
-					$tmpKodeCflow 	= trim($this->input->post($tKode));
-					$TotalC 		= $this->master_reqpay_m->get_saldo_cflow($tmpKodeCflow);
-					$total 			= $TotalC - $totalCflow;
-					$data = array(
-							'inout_budget' => '1'
-					);
-					if ($total <= 0){
-						$model 			= $this->master_reqpay_m->updateReqpay($data, $modelidReqpay);
-					}
-				}
-
+				$data = array(
+						'id_cpa'         => 0,
+						'id_master'      => $modelidReqpay,
+						'kode_perk'      => $tmpKodePerk,
+						'kode_cflow'     => $tmpKodeCflow,
+						'keterangan'     => $tmpKet,
+						'jumlah'        => $tmpJumlah
+				);
+				$query=$this->master_reqpay_m->insertCpa($data);
 			}
-
 		}
-        /*if ($totJurnal > 0) {
-            for ($i = 1; $i <= $totJurnal; $i++) {
-                $tKodePerk 	= 'tempKodePerk' . $i;
-                $tKodeCflow = 'tempKodeCflow' . $i;
-                $tJumlah 	= 'tempJumlah' . $i;
-                $tKet 		= 'tempKet' . $i;
 
-                $tmpKodePerk 	= trim($this->input->post($tKodePerk));
-                $tmpKodeCflow 	= trim($this->input->post($tKodeCflow));
-                $tmpJumlah 		= str_replace(',', '', trim($this->input->post($tJumlah)));
-                $tmpKet 		= trim($this->input->post($tKet));
-                $TotalC 		= $this->master_reqpay_m->get_terpakai_cflow($tmpKodeCflow);
-                $TotalP 		= $this->master_reqpay_m->get_terpakai_perk($tmpKodePerk);
-                $data = array(
-                    'id_cpa' 		=> 0,
-                    'id_master' 	=> $modelidReqpay,
-                    'kode_perk' 	=> $tmpKodePerk,
-                    'kode_cflow' 	=> $tmpKodeCflow,
-                    'keterangan' 	=> $tmpKet,
-                    'jumlah' 		=> $tmpJumlah
-                );
-                $query = $this->master_reqpay_m->insertCpa($data);
-                $totalCflow = $TotalC + $tmpJumlah;
-                $totalCperk = $TotalP + $tmpJumlah;
-
-                $dataTerpakaiCflow  = array(
-                    'terpakai' => $totalCflow
-                );
-
-                $dataTerpakaiPerk  = array(
-                    'terpakai' => $totalCperk
-                );
-                $query = $this->master_reqpay_m->updateBudgetCflowTerpakai($tmpKodeCflow,$tahun,$idProyek,$dataTerpakaiCflow);
-                $query = $this->master_reqpay_m->updateBudgetCflowSaldo($tmpKodeCflow,$tahun,$idProyek);
-                $query = $this->master_reqpay_m->updateBudgetKdPerkTerpakai($tmpKodePerk,$tahun,$idProyek,$dataTerpakaiPerk);
-                $query = $this->master_reqpay_m->updateBudgetKdPerkSaldo($tmpKodePerk,$tahun,$idProyek);
-            }
-            $tmpKodeCflow 	= trim($this->input->post($tKodeCflow));
-            $TotalC 		= $this->master_reqpay_m->get_saldo_cflow($tmpKodeCflow);
-            $total 			= $TotalC - $totalCflow;
-            $data = array(
-                'inout_budget' => '1'
-            );
-            if ($total <= 0){
-                $model 			= $this->master_reqpay_m->updateReqpay($data, $modelidReqpay);
-            }
-        }*/
 		if($model){
     		$array = array(
     			'act'	=>1,
@@ -473,116 +392,33 @@ class Master_reqpay extends CI_Controller
     	$model = $this->master_reqpay_m->updateReqpay($data,$idReqpay);
     	$model = $this->master_reqpay_m->deleteCpa($idReqpay);
 		$totJurnal = trim($this->input->post('txtTempLoop'));
-		if ($totJurnal > 0) {
-			for ($i = 1; $i <= $totJurnal; $i++) {
-				$tKode 	    = 'tempKode' . $i;
-				$tJnsKode   = 'tempJenisKode'.$i;
-				$tJumlah 	= 'tempJumlah' . $i;
-				$tKet 		= 'tempKet' . $i;
+		if($totJurnal > 0){
+			$query=$this->master_reqpay_m->deleteCpa($idReqpay);
 
-				$tmpJnsKode 	    = trim($this->input->post($tJnsKode));
-				$tmpKode 	    = trim($this->input->post($tKode));
-				$tmpJumlah 		= str_replace(',', '', trim($this->input->post($tJumlah)));
-				$tmpKet 		= trim($this->input->post($tKet));
-				if($tmpJnsKode == '1'){
-					$TotalP 		= $this->master_reqpay_m->get_terpakai_perk($tmpKode);
-					$data = array(
-							'id_cpa' => 0,
-							'id_master' 	=> $idReqpay,
-							'kode_perk' 	=> $tmpKode,
-							'keterangan' 	=> $tmpKet,
-							'jumlah' 		=> $tmpJumlah
+			for($i=1;$i<=$totJurnal;$i++){
+				$tKodePerk          = 'tempKodePerk'.$i;
+				$tKodeCflow         = 'tempKodeCflow'.$i;
+				$tJumlah            = 'tempJumlah'.$i;
+				$tKet               = 'tempKet'.$i;
 
-					);
-					$query = $this->master_reqpay_m->insertCpaP($data);
-					$totalCperk = $TotalP + $tmpJumlah;
-					$dataTerpakaiPerk  = array(
-							'terpakai' => $totalCperk
-					);
-					$query = $this->master_reqpay_m->updateBudgetKdPerkTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiPerk);
-					$query = $this->master_reqpay_m->updateBudgetKdPerkSaldo($tmpKode,$tahun,$idProyek);
-				}else{
-					$TotalC 		= $this->master_reqpay_m->get_terpakai_cflow($tmpKode);
-					$data = array(
-							'id_cpa' => 0,
-							'id_master' 	=> $idReqpay,
-							'kode_cflow' 	=> $tmpKode,
-							'keterangan' 	=> $tmpKet,
-							'jumlah' 		=> $tmpJumlah
+				$tmpKodePerk        = trim($this->input->post($tKodePerk ));
+				$tmpKodeCflow       = trim($this->input->post($tKodeCflow ));
+				$tmpJumlah          = str_replace(',', '', trim($this->input->post($tJumlah )));
+				$tmpKet             = trim($this->input->post($tKet ));
 
-					);
-					$query = $this->master_reqpay_m->insertCpaC($data);
-					$totalCflow = $TotalC + $tmpJumlah;
-					$dataTerpakaiCflow  = array(
-							'terpakai' => $totalCflow
-					);
-					$query = $this->master_reqpay_m->updateBudgetCflowTerpakai($tmpKode,$tahun,$idProyek,$dataTerpakaiCflow);
-					$query = $this->master_reqpay_m->updateBudgetCflowSaldo($tmpKode,$tahun,$idProyek);
-
-					$tmpKodeCflow 	= trim($this->input->post($tKode));
-					$TotalC 		= $this->master_reqpay_m->get_saldo_cflow($tmpKodeCflow);
-					$total 			= $TotalC - $totalCflow;
-					$data = array(
-							'inout_budget' => '1'
-					);
-					if ($total <= 0){
-						$model 			= $this->master_reqpay_m->updateReqpay($data, $idReqpay);
-					}
-				}
+				$data = array(
+						'id_cpa'         => 0,
+						'id_master'      => $idReqpay,
+						'kode_perk'      => $tmpKodePerk,
+						'kode_cflow'     => $tmpKodeCflow,
+						'keterangan'     => $tmpKet,
+						'jumlah'        => $tmpJumlah
+				);
+				$query=$this->master_reqpay_m->insertCpa($data);
 			}
-
-		} else {
-			$query = $this->master_reqpay_m->deleteCpa($idReqpay);
+		}else{
+			$query=$this->master_reqpay_m->deleteCpa($idReqpay);
 		}
-        /*if ($totJurnal > 0) {
-            for ($i = 1; $i <= $totJurnal; $i++) {
-                $tKodePerk 	= 'tempKodePerk' . $i;
-                $tKodeCflow = 'tempKodeCflow' . $i;
-                $tJumlah 	= 'tempJumlah' . $i;
-                $tKet 		= 'tempKet' . $i;
-
-                $tmpKodePerk 	= trim($this->input->post($tKodePerk));
-                $tmpKodeCflow 	= trim($this->input->post($tKodeCflow));
-                $tmpJumlah 		= str_replace(',', '', trim($this->input->post($tJumlah)));
-                $tmpKet 		= trim($this->input->post($tKet));
-                $TotalC 		= $this->master_reqpay_m->get_terpakai_cflow($tmpKodeCflow);
-                $TotalP 		= $this->master_reqpay_m->get_terpakai_perk($tmpKodePerk);
-                $data = array(
-                    'id_cpa' 		=> 0,
-                    'id_master' 	=> $idReqpay,
-                    'kode_perk' 	=> $tmpKodePerk,
-                    'kode_cflow' 	=> $tmpKodeCflow,
-                    'keterangan' 	=> $tmpKet,
-                    'jumlah' 		=> $tmpJumlah
-                );
-                $query = $this->master_reqpay_m->insertCpa($data);
-                $totalCflow = $TotalC + $tmpJumlah;
-                $totalCperk = $TotalP + $tmpJumlah;
-
-                $dataTerpakaiCflow  = array(
-                    'terpakai' => $totalCflow
-                );
-
-                $dataTerpakaiPerk  = array(
-                    'terpakai' => $totalCperk
-                );
-                $query = $this->master_reqpay_m->updateBudgetCflowTerpakai($tmpKodeCflow,$tahun,$idProyek,$dataTerpakaiCflow);
-                $query = $this->master_reqpay_m->updateBudgetCflowSaldo($tmpKodeCflow,$tahun,$idProyek);
-                $query = $this->master_reqpay_m->updateBudgetKdPerkTerpakai($tmpKodePerk,$tahun,$idProyek,$dataTerpakaiPerk);
-                $query = $this->master_reqpay_m->updateBudgetKdPerkSaldo($tmpKodePerk,$tahun,$idProyek);
-            }
-            $tmpKodeCflow 	= trim($this->input->post($tKodeCflow));
-            $TotalC 		= $this->master_reqpay_m->get_saldo_cflow($tmpKodeCflow);
-            $total 			= $TotalC - $totalCflow;
-            $data = array(
-                'inout_budget' => '1'
-            );
-            if ($total <= 0){
-                $model 			= $this->master_reqpay_m->updateReqpay($data, $idReqpay);
-            }
-        }else{
-			$query = $this->master_reqpay_m->deleteCpa($idAdv);
-		}*/
 		if($model){
     		$array = array(
     			'act'	=>1,

@@ -262,8 +262,7 @@
                         <div class="modal-dialog  modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"
-                                            aria-hidden="true"></button>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                     <h4 class="modal-title">Data CPA</h4>
                                 </div>
                                 <div class="modal-body">
@@ -276,13 +275,10 @@
                                                             <div class="col-md-6">
                                                                 <!--<label>Kode perk</label>-->
                                                                 <div class="input-group">
-                                                                    <input id="id_kodePerk" readonly
-                                                                           class="form-control input-sm kosongCPA"
-                                                                           type="text" name="kodePerk"
-                                                                           placeholder="Kode Perk"/>
+                                                                    <input id="id_kodePerk" readonly class="form-control input-sm kosongCPA"
+                                                                           type="text" name="kodePerk" placeholder="Kode Perk"/>
                                                     <span class="input-group-btn">
-                                        	           <a href="#" class="btn btn-success btn-sm"
-                                                          data-target="#idDivTabelPerk"
+                                        	           <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelPerk"
                                                           id="id_btnModal2" data-toggle="modal">
                                                            <i class="fa fa-search fa-fw"/></i>
                                                        </a>
@@ -311,13 +307,10 @@
                                                             <div class="col-md-6">
                                                                 <!--<label>Kode Cash Flow</label>-->
                                                                 <div class="input-group">
-                                                                    <input id="id_kodeCflow" readonly
-                                                                           class="form-control input-sm kosongCPA"
-                                                                           type="text" name="kodeCflow"
-                                                                           placeholder="Kode Cash Flow"/>
+                                                                    <input id="id_kodeCflow" readonly class="form-control input-sm kosongCPA"
+                                                                           type="text" name="kodeCflow" placeholder="Kode Cash Flow"/>
                                                     <span class="input-group-btn">
-                                        	           <a href="#" class="btn btn-success btn-sm"
-                                                          data-target="#idDivTabelCflow"
+                                        	           <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelCflow"
                                                           id="id_btnModal2" data-toggle="modal">
                                                            <i class="fa fa-search fa-fw"/></i>
                                                        </a>
@@ -328,10 +321,8 @@
                                                                 <label>&nbsp;</label>
                                                                 <!--<input id="id_kodeAltCflow" readonly class="form-control input-sm kosongCPA"
                                                                    type="text" name="kodeAltCflow" placeholder="Kode Cash Flow Alternatif"/>-->
-                                                                <label><span id="id_kodeAltCflow"
-                                                                             class="tkosongCPA"></span></label>
-                                                                <label><span id="id_namaCflow"
-                                                                             class="tkosongCPA"></span></label>
+                                                                <label><span id="id_kodeAltCflow" class="tkosongCPA"></span></label>
+                                                                <label><span id="id_namaCflow" class="tkosongCPA"></span></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -353,32 +344,24 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                        <textarea rows="2" cols="" name="keteranganCPA" id="id_keteranganCPA"
-                                                  class="form-control input-sm kosongCPA">
+                                        <textarea rows="2" cols="" name="keteranganCPA"  id="id_keteranganCPA" class="form-control input-sm kosongCPA">
                                         </textarea>
 
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" id="idTxtTempLoop" name="txtTempLoop"
-                                                           class="form-control nomor1 hidden">
-                                                    <input type="text" id="idTxtTempJnsKode" name="txtTempJnsKode"
-                                                           class="form-control nomor1 hidden">
-                                                    <input type="text" id="idTempUbahCPA" name="txtTempUbahCPA"
-                                                           class="form-control nomor1 hidden">
-                                                    <input type="text" id="idTempJumlahCPA" name="txtTempJumlahCPA"
-                                                           class="form-control nomor hidden">
+                                                    <input type="text" id="idTxtTempLoop" name="txtTempLoop" class="form-control nomor1 hidden">
+                                                    <input type="text" id="idTempUbahCPA" name="txtTempUbahCPA" class="form-control nomor1 hidden">
+                                                    <input type="text" id="idTempJumlahCPA" name="txtTempJumlahCPA" class="form-control nomor hidden">
                                                     <a href="javascript:;" class="btn blue btn-sm" id="id_btnAddCpa">
                                                         <i class="fa fa-plus"></i>
                                                     </a>
                                                     <a href="javascript:;" class="btn red btn-sm" id="id_btnRemoveCpa">
                                                         <i class="fa fa-minus"></i>
                                                     </a>
-                                                    <a href="javascript:;" class="btn yellow btn-sm"
-                                                       id="id_btnUpdateCpa">
+                                                    <a href="javascript:;" class="btn yellow btn-sm" id="id_btnUpdateCpa">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
-                                                    <a href="javascript:;" class="btn default btn-sm"
-                                                       id="id_btnBatalCpa">
+                                                    <a href="javascript:;" class="btn default btn-sm" id="id_btnBatalCpa">
                                                         <i class="fa fa-times"></i>
                                                     </a>
                                                 </div>
@@ -387,17 +370,16 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-body">
-                                                    <table class="table table-striped table-hover table-bordered"
-                                                           id="id_tabelPerkCflow">
+                                                    <table class="table table-striped table-hover table-bordered" id="id_tabelPerkCflow">
                                                         <thead>
                                                         <tr>
                                                             <th width="20%">
-                                                                Kode
+                                                                Kode Perk
                                                             </th>
-                                                            <th width="10%">
-                                                                Jns kode
+                                                            <th width="20%">
+                                                                Kode Cflow
                                                             </th>
-                                                            <th width="50%">
+                                                            <th width="40%">
                                                                 Keterangan
                                                             </th>
                                                             <th width="20%">
@@ -421,9 +403,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label>Total :</label>
-                                                        <input type="text" name="totalCPA"
-                                                               class="form-control nomor input-sm" id="idTotalCPA"
-                                                               readonly>
+                                                        <input type="text" name="totalCPA" class="form-control nomor input-sm" id="idTotalCPA" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -433,9 +413,7 @@
                                 </div>
                                 <!-- END MODAL BODY-->
                                 <div class="modal-footer">
-                                    <button type="button" class="btn default" data-dismiss="modal"
-                                            id="btnCloseModalDataCPA">Close
-                                    </button>
+                                    <button type="button" class="btn default" data-dismiss="modal" id="btnCloseModalDataCPA">Close</button>
                                 </div>
                             </div>
                             <!-- /.modal-content -->
@@ -1413,76 +1391,44 @@
         $('#id_btnRemoveCpa').attr("disabled", true);
 		$('#id_btnSign').attr("disabled",true);
     }
-    $('#id_btnAddCpa').click(function () {
+    $('#id_btnAddCpa').click(function(){
         var i = $('#idTxtTempLoop').val();
-        //Jika Kode cflow saja
-        if ($('#id_kodePerk').val() == '' && $('#id_kodeCflow').val() != '') {
-            var i = parseInt($('#idTxtTempLoop').val());
-
-            i = i + 1;
-            var jnsKode = $('#idTxtTempJnsKode').val();
-            var kodeCflow = $('#id_kodeCflow').val();
-            var ket = $('#id_keteranganCPA').val().trim();
-            var jumlah = $('#id_jumlahCPA').val();
-
-            tr = '<tr class="listdata" id="tr' + i + '">';
-            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKode' + i + '" name="tempKode' + i + '" readonly="true" value="' + kodeCflow + '" ></td>';
-            tr += '<td><input type="text" class="form-control input-sm" id="id_tempJenisKode' + i + '" name="tempJenisKode' + i + '" readonly="true" value="' + jnsKode + '"></td>';
-            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKet' + i + '" name="tempKet' + i + '" readonly="true" value="' + ket + '"></td>';
-            tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah' + i + '" name="tempJumlah' + i + '" readonly="true" value="' + jumlah + '"></td>';
-            tr += '</tr>';
-            jumlahP = parseFloat(CleanNumber(jumlah));
-            var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
-            var total = totalP + jumlahP;
-            $('#idTotalCPA').val(number_format(total, 2));
-            $('#id_body_data').append(tr);
-            $('#idTxtTempLoop').val(i);
-            kosongCPA();
-            //Jika kode perk aja
-        } else if ($('#id_kodePerk').val() != '' && $('#id_kodeCflow').val() == '') {
-            var i = parseInt($('#idTxtTempLoop').val());
-            i = i + 1;
-            var jnsKode = $('#idTxtTempJnsKode').val();
-            var kodePerk = $('#id_kodePerk').val();
-            var ket = $('#id_keteranganCPA').val().trim();
-            var jumlah = $('#id_jumlahCPA').val();
-
-            tr = '<tr class="listdata" id="tr' + i + '">';
-            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKode' + i + '" name="tempKode' + i + '" readonly="true" value="' + kodePerk + '"></td>';
-            tr += '<td><input type="text" class="form-control input-sm" id="id_tempJenisKode' + i + '" name="tempJenisKode' + i + '" readonly="true" value="' + jnsKode + '"></td>';
-            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKet' + i + '" name="tempKet' + i + '" readonly="true" value="' + ket + '"></td>';
-            tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah' + i + '" name="tempJumlah' + i + '" readonly="true" value="' + jumlah + '"></td>';
-            tr += '</tr>';
-            /*jumlahP = parseFloat(CleanNumber(jumlah));
-            var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
-            var total = totalP + jumlahP;
-            $('#idTotalCPA').val(number_format(total, 2));*/
-            $('#id_body_data').append(tr);
-            $('#idTxtTempLoop').val(i);
-            kosongCPA();
+        if($('#id_kodePerk').val() =='' && $('#id_kodeCflow').text() == ''){
+            alert("Akun GL tidak boleh kosong.");
         }else{
-            alert("Hanya boleh isi salah satu kode.");
+            var i = parseInt($('#idTxtTempLoop').val());
+
+            i=i+1;
+            var kodePerk        = $('#id_kodePerk').val();
+            var kodeCflow       = $('#id_kodeCflow').val();
+            var ket             = $('#id_keteranganCPA').val().trim();
+            var jumlah          = $('#id_jumlahCPA').val();
+
+            tr ='<tr class="listdata" id="tr'+i+'">';
+            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKodePerk'+i+'" name="tempKodePerk'+i+'" readonly="true" value="'+kodePerk+'"></td>';
+            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKodeCflow'+i+'" name="tempKodeCflow'+i+'" readonly="true" value="'+kodeCflow+'" ></td>';
+            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKet'+i+'" name="tempKet'+i+'" readonly="true" value="'+ket+'"></td>';
+            tr+='<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah'+i+'" name="tempJumlah'+i+'" readonly="true" value="'+jumlah+'"></td>';
+            tr+= '</tr>';
+            jumlahP          = parseFloat(CleanNumber(jumlah));
+            var totalP        = parseFloat(CleanNumber($('#idTotalCPA').val()));
+            var total      = totalP+jumlahP;
+            $('#idTotalCPA').val(number_format(total,2));
+            $('#id_body_data').append(tr);
+            $('#idTxtTempLoop').val(i);
+            kosongCPA();
         }
     });
 
     $("#id_tabelPerkCflow").on('click', 'tbody tr', function () {
-        var kode = $(this).find("td input").eq(0).val();
-        var jnsKode = $(this).find("td input").eq(1).val();
-        var ket = $(this).find("td input").eq(2).val();
-        var jumlah = $(this).find("td input").eq(3).val();
-        //Jika jns kode == kode perk
-        if(jnsKode == '1'){
-            $('#id_kodePerk').val(kode);
-            $('#idTxtTempJnsKode').val(jnsKode);
-            $('#id_keteranganCPA').val(ket);
-            $('#id_jumlahCPA').val(jumlah);
-        }else{
-            $('#id_kodeCflow').val(kode);
-            $('#idTxtTempJnsKode').val(jnsKode);
-            $('#id_keteranganCPA').val(ket);
-            $('#id_jumlahCPA').val(jumlah);
-        }
-
+        var kodePerk    = $(this).find("td input").eq(0).val();
+        var kodeCflow   = $(this).find("td input").eq(1).val();
+        var ket         = $(this).find("td input").eq(2).val();
+        var jumlah      = $(this).find("td input").eq(3).val();
+        $('#id_kodePerk').val(kodePerk);
+        $('#id_kodeCflow').val(kodeCflow);
+        $('#id_keteranganCPA').val(ket);
+        $('#id_jumlahCPA').val(jumlah);
 
         var idTr = $(this).attr('id');
         var noRow = idTr.replace('tr', '');
@@ -1490,63 +1436,94 @@
 
         $('#idTempJumlahCPA').val(jumlah);
 
-        $('#id_btnAddCpa').attr("disabled", true);
-        $('#id_btnUpdateCpa').attr("disabled", false);
-        $('#id_btnRemoveCpa').attr("disabled", false);
+        $('#id_btnAddCpa').attr("disabled",true);
+        $('#id_btnUpdateCpa').attr("disabled",false);
+        $('#id_btnRemoveCpa').attr("disabled",false);
 
     });
-    function kosongCPA() {
+    function kosongCPA(){
         $('.kosongCPA').val('');
         $('.tkosongCPA').text('');
         $('#id_jumlahCPA').val('0.00');
     }
-    $('#id_btnUpdateCpa').click(function () {
+    $('#id_btnUpdateCpa').click(function(){
         var noRow = $('#idTempUbahCPA').val();
-        var jnsKode = $('#idTxtTempJnsKode').val();
-        var ket = $('#id_keteranganCPA').val();
-        var jumlah = $('#id_jumlahCPA').val();
+        var kodePerk    = $('#id_kodePerk').val();
+        var kodeCflow   = $('#id_kodeCflow').val();
+        var ket         = $('#id_keteranganCPA').val();
+        var jumlah      = $('#id_jumlahCPA').val();
 
-        if(jnsKode == '1'){
-            var kode = $('#id_kodePerk').val();
-        }else{
-            var kode = $('#id_kodeCflow').val();
-            var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
-            var jumlahOld = parseFloat(CleanNumber($('#idTempJumlahCPA').val()));
-            var jumlahNew = parseFloat(CleanNumber(jumlah));
-            totalP = totalP - jumlahOld + jumlahNew;
-            $('#idTotalCPA').val(number_format(totalP, 2));
-        }
+        var totalP      = parseFloat(CleanNumber($('#idTotalCPA').val()));
+        var jumlahOld   = parseFloat(CleanNumber($('#idTempJumlahCPA').val()));
+        var jumlahNew   = parseFloat(CleanNumber(jumlah));
+        totalP          = totalP - jumlahOld + jumlahNew;
 
-        $('#id_tempKode' + noRow).val(kode);
-        $('#id_tempJenisKode' + noRow).val(jnsKode);
-        $('#id_tempKet' + noRow).val(ket);
-        $('#id_tempJumlah' + noRow).val(jumlah);
-
+        $('#id_tempKodePerk'+noRow).val(kodePerk);
+        $('#id_tempKodeCflow'+noRow).val(kodeCflow);
+        $('#id_tempKet'+noRow).val(ket);
+        $('#id_tempJumlah'+noRow).val(jumlah);
+        $('#idTotalCPA').val(number_format(totalP,2));
         kosongCPA();
         btnCpaStart();
     });
-    $('#id_btnRemoveCpa').click(function () {
+    $('#id_btnRemoveCpa').click(function(){
         var noRow = $('#idTempUbahCPA').val();
-        var jnsKode = $('#idTxtTempJnsKode').val();
-        $('#tr' + noRow).remove();
+        $('#tr'+noRow).remove();
         var i = $('#idTxtTempLoop').val();
-        i = parseInt(i);
-        i = i - 1;
+        i =parseInt(i);
+        i = i-1;
         $('#idTxtTempLoop').val(i);
-        if(jnsKode == '2'){
-            var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
-            var jumlahOld = parseFloat(CleanNumber($('#idTempJumlahCPA').val()));
-            totalP = totalP - jumlahOld;
-            $('#idTotalCPA').val(number_format(totalP, 2));
-        }
+
+        var totalP      = parseFloat(CleanNumber($('#idTotalCPA').val()));
+        var jumlahOld   = parseFloat(CleanNumber($('#idTempJumlahCPA').val()));
+        totalP          = totalP - jumlahOld ;
+        $('#idTotalCPA').val(number_format(totalP,2));
 
         kosongCPA();
         btnCpaStart();
     });
-    $('#id_btnBatalCpa').click(function () {
+    $('#id_btnBatalCpa').click(function(){
         kosongCPA();
         btnCpaStart();
     });
+    function getDescCpa(idAdv){
+        ajaxModal();
+        if (idAdv != '') {
+            $.post("<?php echo site_url('/master_advance/getDescCpa'); ?>",
+                {
+                    'idAdv': idAdv
+                },function (data) {
+                    if (data.data_cpa.length > 0) {
+                        $('#idTxtTempLoop').val(data.data_cpa.length);
+                        for(i=0;i<data.data_cpa.length;i++){
+                            var x = i+1;
+                            //var idCpa           = data.data_cpa[i].id_cpa;
+                            var kodePerk        = data.data_cpa[i].kode_perk;
+                            var kodeCflow       = data.data_cpa[i].kode_cflow;
+                            var ket             = data.data_cpa[i].keterangan;
+                            var jumlah          = data.data_cpa[i].jumlah;
+
+                            tr ='<tr class="listdata" id="tr'+x+'">';
+                            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKodePerk'+x+'" name="tempKodePerk'+x+'" readonly="true" value="'+kodePerk+'"></td>';
+                            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKodeCflow'+x+'" name="tempKodeCflow'+x+'" readonly="true" value="'+kodeCflow+'" ></td>';
+                            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKet'+x+'" name="tempKet'+x+'" readonly="true" value="'+ket+'"></td>';
+                            tr+='<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah'+x+'" name="tempJumlah'+x+'" readonly="true" value="'+number_format(jumlah,2)+'"></td>';
+                            tr+= '</tr>';
+                            jumlahP          = parseFloat(CleanNumber(jumlah));
+                            var totalP        = parseFloat(CleanNumber($('#idTotalCPA').val()));
+                            var total      = totalP+jumlahP;
+                            $('#idTotalCPA').val(number_format(total,2));
+                            $('#id_body_data').append(tr);
+                        }
+                        /*
+                         $('#').val(data.); */
+                    }else{
+                        //alert('Data tidak ditemukan!');
+                        //$('#id_btnBatal').trigger('click');
+                    }
+                }, "json");
+        }//if kd<>''
+    }
     function getDescAdv(idAdv) {
         ajaxModal();
         if (idAdv != '') {
@@ -1644,47 +1621,7 @@
                 }, "json");
         }//if kd<>''
     }
-    function getDescCpa(idAdv) {
-        ajaxModal();
-        if (idAdv != '') {
-            $.post("<?php echo site_url('/master_advance/getDescCpa'); ?>",
-                {
-                    'idAdv': idAdv
-                }, function (data) {
-                    if (data.data_cpa.length > 0) {
-                        $('#idTxtTempLoop').val(data.data_cpa.length);
-                        for (i = 0; i < data.data_cpa.length; i++) {
-                            var x = i + 1;
-                            //var idCpa           = data.data_cpa[i].id_cpa;
-                            var kode = data.data_cpa[i].kode;
-                            var jnsKode = data.data_cpa[i].jns_kode;
-                            var ket = data.data_cpa[i].keterangan;
-                            var jumlah = data.data_cpa[i].jumlah;
 
-                            tr = '<tr class="listdata" id="tr' + x + '">';
-                            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKode' + x + '" name="tempKode' + x + '" readonly="true" value="' + kode + '"></td>';
-                            tr += '<td><input type="text" class="form-control input-sm" id="id_tempJenisKode' + x + '" name="tempJenisKode' + x + '" readonly="true" value="' + jnsKode + '" ></td>';
-                            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKet' + x + '" name="tempKet' + x + '" readonly="true" value="' + ket + '"></td>';
-                            tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah' + x + '" name="tempJumlah' + x + '" readonly="true" value="' + number_format(jumlah, 2) + '"></td>';
-                            tr += '</tr>';
-                            if(jnsKode =='2'){
-                                jumlahP = parseFloat(CleanNumber(jumlah));
-                                var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
-                                var total = totalP + jumlahP;
-                                $('#idTotalCPA').val(number_format(total, 2));
-                            }
-
-                            $('#id_body_data').append(tr);
-                        }
-                        /*
-                         $('#').val(data.); */
-                    } else {
-                        //alert('Data tidak ditemukan!');
-                        //$('#id_btnBatal').trigger('click');
-                    }
-                }, "json");
-        }//if kd<>''
-    }
     function getDescKurs(idKurs) {
         ajaxModal();
         if (idKurs != '') {

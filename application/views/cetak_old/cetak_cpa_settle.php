@@ -17,8 +17,11 @@
 		text-align: center;
 	}
 	#logo{
-		text-align: center;
-		width: 170px;
+		text-align: Left;
+		margin-bottom: 10px;
+	}
+	#logo img{
+		width: 200px;
 	}
 	table.tableizer-table2{
 		width: 98%;
@@ -67,9 +70,9 @@
   </head>
   <body style="width:100%;">
 	<table class="judul">
-		<tr><td rowspan="3" align="center"><img id="logo" src="<?php echo base_url('metronic/img/logo_berkah.png'); ?>"></td><td style="font-size: 16px;font-weight: bold;">PT BERKAH GRAHA MANDIRI</td></tr>
-		<tr><td>Beltway Office Park Tower Lt. 5</td></tr>
-		<tr><td>Jl. TB Simatupang No. 41 - Pasar Minggu - Jakarta Selatan</td></tr>
+		<tr><th></th><th>PT BERKAH GRAHA MANDIRI</th></tr>
+		<tr><td rowspan="2"><img id="logo" src="<?php echo base_url('metronic/img/tatamasa_logo.png'); ?>"></td><td>Beltway Office Park Tower Lt. 5</td></tr>
+		<tr><td>Jl. TB Simatung No. 41 - Psr Minggu - Jakarta Selatan</td></tr>
 	</table>
 	<br/>
 	<table class="tableizer-table">
@@ -77,26 +80,26 @@
 	</table>
 	<br/>
 	<?php 
-		foreach($advance as $a){
+		foreach($settle as $a){
 	?>
 	<table class="tableizer-table3">
 	 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td width="15%" align="left">Request Detail</td><td width="3%" align="left">:</td><td colspan="9" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">ADVANCE REQUEST FOR PAYMENT</td><td>&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td width="15%" align="left">Project</td><td width="3%" align="left">:</td><td colspan="9" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->nama_proyek; ?></td><td>&nbsp;</td></tr>
-	 <tr><td>&nbsp;</td><td width="15%" align="left">No.Request</td><td width="3%" align="left">:</td><td width="15%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->id_advance; ?></td>
+	 <tr><td>&nbsp;</td><td width="15%" align="left">No.Request</td><td width="3%" align="left">:</td><td width="15%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->id_settle_adv; ?></td>
 	 <td>&nbsp;</td><td width="7%" align="left">Tgl Req</td><td width="3%" align="left">:</td><td width="15%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo tgl_indo($a->tgl_trans); ?></td>
 	 <td>&nbsp;</td><td width="10%" align="left">Req.Adv No</td><td width="3%" align="left">:</td><td width="15%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td>&nbsp;</td></tr>	 
 	 <tr><td>&nbsp;</td><td width="15%" align="left">Request Name/Dept</td><td width="3%" align="left">:</td><td colspan="5" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->nama_kyw; ?></td>
 	 <td width="2%" align="left">/</td><td width="15%" colspan="3" align="left" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->nama_dept; ?></td><td>&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td width="15%" align="left">Invoice No</td><td width="3%" align="left">:</td><td colspan="3" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td>&nbsp;</td>
-	 <td width="15%" align="left">Due Date</td><td width="3%" align="left">:</td><td colspan="3" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo tgl_indo($a->tgl_jt); ?></td><td>&nbsp;</td></tr>
+	 <td width="15%" align="left">Due Date</td><td width="3%" align="left">:</td><td colspan="3" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->tgl_jt; ?></td><td>&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td width="15%" align="left">PO No</td><td width="3%" align="left">:</td><td colspan="3" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td>&nbsp;</td>
 	 <td width="15%" align="left">Pay to</td><td width="3%" align="left">:</td><td colspan="3" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->pay; ?></td><td>&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td width="15%" align="left">Amount</td><td width="3%" align="left">:</td><td colspan="3" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo number_format($a->jml_uang,2); ?></td><td>&nbsp;</td>
 	 <td width="15%" align="left">Account Name</td><td width="3%" align="left">:</td><td colspan="3" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->nama_akun_bank; ?></td><td>&nbsp;</td></tr>
-	 <tr><td>&nbsp;</td><td width="15%" align="left">Paid Ammount</td><td width="3%" align="left">:</td><td colspan="3" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">Rp. 0.00</td><td>&nbsp;</td>
+	 <tr><td>&nbsp;</td><td width="15%" align="left">Paid Ammount</td><td width="3%" align="left">:</td><td colspan="3" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo number_format($a->jml_uang_paid,2); ?></td><td>&nbsp;</td>
 	 <td width="15%" align="left">Account No</td><td width="3%" align="left">:</td><td colspan="3" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->no_akun_bank; ?></td><td>&nbsp;</td></tr>
-	 <tr><td>&nbsp;</td><td width="15%" align="left">Over(Under)Paid</td><td width="3%" align="left">:</td><td colspan="3" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">Rp. 0.00</td><td>&nbsp;</td>
+	 <tr><td>&nbsp;</td><td width="15%" align="left">Over(Under)Paid</td><td width="3%" align="left">:</td><td colspan="3" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo number_format($a->jml_uang_oupaid,2); ?></td><td>&nbsp;</td>
 	 <td width="15%" align="left">Bank</td><td width="3%" align="left">:</td><td colspan="3" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->nama_bank; ?></td><td>&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td width="15%" align="left">Description</td><td width="3%" align="left">:</td><td colspan="9" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->keterangan; ?></td><td>&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td width="15%" align="left">Vrf by Finance Dept</td><td width="3%" align="left">:</td><td colspan="9" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $a->financeName; ?></td><td>&nbsp;</td></tr>
@@ -120,14 +123,14 @@
 	 $totalSisa = 0;
 	 foreach($detail as $d){
 	 ?>
-	 <tr><td rowspan="2"><?php echo $d->kode_cflow; ?></td><td style="border-bottom: 0px;"><?php echo $d->nama_cflow; ?></td><td rowspan="2"><?php echo number_format($d->anggaran,2,".",","); ?></td>
-	 <td rowspan="2"><?php echo number_format($d->terpakai,2,".",","); ?></td><td rowspan="2"><?php echo number_format($d->jumlah,2,".",","); ?></td>
+	 <tr><td rowspan="2"><?php echo $d->kode_cflow; ?></td><td style="border-bottom: 0px;"><?php echo $d->nama_cflow; ?></td><td rowspan="2"><?php echo number_format($d->anggaran,2,",","."); ?></td>
+	 <td rowspan="2"><?php echo number_format($d->terpakai,2,",","."); ?></td><td rowspan="2"><?php echo number_format($d->jumlah,2,",","."); ?></td>
 	 <td rowspan="2"><?php 
 	 if($totalSisa <= 0){
 		$sld = str_replace('-', '', $d->saldo);	
-		echo '('.number_format($sld,2,".",",").')'; 
+		echo '('.number_format($sld,2,",",".").')'; 
 	 }else{ 
-		echo number_format($totalSisa,2,".",",");
+		echo number_format($totalSisa,2,",",".");
 	 }
 	 ?></td></tr>
 	 <tr><td style="border-top: 0px;"><?php echo $d->keterangan; ?></td></tr>
@@ -137,14 +140,14 @@
 	 $totalJum = $totalJum + $d->jumlah;
 	 $totalSisa = $totalSisa + $d->saldo;
 	 } ?>
-	 <tr><td colspan="2">Total Request</td><td><?php echo number_format($totalAng,2,".",","); ?></td><td><?php echo number_format($totalTer,2,".",","); ?></td>
-	 <td><?php echo number_format($totalJum,2,".",","); ?></td>
+	 <tr><td colspan="2">Total Request</td><td><?php echo number_format($totalAng,2,",","."); ?></td><td><?php echo number_format($totalTer,2,",","."); ?></td>
+	 <td><?php echo number_format($totalJum,2,",","."); ?></td>
 	 <td><?php 
 	 if($totalSisa <= 0){
 		$ts = str_replace('-', '', $totalSisa);	
-		echo '('.number_format($ts,2,".",",").')'; 
+		echo '('.number_format($ts,2,",",".").')'; 
 	 }else{ 
-		echo number_format($totalSisa,2,".",",");
+		echo number_format($totalSisa,2,",",".");
 	 } ?></td></tr>
 	 <tr><td colspan="6">
 	 <?php  
@@ -158,7 +161,7 @@
 			echo Terbilang($totalSisa).' rupiah';
 		}	
 	 }
-		 ?></td></tr>
+	?></td></tr>
 	</table>
 	<br/>
 	<table class="tableizer-table4">

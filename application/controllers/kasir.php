@@ -10,6 +10,7 @@ class Kasir extends CI_Controller
         $this->load->model('home_m');
         $this->load->model('master_advance_m');
         $this->load->model('kasir_m');
+        $this->load->model('akuntansi_m');
         session_start();
     }
 
@@ -70,7 +71,56 @@ class Kasir extends CI_Controller
         }
         $this->output->set_output(json_encode($data));
     }
+    public function getReqpayAll(){
+        $this->CI =& get_instance();//and a.kcab_id<>'1100'
+        $rows = $this->kasir_m->getReqpayAll();
+        $data['data'] = array();
+        foreach( $rows as $row ) {
+            $jmlUang = number_format($row->jml_uang,2);
+            $array = array(
+                'idReqpay' => trim($row->id_reqpay),
+                'namaReq' => trim($row->nama_kyw),
+                'jmlUang' =>  $jmlUang
+            );
 
+            array_push($data['data'],$array);
+        }
+        $this->output->set_output(json_encode($data));
+    }
+    function getReimpayAll(){
+        $this->CI =& get_instance();//and a.kcab_id<>'1100'
+        $rows = $this->kasir_m->getReimpayAll();
+        $data['data'] = array();
+        foreach( $rows as $row ) {
+            $jmlUang = number_format($row->jml_uang,2);
+            $array = array(
+                'idReimpay' => trim($row->id_reimpay),
+                'namaReq' => trim($row->nama_kyw),
+                'jmlUang' =>  $jmlUang
+            );
+
+            array_push($data['data'],$array);
+        }
+        $this->output->set_output(json_encode($data));
+    }
+    public function getSettlement(){
+        $this->CI =& get_instance();//and a.kcab_id<>'1100'
+        $rows = $this->kasir_m->getSettleAll();
+        $data['data'] = array();
+        foreach( $rows as $row ) {
+            $jmlUangPaid = number_format($row->jml_uang_paid,2);
+            $jmlUangAdv = number_format($row->jml_uang,2);
+            $array = array(
+                'idSettle' => trim($row->id_settle_adv),
+                'namaReq' => trim($row->nama_kyw),
+                'jmlUangAdv' => $jmlUangAdv,
+                'jmlUangPaid' =>  $jmlUangPaid
+            );
+
+            array_push($data['data'],$array);
+        }
+        $this->output->set_output(json_encode($data));
+    }
     function getDescAdv()
     {
         $this->CI =& get_instance();
@@ -122,35 +172,54 @@ class Kasir extends CI_Controller
         $this->output->set_output(json_encode($array));
     }
 
-    function getCflow()
+    /*function getDescCpa()
     {
         $this->CI =& get_instance();
-        $idAdv = $this->input->post('idAdv', TRUE);
-        $idAdv = trim($idAdv);
-        $rows = $this->kasir_m->getCflow($idAdv);
-        if ($rows) {
-            foreach ($rows as $row)
-                //$nilai_kurs = number_format($row->nilai_kurs, 2);
-                $array = array(
-                    'baris' => 1,
-                    'kodeCflow' => $row->kode_cflow,
-                    'namaCflow' => $row->nama_cflow
-                );
-        } else {
+        $idMaster = $this->input->post('idMaster', TRUE);
+        $crows = $this->kasir_m->getCDescCpa($idMaster);
+        if ($crows <= 0) {
             $array = array('baris' => 0);
+            $rows['data_cpa'] = $array;
+            $this->output->set_output(json_encode($rows));
+        } else {
+            $rows = $this->kasir_m->getDescCpa($idMaster);
+            $this->output->set_output(json_encode($rows));
         }
+    }*/
+    function getJurnalKr()
+    {
+        $this->CI =& get_instance();
+        $idMaster = $this->input->post('idMaster', TRUE);
 
-        $this->output->set_output(json_encode($array));
+            $rows = $this->kasir_m->getJurnalKr($idMaster);
+            $this->output->set_output(json_encode($rows));
+
     }
+    function getJurnalKrSt()
+    {
+        $this->CI =& get_instance();
+        $idMaster = $this->input->post('idMaster', TRUE);
+        $jmlPaid = str_replace(',', '', trim($this->input->post('jmlPaid',TRUE)));
 
+        $rows = $this->kasir_m->getJurnalKrSt($idMaster,$jmlPaid);
+        $this->output->set_output(json_encode($rows));
+
+    }
+    function getJurnalDb()
+    {
+        $this->CI =& get_instance();
+        $idMaster = $this->input->post('idMaster', TRUE);
+        $jmlPaid = str_replace(',', '', trim($this->input->post('jmlPaid',TRUE)));
+        $rows = $this->kasir_m->getJurnalDb($idMaster,$jmlPaid);
+        $this->output->set_output(json_encode($rows));
+
+    }
     function simpan()
     {
         $jnsReq = trim($this->input->post('jnsReq'));
 
         $idProyek = trim($this->input->post('proyek'));
         $idDept = trim($this->input->post('dept'));
-        $kodePerk = trim($this->input->post('kodePerk'));
-        $kodeCflow = trim($this->input->post('kodeCflow'));
         $ket = trim($this->input->post('keterangan'));
         $tglTrans = trim($this->input->post('tgltrans'));
         $tglTrans = date('Y-m-d', strtotime($tglTrans));
@@ -159,65 +228,93 @@ class Kasir extends CI_Controller
         $tahun = date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
 
         $modelidPemb = $this->kasir_m->getIdPemb($bulan, $tahun);
-        //if ($jnsReq == '1') {
+        $modelNoVoucher = $this->kasir_m->getNoVoucher($bulan, $tahun);
+        $data_model2 = array(
+            'status_kasir'		      	=> 1
+        );
+        if($jnsReq == 'AV') {
             $id_master = trim($this->input->post('idAdvance'));
-            $jml_uang = str_replace(',', '', trim($this->input->post('uang')));
+            $model2 = $this->kasir_m->updatePP_statusKasir($data_model2,$id_master);
+        }else if($jnsReq == 'RP'){
+            $id_master = trim($this->input->post('idReqpay'));
+            $model2 = $this->kasir_m->updateReqpay_statusKasir($data_model2,$id_master);
+        }else if($jnsReq == 'RM'){
+            $id_master = trim($this->input->post('idReimpay'));
+            $model2 = $this->kasir_m->updateReimpay_statusKasir($data_model2,$id_master);
+        }else if($jnsReq == 'ST'){
+            $id_master = trim($this->input->post('idSettle'));
+            $model2 = $this->kasir_m->updateSettle_statusKasir($data_model2,$id_master);
+        }
+        $totJurnal = trim($this->input->post('txtTempLoop'));
+        if ($totJurnal > 0) {
+            for ($i = 1; $i <= $totJurnal; $i++) {
+                $tKodePerk = 'tempKodePerk' . $i;
+                $tKodeCflow = 'tempKodeCflow' . $i;
+                $tDb = 'tempDb' . $i;
+                $tKr = 'tempKr' . $i;
+                $tKet = 'tempKet' . $i;
 
-            $data_perk = array(
-                'trans_id' => $modelidPemb,
-                'tgl_trans' => $tglTrans,
-                'kode_jurnal' => 'ADV',
-                'master_id' => $id_master,
-                'id_proyek' => $idProyek,
-                'id_dept' => $idDept,
-                'kode_perk' => $kodePerk,
-                'debet' => $jml_uang,
-                'keterangan' => $ket,
-                //        		''		        	=>$,
-            );
-            $model = $this->kasir_m->insertAdvPerk($data_perk);
-            $data_perk = array(
-                'trans_id' => $modelidPemb,
-                'tgl_trans' => $tglTrans,
-                'kode_jurnal' => 'ADV',
-                'master_id' => $id_master,
-                'id_proyek' => $idProyek,
-                'id_dept' => $idDept,
-                'kode_perk' => $kodePerk,
-                'kredit' => $jml_uang,
-                'keterangan' => $ket,
-                //        		''		        	=>$,
-            );
-            $model = $this->kasir_m->insertAdvPerk($data_perk);
-            $data_cflow = array(
-                'trans_id' => $modelidPemb,
-                'tgl_trans' => $tglTrans,
-                'kode_jurnal' => 'ADV',
-                'master_id' => $id_master,
-                'id_proyek' => $idProyek,
-                'id_dept' => $idDept,
-                'kode_cflow' => $kodeCflow,
-                'saldo_akhir' => $jml_uang,
-                'keterangan' => $ket,
-                //        		''		        	=>$,
-            );
-            $model = $this->kasir_m->insertAdvCflow($data_cflow);
-            if ($model) {
-                $array = array(
-                    'act' => 1,
-                    'tipePesan' => 'success',
-                    'idPemb' => $modelidPemb,
-                    'pesan' => 'Data berhasil disimpan.'
+                $tmpKodePerk = trim($this->input->post($tKodePerk));
+                $tmpKodeCflow = trim($this->input->post($tKodeCflow));
+                $tmpDb = str_replace(',', '', trim($this->input->post($tDb)));
+                $tmpKr = str_replace(',', '', trim($this->input->post($tKr)));
+                $tmpKet = trim($this->input->post($tKet));
+
+                $jmlCflow = $tmpDb + $tmpKr;
+
+                $data_perk = array(
+                    'trans_id' => $modelidPemb,
+                    'voucher_no'=>$modelNoVoucher,
+                    'tgl_trans' => $tglTrans,
+                    'kode_jurnal' => $jnsReq,
+                    'master_id' => $id_master,
+                    'id_proyek' => $idProyek,
+                    'id_dept' => $idDept,
+                    'kode_perk' => $tmpKodePerk,
+                    'debet' => $tmpDb,
+                    'kredit' => $tmpKr,
+                    'keterangan' => $tmpKet
                 );
-            } else {
-                $array = array(
-                    'act' => 0,
-                    'tipePesan' => 'error',
-                    'pesan' => 'Data gagal disimpan.'
-                );
+                $model = $this->akuntansi_m->insertTDPerk($data_perk);
+                if($model){
+                    $idTdPerk = $this->akuntansi_m->getIdTDPerk($modelidPemb,$tglTrans,$id_master,$idProyek,$idDept,$tmpKodePerk,$tmpDb,$tmpKr);
+                    if ($tmpKodeCflow <> '') {
+                        $data_cflow = array(
+                            'trans_id' => $modelidPemb,
+                            'voucher_no'=>$modelNoVoucher,
+                            'id_seq_perk'=>$idTdPerk,
+                            'tgl_trans' => $tglTrans,
+                            'kode_jurnal' => $jnsReq,
+                            'master_id' => $id_master,
+                            'id_proyek' => $idProyek,
+                            'id_dept' => $idDept,
+                            'kode_cflow' => $tmpKodeCflow,
+                            'saldo_akhir' => $jmlCflow,
+                            'keterangan' => $tmpKet
+                        );
+                        $model = $this->akuntansi_m->insertTDCflow($data_cflow);
+                    }
+                }
+
             }
-            $this->output->set_output(json_encode($array));
-        //}
+        }
+
+        if ($model) {
+            $array = array(
+                'act' => 1,
+                'tipePesan' => 'success',
+                'idPemb' => $modelidPemb,
+                'jnsReq' =>$jnsReq,
+                'pesan' => 'Data berhasil disimpan.'
+            );
+        } else {
+            $array = array(
+                'act' => 0,
+                'tipePesan' => 'error',
+                'pesan' => 'Data gagal disimpan.'
+            );
+        }
+        $this->output->set_output(json_encode($array));
 
 
     }
@@ -349,7 +446,30 @@ class Kasir extends CI_Controller
         }
         $this->output->set_output(json_encode($array));
     }
-
+    function cetak($idJurnal,$type)
+    {
+        if ($this->auth->is_logged_in() == false) {
+            redirect('main/index');
+        }else{
+            if($type == 'AV'){
+                $data['all'] = $this->kasir_m->getDataCetak($idJurnal);
+                $data['detail'] = $this->kasir_m->getDetailDataCetak($idJurnal);
+                $this->load->view('cetak/cetak_pembayaran', $data);
+            }elseif($type == 'RP'){
+                $data['all'] = $this->kasir_m->getDataCetakRp($idJurnal);
+                $data['detail'] = $this->kasir_m->getDetailDataCetak($idJurnal);
+                $this->load->view('cetak/cetak_pembayaran_rp', $data);
+            }elseif($type == 'RM'){
+                $data['all'] = $this->kasir_m->getDataCetakRm($idJurnal);
+                $data['detail'] = $this->kasir_m->getDetailDataCetak($idJurnal);
+                $this->load->view('cetak/cetak_pembayaran_rm', $data);
+            }else{
+                $data['all'] = $this->kasir_m->getDataCetakRm($idJurnal);
+                $data['detail'] = $this->kasir_m->getDetailDataCetak($idJurnal);
+                $this->load->view('cetak/cetak_pembayaran', $data);
+            }
+        }
+    }
 
 }
 

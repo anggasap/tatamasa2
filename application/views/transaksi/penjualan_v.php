@@ -973,11 +973,11 @@
             var parts = tglRealisasi.split("-");// tanggal displit
             var tglJadwal = new Date(parts[2], parts[1] - 1, parts[0]);
 
-            tglJadwal.setMonth(tglJadwal.getMonth() + 1);
+            tglJadwal.setDate(tglJadwal.getDate() + 14);
 
             for (var i = 1; i <= jmlAngs; i++) {
 
-                tglJadwal.setMonth(tglJadwal.getMonth() + 1);
+                tglJadwal.setMonth(tglJadwal.getDate() + 1);
                 var hari = tglJadwal.getDate();
                 var bulan = tglJadwal.getMonth();
                 var tahun = tglJadwal.getFullYear();
@@ -1013,7 +1013,6 @@
                     var total = total + angs;
                     $('#idTotalJadwal').val(number_format(total, 2));
                 }
-
             }
 
         } else if (tipePembayaran == '3') {
@@ -1029,7 +1028,7 @@
             var parts = tglRealisasi.split("-");// tanggal displit
             var tglJadwal = new Date(parts[2], parts[1] - 1, parts[0]);
 
-            tglJadwal.setMonth(tglJadwal.getMonth() + 1);
+            tglJadwal.setDate(tglJadwal.getDate() + 14);
 
             for (var i = 1; i <= jmlAngs; i++) {
 

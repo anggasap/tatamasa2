@@ -17,11 +17,8 @@
 		text-align: center;
 	}
 	#logo{
-		text-align: Left;
-		margin-bottom: 10px;
-	}
-	#logo img{
-		width: 200px;
+		text-align: center;
+		width: 170px;
 	}
 	table.tableizer-table2{
 		width: 30%;
@@ -80,9 +77,9 @@
   </head>
   <body style="width:100%;">
 	<table class="judul">
-		<tr><th></th><th>PT BERKAH GRAHA MANDIRI</th></tr>
-		<tr><td rowspan="2"><img id="logo" src="<?php echo base_url('metronic/img/tatamasa_logo.png'); ?>"></td><td>Beltway Office Park Tower Lt. 5</td></tr>
-		<tr><td>Jl. TB Simatung No. 41 - Psr Minggu - Jakarta Selatan</td></tr>
+		<tr><td rowspan="3" align="center"><img id="logo" src="<?php echo base_url('metronic/img/logo_berkah.png'); ?>"></td><td style="font-size: 16px;font-weight: bold;">PT BERKAH GRAHA MANDIRI</td></tr>
+		<tr><td>Beltway Office Park Tower Lt. 5</td></tr>
+		<tr><td>Jl. TB Simatupang No. 41 - Pasar Minggu - Jakarta Selatan</td></tr>
 	</table>
 	<br/>
 	<table class="tableizer-table">
@@ -94,26 +91,26 @@
 	?>
 	<table class="tableizer-table2">
 	 <tr><td>&nbsp;</td><td width="40%" align="left">Voucher No.</td><td width="5%" align="left">:</td><td width="50%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->id_pp; ?></td></tr>
-	 <tr><td>&nbsp;</td><td width="40%" align="left">Voucher Date</td><td width="5%" align="left">:</td><td width="50%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo tgl_indo($j->tgl_pp); ?></td></tr>
+	 <tr><td>&nbsp;</td><td width="40%" align="left">Voucher Date</td><td width="5%" align="left">:</td><td width="50%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo tgl_indo($j->tgl_trans); ?></td></tr>
 	</table>
 	<br/>
 	<table class="tableizer-table3">
 	 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 	 <tr><td width="3%">&nbsp;</td><td align="left" colspan="2">ADVANCE REQUEST</td><td>&nbsp;</td>
-	 <td>&nbsp;</td><td width="15%">Check / Giro No. </td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->check_giro; ?></td><td width="5%">&nbsp;</td></tr>
+	 <td>&nbsp;</td><td width="15%">Check / Giro No. </td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php //echo $j->check_giro; ?></td><td width="5%">&nbsp;</td></tr>
 	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">Code of Payee </td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->id_kyw; ?></td>
-	 <td>&nbsp;</td><td width="15%" align="left">Date</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo tgl_indo($j->tanggal); ?></td><td width="5%">&nbsp;</td></tr>
+	 <td>&nbsp;</td><td width="15%" align="left">Date</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php //echo tgl_indo($j->tanggal); ?></td><td width="5%">&nbsp;</td></tr>
 	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">Name of Payee </td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->nama_kyw; ?></td>
-	 <td>&nbsp;</td><td align="left" width="15%">Amount </td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo number_format($j->amount,2,'.',','); ?></td><td width="5%">&nbsp;</td></tr>
-	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">Amount </td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo number_format($j->jml_uang,2,'.',','); ?></td>
-	 <td>&nbsp;</td><td align="left" width="15%">Original Amount </td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo number_format($j->original_amount,2,'.',','); ?></td><td width="5%">&nbsp;</td></tr>
+	 <td>&nbsp;</td><td align="left" width="15%">Amount </td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php //echo number_format($j->amount,2,'.',','); ?></td><td width="5%">&nbsp;</td></tr>
+	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">Amount </td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo number_format($j->jml_uang,2,',','.'); ?></td>
+	 <td>&nbsp;</td><td align="left" width="15%">Original Amount </td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php //echo number_format($j->original_amount,2,'.',','); ?></td><td width="5%">&nbsp;</td></tr>
 	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">Amount (in Word)</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php $rp = ' rupiah'; $a = str_replace(".00", "",$j->jml_uang); echo Terbilang($a).$rp; ?></td>
-	 <td>&nbsp;</td><td align="left" width="15%">Bank </td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->nama_bank; ?></td><td width="5%">&nbsp;</td></tr>
+	 <td>&nbsp;</td><td align="left" width="15%">Bank </td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->nama_kdbayar; ?></td><td width="5%">&nbsp;</td></tr>
 	 <tr><td width="3%">&nbsp;</td><td align="left">Divisi / Dept</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->nama_dept; ?></td>
-	 <td>&nbsp;</td><td align="left" width="15%">A / C No.</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->nama_akun_bank; ?></td><td width="5%">&nbsp;</td></tr>
+	 <td>&nbsp;</td><td align="left" width="15%">A / C No.</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->norek_bank; ?></td><td width="5%">&nbsp;</td></tr>
 	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">Cost Center</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td>
 	 <td>&nbsp;</td><td align="left" width="15%">Kode Cash Out</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->kode_cflow; ?></td><td width="5%">&nbsp;</td></tr>
-	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">Episode No.</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->episodeNo; ?></td>
+	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">Episode No.</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php //echo $j->episodeNo; ?></td>
 	 <td>&nbsp;</td><td align="left" width="15%">Nama Cash Flow</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->nama_cflow; ?></td><td width="5%">&nbsp;</td></tr>
 	 <tr><td width="3%">&nbsp;</td><td align="left" width="15%">Description </td><td width="3%">:</td><td colspan="5" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->keterangan; ?></td><td width="5%">&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
@@ -126,18 +123,65 @@
 	</table>
 	<br/>
 	<table class="tableizer-table5">
-	 <tr><td>Prepared by,</td><td>Reviewed by,</td><td>Approved by,</td><td>Received by,</td></tr>
-	 <tr><td style="border-bottom: 0px;">&nbsp;</td><td style="border-bottom: 0px;">&nbsp;</td><td style="border-bottom: 0px;">&nbsp;</td><td style="border-bottom: 0px;">&nbsp;</td></tr>
-	 <tr><td style="border-bottom: 0px;border-top: 0px;">&nbsp;</td><td style="border-bottom: 0px;border-top: 0px;">&nbsp;</td><td style="border-bottom: 0px;border-top: 0px;">&nbsp;</td><td style="border-bottom: 0px;border-top: 0px;">&nbsp;</td></tr>
-	 <tr><td style="border-top: 0px;">&nbsp;</td><td style="border-top: 0px;">&nbsp;</td><td style="border-top: 0px;">&nbsp;</td><td style="border-top: 0px;">&nbsp;</td></tr>
-	 <tr><td>Date :</td><td>Date :</td><td>Date :</td><td>Date :</td></tr>
+	 <tr><td>Prepared by,
+		<?php echo $j->nama_kyw; ?>
+	 </td><td>Reviewed by,
+		<?php if($j->app_keuangan_status != '0'){
+		 $query = $this->db->query("select nama_kyw as nama from master_karyawan where id_kyw =".$j->app_keuangan_id."");
+		 if($query->num_rows()== '1'){
+		 $g = $query->row()->nama;
+		 }else{
+		 $g = '';
+		 }
+		 echo $g;
+		 }else{ echo '';} ?>
+	 </td><td>Approved by,
+	 <?php if($j->app_hd_status != '0'){
+		 $query = $this->db->query("select nama_kyw as nama from master_karyawan where id_kyw =".$j->app_hd_id."");
+		 if($query->num_rows()== '1'){
+		 $g = $query->row()->nama;
+		 }else{
+		 $g = '';
+		 }
+		 echo $g;
+		 }else{ echo '';} ?>
+	 </td><td>Received by,
+	 
+	 </td></tr>
+	 <tr><td align="center" rowspan="3" height="60px" width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">
+	 <?php if($j->app_user_id != 0){?><img id="img" height="50%" src="<?php echo base_url('metronic/img/sign.png'); ?>"><?php }else{ echo '';} ?>
+	 </td>
+	 <td align="center" rowspan="3" width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">
+	 <?php if($j->app_keuangan_status == 1){?>
+	 <img id="img" height="35%" src="<?php echo base_url('metronic/img/approval.png'); ?>">
+	 <?php }elseif($j->app_keuangan_status == 2){?>
+	 <img id="img" height="35%" src="<?php echo base_url('metronic/img/rejected.png'); ?>">
+	 <?php }elseif ($j->app_keuangan_status == 3){?>
+	 <img id="img" height="50%" src="<?php echo base_url('metronic/img/paid.png'); ?>">
+	 <?php }else{ echo '';} ?>
+	 </td>
+	 <td align="center" rowspan="3" width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">
+	 <?php if($j->app_hd_status == 1){?>
+	 <img id="img" height="35%" src="<?php echo base_url('metronic/img/approval.png'); ?>">
+	 <?php }elseif($j->app_hd_status == 2){?>
+	 <img id="img" height="35%" src="<?php echo base_url('metronic/img/rejected.png'); ?>">
+	 <?php }elseif ($j->app_hd_status == 3){?>
+	 <img id="img" height="50%" src="<?php echo base_url('metronic/img/paid.png'); ?>">
+	 <?php }else{ echo '';} ?>
+	 </td><td align="center" rowspan="3" width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">
+	 </td></tr>
+	 <tr></tr>
+	 <tr></tr>
+	 <tr><td>Date : <?php echo tgl_indo($j->tgl_trans); ?></td>
+	 <td>Date : <?php if($j->app_keuangan_status != '0'){ echo tgl_indo($j->app_keuangan_tgl);}else{ echo '';} ?></td>
+	 <td>Date : <?php if($j->app_hd_status != '0'){ echo tgl_indo($j->app_hd_tgl);}else{ echo '';} ?></td><td>Date :</td></tr>
 	</table>
 	<?php } ?>
   </body>
 </html>
 <script>
 window.print();
-setTimeout("window.close()", 100);
+//setTimeout("window.close()", 100);
 </script>
 <?php
 	function tgl_indo($tgl){
@@ -146,7 +190,6 @@ setTimeout("window.close()", 100);
 		$tahun = substr($tgl,0,4);
 		return $tanggal.' '.$bulan.' '.$tahun;
 	}
- 
 	function getBulan($bln){
 		switch ($bln){
 			case 1: return "Januari"; break;
@@ -163,7 +206,6 @@ setTimeout("window.close()", 100);
 			case 12: return "Desember"; break;
 		}
 	}
-	
 	function Terbilang($x)
 	{
 	  $abil = array("", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas");

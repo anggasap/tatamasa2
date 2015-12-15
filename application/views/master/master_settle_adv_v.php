@@ -1,7 +1,15 @@
 <!-- BEGIN PAGE BREADCRUMB -->
-<!--
-
--->
+<style type="text/css">
+    table#idTabelAdv td:nth-child(3) {
+        text-align: right;
+    }
+    table#idTabelSettleAdv td:nth-child(3) {
+        text-align: right;
+    }
+    table#idTabelSettleAdv td:nth-child(4) {
+        text-align: right;
+    }
+</style>
 <!-- END PAGE BREADCRUMB -->
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
@@ -40,10 +48,8 @@
                                     <label>Id Settlement Of Payment </label>
 
                                     <div class="input-group">
-                                        <div class="input-icon">
                                             <input id="id_idSettle" required="required" class="form-control input-sm"
                                                    type="text" name="idSettle" readonly/>
-                                        </div>
 										<span class="input-group-btn">
 											<a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelSettle"
                                                id="id_btnModal" data-toggle="modal">
@@ -54,7 +60,6 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Id Advance </label>
-
                                     <div class="input-group">
                                         <input id="id_idAdvance" required="required" class="form-control input-sm"
                                                type="text" name="idAdvance" readonly/>
@@ -141,7 +146,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label>Jumlah Pembayaran</label>
-                                            <input id="id_paid" required="required" class="form-control input-sm kanan nomor2"
+                                            <input id="id_paid" required="required" class="form-control input-sm kanan nomor nomor2"
                                                    type="text" name="paid"/>
                                         </div>
 
@@ -150,7 +155,7 @@
 
                                 <div class="form-group">
                                     <label>Lebih(Kurang) Pembayaran</label>
-                                    <input id="id_uangPaidou" required="required" class="form-control input-sm nomor"
+                                    <input id="id_uangPaidou" required="required" class="form-control input-sm kanan nomor2"
                                            type="text" name="uangPaidou" readonly/>
                                 </div>
                             </div>
@@ -439,7 +444,7 @@
                                                                 Kode
                                                             </th>
                                                             <th width="10%">
-                                                                Jns kode
+                                                                Kode Cflow
                                                             </th>
                                                             <th width="50%">
                                                                 Keterangan
@@ -629,11 +634,6 @@
     -->
     <!-- end <div class="col-md-6"> -->
 </div>
-<div class="row">
-    <div class="col-md-6">
-
-    </div>
-</div>
 
 <!-- END PAGE CONTENT-->
 <!--  MODAL Data Karyawan -->
@@ -696,7 +696,7 @@
     <!-- /.modal-dialog -->
 </div>
 <!--  END  MODAL Data Karyawan -->
-<!--  MODAL Data Advance -->
+<!--  MODAL Data Settlement Advance -->
 <div class="modal fade draggable-modal" id="idDivTabelSettle" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog  modal-lg">
         <div class="modal-content">
@@ -725,7 +725,10 @@
                                             Nama Karyawan
                                         </th>
                                         <th>
-                                            Jumlah Bayar
+                                            Jumlah Advance
+                                        </th>
+                                        <th>
+                                            Jumlah Settlement
                                         </th>
                                     </tr>
                                     </thead>
@@ -1076,7 +1079,8 @@
                 "columns": [
                     {"data": "idSettle"},
                     {"data": "namaReq"},
-                    {"data": "jmlUang"}
+                    {"data": "jmlUangAdv"},
+                    {"data": "jmlUangPaid"}
                 ],
                 // Internationalisation. For more info refer to http://datatables.net/manual/i18n
                 "language": {
@@ -1121,7 +1125,7 @@
                     [0, "asc"]
                 ] // set first column as a default sort by asc
             });
-            $('#id_ReloadReqpay').click(function () {
+            $('#id_ReloadSettle').click(function () {
                 table.api().ajax.reload();
             });
 
@@ -1163,7 +1167,7 @@
             var table = $('#idTabelAdv');
             // begin first table
             table.dataTable({
-                "ajax": "<?php echo base_url("/master_advance/getAdvAll"); ?>",
+                "ajax": "<?php echo base_url("/master_settle_adv/getAdvAll"); ?>",
                 "columns": [
                     {"data": "idAdv"},
                     {"data": "namaReq"},
@@ -1647,76 +1651,44 @@
         $('#id_btnRemoveCpa').attr("disabled", true);
         $('#id_btnSign').attr("disabled", true);
     }
-    $('#id_btnAddCpa').click(function () {
+    $('#id_btnAddCpa').click(function(){
         var i = $('#idTxtTempLoop').val();
-        //Jika Kode cflow saja
-        if ($('#id_kodePerk').val() == '' && $('#id_kodeCflow').val() != '') {
+        if($('#id_kodePerk').val() =='' && $('#id_kodeCflow').text() == ''){
+            alert("Akun GL tidak boleh kosong.");
+        }else{
             var i = parseInt($('#idTxtTempLoop').val());
 
-            i = i + 1;
-            var jnsKode = $('#idTxtTempJnsKode').val();
-            var kodeCflow = $('#id_kodeCflow').val();
-            var ket = $('#id_keteranganCPA').val().trim();
-            var jumlah = $('#id_jumlahCPA').val();
+            i=i+1;
+            var kodePerk        = $('#id_kodePerk').val();
+            var kodeCflow       = $('#id_kodeCflow').val();
+            var ket             = $('#id_keteranganCPA').val().trim();
+            var jumlah          = $('#id_jumlahCPA').val();
 
-            tr = '<tr class="listdata" id="tr' + i + '">';
-            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKode' + i + '" name="tempKode' + i + '" readonly="true" value="' + kodeCflow + '" ></td>';
-            tr += '<td><input type="text" class="form-control input-sm" id="id_tempJenisKode' + i + '" name="tempJenisKode' + i + '" readonly="true" value="' + jnsKode + '"></td>';
-            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKet' + i + '" name="tempKet' + i + '" readonly="true" value="' + ket + '"></td>';
-            tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah' + i + '" name="tempJumlah' + i + '" readonly="true" value="' + jumlah + '"></td>';
-            tr += '</tr>';
-            jumlahP = parseFloat(CleanNumber(jumlah));
-            var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
-            var total = totalP + jumlahP;
-            $('#idTotalCPA').val(number_format(total, 2));
+            tr ='<tr class="listdata" id="tr'+i+'">';
+            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKodePerk'+i+'" name="tempKodePerk'+i+'" readonly="true" value="'+kodePerk+'"></td>';
+            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKodeCflow'+i+'" name="tempKodeCflow'+i+'" readonly="true" value="'+kodeCflow+'" ></td>';
+            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKet'+i+'" name="tempKet'+i+'" readonly="true" value="'+ket+'"></td>';
+            tr+='<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah'+i+'" name="tempJumlah'+i+'" readonly="true" value="'+jumlah+'"></td>';
+            tr+= '</tr>';
+            jumlahP          = parseFloat(CleanNumber(jumlah));
+            var totalP        = parseFloat(CleanNumber($('#idTotalCPA').val()));
+            var total      = totalP+jumlahP;
+            $('#idTotalCPA').val(number_format(total,2));
             $('#id_body_data').append(tr);
             $('#idTxtTempLoop').val(i);
             kosongCPA();
-            //Jika kode perk aja
-        } else if ($('#id_kodePerk').val() != '' && $('#id_kodeCflow').val() == '') {
-            var i = parseInt($('#idTxtTempLoop').val());
-            i = i + 1;
-            var jnsKode = $('#idTxtTempJnsKode').val();
-            var kodePerk = $('#id_kodePerk').val();
-            var ket = $('#id_keteranganCPA').val().trim();
-            var jumlah = $('#id_jumlahCPA').val();
-
-            tr = '<tr class="listdata" id="tr' + i + '">';
-            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKode' + i + '" name="tempKode' + i + '" readonly="true" value="' + kodePerk + '"></td>';
-            tr += '<td><input type="text" class="form-control input-sm" id="id_tempJenisKode' + i + '" name="tempJenisKode' + i + '" readonly="true" value="' + jnsKode + '"></td>';
-            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKet' + i + '" name="tempKet' + i + '" readonly="true" value="' + ket + '"></td>';
-            tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah' + i + '" name="tempJumlah' + i + '" readonly="true" value="' + jumlah + '"></td>';
-            tr += '</tr>';
-            /*jumlahP = parseFloat(CleanNumber(jumlah));
-             var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
-             var total = totalP + jumlahP;
-             $('#idTotalCPA').val(number_format(total, 2));*/
-            $('#id_body_data').append(tr);
-            $('#idTxtTempLoop').val(i);
-            kosongCPA();
-        } else {
-            alert("Hanya boleh isi salah satu kode.");
         }
     });
 
     $("#id_tabelPerkCflow").on('click', 'tbody tr', function () {
-        var kode = $(this).find("td input").eq(0).val();
-        var jnsKode = $(this).find("td input").eq(1).val();
-        var ket = $(this).find("td input").eq(2).val();
-        var jumlah = $(this).find("td input").eq(3).val();
-        //Jika jns kode == kode perk
-        if (jnsKode == '1') {
-            $('#id_kodePerk').val(kode);
-            $('#idTxtTempJnsKode').val(jnsKode);
-            $('#id_keteranganCPA').val(ket);
-            $('#id_jumlahCPA').val(jumlah);
-        } else {
-            $('#id_kodeCflow').val(kode);
-            $('#idTxtTempJnsKode').val(jnsKode);
-            $('#id_keteranganCPA').val(ket);
-            $('#id_jumlahCPA').val(jumlah);
-        }
-
+        var kodePerk    = $(this).find("td input").eq(0).val();
+        var kodeCflow   = $(this).find("td input").eq(1).val();
+        var ket         = $(this).find("td input").eq(2).val();
+        var jumlah      = $(this).find("td input").eq(3).val();
+        $('#id_kodePerk').val(kodePerk);
+        $('#id_kodeCflow').val(kodeCflow);
+        $('#id_keteranganCPA').val(ket);
+        $('#id_jumlahCPA').val(jumlah);
 
         var idTr = $(this).attr('id');
         var noRow = idTr.replace('tr', '');
@@ -1724,63 +1696,94 @@
 
         $('#idTempJumlahCPA').val(jumlah);
 
-        $('#id_btnAddCpa').attr("disabled", true);
-        $('#id_btnUpdateCpa').attr("disabled", false);
-        $('#id_btnRemoveCpa').attr("disabled", false);
+        $('#id_btnAddCpa').attr("disabled",true);
+        $('#id_btnUpdateCpa').attr("disabled",false);
+        $('#id_btnRemoveCpa').attr("disabled",false);
 
     });
-    function kosongCPA() {
+    function kosongCPA(){
         $('.kosongCPA').val('');
         $('.tkosongCPA').text('');
         $('#id_jumlahCPA').val('0.00');
     }
-    $('#id_btnUpdateCpa').click(function () {
+    $('#id_btnUpdateCpa').click(function(){
         var noRow = $('#idTempUbahCPA').val();
-        var jnsKode = $('#idTxtTempJnsKode').val();
-        var ket = $('#id_keteranganCPA').val();
-        var jumlah = $('#id_jumlahCPA').val();
+        var kodePerk    = $('#id_kodePerk').val();
+        var kodeCflow   = $('#id_kodeCflow').val();
+        var ket         = $('#id_keteranganCPA').val();
+        var jumlah      = $('#id_jumlahCPA').val();
 
-        if (jnsKode == '1') {
-            var kode = $('#id_kodePerk').val();
-        } else {
-            var kode = $('#id_kodeCflow').val();
-            var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
-            var jumlahOld = parseFloat(CleanNumber($('#idTempJumlahCPA').val()));
-            var jumlahNew = parseFloat(CleanNumber(jumlah));
-            totalP = totalP - jumlahOld + jumlahNew;
-            $('#idTotalCPA').val(number_format(totalP, 2));
-        }
+        var totalP      = parseFloat(CleanNumber($('#idTotalCPA').val()));
+        var jumlahOld   = parseFloat(CleanNumber($('#idTempJumlahCPA').val()));
+        var jumlahNew   = parseFloat(CleanNumber(jumlah));
+        totalP          = totalP - jumlahOld + jumlahNew;
 
-        $('#id_tempKode' + noRow).val(kode);
-        $('#id_tempJenisKode' + noRow).val(jnsKode);
-        $('#id_tempKet' + noRow).val(ket);
-        $('#id_tempJumlah' + noRow).val(jumlah);
-
+        $('#id_tempKodePerk'+noRow).val(kodePerk);
+        $('#id_tempKodeCflow'+noRow).val(kodeCflow);
+        $('#id_tempKet'+noRow).val(ket);
+        $('#id_tempJumlah'+noRow).val(jumlah);
+        $('#idTotalCPA').val(number_format(totalP,2));
         kosongCPA();
         btnCpaStart();
     });
-    $('#id_btnRemoveCpa').click(function () {
+    $('#id_btnRemoveCpa').click(function(){
         var noRow = $('#idTempUbahCPA').val();
-        var jnsKode = $('#idTxtTempJnsKode').val();
-        $('#tr' + noRow).remove();
+        $('#tr'+noRow).remove();
         var i = $('#idTxtTempLoop').val();
-        i = parseInt(i);
-        i = i - 1;
+        i =parseInt(i);
+        i = i-1;
         $('#idTxtTempLoop').val(i);
-        if (jnsKode == '2') {
-            var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
-            var jumlahOld = parseFloat(CleanNumber($('#idTempJumlahCPA').val()));
-            totalP = totalP - jumlahOld;
-            $('#idTotalCPA').val(number_format(totalP, 2));
-        }
+
+        var totalP      = parseFloat(CleanNumber($('#idTotalCPA').val()));
+        var jumlahOld   = parseFloat(CleanNumber($('#idTempJumlahCPA').val()));
+        totalP          = totalP - jumlahOld ;
+        $('#idTotalCPA').val(number_format(totalP,2));
 
         kosongCPA();
         btnCpaStart();
     });
-    $('#id_btnBatalCpa').click(function () {
+    $('#id_btnBatalCpa').click(function(){
         kosongCPA();
         btnCpaStart();
     });
+    function getDescCpa(idSettle){
+        ajaxModal();
+        if (idSettle != '') {
+            $.post("<?php echo site_url('/master_settle_adv/getDescCpa'); ?>",
+                {
+                    'idSettle': idSettle
+                },function (data) {
+                    if (data.data_cpa.length > 0) {
+                        $('#idTxtTempLoop').val(data.data_cpa.length);
+                        for(i=0;i<data.data_cpa.length;i++){
+                            var x = i+1;
+                            //var idCpa           = data.data_cpa[i].id_cpa;
+                            var kodePerk        = data.data_cpa[i].kode_perk;
+                            var kodeCflow       = data.data_cpa[i].kode_cflow;
+                            var ket             = data.data_cpa[i].keterangan;
+                            var jumlah          = data.data_cpa[i].jumlah;
+
+                            tr ='<tr class="listdata" id="tr'+x+'">';
+                            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKodePerk'+x+'" name="tempKodePerk'+x+'" readonly="true" value="'+kodePerk+'"></td>';
+                            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKodeCflow'+x+'" name="tempKodeCflow'+x+'" readonly="true" value="'+kodeCflow+'" ></td>';
+                            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKet'+x+'" name="tempKet'+x+'" readonly="true" value="'+ket+'"></td>';
+                            tr+='<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah'+x+'" name="tempJumlah'+x+'" readonly="true" value="'+number_format(jumlah,2)+'"></td>';
+                            tr+= '</tr>';
+                            jumlahP          = parseFloat(CleanNumber(jumlah));
+                            var totalP        = parseFloat(CleanNumber($('#idTotalCPA').val()));
+                            var total      = totalP+jumlahP;
+                            $('#idTotalCPA').val(number_format(total,2));
+                            $('#id_body_data').append(tr);
+                        }
+                        /*
+                         $('#').val(data.); */
+                    }else{
+                        //alert('Data tidak ditemukan!');
+                        //$('#id_btnBatal').trigger('click');
+                    }
+                }, "json");
+        }//if kd<>''
+    }
     function getDescSettle(idSettle) {
         ajaxModal();
         if (idSettle != '') {
@@ -1800,7 +1803,8 @@
 						$('#id_proyek').val(data.id_proyek);
                         $('#id_idPayTo').val(data.id_pay_to);
                         $('#id_namaPayTo').val(data.pay_to);
-						$('#id_tglAdv').val(data.tgl_trans);
+						$('#id_tglAdv').val(data.tglTransAdv);
+                        $('#id_tgltrans').val(data.tglTransSt);
                         $('#id_namaPemilikAkunBank').val(data.nama_akun_bank);
                         $('#id_noAkunBank').val(data.no_akun_bank);
                         $('#id_namaBank').val(data.nama_bank);
@@ -1922,47 +1926,7 @@
                 }, "json");
         }//if kd<>''
     }
-	function getDescCpa(idSettle) {
-        ajaxModal();
-        if (idSettle != '') {
-            $.post("<?php echo site_url('/master_settle_adv/getDescCpa'); ?>",
-                {
-                    'idSettle': idSettle
-                }, function (data) {
-                    if (data.data_cpa.length > 0) {
-                        $('#idTxtTempLoop').val(data.data_cpa.length);
-                        for (i = 0; i < data.data_cpa.length; i++) {
-                            var x = i + 1;
-                            //var idCpa           = data.data_cpa[i].id_cpa;
-                            var kode = data.data_cpa[i].kode;
-                            var jnsKode = data.data_cpa[i].jns_kode;
-                            var ket = data.data_cpa[i].keterangan;
-                            var jumlah = data.data_cpa[i].jumlah;
 
-                            tr = '<tr class="listdata" id="tr' + x + '">';
-                            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKode' + x + '" name="tempKode' + x + '" readonly="true" value="' + kode + '"></td>';
-                            tr += '<td><input type="text" class="form-control input-sm" id="id_tempJenisKode' + x + '" name="tempJenisKode' + x + '" readonly="true" value="' + jnsKode + '" ></td>';
-                            tr += '<td><input type="text" class="form-control input-sm" id="id_tempKet' + x + '" name="tempKet' + x + '" readonly="true" value="' + ket + '"></td>';
-                            tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempJumlah' + x + '" name="tempJumlah' + x + '" readonly="true" value="' + number_format(jumlah, 2) + '"></td>';
-                            tr += '</tr>';
-                            if(jnsKode =='2'){
-                                jumlahP = parseFloat(CleanNumber(jumlah));
-                                var totalP = parseFloat(CleanNumber($('#idTotalCPA').val()));
-                                var total = totalP + jumlahP;
-                                $('#idTotalCPA').val(number_format(total, 2));
-                            }
-
-                            $('#id_body_data').append(tr);
-                        }
-                        /*
-                         $('#').val(data.); */
-                    } else {
-                        //alert('Data tidak ditemukan!');
-                        //$('#id_btnBatal').trigger('click');
-                    }
-                }, "json");
-        }//if kd<>''
-    }
     function getDescAdv(idAdv) {
         ajaxModal();
         if (idAdv != '') {
@@ -1972,6 +1936,7 @@
                 }, function (data) {
                     if (data.baris == 1) {
 						//console.og(data);
+                        $('#id_idKyw').val(data.id_kyw);
                         $('#id_namaKyw').val(data.nama_kyw);
                         $('#id_deptKyw').val(data.nama_dept);
                         $('#id_proyek').val(data.id_proyek);
@@ -2050,7 +2015,7 @@
             url: "<?php echo base_url(); ?>master_settle_adv/hapus",
             data: {idSettle: idSettle},
             success: function (data) {
-                $('#id_ReloadReqpay').trigger('click');
+                $('#id_ReloadSettle').trigger('click');
                 $('#id_btnBatal').trigger('click');
                 UIToastr.init(data.tipePesan, data.pesan);
             }
