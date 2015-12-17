@@ -46,7 +46,7 @@ class Master_rumah_m extends CI_Model {
 	}
     public function getDescRumah($idRumah)
 	{
-		$this->db->select ( 'r.*,p.nama_proyek' );
+		$this->db->select ( 'r.*,p.id_proyek,p.nama_proyek' );
 		$this->db->from('master_rumah r');
 		$this->db->join('master_proyek p', 'r.id_proyek=p.id_proyek', 'LEFT');
 		$this->db->where ( 'r.id_rumah', $idRumah );

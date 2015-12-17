@@ -39,7 +39,7 @@
                                 
                             </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-actions">
@@ -123,7 +123,7 @@
 		btnStart();
 		resetForm();
 	});
-		
+
 	function cetak(){
 		var tanggal = $('#id_tanggal').val();
 		if(tanggal == ''){
@@ -134,7 +134,7 @@
 			window.open("<?php echo base_url('laporan_tagihan/cetak/'); ?>/"+tanggal, '_blank');
 		}
 	}
-    	
+
 </script>
 
 <!-- END JAVASCRIPTS -->

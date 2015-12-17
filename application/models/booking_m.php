@@ -70,6 +70,75 @@ class Booking_m extends CI_Model {
 
 	}
 
+	function getIdJrAR($bulan,$tahun){
+		$sql= "select trans_id from trans_detail_perk where MONTH(tgl_trans)='$bulan' and YEAR(tgl_trans)='$tahun' and modul = 2 and left(trans_id,2)='AR'";
+		$query = $this->db->query($sql);
+		$jml = $query->num_rows();
+		$kode = "AR";
+		$th = substr($tahun,-2);
+		if($jml == 0){
+			$id_pemb = "0000001";
+			return $kode."-".$id_pemb."-".$bulan.$th;
+		}else{
+			$sql= "select max(substring(trans_id,4,7)) as id_pemb from trans_detail_perk where MONTH(tgl_trans)='$bulan' and YEAR(tgl_trans)='$tahun' and modul = 2  and left(trans_id,2)='AR'";
+			$query = $this->db->query($sql);
+			$hasil = $query->result();
+			$id_pemb =  $hasil[0]->id_pemb;
+			$id_pemb = sprintf('%07u',$id_pemb+1);
+			return $kode."-".$id_pemb."-".$bulan.$th;
+		}
+	}
+	function getNoVoucher($bulan,$tahun){
+		$sql= "select voucher_no from trans_detail_perk where MONTH(tgl_trans)='$bulan' and YEAR(tgl_trans)='$tahun' and modul = 2  and left(trans_id,2)='BR'";
+		$query = $this->db->query($sql);
+		$jml = $query->num_rows();
+		$kode = "BR";
+		$th = substr($tahun,-2);
+		if($jml == 0){
+			$id_pemb = "0000001";
+			return $kode."-".$id_pemb."-".$bulan.$th;
+		}else{
+			$sql= "select max(substring(voucher_no,4,7)) as id_pemb from trans_detail_perk where MONTH(tgl_trans)='$bulan' and YEAR(tgl_trans)='$tahun' and modul = 2  and left(trans_id,2)='BR'";
+			$query = $this->db->query($sql);
+			$hasil = $query->result();
+			$id_pemb =  $hasil[0]->id_pemb;
+			$id_pemb = sprintf('%07u',$id_pemb+1);
+			return $kode."-".$id_pemb."-".$bulan.$th;
+		}
+	}
+	function getIdTDPerk($modelidAP,$tglTrans,$id_master,$idProyek,$tmpKodePerk,$tmpDb,$tmpKr){
+		$sql= "select id_seq from trans_detail_perk where trans_id ='$modelidAP' and tgl_trans = '$tglTrans'
+				and master_id = '$id_master' and  id_proyek ='$idProyek'
+				and kode_perk = '$tmpKodePerk' and debet = '$tmpDb' and kredit = '$tmpKr'";
+		$query = $this->db->query($sql);
+		$hasil = $query->result();
+		return $hasil[0]->id_seq;
+	}
+	function insertAdvPerk($data){
+		$this->db->trans_begin();
+		$model = $this->db->insert('trans_detail_perk', $data);
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return false;
+		}
+		else{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+	function insertAdvCflow($data){
+		$this->db->trans_begin();
+		$model = $this->db->insert('trans_detail_cflow', $data);
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return false;
+		}
+		else{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+
 }
 
 /* End of file sec_menu_user_m.php */

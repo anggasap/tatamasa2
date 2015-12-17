@@ -9,6 +9,8 @@ class Booking extends CI_Controller
 
 		$this->load->model('home_m');
 		$this->load->model('booking_m');
+		$this->load->model('kasir_m');
+		$this->load->model('akuntansi_m');
 		session_start ();
 	}
 	public function index(){
@@ -49,8 +51,8 @@ class Booking extends CI_Controller
 		$data['menu_nama'] = $menuId[0]->menu_nama;
 		$this->auth->restrict ($data['menu_id']);
 		$this->auth->cek_menu ( $data['menu_id'] );
-        
-       
+		$data['kodebayar'] = $this->kasir_m->getKodeBayar();
+
 		if(isset($_POST["btnSimpan"])){
 			$this->simpan();
 		}elseif(isset($_POST["btnUbah"])){
@@ -134,6 +136,64 @@ class Booking extends CI_Controller
 
 			$model_transJual = $this->booking_m->simpan_transJual($data_trans_jual);
 
+			$idProyek = trim($this->input->post('proyek'));
+			$modelidJrAR = $this->booking_m->getIdJrAR($bulan, $tahun);
+			$modelNoVoucher = $this->kasir_m->getNoVoucher($bulan, $tahun);
+			$totJurnal = trim($this->input->post('txtTempLoop'));
+			if ($totJurnal > 0) {
+				for ($i = 1; $i <= $totJurnal; $i++) {
+					$tKodePerk = 'tempKodePerk' . $i;
+					$tKodeCflow = 'tempKodeCflow' . $i;
+					$tDb = 'tempDb' . $i;
+					$tKr = 'tempKr' . $i;
+					$tKet = 'tempKet' . $i;
+
+					$tmpKodePerk = trim($this->input->post($tKodePerk));
+					$tmpKodeCflow = trim($this->input->post($tKodeCflow));
+					$tmpDb = str_replace(',', '', trim($this->input->post($tDb)));
+					$tmpKr = str_replace(',', '', trim($this->input->post($tKr)));
+					$tmpKet = trim($this->input->post($tKet));
+
+					$jmlCflow = $tmpDb + $tmpKr;
+
+					$data_perk = array(
+							'trans_id' => $modelidJrAR,
+							'voucher_no'=>$modelNoVoucher,
+							'tgl_trans' => $tglTrans,
+							'modul'		=>2,
+							'kode_jurnal' => 'AR',
+							'master_id' => $modelidPenj,
+							'id_proyek' => $idProyek,
+							'id_dept' => '',
+							'kode_perk' => $tmpKodePerk,
+							'debet' => $tmpDb,
+							'kredit' => $tmpKr,
+							'keterangan' => $tmpKet
+					);
+					$model = $this->akuntansi_m->insertTDPerk($data_perk);
+					if($model){
+						$idTdPerk = $this->booking_m->getIdTDPerk($modelidJrAR,$tglTrans,$modelidPenj,$idProyek,$tmpKodePerk,$tmpDb,$tmpKr);
+						if ($tmpKodeCflow <> '') {
+							$data_cflow = array(
+									'trans_id' => $modelidJrAR,
+									'voucher_no'=>$modelNoVoucher,
+									'id_seq_perk'=>$idTdPerk,
+									'tgl_trans' => $tglTrans,
+									'modul'		=>2,
+									'kode_jurnal' => 'AR',
+									'master_id' => $modelidPenj,
+									'id_proyek' => $idProyek,
+									'id_dept' => '',
+									'kode_cflow' => $tmpKodeCflow,
+									'saldo_akhir' => $jmlCflow,
+									'keterangan' => $tmpKet
+							);
+							$model = $this->akuntansi_m->insertTDCflow($data_cflow);
+						}
+					}
+
+				}
+			}
 			if($model_master){
 				$array = array(
 						'act'	=>1,

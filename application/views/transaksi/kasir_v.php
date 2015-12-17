@@ -1837,6 +1837,10 @@
         kosongCPA();
         btnCpaStart();
     });
+    $('#id_btnBatalCpa').click(function () {
+        kosongCPA();
+        btnCpaStart();
+    });
     function ajaxSubmit() {
         ajaxModal();
         $.ajax({
