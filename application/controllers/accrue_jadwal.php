@@ -68,7 +68,27 @@ class Accrue_jadwal extends CI_Controller
 		$bulan = date('m', strtotime($tglTrans));//$tglTrans->format("m");
 		$tahun = date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
 
-		/*$totJurnal = trim($this->input->post('txtTempLoopAccr'));
+
+
+		$totJurnal = trim($this->input->post('txtTempLoop'));
+		if ($totJurnal > 0) {
+			for ($i = 1; $i <= $totJurnal; $i++) {
+				$tKodePerk = 'tempKodePerk' . $i;
+				$tmpKodePerk = trim($this->input->post($tKodePerk));
+				$tDb = 'tempDb' . $i;
+				$tKr = 'tempKr' . $i;
+				$tmpDb = str_replace(',', '', trim($this->input->post($tDb)));
+				$tmpKr = str_replace(',', '', trim($this->input->post($tKr)));
+				if($tmpDb>0){
+					$kdPerkDb = $tmpKodePerk;
+				}else{
+					$kdPerkKr = $tmpKodePerk;
+				}
+			}
+
+		}
+
+		$totJurnal = trim($this->input->post('txtTempLoopAccr'));
 		if ($totJurnal > 0) {
 			for ($i = 1; $i <= $totJurnal; $i++) {
 				$tIdPenj = 'tempIdPenj' . $i;
@@ -83,7 +103,7 @@ class Accrue_jadwal extends CI_Controller
 
 				$modelidJrAR = $this->booking_m->getIdJrAR($bulan, $tahun);
 				//$modelNoVoucher = $this->kasir_m->getNoVoucher($bulan, $tahun);
-				$tmpKodePerk = '1010201';
+				//$tmpKodePerk = '1010201';
 				$data_perk = array(
 						'trans_id' => $modelidJrAR,
 						'voucher_no'=>'',
@@ -93,13 +113,13 @@ class Accrue_jadwal extends CI_Controller
 						'master_id' => $tmpIdPenj,
 						'id_proyek' => $tmpIdProyek,
 						'id_dept' => '',
-						'kode_perk' => $tmpKodePerk,
+						'kode_perk' => $kdPerkDb,//$tmpKodePerk,
 						'debet' => $tmpJmlTrans,
 						'kredit' => 0,
 						'keterangan' => '--Accrue--'
 				);
 				$model = $this->akuntansi_m->insertTDPerk($data_perk);
-				$tmpKodePerk = '201050101';
+				//$tmpKodePerk = '201050101';
 				$data_perk = array(
 						'trans_id' => $modelidJrAR,
 						'voucher_no'=>'',
@@ -109,7 +129,7 @@ class Accrue_jadwal extends CI_Controller
 						'master_id' => $tmpIdPenj,
 						'id_proyek' => $tmpIdProyek,
 						'id_dept' => '',
-						'kode_perk' => $tmpKodePerk,
+						'kode_perk' => $kdPerkKr,//$tmpKodePerk,
 						'debet' => 0,
 						'kredit' => $tmpJmlTrans,
 						'keterangan' => '--Accrue--'
@@ -122,60 +142,8 @@ class Accrue_jadwal extends CI_Controller
 				$model = $this->accrue_jadwal_m->updateAccrStatus($data_accr,$tmpIdPenj,$tglTrans);
 
 			}
-		}*/
-		$modelidJrAR = $this->booking_m->getIdJrAR($bulan, $tahun);
-		$totJurnal = trim($this->input->post('txtTempLoop'));
-		if ($totJurnal > 0) {
-			for ($i = 1; $i <= $totJurnal; $i++) {
-				$tKodePerk = 'tempKodePerk' . $i;
-				$tKodeCflow = 'tempKodeCflow' . $i;
-				$tDb = 'tempDb' . $i;
-				$tKr = 'tempKr' . $i;
-				$tKet = 'tempKet' . $i;
-
-				$tmpKodePerk = trim($this->input->post($tKodePerk));
-				$tmpKodeCflow = trim($this->input->post($tKodeCflow));
-				$tmpDb = str_replace(',', '', trim($this->input->post($tDb)));
-				$tmpKr = str_replace(',', '', trim($this->input->post($tKr)));
-				$tmpKet = trim($this->input->post($tKet));
-
-				$jmlCflow = $tmpDb + $tmpKr;
-
-				$data_perk = array(
-						'trans_id' => $modelidJrAR,
-						'tgl_trans' => $tglTrans,
-						'modul'		=>2,
-						'kode_jurnal' => 'AR',
-						'master_id' => 'ACCRUE',
-						'id_proyek' => $idProyek,
-						'id_dept' => $idDept,
-						'kode_perk' => $tmpKodePerk,
-						'debet' => $tmpDb,
-						'kredit' => $tmpKr,
-						'keterangan' => $tmpKet
-				);
-				$model = $this->akuntansi_m->insertTDPerk($data_perk);
-				if($model){
-					$idTdPerk = $this->akuntansi_m->getIdTDPerk($modelidAP,$tglTrans,$id_master,$idProyek,$idDept,$tmpKodePerk,$tmpDb,$tmpKr);
-					if ($tmpKodeCflow <> '') {
-						$data_cflow = array(
-								'trans_id' => $modelidAP,
-								'id_seq_perk'=>$idTdPerk,
-								'tgl_trans' => $tglTrans,
-								'kode_jurnal' => $kodeJurnal,
-								'master_id' => $id_master,
-								'id_proyek' => $idProyek,
-								'id_dept' => $idDept,
-								'kode_cflow' => $tmpKodeCflow,
-								'saldo_akhir' => $jmlCflow,
-								'keterangan' => $tmpKet
-						);
-						$model = $this->akuntansi_m->insertTDCflow($data_cflow);
-					}
-				}
-
-			}
 		}
+
 		if($model){
 			$array = array(
 					'act'	=>1,
