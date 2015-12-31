@@ -46,7 +46,7 @@ class Auth{
          // buat session
          $this->CI->session->set_userdata($session_other);
          
-         $sesJS = array(
+         /*$sesJS = array(
          		'jqueryJS'  => '<script src="'.base_url('metronic/global/plugins/jquery.min.js').'"></script>',
          		'jquery-migrateJS'  => '<script src="'.base_url('metronic/global/plugins/jquery-migrate.min.js').'"></script>',
          		'jquery-uiJS'  => '<script src="'.base_url('metronic/global/plugins/jquery-ui/jquery-ui.min.js').'"></script>',
@@ -64,13 +64,12 @@ class Auth{
          		'metronicJS'  => '<script src="'.base_url('metronic/global/scripts/metronic.js').'"></script>',
          		'layoutJS'  => '<script src="'.base_url('metronic/admin/layout4/scripts/layout.js').'"></script>',
          		'demoJS'  => '<script src="'.base_url('metronic/admin/layout4/scripts/demo.js').'"></script>',
-				'select2JS'  => '<script src="'.base_url('metronic/global/plugins/select2/select2.min.js').'"></script>',
-                //'compPickersJS'  => '<script src="'.base_url('metronic/admin/pages/scripts/components-pickers.js').'"></script>'
+				'select2JS'  => '<script src="'.base_url('metronic/global/plugins/select2/select2.min.js').'"></script>'
          		
-         		/* 'JS'  => '<script src="'.base_url('').'"></script>' */
-         );
+         		 'JS'  => '<script src="'.base_url('').'"></script>'
+         );*/
          
-         $this->CI->session->set_userdata($sesJS);
+         //$this->CI->session->set_userdata($sesJS);
          
          /*$sesCS = array(
          		'fontAwesomeCS'  => '<link href="'.base_url('metronic/global/plugins/font-awesome/css/font-awesome.min.css').'" rel="stylesheet" type="text/css">',

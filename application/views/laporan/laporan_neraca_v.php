@@ -7,7 +7,7 @@
 <!-- BEGIN PAGE CONTENT-->
 <!-- KONTEN DI SINI YA -->
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="portlet light bordered">
             <div class="portlet-title">
                 <div class="caption">
@@ -33,8 +33,18 @@
 									<input id="id_tanggal" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" class="form-control date-picker input-sm" type="text" name="tanggalAwal" />                                                   
                                 </div>
                             </div>
+							<div class="col-md-4">
+								<div class="form-group">
+                                    <label>Bentuk Neraca</label>
+                                    <select id="id_bentuk" class="form-control input-sm select2me" name="bentuk">
+                                        <option value=""></option>
+                                        <option value="T">Bentuk T</option>
+                                        <option value="G">Garis Lurus</option>
+                                    </select>
+								</div>
+							</div>   
                             <!--end <div class="col-md-6"> 1 -->
-                            <div class="col-md-8">
+                            <div class="col-md-4">
 								<div class="form-group">
                                     <label>&nbsp;</label>
 										<div class="checkbox-list">
@@ -78,27 +88,29 @@
 <script src="<?php echo base_url('metronic/global/plugins/respond.min.js'); ?>"></script>
 <script src="<?php echo base_url('metronic/global/plugins/excanvas.min.js'); ?>"></script>
 <![endif]-->
-<?php echo  $this->session->userdata('jqueryJS'); ?>
-<?php echo  $this->session->userdata('jquery-migrateJS'); ?>
+<script src="<?php echo base_url('metronic/global/plugins/jquery.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/global/plugins/jquery-migrate.min.js'); ?>" type="text/javascript"></script>
 <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-<?php echo  $this->session->userdata('jquery-uiJS'); ?>
-<?php echo  $this->session->userdata('bootstrapJS'); ?>
-<?php echo  $this->session->userdata('bootstrap-hover-dropdownJS'); ?>
-<?php echo  $this->session->userdata('jquery-slimscrollJS'); ?>
-<?php echo  $this->session->userdata('jquery-blockuiJS'); ?>
-<?php echo  $this->session->userdata('jquery-cokieJS'); ?>
-<?php echo  $this->session->userdata('jquery-uniformJS'); ?>
-<?php echo  $this->session->userdata('bootstrap-switchJS'); ?>
+<script src="<?php echo base_url('metronic/global/plugins/jquery-ui/jquery-ui.min.js'); ?>" type="text/javascript"></script>
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<?php echo  $this->session->userdata('toastrJS'); ?>
-<?php echo  $this->session->userdata('select2JS'); ?>
-<?php echo  $this->session->userdata('jquery-dataTablesJS'); ?>
-<?php echo  $this->session->userdata('dataTables-bootstrapJS'); ?>
+
+<script src="<?php echo base_url('metronic/global/plugins/bootstrap/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/global/plugins/jquery.blockui.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/global/plugins/jquery.cokie.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/global/plugins/uniform/jquery.uniform.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js'); ?>" type="text/javascript"></script>
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script type="text/javascript" src="<?php echo base_url('metronic/global/plugins/bootstrap-toastr/toastr.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('metronic/global/plugins/select2/select2.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('metronic/global/plugins/datatables/media/js/jquery.dataTables.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('metronic/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js'); ?>"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- END CORE PLUGINS -->
-<?php echo  $this->session->userdata('metronicJS'); ?>
-<?php echo  $this->session->userdata('layoutJS'); ?>
-<?php echo  $this->session->userdata('demoJS'); ?>
+<script type="text/javascript" src="<?php echo base_url('metronic/global/scripts/metronic.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('metronic/admin/layout4/scripts/layout.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('metronic/admin/layout4/scripts/demo.js'); ?>"></script>
 <script src="<?php echo base_url('metronic/additional/start.js'); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('metronic/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'); ?>" type="text/javascript"></script>
 <script>
@@ -135,10 +147,18 @@
 		
 	function cetak(){
 		var tglAwal = $('#id_tanggal').val();
+		var bentuk = $('#id_bentuk').val();
 		var nol = $("#id_nol").attr("checked") ? 1 : 0;
 		if(tglAwal == ''){
 			alert('Silahkan pilih tanggal');
 			return false;
+		}
+		if(bentuk == ''){
+			alert('Silahkan pilih bentuk neraca');
+			return false;
+		}
+		if(bentuk == 'T'){
+			window.open("<?php echo base_url('laporan_neraca_c/cetak_t/'); ?>/"+tglAwal+"/"+nol, '_blank');
 		}else{
 			window.open("<?php echo base_url('laporan_neraca_c/cetak/'); ?>/"+tglAwal+"/"+nol, '_blank');	
 		}

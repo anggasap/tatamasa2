@@ -73,7 +73,7 @@ class Laporan_laba_rugi extends CI_Controller
 			$data['nama'] 	= 'PT BERKAH GRAHA MANDIRI';
 			$data['tower'] 	= 'Beltway Office Park Tower Lt. 5';
 			$data['alamat'] = 'Jl. TB Simatung No. 41 - Pasar Minggu - Jakarta Selatan';
-			$data['laporan']= 'Laporan Laba Rugi per ';
+			$data['laporan']= 'Laporan Laba Rugi komprehensif per ';
 			$data['user'] 	= $this->session->userdata('username');
 			$data['tgl'] 	= $tgl_trans;
     		$this->load->view('cetak/cetak_laporan_laba_rugi',$data);

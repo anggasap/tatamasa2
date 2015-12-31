@@ -40,7 +40,7 @@
                     </li>
                     <li>
                         <a href="#tab_2_2" data-toggle="tab" id="navitab_2_1">
-                            Pembayaran </a>
+                            Info Pembayaran </a>
                     </li>
                     <li>
                         <a href="#tab_2_3" data-toggle="tab" id="navitab_2_3">
@@ -235,96 +235,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr>
-                            <div class="row">
-                                <div class="form-body">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="form-group" id="id_divDPPersen">
-                                                        <label>Tgl trans</label>
-                                                        <input id="id_tgltrans" required="required"
-                                                               class="form-control input-sm date-picker"
-                                                               type="text" name="tglTrans"
-                                                               data-date-format="dd-mm-yyyy"/>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label>No bukti </label>
-                                                    <input id="id_noBukti" class="form-control  input-sm"
-                                                           type="text" name="noBukti" required/>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label>Kode trans</label>
-                                                    <select id="id_kodeTrans" class="form-control  input-sm"
-                                                            name="kodeTrans" required>
-                                                        <option value="1">Tunai</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label>Cicilan ke- </label>
-                                                        <input id="id_cicilanKe" class="form-control nomor1 input-sm"
-                                                               type="text" name="cicilanKe" placeholder=""/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label>Jumlah Bayar</label>
-                                                        <input id="id_jmlBayar" class="form-control nomor input-sm"
-                                                               type="text" name="jmlBayar" placeholder=""/>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <label>Keterangan </label>
-                                                    <textarea rows="2" cols="" name="keterangan" id="id_keterangan"
-                                                      class="form-control input-sm" placeholder=""></textarea>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <!--end <div class="col-md-6"> 1 -->
-                                </div>
-                            </div>
 
                         </div>
                         <div class="tab-pane fade" id="tab_2_3">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label>Kode Pembayaran</label>
-                                        <?php
-                                        $data = array();
-                                        $data[''] = '';
-                                        foreach ($kodebayar as $row):
-                                            $data[$row['kode_bayar']] = $row['nama_kdbayar'];
-                                        endforeach;
-                                        echo form_dropdown('kodebayar', $data, '',
-                                            'id="id_kodebayar" class="form-control input-sm select2me " required');
-                                        ?>
-                                        <input id="id_kodePerkBayar" class="form-control input-sm hidden"
-                                               type="text" name="kodePerkBayar" readonly/>
-                                        <input id="id_namaPerkBayar" class="form-control input-sm hidden"
-                                               type="text" name="namaPerkBayar" readonly/>
-                                    </div>
-                                </div>
-                                <div class="col-md-5">
-                                    <label>Keterangan </label>
-                                                        <textarea rows="2" cols="" name="keterangan" id="id_keterangan"
-                                                                  class="form-control input-sm" placeholder="" ></textarea>
-                                </div>
+                            <div class="form-group" id="">
+                                <input id="id_tgltrans" required="required"
+                                       class="form-control input-sm date-picker hidden"
+                                       type="text" name="tglTrans"/>
                             </div>
-                            <hr>
                             <div class="row">
                                 <div class="form-body">
                                     <div class="col-md-6">
@@ -719,27 +637,29 @@
 <script src="<?php echo base_url('metronic/global/plugins/respond.min.js'); ?>"></script>
 <script src="<?php echo base_url('metronic/global/plugins/excanvas.min.js'); ?>"></script>
 <![endif]-->
-<?php echo $this->session->userdata('jqueryJS'); ?>
-<?php echo $this->session->userdata('jquery-migrateJS'); ?>
+<script src="<?php echo base_url('metronic/global/plugins/jquery.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/global/plugins/jquery-migrate.min.js'); ?>" type="text/javascript"></script>
 <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-<?php echo $this->session->userdata('jquery-uiJS'); ?>
-<?php echo $this->session->userdata('bootstrapJS'); ?>
-<?php echo $this->session->userdata('bootstrap-hover-dropdownJS'); ?>
-<?php echo $this->session->userdata('jquery-slimscrollJS'); ?>
-<?php echo $this->session->userdata('jquery-blockuiJS'); ?>
-<?php echo $this->session->userdata('jquery-cokieJS'); ?>
-<?php echo $this->session->userdata('jquery-uniformJS'); ?>
-<?php echo $this->session->userdata('bootstrap-switchJS'); ?>
+<script src="<?php echo base_url('metronic/global/plugins/jquery-ui/jquery-ui.min.js'); ?>" type="text/javascript"></script>
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<?php echo $this->session->userdata('toastrJS'); ?>
-<?php echo $this->session->userdata('select2JS'); ?>
-<?php echo $this->session->userdata('jquery-dataTablesJS'); ?>
-<?php echo $this->session->userdata('dataTables-bootstrapJS'); ?>
+
+<script src="<?php echo base_url('metronic/global/plugins/bootstrap/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/global/plugins/jquery.blockui.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/global/plugins/jquery.cokie.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/global/plugins/uniform/jquery.uniform.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js'); ?>" type="text/javascript"></script>
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script type="text/javascript" src="<?php echo base_url('metronic/global/plugins/bootstrap-toastr/toastr.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('metronic/global/plugins/select2/select2.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('metronic/global/plugins/datatables/media/js/jquery.dataTables.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('metronic/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js'); ?>"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- END CORE PLUGINS -->
-<?php echo $this->session->userdata('metronicJS'); ?>
-<?php echo $this->session->userdata('layoutJS'); ?>
-<?php echo $this->session->userdata('demoJS'); ?>
+<script type="text/javascript" src="<?php echo base_url('metronic/global/scripts/metronic.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('metronic/admin/layout4/scripts/layout.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('metronic/admin/layout4/scripts/demo.js'); ?>"></script>
 <script src="<?php echo base_url('metronic/additional/start.js'); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('metronic/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'); ?>"
         type="text/javascript"></script>
@@ -1348,7 +1268,7 @@
         $.ajax({
             type: "POST",
             dataType: "json",
-            url: "<?php echo base_url(); ?>pembayaran/simpan",
+            url: "<?php echo base_url(); ?>ajb/simpan",
             data: dataString,
 
             success: function (data) {
