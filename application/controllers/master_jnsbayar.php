@@ -55,6 +55,7 @@ class Master_jnsbayar extends CI_Controller
 					'kodeBayar' => trim($row->kode_bayar),
 					'namaKdBayar' => trim($row->nama_kdbayar),
                     'norekBank' => trim($row->norek_bank),
+					'jenisBayar' => trim($row->jenis),
                     'kodePerk' => trim($row->kode_perk)				
 			);
 	
@@ -82,7 +83,7 @@ class Master_jnsbayar extends CI_Controller
         $namaJnsbyr			= trim($this->input->post('namaJnsbyr'));
         $norekBank			= trim($this->input->post('norekBank'));
         $GL			        = trim($this->input->post('GL'));
-
+		$jenis			    = trim($this->input->post('jenis'));
         //$deptProyek		= trim($this->input->post('deptProyek'));
        
         $modelidJnsbyr = $this->master_jnsbayar_m->getIdJnsbyr();
@@ -90,7 +91,8 @@ class Master_jnsbayar extends CI_Controller
             'kode_bayar'		      		=>$modelidJnsbyr,
             'nama_kdbayar'		        	=>$namaJnsbyr,
             'norek_bank'		        	=>$norekBank,
-            'kode_perk'		        	    =>$GL
+            'kode_perk'		        	    =>$GL,
+			'jenis'							=>$jenis
         );
         $model = $this->master_jnsbayar_m->simpan($data);
         if($model){
@@ -113,11 +115,13 @@ class Master_jnsbayar extends CI_Controller
     	$namaJnsbyr			= trim($this->input->post('namaJnsbyr'));
         $norekBank			= trim($this->input->post('norekBank'));
         $GL			        = trim($this->input->post('GL'));
-    	 
+    	$jenis			    = trim($this->input->post('jenis'));
+         
     	$data = array(
             'nama_kdbayar'		        	=>$namaJnsbyr,
             'norek_bank'		        	=>$norekBank,
-            'kode_perk'		        	    =>$GL
+            'kode_perk'		        	    =>$GL,
+			'jenis'							=>$jenis
         );
     	
     	$model = $this->master_jnsbayar_m->ubah($data,$jnsbyrId);

@@ -28,6 +28,12 @@ class Master_advance_m extends CI_Model {
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}
+	public function getAdvReq($requester)
+	{
+		$sql="SELECT ma.id_advance,mk.nama_kyw, ma.jml_uang from master_advance ma left join master_karyawan mk on ma.id_kyw = mk.id_kyw where ma.id_kyw = '$requester'";
+		$query=$this->db->query($sql);
+		return $query->result(); // returning rows, not row
+	}
 	public function getKywAll()
 	{
 		$sql="SELECT mk.id_kyw,mk.nama_kyw,mk.nama_akun_bank,mk.no_akun_bank,mk.nama_bank,md.nama_dept from master_karyawan mk left join master_dept md on mk.dept_kyw = md.id_dept";

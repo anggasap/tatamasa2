@@ -15,7 +15,8 @@ class Master_karyawan_m extends CI_Model {
 	}
 	public function getKywAll()
 	{
-		$sql="SELECT * from master_karyawan ";
+		$sql="SELECT mk.id_kyw, mk.nama_kyw,mk.dept_kyw,mk.nama_akun_bank,mk.no_akun_bank,mk.nama_bank,mk.kode_perk,mp.nama_perk
+				from master_karyawan mk left join perkiraan mp on mk.kode_perk = mp.kode_perk  ";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}

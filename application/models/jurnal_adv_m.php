@@ -204,6 +204,19 @@ class Jurnal_adv_m extends CI_Model {
 			return true;
 		}
 	}
+	function updateCPA($data_cpa,$idAdv){
+		$this->db->trans_begin();
+		$query1 = $this->db->where('id_master', $idAdv);
+		$query2 = $this->db->update('cpa', $data_cpa);
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return false;
+		}
+		else{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
 	function deleteJadv($jadvId){
 		$this->db->trans_begin();
 		$query1	=	$this->db->where('id_pp',$jadvId);

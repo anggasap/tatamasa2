@@ -22,13 +22,27 @@ class Akuntansi_m extends CI_Model {
 	}
 	function getSettleAll()
 	{
-		$sql="SELECT ms.id_settle_adv,mk.nama_kyw, ma.jml_uang,ms.jml_uang_paid
+		$sql="SELECT ms.id_settle_adv,ma.id_advance,pp.type_adv,mk.nama_kyw, ma.jml_uang,ms.jml_uang_paid
 			  from master_settle_adv ms
 			  left join master_advance ma on ms.id_adv = ma.id_advance
 			  left join master_karyawan mk on ms.id_kyw = mk.id_kyw
+			  left join perintah_pembayaran pp on ma.id_advance = pp.id_advance
 			  where ms.status_akuntansi = 0";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
+	}
+	public function getDescUM($kdByr)
+	{
+		$this->db->select ( 'ta.kode_perk,p.nama_perk' );
+		$this->db->from('type_advance ta');
+		$this->db->join('perkiraan p', 'ta.kode_perk=p.kode_perk', 'LEFT');
+		$this->db->where ( 'id_account', $kdByr );
+//		$this->db->where ( 'T.STATUS_AKTIF <>', 3 );
+		$query = $this->db->get ();
+
+		$rows['data_cpa'] = $query->result();
+		return $rows;
+
 	}
 	function getIdAP($bulan,$tahun){
 		$sql= "select trans_id from trans_detail_perk where MONTH(tgl_trans)='$bulan' and YEAR(tgl_trans)='$tahun'";

@@ -19,6 +19,12 @@ class Master_reqpay_m extends CI_Model {
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}
+	public function getReqpayReq($requester)
+	{
+		$sql="SELECT mr.id_reqpay,mk.nama_kyw, mr.jml_uang from master_reqpay mr left join master_karyawan mk on mr.id_kyw = mk.id_kyw where mr.id_kyw = '$requester'";
+		$query=$this->db->query($sql);
+		return $query->result(); // returning rows, not row
+	}
 	/* public function getKywAll()
 	{
 		$sql="SELECT mk.id_kyw,mk.nama_kyw,md.nama_dept from master_karyawan mk left join master_dept md on mk.dept_kyw = md.id_dept";
@@ -137,9 +143,10 @@ class Master_reqpay_m extends CI_Model {
 	}
 	public function getDescCpa($idReqpay)
 	{
-		$this->db->select ( 'id_cpa,id_master,kode_perk,kode_cflow,keterangan,jumlah' );
-		$this->db->from('cpa');
-		$this->db->where ( 'id_master', $idReqpay );
+		$this->db->select ( 'c.id_cpa,c.id_master,c.kode_perk as kode_perk,p.nama_perk,c.kode_cflow,c.keterangan,c.jumlah' );
+		$this->db->from('cpa c');
+		$this->db->join('perkiraan p', 'c.kode_perk=p.kode_perk', 'LEFT');
+		$this->db->where ( 'c.id_master', $idReqpay );
 //		$this->db->where ( 'T.STATUS_AKTIF <>', 3 );
 		$query = $this->db->get ();
 

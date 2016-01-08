@@ -170,8 +170,15 @@
 								</div>	
                                 <div class="form-group">
                                     <label>Kode Cash Flow</label>
+                                    <div class="input-group">
                                         <input id="id_kodeCflow" required="required" class="form-control input-sm"
                                                type="text" name="kodeCflow" readonly/>
+                                        <span class="input-group-btn">
+														<a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelCflow"
+                                                           id="id_btnModal2" data-toggle="modal">
+                                                            <i class="fa fa-search fa-fw"/></i></a>
+													</span>
+                                    </div>
                                 </div>
 								<div class="form-group">
                                     <div class="row">
@@ -451,6 +458,59 @@
 	</div>
 <!--  END  MODAL Data Perkiraan -->
 <!--  MODAL Data Cash FLow -->
+<div class="modal fade draggable-modal" id="idDivTabelCflow" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Data Cash Flow</h4>
+            </div>
+            <div class="modal-body">
+                <div class="scroller" style="height:400px; ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button id="id_ReloadCflow" style="display: none;"></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-body">
+                                <table class="table table-striped table-bordered table-hover text_kanan"
+                                       id="idTabelCflow">
+                                    <thead>
+                                    <tr>
+                                        <th width='15%' align='left'>Kd Cflow</th>
+                                        <th width='15%' align='left'>Kd Alt</th>
+                                        <th width='50%' align='left'>Nama Perk</th>
+                                        <th width='10%' align='center'>Level</th>
+                                        <th width='10%' align='center'>Type</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                    <tfoot>
+
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end col-12 -->
+                    </div>
+                    <!-- END ROW-->
+                </div>
+                <!-- END SCROLLER-->
+            </div>
+            <!-- END MODAL BODY-->
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal" id="btnCloseModalCflow">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 <!--  END  MODAL Cash Flow -->
 
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
@@ -774,6 +834,102 @@
             });
             tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
         }
+        var initTable4 = function () {
+            //var table = $('#id_TabelPerk');
+            // begin first table
+            var table = $('#idTabelCflow').dataTable({
+                "ajax": "<?php  echo base_url("/master_cflow/getAllCflow"); ?>",
+                "columns": [
+                    {"data": "kode_cflow"},
+                    {"data": "kode_alt"},
+                    {"data": "nama_cflow"},
+                    {"data": "level"},
+                    {"data": "type"}
+                ],
+                // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+                "language": {
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    },
+                    "emptyTable": "No data available in table",
+                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                    "infoEmpty": "No entries found",
+                    "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                    "lengthMenu": "Show _MENU_ entries",
+                    "search": "Search:",
+                    "zeroRecords": "No matching records found"
+                },
+                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+                "lengthMenu": [
+                    [5, 10, 15, 20, -1],
+                    [5, 10, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "pageLength": 5,
+                "pagingType": "bootstrap_full_number",
+                "language": {
+                    "search": "Cari: ",
+                    "lengthMenu": "  _MENU_ records",
+                    "paginate": {
+                        "previous": "Prev",
+                        "next": "Next",
+                        "last": "Last",
+                        "first": "First"
+                    }
+                },
+                // "aaSorting": [[4,'desc'], [5,'desc']],
+                "columnDefs": [{  // set default column settings
+                    'orderable': true,
+                    'type': 'string',
+                    'targets': [0]
+                }, {
+                    "searchable": true,
+                    "targets": [0]
+                }],
+                "order": [
+                    [0, "asc"]
+                ] // set first column as a default sort by asc
+            });
+
+            var tableWrapper = jQuery('#id_TabelPerk_wrapper');
+
+            table.find('.group-checkable').change(function () {
+                var set = jQuery(this).attr("data-set");
+                var checked = jQuery(this).is(":checked");
+                jQuery(set).each(function () {
+                    if (checked) {
+                        $(this).attr("checked", true);
+                        $(this).parents('tr').addClass("active");
+                    } else {
+                        $(this).attr("checked", false);
+                        $(this).parents('tr').removeClass("active");
+                    }
+                });
+                jQuery.uniform.update(set);
+            });
+            $('#id_Reload').click(function () {
+                table.api().ajax.reload();
+            });
+            table.on('click', 'tbody tr', function () {
+                var typeCF = $(this).find("td").eq(4).html();
+                $('#idTxtTempJnsKode').val('2');
+                if(typeCF == 'D'){
+                    var kodeCflow = $(this).find("td").eq(0).html();
+                    $('#id_kodeCflow').val(kodeCflow);
+                    var kodeAlt = $(this).find("td").eq(1).html();
+                    $('#id_kodeAltCflow').text(kodeAlt);
+                    var namaCflow = $(this).find("td").eq(2).html();
+                    $('#id_namaCflow').text(namaCflow);
+
+                    $("#btnCloseModalCflow").trigger("click");
+                }else{
+                    alert("Tidak diijinkan pilih kode induk.");
+                }
+            });
+
+            tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+        }
 
         return {
             //main function to initiate the module
@@ -784,6 +940,7 @@
                 initTable1();
                 initTable2();
                 initTable3();
+                initTable4();
             }
         };
     }();

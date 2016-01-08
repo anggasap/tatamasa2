@@ -80,6 +80,23 @@ class Master_reqpay extends CI_Controller
 		}
 		$this->output->set_output(json_encode($data));
 	}
+	public function getReqpayReq(){
+		$this->CI =& get_instance();//and a.kcab_id<>'1100'
+		$requester = $this->session->userdata('id_kyw');
+		$rows = $this->master_reqpay_m->getReqpayReq($requester);
+		$data['data'] = array();
+		foreach( $rows as $row ) {
+			$jmlUang = number_format($row->jml_uang,2);
+			$array = array(
+					'idReqpay' => trim($row->id_reqpay),
+					'namaReq' => trim($row->nama_kyw),
+					'jmlUang' =>  $jmlUang
+			);
+
+			array_push($data['data'],$array);
+		}
+		$this->output->set_output(json_encode($data));
+	}
 	function getDescReqpay(){
 		$this->CI =& get_instance();
 		$idReqpay = $this->input->post ( 'idReqpay', TRUE );

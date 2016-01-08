@@ -65,6 +65,23 @@ class Master_reimpay extends CI_Controller
 		}
 		$this->output->set_output(json_encode($data));
 	}
+	function getReimpayReq(){
+		$this->CI =& get_instance();//and a.kcab_id<>'1100'
+		$requester = $this->session->userdata('id_kyw');
+		$rows = $this->master_reimpay_m->getReimpayReq($requester);
+		$data['data'] = array();
+		foreach( $rows as $row ) {
+			$jmlUang = number_format($row->jml_uang,2);
+			$array = array(
+					'idReimpay' => trim($row->id_reimpay),
+					'namaReq' => trim($row->nama_kyw),
+					'jmlUang' =>  $jmlUang
+			);
+
+			array_push($data['data'],$array);
+		}
+		$this->output->set_output(json_encode($data));
+	}
 	function getDescReimpay(){
 		$this->CI =& get_instance();
 		$idReimpay = $this->input->post('idReimpay', TRUE );
@@ -438,13 +455,13 @@ class Master_reimpay extends CI_Controller
             $array = array(
                 'act'	=>1,
                 'tipePesan'=>'success',
-                'pesan' =>'Data berhasil di Approve.'.$flag.' - '.$idReimpay
+                'pesan' =>'Data berhasil di Sign.'
             );
         }else{
             $array = array(
                 'act'	=>0,
                 'tipePesan'=>'error',
-                'pesan' =>'Data gagal di Approve.'
+                'pesan' =>'Data gagal di Sign.'
             );
         }
         $this->output->set_output(json_encode($array));

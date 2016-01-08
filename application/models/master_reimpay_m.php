@@ -19,6 +19,12 @@ class Master_reimpay_m extends CI_Model {
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}
+	public function getReimpayReq($requester)
+	{
+		$sql="SELECT mr.id_reimpay,mk.nama_kyw, mr.jml_uang from master_reimpay mr left join master_karyawan mk on mr.id_kyw = mk.id_kyw where mr.id_kyw = '$requester'";
+		$query=$this->db->query($sql);
+		return $query->result(); // returning rows, not row
+	}
 	public function getDescReimpay($idReimpay)
 	{
 		$this->db->select('mr.id_kyw, mk.nama_kyw,md.id_dept, md.nama_dept, mr.no_invoice, mr.jml_uang, mr.id_proyek, mr.id_kurs, mr.nilai_kurs, mr.tgl_trans,, mr.tgl_jt, mr.pay_to, mr.nama_akun_bank, mr.no_akun_bank,

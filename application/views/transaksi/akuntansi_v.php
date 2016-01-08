@@ -30,34 +30,46 @@
                     
                     </span>
                 </div>
+                <ul class="nav nav-pills">
+                    <li class="linav active" id="linav1">
+                        <a href="#tab_2_1" data-toggle="tab" id="navitab_2_1" class="anavitab">
+                            Info Request </a>
+                    </li>
+                    <li class="linav" id="linav2">
+                        <a href="#tab_2_2" data-toggle="tab" id="navitab_2_2" class="anavitab">
+                            Jurnal </a>
+                    </li>
+                </ul>
                 <form role="form" method="post"
                       action="<?php echo base_url('akuntansi/home'); ?>" id="id_formAkuntansi">
-                    <div class="row">
-                        <div class="form-body">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <input id="id_kywId" required="required" class="form-control hidden"
-                                           type="text" name="kywId" readonly/>
-                                    <label>Id Jurnal </label>
-                                    <input id="id_idJurnal" required="required" class="form-control input-sm"
-                                           type="text" name="idJurnal" readonly/>
-                                </div>
-                                <div class="form-group">
-                                    <label>Kode Jurnal</label>
-                                    <select id="id_kodeJurnal" class="form-control input-sm select2me" name="kodeJurnal">
-                                        <option value=""></option>
-                                        <option value="RP">Request for payment</option>
-                                        <option value="RM">Reimbursement</option>
-                                        <option value="ST">Settlement</option>
-                                        <option value="JU">Jurnal Umum</option>
-                                    </select>
-                                </div>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="tab_2_1">
+                            <div class="row">
+                                <div class="form-body">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input id="id_kywId" required="required" class="form-control hidden"
+                                                   type="text" name="kywId" readonly/>
+                                            <label>Id Jurnal </label>
+                                            <input id="id_idJurnal" required="required" class="form-control input-sm"
+                                                   type="text" name="idJurnal" readonly/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Kode Jurnal</label>
+                                            <select id="id_kodeJurnal" class="form-control input-sm select2me" name="kodeJurnal">
+                                                <option value=""></option>
+                                                <option value="RP">Request for payment</option>
+                                                <option value="RM">Reimbursement</option>
+                                                <option value="ST">Settlement</option>
+                                                <option value="JU">Jurnal Umum</option>
+                                            </select>
+                                        </div>
 
-                                <div class="form-group request_in"  id="div_idReqpay">
-                                    <label>Id Request for Payment </label>
-                                    <div class="input-group">
-                                        <input id="id_idReqpay" required="required" class="form-control  input-sm"
-                                               type="text" name="idReqpay" readonly/>
+                                        <div class="form-group request_in"  id="div_idReqpay">
+                                            <label>Id Request for Payment </label>
+                                            <div class="input-group">
+                                                <input id="id_idReqpay" required="required" class="form-control  input-sm"
+                                                       type="text" name="idReqpay" readonly/>
                                     <span class="input-group-btn">
                                         <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelReqpay"
                                            id="id_btnModal" data-toggle="modal">
@@ -65,13 +77,13 @@
 
                                         </a>
                                     </span>
-                                    </div>
-                                </div>
-                                <div class="form-group request_in"  id="div_idReimpay">
-                                    <label>Id Reimbursement </label>
-                                    <div class="input-group">
-                                        <input id="id_idReimpay" required="required" class="form-control  input-sm"
-                                               type="text" name="idReimpay" readonly/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group request_in"  id="div_idReimpay">
+                                            <label>Id Reimbursement </label>
+                                            <div class="input-group">
+                                                <input id="id_idReimpay" required="required" class="form-control  input-sm"
+                                                       type="text" name="idReimpay" readonly/>
                                     <span class="input-group-btn">
                                         <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelReimpay"
                                            id="id_btnModal" data-toggle="modal">
@@ -79,13 +91,13 @@
 
                                         </a>
                                     </span>
-                                    </div>
-                                </div>
-                                <div class="form-group request_in"  id="div_idSettle">
-                                    <label>Id Settlement </label>
-                                    <div class="input-group">
-                                        <input id="id_idSettle" required="required" class="form-control  input-sm"
-                                               type="text" name="idSettle" readonly/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group request_in"  id="div_idSettle">
+                                            <label>Id Settlement </label>
+                                            <div class="input-group">
+                                                <input id="id_idSettle" required="required" class="form-control  input-sm"
+                                                       type="text" name="idSettle" readonly/>
                                     <span class="input-group-btn">
                                         <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelSettle"
                                            id="id_btnModal" data-toggle="modal">
@@ -93,109 +105,110 @@
 
                                         </a>
                                     </span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <!--end <div class="col-md-6"> 1 -->
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <input id="id_kywId" required="required" class="form-control hidden"
-                                           type="text" name="kywId" readonly/>
-                                    <label>Nama karyawan (Requester) </label>
-                                    <input id="id_namaKyw" required="required" class="form-control input-sm"
-                                           type="text" name="namaKyw" readonly/>
-                                    <input id="id_dept" required="required" class="form-control hidden input-sm"
-                                           type="text" name="dept" readonly/>
-                                </div>
-                                <div class="form-group">
-                                    <label>Proyek</label>
-                                    <input id="id_proyek" required="required" class="form-control  input-sm"
-                                           type="text" name="proyek" readonly/>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
+                                    <!--end <div class="col-md-6"> 1 -->
+                                    <div class="col-md-3">
                                         <div class="form-group">
-                                            <label>Nomor Invoice</label>
-                                            <input id="id_noInvoice" class="form-control  input-sm"
-                                                   type="text" name="noInvoice" readonly/>
+                                            <input id="id_kywId" required="required" class="form-control hidden"
+                                                   type="text" name="kywId" readonly/>
+                                            <label>Nama karyawan (Requester) </label>
+                                            <input id="id_namaKyw" required="required" class="form-control input-sm"
+                                                   type="text" name="namaKyw" readonly/>
+                                            <input id="id_dept" required="required" class="form-control hidden input-sm"
+                                                   type="text" name="dept" readonly/>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Nomor PO</label>
-                                            <input id="id_noPO"  class="form-control  input-sm"
-                                                   type="text" name="noPO" readonly/>
+                                            <label>Proyek</label>
+                                            <input id="id_proyek" required="required" class="form-control  input-sm"
+                                                   type="text" name="proyek" readonly/>
                                         </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Tgl Jurnal</label>
-                                            <input id="id_tgltrans" class="form-control  input-sm"
-                                                   type="text" name="tgltrans" readonly/>
-
-                                        </div>
-                                        <div class="col-md-6">
-                                            <!--<label>Nilai Kurs</label>
-                                            <input id="id_nilaiKurs"
-                                                   class="form-control input-sm nomor"
-                                                   type="text" name="nilaiKurs" readonly/>-->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Jumlah uang</label>
-                                    <input id="id_uang" required="required" class="form-control input-sm nomor"
-                                           type="text" name="uang" readonly/>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Tgl Pengajuan</label>
-                                            <input id="id_tglReq" required="required"
-                                                   class="form-control input-sm "
-                                                   type="text" name="tglReq" readonly/>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>Tgl JT</label>
-                                            <input id="id_tglJT" required="required" data-date-format="dd-mm-yyyy"
-                                                   class="form-control  date-picker input-sm"
-                                                   type="text" name="tglJT" placeholder="dd-mm-yyyy" readonly/>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Nomor Invoice</label>
+                                                    <input id="id_noInvoice" class="form-control  input-sm"
+                                                           type="text" name="noInvoice" readonly/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Nomor PO</label>
+                                                    <input id="id_noPO"  class="form-control  input-sm"
+                                                           type="text" name="noPO" readonly/>
+                                                </div>
+                                            </div>
                                         </div>
 
                                     </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Tgl Jurnal</label>
+                                                    <input id="id_tgltrans" class="form-control  input-sm"
+                                                           type="text" name="tgltrans" readonly/>
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <!--<label>Nilai Kurs</label>
+                                                    <input id="id_nilaiKurs"
+                                                           class="form-control input-sm nomor"
+                                                           type="text" name="nilaiKurs" readonly/>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Jumlah uang</label>
+                                            <input id="id_uang" required="required" class="form-control input-sm nomor"
+                                                   type="text" name="uang" readonly/>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Tgl Pengajuan</label>
+                                                    <input id="id_tglReq" required="required"
+                                                           class="form-control input-sm "
+                                                           type="text" name="tglReq" readonly/>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Tgl JT</label>
+                                                    <input id="id_tglJT" required="required" data-date-format="dd-mm-yyyy"
+                                                           class="form-control  date-picker input-sm"
+                                                           type="text" name="tglJT" placeholder="dd-mm-yyyy" readonly/>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Dibayarkan ke</label>
+                                            <input id="id_namaPayTo" required="required" class="form-control input-sm"
+                                                   type="text" name="namapayTo" readonly/>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Dibayarkan ke</label>
-                                    <input id="id_namaPayTo" required="required" class="form-control input-sm"
-                                           type="text" name="namapayTo" readonly/>
-                                </div>
+                                <!-- HIDDEN INPUT -->
+                                <input type="text" id="idTmpAksiBtn" class="hidden">
+                                <input type="text" id="idTmpBtnKyw" class="hidden">
+                                <!-- END HIDDEN INPUT -->
                             </div>
                         </div>
-                        <!-- HIDDEN INPUT -->
-                        <input type="text" id="idTmpAksiBtn" class="hidden">
-                        <input type="text" id="idTmpBtnKyw" class="hidden">
-                        <!-- END HIDDEN INPUT -->
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="form-body">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <!--<label>Kode perk</label>-->
-                                            <div class="input-group">
-                                                <input id="id_kodePerk" readonly
-                                                       class="form-control input-sm kosongCPA"
-                                                       type="text" name="kodePerk"
-                                                       placeholder="Kode Perk"/>
+                        <div class="tab-pane fade" id="tab_2_2">
+                            <div class="row">
+                                <div class="form-body">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <!--<label>Kode perk</label>-->
+                                                    <div class="input-group">
+                                                        <input id="id_kodePerk" readonly
+                                                               class="form-control input-sm kosongCPA"
+                                                               type="text" name="kodePerk"
+                                                               placeholder="Kode Perk"/>
                                                     <span class="input-group-btn">
                                         	           <a href="#" class="btn btn-success btn-sm"
                                                           data-target="#idDivTabelPerk"
@@ -203,34 +216,34 @@
                                                            <i class="fa fa-search fa-fw"/></i>
                                                        </a>
                                     	           </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>&nbsp;</label>
+                                                    <!--<input id="id_kodeAlt" readonly class="form-control input-sm kosongCPA"
+                                                       type="text" name="kodeAlt" placeholder="Kode Perk Alternatif"/>-->
+                                                    <span id="id_kodeAlt" class="tkosongCPA"></span>
+                                                    <span id="id_namaPerk" class="tkosongCPA"></span>
+                                                </div>
                                             </div>
+
                                         </div>
-                                        <div class="col-md-6">
-                                            <label>&nbsp;</label>
-                                            <!--<input id="id_kodeAlt" readonly class="form-control input-sm kosongCPA"
-                                               type="text" name="kodeAlt" placeholder="Kode Perk Alternatif"/>-->
-                                            <span id="id_kodeAlt" class="tkosongCPA"></span>
-                                            <span id="id_namaPerk" class="tkosongCPA"></span>
-                                        </div>
+                                        <!--<div class="form-group">
+                                            <input id="id_namaPerk" readonly class="form-control input-sm kosongCPA"
+                                            type="text" name="namaPerk" placeholder="Nama Perk"/>
+                                        </div>-->
+
                                     </div>
-
-                                </div>
-                                <!--<div class="form-group">
-                                    <input id="id_namaPerk" readonly class="form-control input-sm kosongCPA"
-                                    type="text" name="namaPerk" placeholder="Nama Perk"/>
-                                </div>-->
-
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <!--<label>Kode Cash Flow</label>-->
-                                            <div class="input-group">
-                                                <input id="id_kodeCflow" readonly
-                                                       class="form-control input-sm kosongCPA"
-                                                       type="text" name="kodeCflow"
-                                                       placeholder="Kode Cash Flow"/>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <!--<label>Kode Cash Flow</label>-->
+                                                    <div class="input-group">
+                                                        <input id="id_kodeCflow" readonly
+                                                               class="form-control input-sm kosongCPA"
+                                                               type="text" name="kodeCflow"
+                                                               placeholder="Kode Cash Flow"/>
                                                     <span class="input-group-btn">
                                         	           <a href="#" class="btn btn-success btn-sm"
                                                           data-target="#idDivTabelCflow"
@@ -238,143 +251,144 @@
                                                            <i class="fa fa-search fa-fw"/></i>
                                                        </a>
                                     	           </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>&nbsp;</label>
+                                                    <!--<input id="id_kodeAltCflow" readonly class="form-control input-sm kosongCPA"
+                                                       type="text" name="kodeAltCflow" placeholder="Kode Cash Flow Alternatif"/>-->
+                                                    <label><span id="id_kodeAltCflow"
+                                                                 class="tkosongCPA"></span></label>
+                                                    <label><span id="id_namaCflow"
+                                                                 class="tkosongCPA"></span></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-group">
+                                            <input id="id_namaCflow" readonly class="form-control input-sm kosongCPA"
+                                            type="text" name="namaCflow" placeholder="Nama Cash flow"/>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END ROW-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Debet</label>
+                                                <input id="id_jumlahDb" class="form-control input-sm nomor "
+                                                       type="text" name="jumlahDb"/>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <label>&nbsp;</label>
-                                            <!--<input id="id_kodeAltCflow" readonly class="form-control input-sm kosongCPA"
-                                               type="text" name="kodeAltCflow" placeholder="Kode Cash Flow Alternatif"/>-->
-                                            <label><span id="id_kodeAltCflow"
-                                                         class="tkosongCPA"></span></label>
-                                            <label><span id="id_namaCflow"
-                                                         class="tkosongCPA"></span></label>
+                                            <div class="form-group">
+                                                <label>Kredit</label>
+                                                <input id="id_jumlahKr" class="form-control input-sm nomor "
+                                                       type="text" name="jumlahKr"/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!--<div class="form-group">
-                                    <input id="id_namaCflow" readonly class="form-control input-sm kosongCPA"
-                                    type="text" name="namaCflow" placeholder="Nama Cash flow"/>
-                                </div>-->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END ROW-->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Debet</label>
-                                        <input id="id_jumlahDb" class="form-control input-sm nomor "
-                                               type="text" name="jumlahDb"/>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Kredit</label>
-                                        <input id="id_jumlahKr" class="form-control input-sm nomor "
-                                               type="text" name="jumlahKr"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
                                         <textarea rows="2" cols="" name="keteranganCPA" id="id_keteranganCPA"
                                                   class="form-control input-sm kosongCPA"></textarea>
 
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="idTxtTempLoop" name="txtTempLoop"
+                                               class="form-control nomor1 hidden">
+                                        <input type="text" id="idTxtTempJnsKode" name="txtTempJnsKode"
+                                               class="form-control nomor1 hidden">
+                                        <input type="text" id="idTempUbahCPA" name="txtTempUbahCPA"
+                                               class="form-control nomor1 hidden">
+                                        <input type="text" id="idTempJumlahDb" name="txtTempJumlahDb"
+                                               class="form-control nomor hidden">
+                                        <input type="text" id="idTempJumlahKr" name="txtTempJumlahKr"
+                                               class="form-control nomor hidden">
+                                        <a href="javascript:;" class="btn blue btn-sm" id="id_btnAddCpa">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                        <a href="javascript:;" class="btn red btn-sm" id="id_btnRemoveCpa">
+                                            <i class="fa fa-minus"></i>
+                                        </a>
+                                        <a href="javascript:;" class="btn yellow btn-sm"
+                                           id="id_btnUpdateCpa">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a href="javascript:;" class="btn default btn-sm"
+                                           id="id_btnBatalCpa">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="text" id="idTxtTempLoop" name="txtTempLoop"
-                                       class="form-control nomor1 hidden">
-                                <input type="text" id="idTxtTempJnsKode" name="txtTempJnsKode"
-                                       class="form-control nomor1 hidden">
-                                <input type="text" id="idTempUbahCPA" name="txtTempUbahCPA"
-                                       class="form-control nomor1 hidden">
-                                <input type="text" id="idTempJumlahDb" name="txtTempJumlahDb"
-                                       class="form-control nomor hidden">
-                                <input type="text" id="idTempJumlahKr" name="txtTempJumlahKr"
-                                       class="form-control nomor hidden">
-                                <a href="javascript:;" class="btn blue btn-sm" id="id_btnAddCpa">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <a href="javascript:;" class="btn red btn-sm" id="id_btnRemoveCpa">
-                                    <i class="fa fa-minus"></i>
-                                </a>
-                                <a href="javascript:;" class="btn yellow btn-sm"
-                                   id="id_btnUpdateCpa">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <a href="javascript:;" class="btn default btn-sm"
-                                   id="id_btnBatalCpa">
-                                    <i class="fa fa-times"></i>
-                                </a>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-body">
+                                        <table class="table table-striped table-hover table-bordered"
+                                               id="id_tabelPerkCflow">
+                                            <thead>
+                                            <tr>
+                                                <th width="15%">
+                                                    Akun GL
+                                                </th>
+                                                <th width="40%">
+                                                    Keterangan
+                                                </th>
+                                                <th width="15%">
+                                                    Cflow
+                                                </th>
+                                                <th width="15%">
+                                                    Debet
+                                                </th>
+                                                <th width="15%">
+                                                    Kredit
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="id_body_data">
+
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <td colspan="3" width="70%">
+                                                    <strong>Total</strong>
+                                                </td>
+                                                <td width="15%">
+                                                    <input type="text" name="totalDb"
+                                                           class="form-control nomor input-sm" id="id_totalDb"
+                                                           readonly>
+                                                </td>
+                                                <td width="15%">
+                                                    <input type="text" name="totalKr"
+                                                           class="form-control nomor input-sm" id="id_totalKr"
+                                                           readonly>
+                                                </td>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--END ROW 1 -->
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-actions">
+                                        <button name="btnSimpan" class="btn blue" id="id_btnSimpan">
+                                            <!--<i class="fa fa-check"></i>--> Simpan
+                                        </button>
+                                        <button id="id_btnBatal" type="button" class="btn default">Batal</button>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-body">
-                                <table class="table table-striped table-hover table-bordered"
-                                       id="id_tabelPerkCflow">
-                                    <thead>
-                                    <tr>
-                                        <th width="15%">
-                                            Akun GL
-                                        </th>
-                                        <th width="40%">
-                                            Keterangan
-                                        </th>
-                                        <th width="15%">
-                                            Cflow
-                                        </th>
-                                        <th width="15%">
-                                            Debet
-                                        </th>
-                                        <th width="15%">
-                                            Kredit
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="id_body_data">
-
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <td colspan="3" width="70%">
-                                            <strong>Total</strong>
-                                        </td>
-                                        <td width="15%">
-                                            <input type="text" name="totalDb"
-                                                   class="form-control nomor input-sm" id="id_totalDb"
-                                                   readonly>
-                                        </td>
-                                        <td width="15%">
-                                            <input type="text" name="totalKr"
-                                                   class="form-control nomor input-sm" id="id_totalKr"
-                                                   readonly>
-                                        </td>
-                                    </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--END ROW 1 -->
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-actions">
-                                <button name="btnSimpan" class="btn blue" id="id_btnSimpan">
-                                    <!--<i class="fa fa-check"></i>--> Simpan
-                                </button>
-                                <button id="id_btnBatal" type="button" class="btn default">Batal</button>
-
-                            </div>
-                        </div>
-                    </div>
-
                 </form>
             </div>
         </div>
@@ -541,6 +555,9 @@
                                             Id Settlement
                                         </th>
                                         <th>
+                                            Id Advance
+                                        </th>
+                                        <th>
                                             Nama Karyawan
                                         </th>
                                         <th>
@@ -548,6 +565,9 @@
                                         </th>
                                         <th>
                                             Jumlah Settlement
+                                        </th>
+                                        <th>
+                                            Kode UM
                                         </th>
                                     </tr>
                                     </thead>
@@ -920,9 +940,11 @@
                 "ajax": "<?php  echo base_url("/akuntansi/getSettlement"); ?>",
                 "columns": [
                     {"data": "idSettle"},
+                    {"data": "idAdv"},
                     {"data": "namaReq"},
                     {"data": "jmlUangAdv"},
-                    {"data": "jmlUangPaid"}
+                    {"data": "jmlUangPaid"},
+                    {"data": "typeAdv"}
                 ],
                 // Internationalisation. For more info refer to http://datatables.net/manual/i18n
                 "language": {
@@ -993,11 +1015,30 @@
             });
             table.on('click', 'tbody tr', function () {
                 var idSettle = $(this).find("td").eq(0).html();
+                var idAdv = $(this).find("td").eq(1).html();
+                var jmlAdv = $(this).find("td").eq(3).html();
+                var jmlSettle = $(this).find("td").eq(4).html();
+                var kdBayar = $(this).find("td").eq(5).html();
+                idAdv = idAdv.trim();
                 $('#id_idSettle').val(idSettle);
                 $('#id_idSettle').focus();
-                getDescCpa(idSettle);
-                $('#btnCloseModalDataSettleAdv').trigger('click');
+                //alert(idAdv);
 
+                njmlAdv = parseFloat(CleanNumber(jmlAdv));
+                njmlSettle = parseFloat(CleanNumber(jmlSettle));
+                var krglbhAdv = Math.abs(njmlSettle - njmlAdv);
+                krglbhAdv = number_format(krglbhAdv,2);
+                if(njmlAdv > njmlSettle){
+                    getDescCpa(idSettle);
+                    getCpaSettleLbh(idAdv,jmlSettle);
+                    getDescUM(kdBayar,jmlAdv);
+                }else{
+                    getCpaSettleLbh(idAdv,jmlSettle);
+                    getDescUM(kdBayar,jmlAdv);
+                    getCpaSettleKrg(idSettle,krglbhAdv);
+                }
+
+                $('#btnCloseModalDataSettleAdv').trigger('click');
             });
             tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
         }
@@ -1534,9 +1575,88 @@
                             var x = i+1;
                             //var idCpa           = data.data_cpa[i].id_cpa;
                             var kodePerk        = data.data_cpa[i].kode_perk;
+                            var namaPerk        = data.data_cpa[i].nama_perk;//+ namaPerkUM +'\n'+ data.keterangan +
                             var kodeCflow       = data.data_cpa[i].kode_cflow;
                             var ket             = data.data_cpa[i].keterangan;
                             var db              = data.data_cpa[i].jumlah;
+                            var kr              = 0;
+                            tr ='<tr class="listdata" id="tr'+x+'">';
+                            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKodePerk'+x+'" name="tempKodePerk'+x+'" readonly="true" value="'+kodePerk+'"></td>';
+                            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKet'+x+'" name="tempKet'+x+'" readonly="true" value="'+ ket +'"></td>';
+                            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKodeCflow'+x+'" name="tempKodeCflow'+x+'" readonly="true" value="'+kodeCflow+'" ></td>';
+                            tr+='<td><input type="text" class="form-control nomor input-sm" id="id_tempDb'+x+'" name="tempDb'+x+'" readonly="true" value="'+number_format(db,2)+'"></td>';
+                            tr+='<td><input type="text" class="form-control nomor input-sm" id="id_tempKr'+x+'" name="tempKr'+x+'" readonly="true" value="'+number_format(kr,2)+'"></td>';
+                            tr+= '</tr>';
+
+                            jumlahDb        = parseFloat(CleanNumber(db));
+                            var totalDb     = parseFloat(CleanNumber($('#id_totalDb').val()));
+                            var totalDb     = totalDb + jumlahDb;
+
+                            $('#id_totalDb').val(number_format(totalDb,2));
+                            $('#id_body_data').append(tr);
+                        }
+                    }else{
+                        //alert('Data tidak ditemukan!');
+                        //$('#id_btnBatal').trigger('click');
+                    }
+                }, "json");
+        }//if kd<>''
+    }
+    function getDescUM(typeUM,jmlAdv){
+        ajaxModal();
+        if (typeUM != '') {
+            $.post("<?php echo site_url('/akuntansi/getDescUM'); ?>",
+                {
+                    'typeUM': typeUM
+                },function (data) {
+                    if (data.data_cpa.length > 0) {
+                        var i = $('#idTxtTempLoop').val();
+                        var x = parseInt(i) + 1;
+                            //var idCpa           = data.data_cpa[i].id_cpa;
+                            var kodePerk        = data.data_cpa[0].kode_perk;
+                            var kodeCflow       = '';
+                            var ket             = data.data_cpa[0].nama_perk;
+                            var db              = 0;
+                            var kr              = jmlAdv;
+                            tr ='<tr class="listdata" id="tr'+x+'">';
+                            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKodePerk'+x+'" name="tempKodePerk'+x+'" readonly="true" value="'+kodePerk+'"></td>';
+                            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKet'+x+'" name="tempKet'+x+'" readonly="true" value="'+ket+'"></td>';
+                            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKodeCflow'+x+'" name="tempKodeCflow'+x+'" readonly="true" value="'+kodeCflow+'" ></td>';
+                            tr+='<td><input type="text" class="form-control nomor input-sm" id="id_tempDb'+x+'" name="tempDb'+x+'" readonly="true" value="'+number_format(db,2)+'"></td>';
+                            tr+='<td><input type="text" class="form-control nomor input-sm" id="id_tempKr'+x+'" name="tempKr'+x+'" readonly="true" value="'+number_format(kr,2)+'"></td>';
+                            tr+= '</tr>';
+
+                            jumlahKr        = parseFloat(CleanNumber(kr));
+                            var totalKr     = parseFloat(CleanNumber($('#id_totalKr').val()));
+                            var totalKr     = totalKr + jumlahKr;
+
+                            $('#id_totalKr').val(number_format(totalKr,2));
+                        i++;
+                        $('#id_body_data').append(tr);
+                        $('#idTxtTempLoop').val(i);
+
+                    }else{
+                        //alert('Data tidak ditemukan!');
+                        //$('#id_btnBatal').trigger('click');
+                    }
+                }, "json");
+        }//if kd<>''
+    }
+    function getCpaSettleLbh(idMaster,jmlSettle){
+        ajaxModal();
+        if (idMaster != '') {
+            $.post("<?php echo site_url('/master_reqpay/getDescCpa'); ?>",
+                {
+                    'idReqpay': idMaster
+                },function (data) {
+                    if (data.data_cpa.length > 0) {
+                        var i = $('#idTxtTempLoop').val();
+                        var x = parseInt(i) + 1;
+                            //var idCpa           = data.data_cpa[i].id_cpa;
+                            var kodePerk        = data.data_cpa[0].kode_perk;
+                            var kodeCflow       = data.data_cpa[0].kode_cflow;
+                            var ket             = data.data_cpa[0].keterangan;
+                            var db              = jmlSettle;
                             var kr              = 0;
                             tr ='<tr class="listdata" id="tr'+x+'">';
                             tr+='<td><input type="text" class="form-control input-sm" id="id_tempKodePerk'+x+'" name="tempKodePerk'+x+'" readonly="true" value="'+kodePerk+'"></td>';
@@ -1551,8 +1671,50 @@
                             var totalDb     = totalDb + jumlahDb;
 
                             $('#id_totalDb').val(number_format(totalDb,2));
-                            $('#id_body_data').append(tr);
-                        }
+                        i++;
+                        $('#id_body_data').append(tr);
+                        $('#idTxtTempLoop').val(i);
+
+                    }else{
+                        //alert('Data tidak ditemukan!');
+                        //$('#id_btnBatal').trigger('click');
+                    }
+                }, "json");
+        }//if kd<>''
+    }
+    function getCpaSettleKrg(idMaster,jmlSettle){
+        ajaxModal();
+        if (idMaster != '') {
+            $.post("<?php echo site_url('/master_reqpay/getDescCpa'); ?>",
+                {
+                    'idReqpay': idMaster
+                },function (data) {
+                    if (data.data_cpa.length > 0) {
+                        var i = $('#idTxtTempLoop').val();
+                        var x = parseInt(i) + 1;
+                        //var idCpa           = data.data_cpa[i].id_cpa;
+                        var kodePerk        = data.data_cpa[0].kode_perk;
+                        var kodeCflow       = data.data_cpa[0].kode_cflow;
+                        var ket             = data.data_cpa[0].keterangan;
+                        var kr              = jmlSettle;
+                        var db              = 0;
+                        tr ='<tr class="listdata" id="tr'+x+'">';
+                        tr+='<td><input type="text" class="form-control input-sm" id="id_tempKodePerk'+x+'" name="tempKodePerk'+x+'" readonly="true" value="'+kodePerk+'"></td>';
+                        tr+='<td><input type="text" class="form-control input-sm" id="id_tempKet'+x+'" name="tempKet'+x+'" readonly="true" value="'+ket+'"></td>';
+                        tr+='<td><input type="text" class="form-control input-sm" id="id_tempKodeCflow'+x+'" name="tempKodeCflow'+x+'" readonly="true" value="'+kodeCflow+'" ></td>';
+                        tr+='<td><input type="text" class="form-control nomor input-sm" id="id_tempDb'+x+'" name="tempDb'+x+'" readonly="true" value="'+number_format(db,2)+'"></td>';
+                        tr+='<td><input type="text" class="form-control nomor input-sm" id="id_tempKr'+x+'" name="tempKr'+x+'" readonly="true" value="'+number_format(kr,2)+'"></td>';
+                        tr+= '</tr>';
+
+                        jumlahKr        = parseFloat(CleanNumber(kr));
+                        var totalKr     = parseFloat(CleanNumber($('#id_totalKr').val()));
+                        var totalKr     = totalKr + jumlahKr;
+
+                        $('#id_totalKr').val(number_format(totalKr,2));
+                        i++;
+                        $('#id_body_data').append(tr);
+                        $('#idTxtTempLoop').val(i);
+
                     }else{
                         //alert('Data tidak ditemukan!');
                         //$('#id_btnBatal').trigger('click');

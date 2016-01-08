@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
+    <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');?>
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -44,16 +44,17 @@
 <!-- END SIDEBAR TOGGLER BUTTON -->
 <!-- BEGIN LOGO -->
 <div class="logo"  style="color: #ffffff;">
-	<h2>PT. Berkah Graha Mandiri</h2>
+    <h2>PT. Berkah Graha Mandiri</h2>
+        <img id="id_imgCR" src="<?php echo base_url('metronic/img/c_r1.jpg'); ?>" alt=""/>
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
-<div class="content">
+<div id="id_divFormLogin" class="content">
 	<!-- BEGIN LOGIN FORM -->
 	
 	<!-- END LOGIN FORM -->
 	<!-- BEGIN FORGOT PASSWORD FORM -->
-	<form class="login-form" action="<?php echo base_url('main/login') ?>" method="post">
+	<form class="login-form " action="<?php echo base_url('main/login') ?>" method="post">
         <h3 class="form-title">Sistem Informasi </h3>
         <h3 class="form-title">Monitoring Proyek</h3>
 
@@ -105,8 +106,8 @@
             </div>
         </div>
         <div class="form-actions">
-            <label class="checkbox">
-            <input type="checkbox" name="remember" value="1"/> Remember me </label>
+            <label id="id_lblBacklogo">
+            << back to logo </label>
             <button type="submit" class="btn blue pull-right">
             Masuk <i class="m-icon-swapright m-icon-white"></i>
             </button>
@@ -158,6 +159,15 @@ Login.init();
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#username").focus();
+    $('#id_divFormLogin').hide();
+    $('.logo').click(function () {
+        $('#id_divFormLogin').slideDown();
+        $('#id_imgCR').slideUp();
+    });
+    $('#id_lblBacklogo').click(function () {
+        $('#id_divFormLogin').slideUp();
+        $('#id_imgCR').slideDown();
+    });
 });
 	</script>
 <!-- END JAVASCRIPTS -->

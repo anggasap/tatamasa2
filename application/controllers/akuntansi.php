@@ -92,14 +92,24 @@ class Akuntansi extends CI_Controller
             $jmlUangAdv = number_format($row->jml_uang,2);
             $array = array(
                 'idSettle' => trim($row->id_settle_adv),
+                'idAdv'     => trim($row->id_advance),
                 'namaReq' => trim($row->nama_kyw),
                 'jmlUangAdv' => $jmlUangAdv,
-                'jmlUangPaid' =>  $jmlUangPaid
+                'jmlUangPaid' =>  $jmlUangPaid,
+                'typeAdv'   => $row->type_adv
             );
 
             array_push($data['data'],$array);
         }
         $this->output->set_output(json_encode($data));
+    }
+    function getDescUM()
+    {
+        $this->CI =& get_instance();
+        $kdByr = $this->input->post('typeUM', TRUE);
+
+        $rows = $this->akuntansi_m->getDescUM($kdByr);
+        $this->output->set_output(json_encode($rows));
     }
     function getDescCpa()
     {
@@ -212,9 +222,9 @@ class Akuntansi extends CI_Controller
                         $model = $this->akuntansi_m->insertTDCflow($data_cflow);
 						
 						$string = $tmpKodeCflow;
-						if($string[0] == '1' ){
+						/*if($string[0] == '1' ){
 							$terpakai = $this->akuntansi_m->getCflowTerpakai15($tglTrans,$idProyek,$tmpKodeCflow);
-							$model = $this->akuntansi_m->updateBudgetCflow($terpakai,$tahun,$idProyek,$tmpKodeCflow);	
+							$model = $this->akuntansi_m->updateBudgetCflow($terpakai,$tahun,$idProyek,$tmpKodeCflow);
 						}elseif($string[0] == '5'){
 							$terpakai = $this->akuntansi_m->getCflowTerpakai15($tglTrans,$idProyek,$tmpKodeCflow);
 							$model = $this->akuntansi_m->updateBudgetCflow($terpakai,$tahun,$idProyek,$tmpKodeCflow);
@@ -227,7 +237,7 @@ class Akuntansi extends CI_Controller
 						}elseif($string[0] == '4'){
 							$terpakai = $this->akuntansi_m->getCflowTerpakai234($tglTrans,$idProyek,$tmpKodeCflow);
 							$model = $this->akuntansi_m->updateBudgetCflow($terpakai,$tahun,$idProyek,$tmpKodeCflow);
-						}
+						}*/
                     }
                 }
 

@@ -209,6 +209,7 @@ class Jurnal_adv extends CI_Controller
 		$jumlah			= str_replace(',', '', trim($this->input->post('jumlah')));
         $typeAdv		= trim($this->input->post('idUm'));
 		$kodeBayar		= trim($this->input->post('kodeBayar'));
+		$cashflow		= trim($this->input->post('kodeCflow'));
 		$bulan 			= date('m', strtotime($tglTrans));//$tglTrans->format("m");
 		$tahun 			= date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
 		$idPp 			= $this->jurnal_adv_m->getIdPp($bulan,$tahun);
@@ -223,6 +224,10 @@ class Jurnal_adv extends CI_Controller
         $model1 = $this->jurnal_adv_m->insertJadv($data_model1);
 		/*Update status pp di master advance*/
 		if($model1){
+			$data_cpa = array(
+					'kode_cflow'		      	=> $cashflow
+			);
+			$model3 = $this->jurnal_adv_m->updateCPA($data_cpa,$idAdv);
 			$data_model2 = array(
 					'status_pp'		      	=> 1
 			);
@@ -256,7 +261,7 @@ class Jurnal_adv extends CI_Controller
 		$kodeBayar		= trim($this->input->post('kodeBayar'));
 		$bulan 			= date('m', strtotime($tglTrans));//$tglTrans->format("m");
 		$tahun 			= date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
-		
+		$cashflow		= trim($this->input->post('kodeCflow'));
 		$data = array(
             'id_pp'		      	=> $idPp,
             'tgl_trans'		    => $tglTrans,
@@ -267,6 +272,16 @@ class Jurnal_adv extends CI_Controller
         );
     	$model = $this->jurnal_adv_m->updateJadv($data,$idPp);
     	if($model){
+			$data_cpa = array(
+					'kode_cflow'		      	=> $cashflow
+			);
+			$model3 = $this->jurnal_adv_m->updateCPA($data_cpa,$idAdv);
+			$data_model2 = array(
+					'status_pp'		      	=> 1
+			);
+			$model2 = $this->jurnal_adv_m->updateAdv_statusPP($data_model2,$idAdv);
+		}
+		if($model){
     		$array = array(
     			'act'	=>1,
 				'id'	=> $idPp,

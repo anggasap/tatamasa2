@@ -133,7 +133,7 @@
 						<img alt="" class="img-circle" src="<?php echo base_url('metronic/admin/layout4/img/avatar9.jpg'); ?>"/>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-default">
-							<li>
+							<li id="id_btnLogout">
 								<a href="<?php echo site_url('main/logout');?>">
 								<i class="icon-key"></i> Log Out </a>
 							</li>

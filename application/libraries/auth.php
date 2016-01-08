@@ -13,10 +13,11 @@ class Auth{
    function do_login($username, $password,$tgl_d,$tgl_y,$nama_kantor){
 		$password =base64_encode($password);
       // cek di database, ada ga?
-	  $this->CI->db->select( 'p.userid,p.username,p.id_kyw,p.usergroup,u.usergroup_desc,mk.nama_kyw' );
+	  $this->CI->db->select( 'p.userid,p.username,p.id_kyw,p.usergroup,u.usergroup_desc,mk.nama_kyw,md.nama_dept' );
       $this->CI->db->from('sec_passwd p');
       $this->CI->db->join('sec_usergroup u','p.usergroup=u.usergroup_id');
-       $this->CI->db->join('master_karyawan mk','p.id_kyw=mk.id_kyw');
+      $this->CI->db->join('master_karyawan mk','p.id_kyw=mk.id_kyw');
+      $this->CI->db->join('master_dept md','mk.dept_kyw=md.id_dept');
       $this->CI->db->where('p.username',$username);
       $this->CI->db->where('p.password',$password);
       $result = $this->CI->db->get();
@@ -30,7 +31,7 @@ class Auth{
          $session_data = array(
             'id_user'   		=> $userdata->userid,
 			'id_kyw'   		    => $userdata->id_kyw,
-            //'namaInisial'       => $userdata->username,
+            'namaDept'       => $userdata->nama_dept,
              'namaKyw'          => $userdata->nama_kyw,
             'usergroup'     	=> $userdata->usergroup,
          	'usergroup_desc'    => $userdata->usergroup_desc,
@@ -40,11 +41,11 @@ class Auth{
          // buat session
          $this->CI->session->set_userdata($session_data);
 
-         $session_other = array(
+         /*$session_other = array(
             'usergroup_desc'    => $userdata->usergroup_desc
-         );
+         );*/
          // buat session
-         $this->CI->session->set_userdata($session_other);
+         //$this->CI->session->set_userdata($session_other);
          
          /*$sesJS = array(
          		'jqueryJS'  => '<script src="'.base_url('metronic/global/plugins/jquery.min.js').'"></script>',

@@ -57,7 +57,9 @@ class Master_karyawan extends CI_Controller
 					'deptKyw' =>  trim($row->dept_kyw),
 					'nama_akun_bank' => trim($row->nama_akun_bank),
 					'no_akun_bank' => trim($row->no_akun_bank),
-					'nama_bank' => trim($row->nama_bank)
+					'nama_bank' => trim($row->nama_bank),
+					'kode_perk' => trim($row->kode_perk),
+					'nama_perk' => trim($row->nama_perk)
 			);
 	
 			array_push($data['data'],$array);
@@ -65,11 +67,12 @@ class Master_karyawan extends CI_Controller
 		$this->output->set_output(json_encode($data));
 	}
     function simpan(){
-        $namaKyw			= trim($this->input->post('namaKyw'));
+        $namaKyw		= trim($this->input->post('namaKyw'));
         $deptKyw		= trim($this->input->post('deptKyw'));
 		$namaPemilikAkunBank = trim($this->input->post('namaPemilikAkunBank'));
 		$noAkunBank = trim($this->input->post('noAkunBank'));
 		$namaBank 	= trim($this->input->post('namaBank'));
+		$GL			        = trim($this->input->post('GL'));
        
         $modelidKyw = $this->master_karyawan_m->getIdKyw();
         $data = array(
@@ -79,6 +82,7 @@ class Master_karyawan extends CI_Controller
 				'nama_akun_bank' => $namaPemilikAkunBank,
 				'no_akun_bank' => $noAkunBank,
 				'nama_bank' => $namaBank,
+				'kode_perk'		        	    =>$GL
         );
         $model = $this->master_karyawan_m->insertKyw($data);
         if($model){
@@ -104,6 +108,7 @@ class Master_karyawan extends CI_Controller
 		$namaPemilikAkunBank = trim($this->input->post('namaPemilikAkunBank'));
 		$noAkunBank = trim($this->input->post('noAkunBank'));
 		$namaBank 	= trim($this->input->post('namaBank'));
+		$GL			        = trim($this->input->post('GL'));
 
     	$data = array(
             'nama_kyw'		        	=>$namaKyw,
@@ -111,6 +116,7 @@ class Master_karyawan extends CI_Controller
 				'nama_akun_bank' => $namaPemilikAkunBank,
 				'no_akun_bank' => $noAkunBank,
 				'nama_bank' => $namaBank,
+				'kode_perk'		        	    =>$GL
         );
     	
     	$model = $this->master_karyawan_m->updateKyw($data,$kywId);

@@ -64,6 +64,23 @@ class Master_settle_adv extends CI_Controller
 		}
 		$this->output->set_output(json_encode($data));
 	}
+	public function getAdvReq()
+	{
+		$this->CI =& get_instance();//and a.kcab_id<>'1100'
+		$requester = $this->session->userdata('id_kyw');
+		$rows = $this->master_settle_adv_m->getAdvReq($requester);
+		$data['data'] = array();
+		foreach ($rows as $row) {
+			$jmlUang = number_format($row->jml_uang, 2);
+			$array = array(
+					'idAdv' => trim($row->id_advance),
+					'namaReq' => trim($row->nama_kyw),
+					'jmlUang' => $jmlUang
+			);
+			array_push($data['data'], $array);
+		}
+		$this->output->set_output(json_encode($data));
+	}
 	public function getSettlement(){
 		$this->CI =& get_instance();//and a.kcab_id<>'1100'
 		$rows = $this->master_settle_adv_m->getSettleAll();
@@ -78,6 +95,25 @@ class Master_settle_adv extends CI_Controller
 					'jmlUangPaid' =>  $jmlUangPaid
 			);
 	
+			array_push($data['data'],$array);
+		}
+		$this->output->set_output(json_encode($data));
+	}
+	public function getSettlementReq(){
+		$this->CI =& get_instance();//and a.kcab_id<>'1100'
+		$requester = $this->session->userdata('id_kyw');
+		$rows = $this->master_settle_adv_m->getSettleReq($requester);
+		$data['data'] = array();
+		foreach( $rows as $row ) {
+			$jmlUangPaid = number_format($row->jml_uang_paid,2);
+			$jmlUangAdv = number_format($row->jml_uang,2);
+			$array = array(
+					'idSettle' => trim($row->id_settle_adv),
+					'namaReq' => trim($row->nama_kyw),
+					'jmlUangAdv' => $jmlUangAdv,
+					'jmlUangPaid' =>  $jmlUangPaid
+			);
+
 			array_push($data['data'],$array);
 		}
 		$this->output->set_output(json_encode($data));

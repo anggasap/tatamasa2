@@ -36,7 +36,9 @@ class Kasir extends CI_Controller
         $this->auth->restrict($data['menu_id']);
         $this->auth->cek_menu($data['menu_id']);
         $data['proyek'] = $this->master_advance_m->getProyek();
-        $data['kodebayar'] = $this->kasir_m->getKodeBayar();
+        $data['kodebayartunai'] = $this->kasir_m->getKodeBayarTunai();
+        $data['kodebayarnontunai'] = $this->kasir_m->getKodeBayarNonTunai();
+        $data['carabayar'] = $this->kasir_m->getCaraBayar();
 
         if (isset($_POST["btnSimpan"])) {
             $this->simpan();
@@ -223,6 +225,14 @@ class Kasir extends CI_Controller
         $ket = trim($this->input->post('keterangan'));
         $tglTrans = trim($this->input->post('tgltrans'));
         $tglTrans = date('Y-m-d', strtotime($tglTrans));
+        $caraBayar = trim($this->input->post('carabayar'));
+        if($caraBayar == 5){
+            $kodeBayar = trim($this->input->post('kodebayartunai'));
+        }else{
+            $kodeBayar = trim($this->input->post('kodebayarnontunai'));
+        }
+        $noCekGiro = trim($this->input->post('noCekGiro'));
+        $tglCekGiro = date('Y-m-d', strtotime(trim($this->input->post('tglCekGiro'))));
 
         $bulan = date('m', strtotime($tglTrans));//$tglTrans->format("m");
         $tahun = date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
@@ -264,7 +274,12 @@ class Kasir extends CI_Controller
 
                 $data_perk = array(
                     'trans_id' => $modelidPemb,
+                    'modul' =>1,
                     'voucher_no'=>$modelNoVoucher,
+                    'id_carabayar'=>$caraBayar,
+                    'kode_bayar'=>$kodeBayar,
+                    'no_cek'=>$noCekGiro,
+                    'tgl_cek'=>$tglCekGiro,
                     'tgl_trans' => $tglTrans,
                     'kode_jurnal' => $jnsReq,
                     'master_id' => $id_master,

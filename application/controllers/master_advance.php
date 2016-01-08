@@ -88,6 +88,24 @@ class Master_advance extends CI_Controller
         }
         $this->output->set_output(json_encode($data));
     }
+    public function getAdvReq()
+    {
+        $this->CI =& get_instance();//and a.kcab_id<>'1100'
+        $requester = $this->session->userdata('id_kyw');
+        $rows = $this->master_advance_m->getAdvReq($requester);
+        $data['data'] = array();
+        foreach ($rows as $row) {
+            $jmlUang = number_format($row->jml_uang, 2);
+            $array = array(
+                'idAdv' => trim($row->id_advance),
+                'namaReq' => trim($row->nama_kyw),
+                'jmlUang' => $jmlUang
+            );
+
+            array_push($data['data'], $array);
+        }
+        $this->output->set_output(json_encode($data));
+    }
 
     function getDescKurs()
     {
@@ -478,13 +496,13 @@ class Master_advance extends CI_Controller
             $array = array(
                 'act'	=>1,
                 'tipePesan'=>'success',
-                'pesan' =>'Data berhasil di Approve.'
+                'pesan' =>'Data berhasil di Sign.'
             );
         }else{
             $array = array(
                 'act'	=>0,
                 'tipePesan'=>'error',
-                'pesan' =>'Data gagal di Approve.'
+                'pesan' =>'Data gagal di Sign.'
             );
         }
         $this->output->set_output(json_encode($array));

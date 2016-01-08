@@ -238,7 +238,7 @@
                                             <label>
                                                 <input type="checkbox" value="1" name="wBudget" id="id_wBudget" class="chkbudget"/>
                                                 Within Budget </label>
-                                            <input type="text" name="inoutBudget_in" id="id_inoutBudget_in" class="nomor1 inbudget">
+                                            <input type="text" name="inoutBudget_in" id="id_inoutBudget_in" class="nomor1 inbudget hidden">
                                             <label>
                                                 <input type="checkbox" value="1" name="oBudget" id="id_oBudget" class="chkbudget" />
                                                 Out of Budget </label>
@@ -663,7 +663,7 @@
                             </div>
                             <?php
                         }
-                        if ($this->session->userdata('usergroup_desc') == 'Admin') {
+                        if ($this->session->userdata('usergroup') == '1') {
                             ?>
                             <div class="row">
                                 <div class="col-md-12">
@@ -680,7 +680,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <select id="id_appKeuanganStatus" disabled class="form-control input-sm"
+                                            <select id="id_appKeuanganStatus"  class="form-control input-sm"
                                                     name="appKeuanganStatus">
                                                 <option value="1">Approve</option>
                                                 <option value="2">Reject</option>
@@ -696,9 +696,8 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group">
-                    <textarea rows="2" cols="" readonly placeholder="Keterangan" name="appKeuanganKet"
-                              id="id_appKeuanganKet"
-                              class="form-control input-sm">
+                    <textarea rows="2" cols="" name="appKeuanganKet" id="id_appKeuanganKet"
+                              class="form-control input-sm" placeholder="Keterangan" >
                     </textarea>
                                         </div>
                                     </div>
@@ -719,7 +718,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <select id="id_appHDStatus" disabled class="form-control input-sm"
+                                            <select id="id_appHDStatus"  class="form-control input-sm"
                                                     name="appHDStatus">
                                                 <option value="1">Approve</option>
                                                 <option value="2">Reject</option>
@@ -735,8 +734,8 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group">
-                    <textarea rows="2" cols="" readonly placeholder="Keterangan" name="appHDKet" id="id_appHDKet"
-                              class="form-control input-sm">
+                    <textarea rows="2" cols="" placeholder="Keterangan" name="appHDKet" id="id_appHDKet"
+                              class="form-control input-sm" >
                     </textarea>
                                         </div>
                                     </div>
@@ -757,8 +756,8 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <select id="id_appGMStatus" disabled
-                                                    class="form-control  input-sm" name="appGMStatus">
+                                            <select id="id_appGMStatus" class="form-control  input-sm approvalselect"
+                                                    name="appGMStatus">
                                                 <option value="1">Approve</option>
                                                 <option value="2">Reject</option>
                                                 <option value="3">Paid</option>
@@ -767,14 +766,14 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <input id="id_appGMTgl" class="form-control input-sm"
+                                            <input id="id_appGMTgl" class="form-control input-sm keterangan"
                                                    type="text" name="appGMTgl" readonly/>
                                         </div>
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group">
-                    <textarea rows="2" cols="" readonly placeholder="Keterangan" name="appGMKet" id="id_appGMKet"
-                              class="form-control input-sm">
+                    <textarea rows="2" cols="" placeholder="Keterangan" name="appGMKet" id="id_appGMKet"
+                              class="form-control input-sm" >
                     </textarea>
                                         </div>
                                     </div>
@@ -1205,6 +1204,54 @@
                                 $('#id_appHDId').val(data.app_hd_id);
                                 $('#id_appHDStatus').val(data.app_hd_status);
                                 $('#id_appHDTgl').val(data.app_hd_tgl);
+                                $('#id_appHDKet').val(data.app_hd_ket);
+                            }else if(idUserGroup == '1'){
+                                if (data.app_gm_id == '') {
+                                    var idSessNamaKyw = $('#idSessNamaKyw').text();
+                                    $('#id_appGMId').val(idSessNamaKyw.trim());
+                                } else {
+                                    $('#id_appGMId').val(data.app_gm_id);
+                                }
+                                $('#id_appGMStatus').val(data.app_gm_status);
+                                //$('#id_appGMTgl').val(data.app_gm_tgl);
+                                if (data.app_gm_tgl == '') {
+                                    var idSessTgltrans = $('#id_sessTgltrans').text();
+                                    $('#id_appGMTgl').val(idSessTgltrans.trim());
+                                } else {
+                                    $('#id_appGMTgl').val(data.app_gm_tgl);
+                                }
+                                $('#id_appGMKet').val(data.app_gm_ket);
+
+                                if (data.app_keuangan_id == '') {
+                                    var idSessNamaKyw = $('#idSessNamaKyw').text();
+                                    $('#id_appKeuanganId').val(idSessNamaKyw.trim());
+                                } else {
+                                    $('#id_appKeuanganId').val(data.app_keuangan_id);
+                                }
+
+                                $('#id_appKeuanganStatus').val(data.app_keuangan_status);
+
+                                if (data.app_keuangan_tgl == '') {
+                                    var idSessTgltrans = $('#id_sessTgltrans').text();
+                                    $('#id_appKeuanganTgl').val(idSessTgltrans.trim());
+                                } else {
+                                    $('#id_appKeuanganTgl').val(data.app_keuangan_tgl);
+                                }
+                                $('#id_appKeuanganKet').val(data.app_keuangan_ket);
+
+                                if (data.app_hd_id == '') {
+                                    var idSessNamaKyw = $('#idSessNamaKyw').text();
+                                    $('#id_appHDId').val(idSessNamaKyw.trim());
+                                } else {
+                                    $('#id_appHDId').val(data.app_hd_id);
+                                }
+                                $('#id_appHDStatus').val(data.app_hd_status);
+                                if (data.app_hd_tgl == '') {
+                                    var idSessTgltrans = $('#id_sessTgltrans').text();
+                                    $('#id_appHDTgl').val(idSessTgltrans.trim());
+                                } else {
+                                    $('#id_appHDTgl').val(data.app_hd_tgl);
+                                }
                                 $('#id_appHDKet').val(data.app_hd_ket);
                             }
 

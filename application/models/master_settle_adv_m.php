@@ -21,12 +21,30 @@ class Master_settle_adv_m extends CI_Model {
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}
+	public function getAdvReq($requester)
+	{
+		$sql="SELECT ma.id_advance,mk.nama_kyw, ma.jml_uang
+			  from master_advance ma left join master_karyawan mk on ma.id_kyw = mk.id_kyw
+			  where status_settle = 0 and ma.id_kyw='$requester'";
+		$query=$this->db->query($sql);
+		return $query->result(); // returning rows, not row
+	}
 	function getSettleAll()
 	{
 		$sql="SELECT ms.id_settle_adv,mk.nama_kyw, ma.jml_uang,ms.jml_uang_paid
 			  from master_settle_adv ms
 			  left join master_advance ma on ms.id_adv = ma.id_advance
 			  left join master_karyawan mk on ms.id_kyw = mk.id_kyw";
+		$query=$this->db->query($sql);
+		return $query->result(); // returning rows, not row
+	}
+	function getSettleReq($requester)
+	{
+		$sql="SELECT ms.id_settle_adv,mk.nama_kyw, ma.jml_uang,ms.jml_uang_paid
+			  from master_settle_adv ms
+			  left join master_advance ma on ms.id_adv = ma.id_advance
+			  left join master_karyawan mk on ms.id_kyw = mk.id_kyw
+			  where ms.id_kyw = '$requester'";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}

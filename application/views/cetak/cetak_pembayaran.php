@@ -83,7 +83,7 @@
 	</table>
 	<br/>
 	<table class="tableizer-table">
-	<tr class="tableizer-firstrow"><th colspan="14">BANK PAYMENT - ADVANCE</th></tr>
+	<tr class="tableizer-firstrow"><th colspan="14">BANK PAYMENT - VOUCHER</th></tr>
 	</table>
 	<br/>
 	<?php 

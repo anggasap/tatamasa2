@@ -78,6 +78,23 @@ class Approval_reqpay extends CI_Controller
 			'app_keuangan_ket'		=> $keuanganKeterangan
 			);
 			$model = $this->approval_reqpay_m->updateReqpay($data,$id);
+		}elseif($hak == 'Admin'){
+			$data = array(
+					'id_reqpay'			=> $id,
+					'app_keuangan_id'		=> $user,
+					'app_keuangan_status'	=> $keuanganStatus,
+					'app_keuangan_tgl'		=> $tanggal,
+					'app_keuangan_ket'		=> $keuanganKeterangan,
+					'app_hd_id'		=> $user,
+					'app_hd_status'	=> $hdStatus,
+					'app_hd_tgl'	=> $tanggal,
+					'app_hd_ket'	=> $hdKeterangan,
+					'app_gm_id'		=> $user,
+					'app_gm_status'	=> $gmStatus,
+					'app_gm_tgl'	=> $tanggal,
+					'app_gm_ket'	=> $gmKeterangan
+			);
+			$model = $this->approval_reqpay_m->updateReqpay($data,$id);
 		}else{
 			$model = false;
 		}
