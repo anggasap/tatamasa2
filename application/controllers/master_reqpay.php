@@ -343,6 +343,7 @@ class Master_reqpay extends CI_Controller
 		if($model){
     		$array = array(
     			'act'	=>1,
+				'idMaster'=>$modelidReqpay,
     			'tipePesan'=>'success',
     			'pesan' =>'Data berhasil disimpan.'
     		);

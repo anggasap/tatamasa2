@@ -1783,6 +1783,7 @@
 
             success: function (data) {
                 $('#id_ReloadReimpay').trigger('click');
+                $('#id_idReimpay').val(data.idMaster);
                 //$('#id_btnBatal').trigger('click');
                 UIToastr.init(data.tipePesan, data.pesan);
             }

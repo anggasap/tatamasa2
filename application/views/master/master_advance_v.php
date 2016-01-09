@@ -1688,7 +1688,6 @@
                 }, "json");
         }//if kd<>''
     }
-
     function getDescKurs(idKurs) {
         ajaxModal();
         if (idKurs != '') {
@@ -1717,9 +1716,10 @@
 
             success: function (data) {
                 $('#id_Reload').trigger('click');
+                $('#id_idAdvance').val(data.idAdv);
                 //$('#id_btnBatal').trigger('click');
-                readyToStart();
-                startCheckBox();
+                //readyToStart();
+                //startCheckBox();
                 UIToastr.init(data.tipePesan, data.pesan);
             }
 

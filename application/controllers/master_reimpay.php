@@ -306,6 +306,7 @@ class Master_reimpay extends CI_Controller
         if($model){
     		$array = array(
     			'act'	=>1,
+				'idMaster'=>$modelidReimpay,
     			'tipePesan'=>'success',
     			'pesan' =>'Data berhasil disimpan.'
     		);

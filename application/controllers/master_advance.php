@@ -350,6 +350,7 @@ class Master_advance extends CI_Controller
         if ($model) {
             $array = array(
                 'act' => 1,
+                'idAdv'=>$modelidAdv,
                 'tipePesan' => 'success',
                 'pesan' => 'Data berhasil disimpan.'
             );

@@ -2251,6 +2251,7 @@
 			success:function (data) {
 				$('#id_ReloadReqpay').trigger('click');
 				//$('#id_btnBatal').trigger('click');
+                $('#id_idReqpay').val(data.idMaster);
                 UIToastr.init(data.tipePesan, data.pesan);
 			}
 		});

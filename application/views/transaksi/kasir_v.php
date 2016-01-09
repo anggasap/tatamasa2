@@ -395,7 +395,7 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="text" id="idTxtTempLoop" name="txtTempLoop"
-                                               class="form-control nomor1 ">
+                                               class="form-control nomor1 hidden">
                                         <input type="text" id="idTxtTempKodeBayar" name="TxtTempKodeBayar"
                                                class="form-control nomor1 hidden">
                                         <input type="text" id="idTempUbahCPA" name="txtTempUbahCPA"
@@ -1396,16 +1396,7 @@
             $('.request_in').slideUp();
         }
     });
-    $('.divkodebayar').hide();
-    $("#id_carabayar").change(function () {
-        var caraBayar = $(this).val();
-        $('.kodebayar').slideUp();
-        if (caraBayar == '5') {
-            $('#id_divkodebayartunai').slideDown();
-        } else {
-            $('#id_divkodebayarnontunai').slideDown();
-        }
-    });
+
 
     $("#id_kodeJurnal").focus();
 
@@ -1426,7 +1417,9 @@
         tglTransStart();
 
         $('#id_body_data').empty();
-        $("#id_kodebayar").select2("val", "");
+        $("#id_kodebayartunai").select2("val", "");
+        $("#id_kodebayarnontunai").select2("val", "");
+        $("#id_carabayar").select2("val", "");
         $("#id_jnsReq").select2("val", "");
         $('.request_in').slideUp();
         kosongCPA();
@@ -1449,6 +1442,18 @@
         var idSettle = $(this).val();
         getDescSettle(idSettle);
         //getJurnalDb(idSettle);
+    });
+    $('.divkodebayar').hide();
+    $("#id_carabayar").change(function () {
+        var caraBayar = $(this).val();
+        $('.divkodebayar').slideUp();
+        if (caraBayar == '5') {
+            $('#id_divkodebayartunai').slideDown();
+            $("#id_kodebayarnontunai").select2("val", "");
+        } else {
+            $('#id_divkodebayarnontunai').slideDown();
+            $("#id_kodebayartunai").select2("val", "");
+        }
     });
     $('#id_kodebayartunai').change(function () {
         var kdBayar = $(this).val();
@@ -1519,6 +1524,7 @@
                 }, "json");
         }//if kd<>''
     }
+
     function getDescAdv(idAdv) {
         ajaxModal();
         if (idAdv != '') {
@@ -1945,6 +1951,7 @@
         });
         event.preventDefault();
     }
+
 
     $('#id_formKasir').submit(function (event) {
         $('#id_proyek').attr('disabled', false);
