@@ -193,7 +193,7 @@ class Master_reqpay extends CI_Controller
 						'tgl_trans'					=> $tglTrans,
 						'tgl_jt' 					=> $tgl_jt,
 						'pay_to' 					=> $row->pay_to,
-						//'nama_pay_to' => $nama_pay_to[0]->nama_kyw,
+						'kode_perk' 				=> $row->kode_perk,
 						'nama_spl' 					=> $row->nama_spl,
 						'nama_akun_bank' 			=> $row->nama_akun_bank,
 						'no_akun_bank' 				=> $row->no_akun_bank,

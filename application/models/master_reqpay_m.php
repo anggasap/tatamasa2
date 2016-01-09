@@ -37,7 +37,7 @@ class Master_reqpay_m extends CI_Model {
 		mr.tgl_jt, mr.pay_to,ms.nama_spl, ms.nama_akun_bank, ms.no_akun_bank, ms.nama_bank, mr.keterangan, mr.dok_fpe, mr.dok_kuitansi, mr.dok_fpa, 
 		mr.dok_po, mr.dok_suratjalan,mr.dok_lappenerimaanbrg,mr.dok_bast, mr.dok_bap, mr.dok_cop, mr.dok_ssp, mr.dok_sspk, mr.dok_sbj, 
 		mr.app_keuangan_id, mr.app_hd_id, mr.app_gm_id, mr.app_keuangan_status, mr.app_hd_status, mr.app_gm_status, mr.app_keuangan_tgl, mr.app_hd_tgl, 
-		mr.app_gm_tgl, mr.app_keuangan_ket, mr.app_hd_ket, mr.app_gm_ket, mr.app_user_id, mr.inout_budget,(select e.nama_spl from master_supplier e where e.id_spl = mr.pay_to) as pay');
+		mr.app_gm_tgl, mr.app_keuangan_ket, mr.app_hd_ket, mr.app_gm_ket, mr.app_user_id, mr.inout_budget,ms.kode_perk,(select e.nama_spl from master_supplier e where e.id_spl = mr.pay_to) as pay');
 		$this->db->from('master_reqpay mr');
 		$this->db->join('master_karyawan mk', 'mr.id_kyw=mk.id_kyw', 'LEFT');
 		$this->db->join('master_dept md', 'mk.dept_kyw=md.id_dept', 'LEFT');

@@ -395,7 +395,7 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="text" id="idTxtTempLoop" name="txtTempLoop"
-                                               class="form-control nomor1 hidden">
+                                               class="form-control nomor1 ">
                                         <input type="text" id="idTxtTempKodeBayar" name="TxtTempKodeBayar"
                                                class="form-control nomor1 hidden">
                                         <input type="text" id="idTempUbahCPA" name="txtTempUbahCPA"
@@ -1452,7 +1452,6 @@
     });
     $('#id_kodebayartunai').change(function () {
         var kdBayar = $(this).val();
-        alert(kdBayar);
         if (kdBayar == '') {
             $('#id_kodebayar').val('');
             $('#id_kodePerkBayar').val('');
@@ -1463,7 +1462,6 @@
     });
     $('#id_kodebayarnontunai').change(function () {
         var kdBayar = $(this).val();
-        alert(kdBayar);
         if (kdBayar == '') {
             $('#id_kodebayar').val('');
             $('#id_kodePerkBayar').val('');
@@ -1521,7 +1519,6 @@
                 }, "json");
         }//if kd<>''
     }
-
     function getDescAdv(idAdv) {
         ajaxModal();
         if (idAdv != '') {
@@ -1948,7 +1945,6 @@
         });
         event.preventDefault();
     }
-
 
     $('#id_formKasir').submit(function (event) {
         $('#id_proyek').attr('disabled', false);

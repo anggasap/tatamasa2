@@ -60,7 +60,10 @@ class Akuntansi extends CI_Controller
             $array = array(
                 'idReqpay' => trim($row->id_reqpay),
                 'namaReq' => trim($row->nama_kyw),
-                'jmlUang' =>  $jmlUang
+                'jmlUang' =>  $jmlUang,
+                'namaSpl'=> trim($row->nama_spl),
+                'kodePerk'=> trim($row->kode_perk),
+                'namaPerk'=> trim($row->nama_perk)
             );
 
             array_push($data['data'],$array);
@@ -76,7 +79,9 @@ class Akuntansi extends CI_Controller
             $array = array(
                 'idReimpay' => trim($row->id_reimpay),
                 'namaReq' => trim($row->nama_kyw),
-                'jmlUang' =>  $jmlUang
+                'jmlUang' =>  $jmlUang,
+                'kodePerk'=> trim($row->kode_perk),
+                'namaPerk'=> trim($row->nama_perk)
             );
 
             array_push($data['data'],$array);

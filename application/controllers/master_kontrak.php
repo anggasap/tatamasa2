@@ -103,7 +103,7 @@ class Master_kontrak extends CI_Controller
         $tglSelesai			= trim($this->input->post('tglSelesai'));
 		$tglSelesai			= date('Y-m-d', strtotime($tglSelesai));
 		$pasal				= trim($this->input->post('jmlPasal'));
-		$nilai				= trim($this->input->post('nilaiKontrak'));
+		$nilai				= str_replace(',', '', trim($this->input->post('nilaiKontrak')));
 		$pekerjaan			= trim($this->input->post('pekerjaan'));
 		$nama1				= trim($this->input->post('nama'));
 		$jabatan1			= trim($this->input->post('jabatan'));

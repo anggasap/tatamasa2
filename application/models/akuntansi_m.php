@@ -6,16 +6,21 @@ if (! defined ( 'BASEPATH' ))
 class Akuntansi_m extends CI_Model {
 	public function getReqpayAll()
 	{
-		$sql="SELECT mr.id_reqpay,mk.nama_kyw, mr.jml_uang
-			  from master_reqpay mr left join master_karyawan mk on mr.id_kyw = mk.id_kyw
+		$sql="SELECT mr.id_reqpay,mk.nama_kyw, mr.jml_uang,
+			  ms.nama_spl,ms.kode_perk,p.nama_perk
+			  from master_reqpay mr
+			  left join master_karyawan mk on mr.id_kyw = mk.id_kyw
+			  left join master_supplier ms on mr.pay_to = ms.id_spl
+			  left join perkiraan p on ms.kode_perk = p.kode_perk
 			  where mr.status_akuntansi = 0";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}
 	public function getReimpayAll()
 	{
-		$sql="SELECT mr.id_reimpay,mk.nama_kyw, mr.jml_uang
+		$sql="SELECT mr.id_reimpay,mk.nama_kyw, mr.jml_uang,mk.kode_perk,p.nama_perk
 			  from master_reimpay mr left join master_karyawan mk on mr.id_kyw = mk.id_kyw
+			  left join perkiraan p on mk.kode_perk = p.kode_perk
 			  where mr.status_akuntansi = 0";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
