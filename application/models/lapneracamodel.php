@@ -104,8 +104,20 @@ class Lapneracamodel extends CI_Model {
 		$query = $this->db->query($sql);
 		return $query->result();
 	}
+	function get_data_neraca_hanya_header($tgl_trans,$user_id){
+		$sql = "SELECT * from web_temp_perkiraan where user_id = '".$user_id."' and tanggal <= '".$tgl_trans."' and type = 'G' 
+		AND (left(kode_perk,1)='1' OR left(kode_perk,1)='2' OR left(kode_perk,1)='3') order by kode_perk asc";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
 	function get_data_neraca_bukan_nol($tgl_trans,$user_id){
 		$sql = "SELECT * from web_temp_perkiraan where user_id = '".$user_id."' and tanggal <= '".$tgl_trans."' and 
+		saldo_akhir != 0 AND (left(kode_perk,1)='1' OR left(kode_perk,1)='2' OR left(kode_perk,1)='3') order by kode_perk asc";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+	function get_data_neraca_bukan_nol_hanya_header($tgl_trans,$user_id){
+		$sql = "SELECT * from web_temp_perkiraan where user_id = '".$user_id."' and tanggal <= '".$tgl_trans."' and type = 'G' and
 		saldo_akhir != 0 AND (left(kode_perk,1)='1' OR left(kode_perk,1)='2' OR left(kode_perk,1)='3') order by kode_perk asc";
 		$query = $this->db->query($sql);
 		return $query->result();
@@ -172,6 +184,48 @@ class Lapneracamodel extends CI_Model {
 		return $query->result();	
 	}
 	//end dengan 0;
+	
+	//benuk T. dengan 0 hanya header
+	function get_total_neraca_aktiva_hanya_header($tgl_trans,$user_id){
+		$sql = "SELECT * from web_temp_perkiraan where user_id = '".$user_id."' and tanggal <= '".$tgl_trans."' 
+		and type='G' AND left(kode_perk,1)='1' order by kode_perk asc";
+		$query = $this->db->query($sql);
+		return $query->num_rows();;
+	}
+	function get_total_neraca_pasiva_hanya_header($tgl_trans,$user_id){
+		$sql = "SELECT * from web_temp_perkiraan where user_id = '".$user_id."' and tanggal <= '".$tgl_trans."' 
+		and type='G' AND (left(kode_perk,1)='2' OR left(kode_perk,1)='3') order by kode_perk asc";
+		$query = $this->db->query($sql);
+		return $query->num_rows();
+	}
+	function insert_temp_aktiva_hanya_header($tgl_trans,$user_id){
+		$sql  = "INSERT INTO web_temp (user_id,tanggal,kode_perk,kode_alt,nama_perk,type,level,kode_induk,saldo_akhir,kode_perk_psv,kode_alt_psv,nama_perk_psv,type_psv,level_psv,kode_induk_psv,saldo_akhir_psv) ";
+		$sql .= "SELECT '".$user_id."' as user_id,'".$tgl_trans."' as tanggal,kode_perk,kode_alt,nama_perk,type,level,kode_induk,saldo_akhir,'','','','','0','','0' ";
+		$sql .= "FROM web_temp_perkiraan WHERE "; 			
+		$sql .= "LEFT(web_temp_perkiraan.kode_perk,1)=1 and type='G' order by kode_perk asc";
+		$query = $this->db->query($sql);					   
+	}
+	function insert_temp_pasiva_hanya_header($tgl_trans,$user_id){
+		$sql  = "INSERT INTO web_temp (user_id,tanggal,kode_perk,kode_alt,nama_perk,type,level,kode_induk,saldo_akhir,kode_perk_psv,kode_alt_psv,nama_perk_psv,type_psv,level_psv,kode_induk_psv,saldo_akhir_psv) ";
+		$sql .= "SELECT '".$user_id."' as user_id,'".$tgl_trans."' as tanggal,'','','','','0','','0',kode_perk,kode_alt,nama_perk,type,level,kode_induk,saldo_akhir";
+		$sql .= "FROM web_temp_perkiraan WHERE "; 			
+		$sql .= "(left(kode_perk,1)='2' OR left(kode_perk,1)='3') and type='G' order by kode_perk asc";
+		$query = $this->db->query($sql);					   
+	}
+	function get_data_aktiva_hanya_header(){
+		$sql .= "SELECT user_id,tanggal,kode_perk,kode_alt,nama_perk,type,level,kode_induk,saldo_akhir";
+		$sql .= "FROM web_temp_perkiraan WHERE "; 			
+		$sql .= "LEFT(web_temp_perkiraan.kode_perk,1)=1 and type='G' order by kode_perk asc";
+		$query = $this->db->query($sql);
+		return $query->result();		
+	}
+	function get_data_pasiva_hanya_header(){
+		$sql = "SELECT user_id,tanggal,kode_perk,kode_alt,nama_perk,type,level,kode_induk,saldo_akhir
+		FROM web_temp_perkiraan WHERE (left(kode_perk,1)='2' OR left(kode_perk,1)='3') and type='G' order by kode_perk asc";
+		$query = $this->db->query($sql);
+		return $query->result();	
+	}
+	//end dengan 0 hanya header;
 	//tanpa 0
 	function get_total_neraca_aktiva_tanpa_0($tgl_trans,$user_id){
 		$sql = "SELECT * from web_temp_perkiraan where user_id = '".$user_id."' and tanggal <= '".$tgl_trans."' 
@@ -213,6 +267,47 @@ class Lapneracamodel extends CI_Model {
 		return $query->result();	
 	}
 	//end tanpa 0
+	//tanpa 0 hanya header
+	function get_total_neraca_aktiva_tanpa_0_hanya_header($tgl_trans,$user_id){
+		$sql = "SELECT * from web_temp_perkiraan where user_id = '".$user_id."' and tanggal <= '".$tgl_trans."' 
+		and type='G' AND left(kode_perk,1)='1' and saldo_akhir != 0 order by kode_perk asc";
+		$query = $this->db->query($sql);
+		return $query->num_rows();;
+	}
+	function get_total_neraca_pasiva_tanpa_0_hanya_header($tgl_trans,$user_id){
+		$sql = "SELECT * from web_temp_perkiraan where user_id = '".$user_id."' and tanggal <= '".$tgl_trans."' 
+		and type='G' and saldo_akhir != 0 AND (left(kode_perk,1)='2' OR left(kode_perk,1)='3') order by kode_perk asc";
+		$query = $this->db->query($sql);
+		return $query->num_rows();
+	}
+	function insert_temp_aktiva_tanpa_0_hanya_header($tgl_trans,$user_id){
+		$sql  = "INSERT INTO web_temp (user_id,tanggal,kode_perk,kode_alt,nama_perk,type,level,kode_induk,saldo_akhir,kode_perk_psv,kode_alt_psv,nama_perk_psv,type_psv,level_psv,kode_induk_psv,saldo_akhir_psv) ";
+		$sql .= "SELECT '".$user_id."' as user_id,'".$tgl_trans."' as tanggal,kode_perk,kode_alt,nama_perk,type,level,kode_induk,saldo_akhir,'','','','','0','','0' ";
+		$sql .= "FROM web_temp_perkiraan WHERE "; 			
+		$sql .= "LEFT(web_temp_perkiraan.kode_perk,1)=1 and saldo_akhir != 0 and type='G' order by kode_perk asc";
+		$query = $this->db->query($sql);					   
+	}
+	function insert_temp_pasiva_tanpa_0_hanya_header($tgl_trans,$user_id){
+		$sql  = "INSERT INTO web_temp (user_id,tanggal,kode_perk,kode_alt,nama_perk,type,level,kode_induk,saldo_akhir,kode_perk_psv,kode_alt_psv,nama_perk_psv,type_psv,level_psv,kode_induk_psv,saldo_akhir_psv)
+				SELECT '".$user_id."' as user_id,'".$tgl_trans."' as tanggal,'','','','','0','','0',kode_perk,kode_alt,nama_perk,type,level,kode_induk,saldo_akhir
+				FROM web_temp_perkiraan WHERE 			
+				(left(kode_perk,1)='2' OR left(kode_perk,1)='3') and saldo_akhir != 0 and type='G' order by kode_perk asc";
+		$query = $this->db->query($sql);					   
+	}
+	function get_data_aktiva_tanpa_0_hanya_header(){
+		$sql = "SELECT user_id,tanggal,kode_perk,kode_alt,nama_perk,type,level,kode_induk,saldo_akhir
+		FROM web_temp_perkiraan WHERE 			
+		LEFT(web_temp_perkiraan.kode_perk,1)=1 and saldo_akhir != 0 and type='G' order by kode_perk asc";
+		$query = $this->db->query($sql);
+		return $query->result();		
+	}
+	function get_data_pasiva_tanpa_0_hanya_header(){
+		$sql = "SELECT user_id,tanggal,kode_perk,kode_alt,nama_perk,type,level,kode_induk,saldo_akhir
+		FROM web_temp_perkiraan WHERE (left(kode_perk,1)='2' OR left(kode_perk,1)='3') and saldo_akhir != 0 and type='G' order by kode_perk asc";
+		$query = $this->db->query($sql);
+		return $query->result();	
+	}
+	//end tanpa 0 hanya header
 	function get_data_neraca_t($tgl_trans,$user_id){
 		$sql = "SELECT * from web_temp where user_id = '".$user_id."' and tanggal <= '".$tgl_trans."'";
 		$query = $this->db->query($sql);

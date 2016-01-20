@@ -41,7 +41,8 @@
                                         <th width='10%' align='left'>Id proyek</th>
                                         <th width='20%' align='left'>Nama Rumah</th>
                                         <th width='25%' align='left'>Nama Customer</th>
-                                        <th width='10%' align='center'>Jumlah trans</th>
+                                        <th width='15%' align='left'>GL</th>
+                                        <th width='15%' align='center'>Jml trans</th>
                                     </tr>
                                     </thead>
                                     <tbody id="id_body_data">
@@ -165,18 +166,20 @@
                             var x = i+1;
                             //var idCpa           = data.data_cpa[i].id_cpa;
                             var idPenj        = data.data_cpa[i].master_id;
-                            var idProyek       = data.data_cpa[i].id_proyek;
-                            var namaRumah       = data.data_cpa[i].nama_rumah;
-                            var namaCust             = data.data_cpa[i].nama_cust;
-                            var jmlTrans              = data.data_cpa[i].jml_trans;
+                            var idProyek      = data.data_cpa[i].id_proyek;
+                            var namaRumah     = data.data_cpa[i].nama_rumah;
+                            var namaCust      = data.data_cpa[i].nama_cust;
+                            var kodePerk      = data.data_cpa[i].kode_perk;
+                            var jmlTrans      = data.data_cpa[i].jml_trans;
 
                             tr ='<tr class="listdata" id="tr'+x+'">';
                             tr+='<td><input type="text" class="form-control input-sm" id="id_tempIdPenj'+x+'" name="tempIdPenj'+x+'" readonly="true" value="'+idPenj+'"></td>';
                             tr+='<td><input type="text" class="form-control input-sm" id="id_tempIdProyek'+x+'" name="tempIdProyek'+x+'" readonly="true" value="'+idProyek.trim()+'"></td>';
                             tr+='<td><input type="text" class="form-control input-sm" id="id_tempNamaRumah'+x+'" name="tempNamaRumah'+x+'" readonly="true" value="'+namaRumah+'"></td>';
                             tr+='<td><input type="text" class="form-control input-sm" id="id_tempNamaCust'+x+'" name="tempNamaCust'+x+'" readonly="true" value="'+namaCust+'" ></td>';
+                            tr+='<td><input type="text" class="form-control input-sm" id="id_tempKodePerk'+x+'" name="tempKodePerk'+x+'" readonly="true" value="'+kodePerk+'" ></td>';
                             tr+='<td><input type="text" class="form-control nomor input-sm" id="id_tempJmlTrans'+x+'" name="tempJmlTrans'+x+'" readonly="true" value="'+number_format(jmlTrans,2)+'"></td>';
-                            tr+= '</tr>';
+                            tr+='</tr>';
 
                             $('#id_body_data').append(tr);
                         }
@@ -197,7 +200,6 @@
 
             success: function (data) {
                 $('#id_btnBatal').trigger('click');
-
                 UIToastr.init(data.tipePesan, data.pesan);
             }
 

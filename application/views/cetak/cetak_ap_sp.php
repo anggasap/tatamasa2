@@ -6,7 +6,7 @@
 	<style type="text/css">
 	table.tableizer-table {
 		width: 100%;
-		border: 0px solid #CCC; font-family: Arial, Helvetica, sans-serif;
+		border: 0px solid #000; font-family: Arial, Helvetica, sans-serif;
 		font-size: 10px;
 	}
 	.tableizer-table th {
@@ -22,49 +22,49 @@
 	}
 	table.tableizer-table2{
 		width: 30%;
-		border: 0px solid #CCC; font-family: Arial, Helvetica, sans-serif;
+		border: 0px solid #000; font-family: Arial, Helvetica, sans-serif;
 		font-size: 10px;
 	}
 	.tableizer-table2 td {
-		border: 0px solid #ccc;
+		border: 0px solid #000;
 	}
 	.tableizer-table2 th {
 		background-color: #104E8B; 
 		color: #FFF;
-		border: 0px solid #ccc;
+		border: 0px solid #000;
 		font-weight: bold;
 		font-size: 12px;
 		text-align: center;
 	}
 	table.tableizer-table3{
 		width: 98%;
-		border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;
+		border: 1px solid #000; font-family: Arial, Helvetica, sans-serif;
 		font-size: 10px;	
 		background-color: whitesmoke;
 	}
 	table.tableizer-table4{
 		width: 98%;
 		float: left;
-		border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;
+		border: 1px solid #000; font-family: Arial, Helvetica, sans-serif;
 		font-size: 10px;
 		margin-bottom: 20px;	
 	}
 	.tableizer-table4 td {
-		border: 1px solid #ccc;
+		border: 1px solid #000;
 	}
 	table.tableizer-table5{
 		width: 98%;
 		float: left;
-		border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;
+		border: 1px solid #000; font-family: Arial, Helvetica, sans-serif;
 		font-size: 10px;
 		margin-bottom: 20px;	
 	}
 	.tableizer-table5 td {
-		border: 1px solid #ccc;
+		border: 1px solid #000;
 	}	
 	table.judul{
 		width: 100%;
-		border: 0px solid #CCC; font-family: Arial, Helvetica, sans-serif;
+		border: 0px solid #000; font-family: Arial, Helvetica, sans-serif;
 		font-size: 12px;	
 	}
 	.judul th {
@@ -92,22 +92,22 @@
 	?>
 	<table class="tableizer-table3">
 	 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">ID RP</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->trans_id; ?></td>
-	 <td>&nbsp;</td><td width="15%" align="left">Tgl AP</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $date; ?></td><td width="5%">&nbsp;</td></tr>
-	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">No. Request</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->id_settle_adv; ?></td>
-	 <td>&nbsp;</td><td align="left" width="15%">Tgl Req</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo tgl_indo($j->tgl_trans); ?></td><td width="5%">&nbsp;</td></tr>
-	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">Vendor</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->nama_spl; ?></td>
-	 <td>&nbsp;</td><td align="left" width="15%"></td><td width="3%">&nbsp;</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td width="5%">&nbsp;</td></tr>
-	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">No. Invoice</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->no_invoice; ?></td>
-	 <td>&nbsp;</td><td align="left" width="15%">Tgl Inv</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td width="5%">&nbsp;</td></tr>
-	 <tr><td width="3%">&nbsp;</td><td align="left">Tgl Jatuh Tempo</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo tgl_indo($j->tgl_jt); ?></td>
-	 <td>&nbsp;</td><td align="left" width="15%">PPH</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td width="5%">&nbsp;</td></tr>
-	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">Cash Flow</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td>
-	 <td>&nbsp;</td><td align="left" width="15%">&nbsp;</td><td width="3%">&nbsp;</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td width="5%">&nbsp;</td></tr>
-	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">Proyek</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->nama_proyek; ?></td>
-	 <td>&nbsp;</td><td align="left" width="15%">&nbsp;</td><td width="3%">&nbsp;</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td width="5%">&nbsp;</td></tr>
-	 <tr><td width="3%">&nbsp;</td><td align="left">No. Faktur Pajak</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td>
-	 <td>&nbsp;</td><td align="left" width="15%">Tgl FP</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td width="5%">&nbsp;</td></tr>
+	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">ID RP</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #000; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->trans_id; ?></td>
+	 <td>&nbsp;</td><td width="15%" align="left">Tgl AP</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #000; font-family: Arial, Helvetica, sans-serif;"><?php echo $date; ?></td><td width="5%">&nbsp;</td></tr>
+	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">No. Request</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #000; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->id_settle_adv; ?></td>
+	 <td>&nbsp;</td><td align="left" width="15%">Tgl Req</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #000; font-family: Arial, Helvetica, sans-serif;"><?php echo tgl_indo($j->tgl_trans); ?></td><td width="5%">&nbsp;</td></tr>
+	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">Vendor</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #000; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->nama_spl; ?></td>
+	 <td>&nbsp;</td><td align="left" width="15%"></td><td width="3%">&nbsp;</td><td width="25%" style="border-bottom: 1px solid #000; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td width="5%">&nbsp;</td></tr>
+	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">No. Invoice</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #000; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->no_invoice; ?></td>
+	 <td>&nbsp;</td><td align="left" width="15%">Tgl Inv</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #000; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td width="5%">&nbsp;</td></tr>
+	 <tr><td width="3%">&nbsp;</td><td align="left">Tgl Jatuh Tempo</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #000; font-family: Arial, Helvetica, sans-serif;"><?php echo tgl_indo($j->tgl_jt); ?></td>
+	 <td>&nbsp;</td><td align="left" width="15%">PPH</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #000; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td width="5%">&nbsp;</td></tr>
+	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">Cash Flow</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #000; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td>
+	 <td>&nbsp;</td><td align="left" width="15%">&nbsp;</td><td width="3%">&nbsp;</td><td width="25%" style="border-bottom: 1px solid #000; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td width="5%">&nbsp;</td></tr>
+	 <tr><td width="3%">&nbsp;</td><td width="15%" align="left">Proyek</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #000; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->nama_proyek; ?></td>
+	 <td>&nbsp;</td><td align="left" width="15%">&nbsp;</td><td width="3%">&nbsp;</td><td width="25%" style="border-bottom: 1px solid #000; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td width="5%">&nbsp;</td></tr>
+	 <tr><td width="3%">&nbsp;</td><td align="left">No. Faktur Pajak</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #000; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td>
+	 <td>&nbsp;</td><td align="left" width="15%">Tgl FP</td><td width="3%">:</td><td width="25%" style="border-bottom: 1px solid #000; font-family: Arial, Helvetica, sans-serif;">&nbsp;</td><td width="5%">&nbsp;</td></tr>
 	 <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 	</table>
 	<br/>
@@ -142,12 +142,12 @@
 	 </td><td>Approved by,
 	 </td><td>Received by,
 	 </td></tr>
-	 <tr><td align="center" rowspan="3" height="60px" width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">
+	 <tr><td align="center" rowspan="3" height="60px" width="25%" style="border: 1px solid #000; font-family: Arial, Helvetica, sans-serif;">
 	 </td>
-	 <td align="center" rowspan="3" width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">
+	 <td align="center" rowspan="3" width="25%" style="border: 1px solid #000; font-family: Arial, Helvetica, sans-serif;">
 	 </td>
-	 <td align="center" rowspan="3" width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">
-	 </td><td align="center" rowspan="3" width="25%" style="border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">
+	 <td align="center" rowspan="3" width="25%" style="border: 1px solid #000; font-family: Arial, Helvetica, sans-serif;">
+	 </td><td align="center" rowspan="3" width="25%" style="border: 1px solid #000; font-family: Arial, Helvetica, sans-serif;">
 	 </td></tr>
 	 <tr></tr>
 	 <tr></tr>

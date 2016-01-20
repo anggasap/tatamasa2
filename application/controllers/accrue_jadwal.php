@@ -73,17 +73,19 @@ class Accrue_jadwal extends CI_Controller
 			for ($i = 1; $i <= $totJurnal; $i++) {
 				$tIdPenj = 'tempIdPenj' . $i;
 				$tIdProyek = 'tempIdProyek' . $i;
+				$tKodePerk = 'tempKodePerk' . $i;
 				$tJmlTrans = 'tempJmlTrans' . $i;
 
 
 				$tmpIdPenj = trim($this->input->post($tIdPenj));
 				$tmpIdProyek = trim($this->input->post($tIdProyek));
+				$tmpKodePerk = trim($this->input->post($tKodePerk));
 				$tmpJmlTrans = str_replace(',', '', trim($this->input->post($tJmlTrans)));
 
 
 				$modelidJrAR = $this->booking_m->getIdJrAR($bulan, $tahun);
 				//$modelNoVoucher = $this->kasir_m->getNoVoucher($bulan, $tahun);
-				$tmpKodePerk = '1010201';
+				//$tmpKodePerk = '1010201';
 				$data_perk = array(
 						'trans_id' => $modelidJrAR,
 						'voucher_no'=>'',
@@ -99,7 +101,9 @@ class Accrue_jadwal extends CI_Controller
 						'keterangan' => '--Accrue--'
 				);
 				$model = $this->akuntansi_m->insertTDPerk($data_perk);
-				$tmpKodePerk = '201050101';
+
+				$tmpKodePerk = $this->accrue_jadwal_m->getJurnalPend('7');
+				$tmpKodePerk = $tmpKodePerk[0]->kode_perk;
 				$data_perk = array(
 						'trans_id' => $modelidJrAR,
 						'voucher_no'=>'',

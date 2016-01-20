@@ -29,7 +29,7 @@ table#idTabelRumah td:nth-child(5) {
             <div class="portlet-body">
                 <div>
                 	<span id="event_result">
-                    
+
                     </span>
                 </div>
                 <form role="form" method="post" class="cls_from_rumah"
@@ -48,7 +48,7 @@ table#idTabelRumah td:nth-child(5) {
                                                 <span class="input-group-btn">
                                                     <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelRumah"
                                                     id="id_btnModalRmh" data-toggle="modal">
-                                                    <i class="fa fa-search fa-fw"/></i> 
+                                                    <i class="fa fa-search fa-fw"/></i>
                                                     </a>
                                                 </span>
                                             </div>
@@ -118,12 +118,12 @@ table#idTabelRumah td:nth-child(5) {
                                                    type="text" name="hargaRumah"/>
                                         </div>
                                     </div>
-                                </div>                               
+                                </div>
                             </div>
                             <!--end <div class="col-md-6"> 1 -->
                             <!--
                             <div class="col-md-6">
-                                
+
                             </div>
                             -->
                         </div>
@@ -136,7 +136,7 @@ table#idTabelRumah td:nth-child(5) {
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-actions">
-                            	
+
                                 <button name="btnSimpan" class="btn blue" id="id_btnSimpan">
                                     <!--<i class="fa fa-check"></i>--> Simpan
                                 </button>
@@ -197,7 +197,7 @@ table#idTabelRumah td:nth-child(5) {
                                             </th>
                                             <th>
                                                 Nama Proyek
-                                            </th> 
+                                            </th>
                                             <th>
                                                 Nama Rumah
                                             </th>
@@ -212,7 +212,7 @@ table#idTabelRumah td:nth-child(5) {
                                             </th>
                                             <th>
                                                 Harga
-                                            </th>                                        
+                                            </th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -268,7 +268,7 @@ table#idTabelRumah td:nth-child(5) {
                                             </th>
                                             <th>
                                                 Nama Proyek
-                                            </th>                                            
+                                            </th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -435,13 +435,13 @@ table#idTabelRumah td:nth-child(5) {
                 $('#id_rumahId').val(idRumah);
                 getDescRumah(idRumah);
                 //$('#').val();
-                
+
                 $('#btnCloseModalDataRumah').trigger('click');
                 $('#id_btnSimpan').attr('disabled',true);
                 $('#id_btnUbah').attr("disabled",false);
                 $('#id_btnHapus').attr("disabled",false);
                 $('#id_rumahId').focus();
-            }); 
+            });
 
             tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
         }
@@ -532,12 +532,12 @@ table#idTabelRumah td:nth-child(5) {
                 $('#id_proyekId').val(idProyek);
                 $('#id_namaProyek').val(namaProyek);
                 //$('#').val();
-                
+
                 $('#btnCloseModalDataProyek').trigger('click');
-                
+
                 $('#id_proyekId').focus();
 
-            }); 
+            });
 
             tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
         }
@@ -556,11 +556,11 @@ table#idTabelRumah td:nth-child(5) {
     btnStart();
     readyToStart();
 	$("#id_namaProyek").focus();
-    	
+
 	$( "#id_btnSimpan" ).click(function() {
 		$('#idTmpAksiBtn').val('1');
 	});
-	    
+
 	$('#id_btnUbah').click(function(){
 		$('#idTmpAksiBtn').val('2');
 	});
@@ -603,13 +603,13 @@ table#idTabelRumah td:nth-child(5) {
 			dataType: "json",
 			url:"<?php echo base_url(); ?>master_rumah/simpan",
 			data:dataString,
-	
+
 			success:function (data) {
 				$('#id_ReloadRumah').trigger('click');
 				$('#id_btnBatal').trigger('click');
 				UIToastr.init(data.tipePesan,data.pesan);
 			}
-	
+
 		});
 		event.preventDefault();
 	}
@@ -620,13 +620,13 @@ table#idTabelRumah td:nth-child(5) {
 			dataType: "json",
 			url:"<?php echo base_url(); ?>master_rumah/ubah",
 			data:dataString,
-	
+
 			success:function (data) {
 				$('#id_ReloadRumah').trigger('click');
 				$('#id_btnBatal').trigger('click');
-				UIToastr.init(data.tipePesan,data.pesan);		
+				UIToastr.init(data.tipePesan,data.pesan);
 			}
-	
+
 		});
 		event.preventDefault();
 	}
@@ -642,9 +642,9 @@ table#idTabelRumah td:nth-child(5) {
 			success:function (data) {
 				$('#id_ReloadRumah').trigger('click');
 				$('#id_btnBatal').trigger('click');
-				UIToastr.init(data.tipePesan,data.pesan);			
+				UIToastr.init(data.tipePesan,data.pesan);
 			}
-	
+
 		});
 		event.preventDefault();
 	}
@@ -658,7 +658,7 @@ table#idTabelRumah td:nth-child(5) {
 			 }else{//if(r)
 				return false;
 			}
-        }else if(aksiBtn == '2'){ 
+        }else if(aksiBtn == '2'){
         	var r = confirm('Anda yakin merubah data ini?');
 			 if (r== true){
 				 ajaxUbah();
@@ -673,8 +673,8 @@ table#idTabelRumah td:nth-child(5) {
 				return false;
 			}
         }
-    }); 
-    
+    });
+
 </script>
 
 

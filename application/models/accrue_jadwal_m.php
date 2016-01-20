@@ -19,7 +19,7 @@ class Accrue_jadwal_m extends CI_Model {
 	}
 	public function getJadwalJT($tglTrans)
 	{
-		$sql="select tj.master_id,mp.id_proyek,mr.nama_rumah,mc.nama_cust,tj.tgl_trans,tj.jml_trans from trans_jual tj
+		$sql="select tj.master_id,mp.id_proyek,mr.nama_rumah,mc.nama_cust,tj.tgl_trans,tj.jml_trans,mc.kode_perk from trans_jual tj
 			  left join master_jual mj on tj.master_id = mj.master_id
 			  left join master_rumah mr on mj.id_rumah = mr.id_rumah
 			  left join master_customer mc on mj.id_cust = mc.id_cust
@@ -28,6 +28,19 @@ class Accrue_jadwal_m extends CI_Model {
 		$query=$this->db->query($sql);
 
 		$rows['data_cpa'] = $query->result();
+		return $rows;
+
+	}
+	public function getJurnalPend($idJurnalPend)
+	{
+		$this->db->select ( 'ij.kode_perk,p.nama_perk' );
+		$this->db->from('integrasi_jurnal ij');
+		$this->db->join('perkiraan p', 'ij.kode_perk=p.kode_perk', 'LEFT');
+		$this->db->where ( 'id_integrasi', $idJurnalPend );
+//		$this->db->where ( 'T.STATUS_AKTIF <>', 3 );
+		$query = $this->db->get ();
+
+		$rows = $query->result();
 		return $rows;
 
 	}

@@ -76,7 +76,7 @@ class Master_rumah extends CI_Controller
                 $harga = number_format($row->harga,2);
 				$array = array (
 						'baris'=>1,
-						//'id_rumah' => $row->id_rumah,
+						'id_rumah' => $row->id_rumah,//
                         'id_proyek' => $row->id_proyek,
 						'nama_proyek'=>$row->nama_proyek,
 						'nama_rumah'=>$row->nama_rumah,

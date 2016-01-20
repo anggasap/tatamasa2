@@ -66,6 +66,7 @@ function startCheckBox(){
 }
 function resetForm(){
 	$( "form input:text" ).val('');
+	$( "form input[type=email]" ).val('');
 	$( "form textarea" ).val('');
     $( "form select" ).val('');
 }

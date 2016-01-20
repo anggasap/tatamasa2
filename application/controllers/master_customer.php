@@ -52,37 +52,100 @@ class Master_customer extends CI_Controller
 		$data['data'] = array();
 		foreach( $rows as $row ) {
 		  //$harga = number_format(trim($row->harga),2);
+
 			$array = array(
 					'id_cust' => trim($row->id_cust),
+					'no_id' => trim($row->no_id),
 					'nama_cust' => trim($row->nama_cust),
                     'alamat' => trim($row->alamat),
-                    'no_id' => trim($row->no_id),
+					'email' => trim($row->email),
                     'no_hp' => trim($row->no_hp),
-					'no_telp'=>trim($row->no_telp)
+					'no_telp'=>trim($row->no_telp),
+					'no_npwp'=>trim($row->no_npwp),
+					'nama_npwp'=>trim($row->nama_npwp),
+					'alamat_npwp'=>trim($row->alamat_npwp),
+					'no_akun_bank'=>trim($row->no_akun_bank),
+					'bank_akun_bank'=>trim($row->bank_akun_bank),
+					'kode_perk'=>trim($row->kode_perk),
+					'no_va'=>trim($row->no_va),
+					'nama_va'=>trim($row->nama_va),
+					'bank_va'=>trim($row->bank_va)
 			);
 	
 			array_push($data['data'],$array);
 		}
 		$this->output->set_output(json_encode($data));
 	}
+	function getDescCust()
+	{
+		$this->CI =& get_instance();
+		$idCust = $this->input->post('idCust', TRUE);
+		$rows = $this->master_customer_m->getDescCust($idCust);
+		if ($rows) {
+			foreach ($rows as $row)
+			$array = array(
+					'baris' => 1,
+					'id_cust' => trim($row->id_cust),
+					'no_id' => trim($row->no_id),
+					'nama_cust' => trim($row->nama_cust),
+					'alamat' => trim($row->alamat),
+					'email' => trim($row->email),
+					'no_hp' => trim($row->no_hp),
+					'no_telp'=>trim($row->no_telp),
+					'no_npwp'=>trim($row->no_npwp),
+					'nama_npwp'=>trim($row->nama_npwp),
+					'alamat_npwp'=>trim($row->alamat_npwp),
+					'no_akun_bank'=>trim($row->no_akun_bank),
+					'bank_akun_bank'=>trim($row->bank_akun_bank),
+					'kode_perk'=>trim($row->kode_perk),
+					'nama_perk'=>trim($row->nama_perk),
+					'no_va'=>trim($row->no_va),
+					'nama_va'=>trim($row->nama_va),
+					'bank_va'=>trim($row->bank_va)
+			);
+		} else {
+			$array = array('baris' => 0);
+		}
+
+		$this->output->set_output(json_encode($array));
+	}
 
     function simpan(){
-
+		$noId		    = trim($this->input->post('noId'));
         $namaCustomer	= trim($this->input->post('namaCustomer'));
 		$alamat		    = trim($this->input->post('alamat'));
-		$noId		    = trim($this->input->post('noId'));
+		$email		    = trim($this->input->post('email'));
         $noHp		    = trim($this->input->post('noHp'));
         $noTelp		    = trim($this->input->post('noTelp'));
+		$noNpwp		    = trim($this->input->post('noNpwp'));
+		$namaNpwp		    = trim($this->input->post('namaNpwp'));
+		$alamatNpwp		    = trim($this->input->post('alamatNpwp'));
+		$kodePerk		    = trim($this->input->post('GL'));
+		$noRek		    = trim($this->input->post('noRek'));
+		$bankRek		    = trim($this->input->post('bankRek'));
+		$noVA		    = trim($this->input->post('noVA'));
+		$namaVA		    = trim($this->input->post('namaVA'));
+		$bankVA		    = trim($this->input->post('bankVA'));
                
         $modelidcust = $this->master_customer_m->getIdCustomer();
 
         $data = array(
             'id_cust'		    =>$modelidcust,
-            'nama_cust'		    =>$namaCustomer,
-            'alamat'		    =>$alamat,
 			'no_id'		        =>$noId,
+			'nama_cust'		    =>$namaCustomer,
+            'alamat'		    =>$alamat,
+			'email'		        =>$email,
 			'no_hp'		        =>$noHp,
-            'no_telp'		    =>$noTelp
+            'no_telp'		    =>$noTelp,
+			'no_npwp'		    =>$noNpwp,
+			'nama_npwp'		    =>$namaNpwp,
+			'alamat_npwp'		=>$alamatNpwp,
+			'kode_perk'			=>$kodePerk,
+			'no_akun_bank'		=>$noRek,
+			'bank_akun_bank'	=>$bankRek,
+			'no_va'				=>$noVA,
+			'nama_va'			=>$namaVA,
+			'bank_va'			=>$bankVA
         );
         $model = $this->master_customer_m->simpan($data);
         if($model){
@@ -101,19 +164,39 @@ class Master_customer extends CI_Controller
         $this->output->set_output(json_encode($array));
     }
     function ubah(){
-		$idCustomer	= trim($this->input->post('customerId'));
+		$idCustomer		= trim($this->input->post('customerId'));
+		$noId		    = trim($this->input->post('noId'));
 		$namaCustomer	= trim($this->input->post('namaCustomer'));
 		$alamat		    = trim($this->input->post('alamat'));
-		$noId		    = trim($this->input->post('noId'));
+		$email		    = trim($this->input->post('email'));
 		$noHp		    = trim($this->input->post('noHp'));
 		$noTelp		    = trim($this->input->post('noTelp'));
+		$noNpwp		    = trim($this->input->post('noNpwp'));
+		$namaNpwp		    = trim($this->input->post('namaNpwp'));
+		$alamatNpwp		    = trim($this->input->post('alamatNpwp'));
+		$kodePerk		    = trim($this->input->post('GL'));
+		$noRek		    = trim($this->input->post('noRek'));
+		$bankRek		    = trim($this->input->post('bankRek'));
+		$noVA		    = trim($this->input->post('noVA'));
+		$namaVA		    = trim($this->input->post('namaVA'));
+		$bankVA		    = trim($this->input->post('bankVA'));
 
 		$data = array(
+				'no_id'		        =>$noId,
 				'nama_cust'		    =>$namaCustomer,
 				'alamat'		    =>$alamat,
-				'no_id'		        =>$noId,
+				'email'		        =>$email,
 				'no_hp'		        =>$noHp,
-				'no_telp'		    =>$noTelp
+				'no_telp'		    =>$noTelp,
+				'no_npwp'		    =>$noNpwp,
+				'nama_npwp'		    =>$namaNpwp,
+				'alamat_npwp'		=>$alamatNpwp,
+				'kode_perk'			=>$kodePerk,
+				'no_akun_bank'		=>$noRek,
+				'bank_akun_bank'	=>$bankRek,
+				'no_va'				=>$noVA,
+				'nama_va'			=>$namaVA,
+				'bank_va'			=>$bankVA
 		);
     	
     	$model = $this->master_customer_m->ubah($data,$idCustomer);

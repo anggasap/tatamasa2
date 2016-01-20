@@ -7,7 +7,7 @@
 <!-- BEGIN PAGE CONTENT-->
 <!-- KONTEN DI SINI YA -->
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="portlet light bordered">
             <div class="portlet-title">
                 <div class="caption">
@@ -27,13 +27,13 @@
                 <form role="form" method="post" id="id_laporanNeraca">
                     <div class="row">
                         <div class="form-body">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Tanggal</label>
 									<input id="id_tanggal" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" class="form-control date-picker input-sm" type="text" name="tanggalAwal" />                                                   
                                 </div>
                             </div>
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<div class="form-group">
                                     <label>Bentuk Neraca</label>
                                     <select id="id_bentuk" class="form-control input-sm select2me" name="bentuk">
@@ -44,7 +44,7 @@
 								</div>
 							</div>   
                             <!--end <div class="col-md-6"> 1 -->
-                            <div class="col-md-4">
+                            <div class="col-md-3">
 								<div class="form-group">
                                     <label>&nbsp;</label>
 										<div class="checkbox-list">
@@ -53,7 +53,15 @@
 										</div>
 								</div>		
                             </div>
-                            
+                            <div class="col-md-3">
+								<div class="form-group">
+                                    <label>&nbsp;</label>
+										<div class="checkbox-list">
+												<label>
+												<input type="checkbox" value="1" name="tipe" id="id_tipe">Hanya akun General</label>
+										</div>
+								</div>		
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -149,6 +157,7 @@
 		var tglAwal = $('#id_tanggal').val();
 		var bentuk = $('#id_bentuk').val();
 		var nol = $("#id_nol").attr("checked") ? 1 : 0;
+		var tipe = $("#id_tipe").attr("checked") ? 1 : 0;
 		if(tglAwal == ''){
 			alert('Silahkan pilih tanggal');
 			return false;
@@ -158,9 +167,9 @@
 			return false;
 		}
 		if(bentuk == 'T'){
-			window.open("<?php echo base_url('laporan_neraca_c/cetak_t/'); ?>/"+tglAwal+"/"+nol, '_blank');
+			window.open("<?php echo base_url('laporan_neraca_c/cetak_t/'); ?>/"+tglAwal+"/"+nol+"/"+tipe, '_blank');
 		}else{
-			window.open("<?php echo base_url('laporan_neraca_c/cetak/'); ?>/"+tglAwal+"/"+nol, '_blank');	
+			window.open("<?php echo base_url('laporan_neraca_c/cetak/'); ?>/"+tglAwal+"/"+nol+"/"+tipe, '_blank');	
 		}
 	}
     

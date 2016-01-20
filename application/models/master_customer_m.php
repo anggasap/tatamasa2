@@ -11,6 +11,19 @@ class Master_customer_m extends CI_Model {
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}
+	public function getDescCust($idCust)
+	{
+		$this->db->select ( 'r.*,p.nama_perk' );
+		$this->db->from('master_customer r');
+		$this->db->join('perkiraan p', 'r.kode_perk = p.kode_perk', 'LEFT');
+		$this->db->where ( 'r.id_cust', $idCust);
+		$query = $this->db->get ();
+		if($query->num_rows()== '1'){
+			return $query->result ();
+		}else{
+			return false;
+		}
+	}
 	public function getIdCustomer(){
 		$sql= "select id_cust from master_customer";
 		$query = $this->db->query($sql);

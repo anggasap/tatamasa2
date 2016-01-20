@@ -50,6 +50,15 @@ class Kasir_m extends CI_Model {
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}
+	public function getKodeBayar() {
+		$rows 		=	array(); //will hold all results
+		$sql		=	"select * from type_bayar order by kode_bayar asc ";
+		$query		=	$this->db->query($sql);
+		foreach($query->result_array() as $row){
+			$rows[] = $row; //add the fetched result to the result array;
+		}
+		return $rows; // returning rows, not row
+	}
 	public function getKodeBayarTunai() {
 		$rows 		=	array(); //will hold all results
 		$sql		=	"select * from type_bayar where jenis ='T' order by kode_bayar asc ";

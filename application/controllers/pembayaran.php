@@ -11,6 +11,8 @@ class Pembayaran extends CI_Controller
         $this->load->model('pembayaran_m');
         $this->load->model('booking_m');
         $this->load->model('kasir_m');
+		$this->load->model('akuntansi_m');
+        $this->load->model('kasir_ar_m');
         session_start();
     }
 
@@ -76,7 +78,9 @@ class Pembayaran extends CI_Controller
                 'nama_cust' => $row->nama_cust,
                 'no_id' => $row->no_id,
                 'no_hp' => $row->no_hp,
-                'no_telp' => $row->no_telp
+                'no_telp' => $row->no_telp,
+                'kode_perk' => $row->kode_perk,
+                'nama_perk' => $row->nama_perk
                 //'' => $row->
             );
         } else {
@@ -108,18 +112,23 @@ class Pembayaran extends CI_Controller
     }
     function getAngsInfo2()
     {
-        $this->CI =& get_instance();
-        $idPenj = $this->input->post('idPenj', TRUE);
-        $tglTrans = $this->input->post('tglTrans', TRUE);
-        $tglTrans 			= date('Y-m-d', strtotime($tglTrans));
+        $this->CI 	=& get_instance();
+        $idPenj 	= $this->input->post('idPenj', TRUE);
+        $tglTrans 	= $this->input->post('tglTrans', TRUE);
+        $tglTrans 	= date('Y-m-d', strtotime($tglTrans));
         $rows = $this->pembayaran_m->getAngsInfo2($idPenj,$tglTrans);
         if ($rows) {
             foreach ($rows as $row)
+				if($row->tagihan <= 0){
+					$tagihan = 0;
+				}else{
+					$tagihan = $row->tagihan;
+				} 
                 $array = array(
-                    'baris' => 1,
-                    'sisaAngs' => $row->sisaAngs,
-                    'tagihan' => $row->tagihan,
-                    'sdhdibayar' => $row->sdhdibayar
+                    'baris' 		=> 1,
+                    'sisaAngs' 		=> $row->sisaAngs,
+                    'tagihan' 		=> $tagihan,
+                    'sdhdibayar' 	=> $row->sdhdibayar
                     //'' => $row->
                 );
         } else {
@@ -137,7 +146,10 @@ class Pembayaran extends CI_Controller
         $data['menu_nama'] = $menuId[0]->menu_nama;
         $this->auth->restrict($data['menu_id']);
         $this->auth->cek_menu($data['menu_id']);
-        $data['kodebayar'] = $this->kasir_m->getKodeBayar();
+        //$data['kodebayar'] = $this->kasir_m->getKodeBayar();
+        $data['kodebayartunai'] = $this->kasir_ar_m->getKodeBayarTunai();
+        $data['kodebayarnontunai'] = $this->kasir_ar_m->getKodeBayarNonTunai();
+        $data['carabayar'] = $this->kasir_ar_m->getCaraBayar();
 
         if (isset($_POST["btnSimpan"])) {
             $this->simpan();
@@ -158,20 +170,28 @@ class Pembayaran extends CI_Controller
     {
         $tglTrans = trim($this->input->post('tglTrans'));
         $tglTrans = date('Y-m-d', strtotime($tglTrans));
-
+		$idProyek = trim($this->input->post('proyek'));
         $idPenj     = trim($this->input->post('idPenj'));
-        $keterangan 			= trim($this->input->post('keterangan'));
-        $jmlBayar 		= str_replace(',', '', trim($this->input->post('jmlBayar')));
-
+        $keterangan = trim($this->input->post('keterangan'));
+		$hargaJual 	= str_replace(',', '', trim($this->input->post('hargaJual')));
+        $jmlBayar 	= str_replace(',', '', trim($this->input->post('jmlBayar')));
+		$modelidTrans = $this->booking_m->getKodeTrans();
+		
         $data_trans = array(
+			'kode_transaksi'=>$modelidTrans,
             'master_id'		=>$idPenj,
             'tgl_trans'		=>$tglTrans,
             'kode_trans'	=>'300',
             'jml_trans'		=>$jmlBayar,
             'keterangan'	=>$keterangan
-
         );
-
+		
+		if($hargaJual == $jmlBayar){
+			$data = array(
+				'status_jual' => 3
+			);
+			$model_jual = $this->pembayaran_m->updateMasterJual($data,$idPenj);	
+		}
         $model_trans = $this->pembayaran_m->simpan_trans($data_trans);
 
         $bulan = date('m', strtotime($tglTrans));//$tglTrans->format("m");
@@ -193,9 +213,7 @@ class Pembayaran extends CI_Controller
                 $tmpDb = str_replace(',', '', trim($this->input->post($tDb)));
                 $tmpKr = str_replace(',', '', trim($this->input->post($tKr)));
                 $tmpKet = trim($this->input->post($tKet));
-
                 $jmlCflow = $tmpDb + $tmpKr;
-
                 $data_perk = array(
                     'trans_id' => $modelidJrAR,
                     'voucher_no'=>$modelNoVoucher,
@@ -237,6 +255,7 @@ class Pembayaran extends CI_Controller
         if ($model_trans) {
             $array = array(
                 'act' => 1,
+				'kode' => $modelidTrans,
                 'tipePesan' => 'success',
                 'pesan' => 'Data berhasil disimpan.'
             );
@@ -249,9 +268,26 @@ class Pembayaran extends CI_Controller
         }
         $this->output->set_output(json_encode($array));
     }
-
-
-
+	function cetak($kodePenj,$kodetr,$idRumah)
+    {
+        if ($this->auth->is_logged_in() == false) {
+            redirect('main/index');
+        }else{			
+			$tglTrans 	= date('d-m-Y');
+			$bulan 		= date('m', strtotime($tglTrans));
+			$tahun 		= date('Y', strtotime($tglTrans));
+			$data['invoice'] = $this->booking_m->getKodeInvoice($bulan,$tahun);
+			$data = array(
+				'invoice'	=> $data['invoice'],
+			);
+			$update 		= $this->booking_m->updateTransJual($data,$kodetr);
+			$data['rows1'] 	= $this->pembayaran_m->getDescRumahSelled($idRumah);
+			$data['rows2']  = $this->pembayaran_m->getAngsInfo1($kodePenj);
+			$data['rows3']  = $this->pembayaran_m->getAngsInfo2($kodePenj,$tglTrans);
+			$data['all'] 	= $this->booking_m->getDataCetak($kodePenj);
+			$this->load->view('cetak/cetak_kwitansi_pembayaran', $data);
+        }
+    }
 }
 
 /* End of file sec_user.php */

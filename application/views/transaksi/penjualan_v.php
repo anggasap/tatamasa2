@@ -979,7 +979,7 @@
 
             for (var i = 1; i <= jmlAngs; i++) {
 
-                tglJadwal.setMonth(tglJadwal.getDate() + 1);
+                tglJadwal.setMonth(tglJadwal.getMonth() + 1);
                 var hari = tglJadwal.getDate();
                 var bulan = tglJadwal.getMonth();
                 var tahun = tglJadwal.getFullYear();

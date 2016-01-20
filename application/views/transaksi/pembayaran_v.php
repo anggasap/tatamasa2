@@ -33,7 +33,7 @@
                     
                     </span>
                 </div>
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-pills">
                     <li class="active">
                         <a href="#tab_2_1" data-toggle="tab" id="navitab_2_1">
                             Info Rumah & Customer </a>
@@ -61,6 +61,8 @@
                                                         <input id="id_rumahId" required="required"
                                                                class="form-control input-sm"
                                                                type="text" name="rumahId" readonly/>
+														<input id="id_kodetr" class="form-control hidden input-sm"
+                                                               type="text" name="kodetr" >	   
                                                 <span class="input-group-btn">
                                                     <a href="#" class="btn btn-success btn-sm"
                                                        data-target="#idDivTabelRumah"
@@ -88,6 +90,9 @@
                                                     <input id="id_namaRumah" required="required"
                                                            class="form-control  input-sm"
                                                            type="text" name="namaRumah" placeholder="" readonly/>
+													<input id="id_transJual"
+                                                           class="form-control hidden input-sm"
+                                                           type="text" name="transJual"/>	   
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>Nama proyek</label>
@@ -179,6 +184,22 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>No rek GL</label>
+                                                    <input id="id_GL" required="required" class="form-control input-sm"
+                                                           type="text" name="GL" readonly/>
+                                                </div>
+                                                <div class="col-md-6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nama rek GL</label>
+                                            <input id="id_namaGL" readonly class="form-control input-sm"
+                                                   type="text" name="namaGL"/>
+                                        </div>
                                     </div>
                                     <!--end <div class="col-md-6"> 1 -->
                                 </div>
@@ -238,10 +259,10 @@
                             <hr>
                             <div class="row">
                                 <div class="form-body">
-                                    <div class="col-md-6">
+                                    <div class="col-md-5">
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <!--<div class="col-md-3">
                                                     <div class="form-group" id="id_divDPPersen">
                                                         <label>Tgl trans</label>
                                                         <input id="id_tgltrans" required="required"
@@ -249,19 +270,19 @@
                                                                type="text" name="tglTrans"
                                                                data-date-format="dd-mm-yyyy"/>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-3">
+                                                </div>-->
+                                                <div class="col-md-9">
                                                     <label>No bukti </label>
                                                     <input id="id_noBukti" class="form-control  input-sm"
                                                            type="text" name="noBukti" required/>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <!--<div class="col-md-3">
                                                     <label>Kode trans</label>
                                                     <select id="id_kodeTrans" class="form-control  input-sm"
                                                             name="kodeTrans" required>
                                                         <option value="1">Tunai</option>
                                                     </select>
-                                                </div>
+                                                </div>-->
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>Cicilan ke- </label>
@@ -273,7 +294,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-7">
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-4">
@@ -296,35 +317,92 @@
                                     <!--end <div class="col-md-6"> 1 -->
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="tab-pane fade" id="tab_2_3">
+                            <hr>
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="form-group">
+                                        <label>Tgl Pembayaran</label>
+                                        <input id="id_tgltrans" required="required"
+                                               class="form-control input-sm "
+                                               type="text" name="tglTrans" placeholder="dd-mm-yyyy" readonly/>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Cara Pembayaran</label>
+                                        <?php
+                                        $data = array();
+                                        $data[''] = '';
+                                        foreach ($carabayar as $row):
+                                            $data[$row['id_carabayar']] = $row['nama_carabayar'];
+                                        endforeach;
+                                        echo form_dropdown('carabayar', $data, '',
+                                            'id="id_carabayar" class="form-control input-sm select2me " required');
+                                        ?>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group divkodebayar" id="id_divkodebayartunai">
                                         <label>Kode Pembayaran</label>
                                         <?php
                                         $data = array();
                                         $data[''] = '';
-                                        foreach ($kodebayar as $row):
+                                        foreach ($kodebayartunai as $row):
                                             $data[$row['kode_bayar']] = $row['nama_kdbayar'];
                                         endforeach;
-                                        echo form_dropdown('kodebayar', $data, '',
-                                            'id="id_kodebayar" class="form-control input-sm select2me " required');
+                                        echo form_dropdown('kodebayartunai', $data, '',
+                                            'id="id_kodebayartunai" class="form-control input-sm select2me " ');
                                         ?>
-                                        <input id="id_kodePerkBayar" class="form-control input-sm hidden"
-                                               type="text" name="kodePerkBayar" readonly/>
-                                        <input id="id_namaPerkBayar" class="form-control input-sm hidden"
-                                               type="text" name="namaPerkBayar" readonly/>
+                                    </div>
+                                    <div class="form-group divkodebayar" id="id_divkodebayarnontunai">
+                                        <label>Kode Pembayaran</label>
+                                        <?php
+                                        $data = array();
+                                        $data[''] = '';
+                                        foreach ($kodebayarnontunai as $row):
+                                            $data[$row['kode_bayar']] = $row['nama_kdbayar'];
+                                        endforeach;
+                                        echo form_dropdown('kodebayarnontunai', $data, '',
+                                            'id="id_kodebayarnontunai" class="form-control input-sm select2me " ');
+                                        ?>
                                     </div>
                                 </div>
-                                <div class="col-md-5">
-                                    <label>Keterangan </label>
-                                                        <textarea rows="2" cols="" name="keterangan" id="id_keterangan"
-                                                                  class="form-control input-sm" placeholder="" ></textarea>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>No. Cek/Giro</label>
+                                        <input id="id_noCekGiro" required="required"
+                                               class="form-control input-sm "
+                                               type="text" name="noCekGiro" placeholder=""/>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Tgl. Cek/Giro</label>
+                                        <input id="id_tglCekGiro" required="required" data-date-format="dd-mm-yyyy"
+                                               class="form-control date-picker input-sm "
+                                               type="text" name="tglCekGiro" placeholder="dd-mm-yyyy"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 hidden">
+                                    <div class="form-group ">
+                                        <label>Kode Perk</label>
+                                        <input id="id_kodePerkBayar" class="form-control input-sm"
+                                               type="text" name="kodePerkBayar" readonly/>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 hidden">
+                                    <div class="form-group ">
+                                        <label>Nama Perk</label>
+                                        <input id="id_namaPerkBayar" class="form-control input-sm"
+                                               type="text" name="namaPerkBayar" readonly/>
+
+                                    </div>
                                 </div>
                             </div>
-                            <hr>
+
+                        </div>
+                        <div class="tab-pane fade" id="tab_2_3">
                             <div class="row">
                                 <div class="form-body">
                                     <div class="col-md-6">
@@ -343,7 +421,7 @@
                                                           id="id_btnModalPerk" data-toggle="modal">
                                                            <i class="fa fa-search fa-fw"/></i>
                                                        </a>
-                                    	           </span>
+                                    	            </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -423,7 +501,6 @@
                                     <div class="form-group">
                                         <textarea rows="2" cols="" name="keteranganCPA" id="id_keteranganCPA"
                                                   class="form-control input-sm kosongCPA"></textarea>
-
                                     </div>
                                     <div class="form-group">
                                         <input type="text" id="idTxtTempLoop" name="txtTempLoop"
@@ -504,11 +581,9 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-actions">
-
-                                        <button name="btnSimpan" class="btn blue" id="id_btnSimpan">
-                                            <!--<i class="fa fa-check"></i>--> Simpan
-                                        </button>
+                                        <button name="btnSimpan" class="btn blue" id="id_btnSimpan">Simpan</button>
                                         <button id="id_btnBatal" type="button" class="btn default">Batal</button>
+										<button id="id_btnCetak" type="button" class="btn green">Kwitansi</button>
                                     </div>
                                 </div>
 
@@ -858,8 +933,7 @@
                 $('#id_rumahId').val(idRumah);
                 $('#id_namaProyek').val(namaProyek);
                 getDescRumahSelled(idRumah);
-                getAngsInfo1(idPenj);
-                getAngsInfo2(idPenj,tglTrans);
+
                 //$('#').val();
                 $('#btnCloseModalDataRumah').trigger('click');
                 $('#id_rumahId').focus();
@@ -1083,10 +1157,12 @@
         readyToStart();
         tglTransStart();
         $('#id_body_data').empty();
-        $("#id_kodebayar").select2("val", "");
+        $("#id_kodebayartunai").select2("val", "");
+        $("#id_kodebayarnontunai").select2("val", "");
+        $("#id_carabayar").select2("val", "");
         kosongCPA();
     });
-
+	
     function getDescRumahSelled(idRumah) {
         ajaxModal();
         if (idRumah != '') {
@@ -1111,7 +1187,13 @@
                         $('#id_noId').val(data.no_id);
                         $('#id_noHp').val(data.no_hp);
                         $('#id_noTelp').val(data.no_telp);
+                        $('#id_GL').val(data.kode_perk);
+                        $('#id_namaGL').val(data.nama_perk);
                         $('#id_btnModalCust').attr('disabled', true);
+
+                        getAngsInfo1(data.id_penj);
+                        var tglTrans        = $('#id_tgltrans').val();
+                        getAngsInfo2(data.id_penj,tglTrans);
                         //hitungHargaJual();
                     } else {
                         alert('Data tidak ditemukan!');
@@ -1148,6 +1230,13 @@
                         $('#id_sdhDibayar').val(number_format(data.sdhdibayar,2));
                         $('#id_bakiDebet').val(number_format(data.sisaAngs,2));
                         $('#id_jmlBayar').val(number_format(data.tagihan,2));
+
+                        var kodePerk = $('#id_GL').val();
+                        var namaPerk = $('#id_namaGL').val();
+                        var Kr = $('#id_jmlBayar').val();
+                        var Db = 0;
+                        addRowKr(kodePerk, namaPerk, Db, Kr);
+
                     } else {
                         alert('Data tidak ditemukan!');
                         $('#id_btnBatal').trigger('click');
@@ -1155,7 +1244,29 @@
                 }, "json");
         }//if kd<>''
     }
-    $('#id_kodebayar').change(function () {
+    $('.divkodebayar').hide();
+    $("#id_carabayar").change(function () {
+        var caraBayar = $(this).val();
+        $('.divkodebayar').slideUp();
+        if (caraBayar == '5') {
+            $('#id_divkodebayartunai').slideDown();
+            $("#id_kodebayarnontunai").select2("val", "");
+        } else {
+            $('#id_divkodebayarnontunai').slideDown();
+            $("#id_kodebayartunai").select2("val", "");
+        }
+    });
+    $('#id_kodebayartunai').change(function () {
+        var kdBayar = $(this).val();
+        if (kdBayar == '') {
+            $('#id_kodebayar').val('');
+            $('#id_kodePerkBayar').val('');
+            $('#id_namaPerkBayar').val('');
+        } else {
+            getDescKodeBayar(kdBayar);
+        }
+    });
+    $('#id_kodebayarnontunai').change(function () {
         var kdBayar = $(this).val();
         if (kdBayar == '') {
             $('#id_kodebayar').val('');
@@ -1209,6 +1320,29 @@
         tr+='<td><input type="text" class="form-control nomor input-sm" id="id_tempKr'+x+'" name="tempKr'+x+'" readonly="true" value="'+number_format(Kr,2)+'"></td>';
         tr+= '</tr>';
 
+        i++;
+        $('#id_body_data').append(tr);
+        $('#idTxtTempLoop').val(i);
+    }
+    function addRowKr(kodePerk, namaPerk, Db, Kr) {
+        var i = $('#idTxtTempLoop').val();
+        var x = parseInt(i) + 1;
+        var kodeCflow = '';
+
+        tr = '<tr class="listdata" id="tr' + x + '">';
+        tr += '<td><input type="text" class="form-control input-sm" id="id_tempKodePerk' + x + '" name="tempKodePerk' + x + '" readonly="true" value="' + kodePerk + '"></td>';
+        tr += '<td><input type="text" class="form-control input-sm" id="id_tempKet' + x + '" name="tempKet' + x + '" readonly="true" value="' + namaPerk + '"></td>';
+        //tr += '<td><textarea class="form-control input-sm" id="id_tempKet' + x + '" name="tempKet' + x + '" readonly="true" >'+ namaPerkUM +'\n'+ data.keterangan +'</textarea></td>';
+        tr += '<td><input type="text" class="form-control input-sm" id="id_tempKodeCflow' + x + '" name="tempKodeCflow' + x + '" readonly="true" value="' + kodeCflow + '" ></td>';
+        tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempDb' + x + '" name="tempDb' + x + '" readonly="true" value="' + number_format(Db, 2) + '"></td>';
+        tr += '<td><input type="text" class="form-control nomor input-sm" id="id_tempKr' + x + '" name="tempKr' + x + '" readonly="true" value="' + number_format(Kr, 2) + '"></td>';
+        tr += '</tr>';
+
+        jumlahKr        = parseFloat(CleanNumber(Kr));
+        var totalKr     = parseFloat(CleanNumber($('#id_totalKr').val()));
+        var totalKr     = totalKr + jumlahKr;
+
+        $('#id_totalKr').val(number_format(totalKr,2));
         i++;
         $('#id_body_data').append(tr);
         $('#idTxtTempLoop').val(i);
@@ -1344,8 +1478,7 @@
         kosongCPA();
         btnCpaStart();
     });
-
-    function ajaxSubmit() {
+    function ajaxSubmit(){
         ajaxModal();
         $.ajax({
             type: "POST",
@@ -1354,15 +1487,15 @@
             data: dataString,
 
             success: function (data) {
-                $('#id_btnBatal').trigger('click');
+                //$('#id_btnBatal').trigger('click');
                 $('#id_ReloadRumah').trigger('click');
+				$('#id_kodetr').val(data.kode);
                 UIToastr.init(data.tipePesan, data.pesan);
             }
 
         });
         event.preventDefault();
     }
-
     $('#id_formPembayaran').submit(function (event) {
         dataString = $("#id_formPembayaran").serialize();
         //var aksiTab = $('#idTmpAksiTab').val();
@@ -1371,6 +1504,16 @@
             ajaxSubmit();
         } else {//if(r)
             return false;
+        }
+    });
+	$('#id_btnCetak').click(function(){
+        var idPenj = $('#id_idPenj').val();
+		var kodetr = $('#id_kodetr').val();
+		var idrumah = $('#id_rumahId').val();        
+		if (idPenj == ''){
+            alert('Tidak ada kode penjualan');
+        }else{
+            window.open("<?php echo base_url('pembayaran/cetak/'); ?>/" + idPenj +"/"+kodetr+"/"+idrumah, '_blank');
         }
     });
 

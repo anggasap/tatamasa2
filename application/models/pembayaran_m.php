@@ -13,10 +13,11 @@ class Pembayaran_m extends CI_Model {
 
 	public function getDescRumahSelled($idRumah)
 	{
-		$this->db->select ( 'r.*,c.*, mj.master_id, mj.tgl_trans, mj.harga' );
+		$this->db->select ( 'r.*,c.*, mj.master_id, mj.tgl_trans, mj.harga,c.kode_perk,p.nama_perk' );
 		$this->db->from('master_rumah r');
 		$this->db->join('master_jual mj', 'r.id_rumah=mj.id_rumah', 'LEFT');
 		$this->db->join('master_customer c', 'mj.id_cust=c.id_cust', 'LEFT');
+		$this->db->join('perkiraan p', 'c.kode_perk=p.kode_perk', 'LEFT');
 		$this->db->where ( 'r.id_rumah', $idRumah );
 		$query = $this->db->get ();
 		if($query->num_rows()== '1'){
