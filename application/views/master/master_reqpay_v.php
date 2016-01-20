@@ -387,7 +387,7 @@
                                     <div class="form-group">
                                         <input type="text" id="idTxtTempLoop" name="txtTempLoop" class="form-control nomor1 hidden">
                                         <input type="text" id="idTempUbahCPA" name="txtTempUbahCPA" class="form-control nomor1 hidden">
-										<input type="text" id="idTxtCekLoop" value="0" name="txtCekLoop" class="form-control nomor1">
+										<input type="text" id="idTxtCekLoop" value="0" name="txtCekLoop" class="form-control nomor1 hidden">
                                         <input type="text" id="idTempJumlahCPA" name="txtTempJumlahCPA" class="form-control nomor hidden">
                                         <a href="javascript:;" class="btn blue btn-sm" id="id_btnAddCpa">
                                             <i class="fa fa-plus"></i>

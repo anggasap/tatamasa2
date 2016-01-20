@@ -1192,8 +1192,8 @@
                     return;
                 }
                 initTableRp();
-                initTableRm();
-                initTableSt();
+                //initTableRm();
+                //initTableSt();
                 initTableCf();
             }
         };

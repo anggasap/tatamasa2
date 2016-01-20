@@ -147,8 +147,8 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label>Tgl Jurnal</label>
-                                                    <input id="id_tgltrans" class="form-control  input-sm"
-                                                           type="text" name="tgltrans" readonly/>
+                                                    <input id="id_tgltrans" class="form-control date-picker input-sm"
+                                                           type="text" name="tgltrans" data-date-format="dd-mm-yyyy" readonly/>
 
                                                 </div>
                                                 <div class="col-md-6">
@@ -1294,6 +1294,11 @@
     readyToStart();
     tglTransStart();
     btnCpaStart();
+    $(document).keyup(function(e) {
+        if(e.which == 120) {
+            $('#id_tgltrans').attr("readonly", false);
+        }
+    });
     $('.request_in').hide();
     $("#id_kodeJurnal").change(function () {
         var kodeJurnal = $(this).val();

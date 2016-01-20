@@ -12,7 +12,7 @@
             <div class="portlet-title">
                 <div class="caption">
                     <i class="fa fa-cogs  font-red-sunglo"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase">Accrue Jadwal</span>
+                    <span class="caption-subject font-red-sunglo bold uppercase"><?php echo $menu_nama; ?></span>
                 </div>
                 <div class="actions">
                     <a class="btn btn-icon-only btn-default btn-sm fullscreen" href="javascript:;"

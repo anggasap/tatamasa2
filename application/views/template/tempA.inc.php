@@ -28,17 +28,20 @@
 		<!-- END RESPONSIVE MENU TOGGLER -->
 		<!-- BEGIN PAGE ACTIONS -->
 		<!-- DOC: Remove "hide" class to enable the page header actions -->
-		<!-- <div class="page-actions">
+		<div class="page-actions">
 			<div class="btn-group">
 				<button type="button" class="btn red-haze btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-				<span class="hidden-sm hidden-xs">Actions&nbsp;</span><i class="fa fa-angle-down"></i>
+					<i class="fa fa-user">&nbsp; &nbsp;</i><span class="hidden-sm hidden-xs">
+						<input type="hidden" value="<?php  echo $this->session->userdata('id_kyw'); ?>">
+						<?php echo $this->session->userdata('id_kyw'); ?>
+						&nbsp;</span><i class="fa fa-angle-down"></i>
 				</button>
 				<ul class="dropdown-menu" role="menu">
 					<li>
-						<a href="#">
-						<i class="icon-docs"></i> New Post </a>
+						<a href="<?php echo site_url('main/logout');?>">
+						<i class="icon-key"></i> Logout </a>
 					</li>
-					<li>
+					<!--<li>
 						<a href="#">
 						<i class="icon-tag"></i> New Comment </a>
 					</li>
@@ -57,10 +60,10 @@
 						<a href="#">
 						<i class="icon-users"></i> Feedbacks <span class="badge badge-danger">2</span>
 						</a>
-					</li>
+					</li>-->
 				</ul>
 			</div>
-		</div> -->
+		</div>
 		<!-- END PAGE ACTIONS -->
 		<!-- BEGIN PAGE TOP -->
 		<div class="page-top">
@@ -74,36 +77,36 @@
 					</li>
 					<!-- BEGIN NOTIFICATION DROPDOWN -->
 					<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-					<li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
+					<!--<li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<i class="icon-bell"></i>
+							<i class="icon-bell"></i>
 						<span class="badge badge-success">
-                            <input type="hidden" value="<?php  echo $this->session->userdata('id_kyw'); ?>">
-						<?php echo $this->session->userdata('id_kyw'); ?> </span>
+                            <input type="hidden" value="<?php /* echo $this->session->userdata('id_kyw'); */?>">
+							<?php /*echo $this->session->userdata('id_kyw'); */?> </span>
 						</a>
 
-					</li>
+					</li>-->
 					<!-- END NOTIFICATION DROPDOWN -->
-					<li class="separator hide">
-					</li>
-                    <!-- BEGIN INBOX DROPDOWN -->
-                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                    <li class="dropdown dropdown-extended dropdown-inbox dropdown-dark" id="header_inbox_bar">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <i class="icon-user"></i>
-						<span class="badge badge-warning" id="idSessNamaKyw">
-						<?php echo $this->session->userdata('namaKyw'); ?> </span>
-                        </a>
-
-                    </li>
-                    <!-- END INBOX DROPDOWN -->
-                    <li class="separator hide">
-                    </li>
+					<!--<li class="separator hide">
+					</li>-->
 					<!-- BEGIN INBOX DROPDOWN -->
 					<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 					<li class="dropdown dropdown-extended dropdown-inbox dropdown-dark" id="header_inbox_bar">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<i class="icon-badge"></i>
+							<i class="icon-user"></i>
+						<span class="badge badge-warning" id="idSessNamaKyw">
+						<?php echo $this->session->userdata('namaKyw'); ?> </span>
+						</a>
+
+					</li>
+					<!-- END INBOX DROPDOWN -->
+					<li class="separator hide">
+					</li>
+					<!-- BEGIN INBOX DROPDOWN -->
+					<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+					<li class="dropdown dropdown-extended dropdown-inbox dropdown-dark" id="header_inbox_bar">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+							<i class="icon-badge"></i>
 						<span class="badge badge-danger">
 						<?php echo $this->session->userdata('usergroup_desc'); ?> </span>
 						</a>
@@ -116,7 +119,7 @@
 					<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 					<li class="dropdown dropdown-extended dropdown-tasks dropdown-dark" id="header_task_bar">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<i class="icon-calendar"></i>
+							<i class="icon-calendar"></i>
 						<span class="badge badge-primary" id="id_sessTgltrans">
 						<?php echo $this->session->userdata('tgl_d'); ?> </span>
 						</a>
@@ -125,20 +128,18 @@
 					<!-- END TODO DROPDOWN -->
 					<!-- BEGIN USER LOGIN DROPDOWN -->
 					<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-					<li class="dropdown dropdown-user dropdown-dark">
+					<!--<li class="dropdown dropdown-user dropdown-dark">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<span class="username username-hide-on-mobile">
-						<?php echo $this->session->userdata('namaFull'); ?> </span>
-						<!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
-						<img alt="" class="img-circle" src="<?php echo base_url('metronic/admin/layout4/img/avatar9.jpg'); ?>"/>
+						<span class="username username-hide-on-mobile"></span>
+							<img alt="" class="img-circle" src="<?php /*echo base_url('metronic/admin/layout4/img/avatar9.jpg'); */?>"/>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-default">
 							<li id="id_btnLogout">
-								<a href="<?php echo site_url('main/logout');?>">
-								<i class="icon-key"></i> Log Out </a>
+								<a href="<?php /*echo site_url('main/logout');*/?>">
+									<i class="icon-key"></i> Log Out </a>
 							</li>
 						</ul>
-					</li>
+					</li>-->
 					<!-- END USER LOGIN DROPDOWN -->
 				</ul>
 			</div>
@@ -149,10 +150,11 @@
 	<!-- END HEADER INNER -->
 </div>
 <!-- END HEADER -->
-<div class="clearfix modal_json">
+<div class="clearfix ">
 </div>
+<div class="modal_json"></div>
 <!-- BEGIN CONTAINER -->
-<div class="page-container">
+<div class="page-container ">
 	<!-- BEGIN SIDEBAR -->
 	<div class="page-sidebar-wrapper">
 		<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
@@ -168,13 +170,13 @@
 			<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
 				<li class="menu_root" id="menu_root_0">
 					<a href="<?php echo base_url('main/'); ?>" id="id_a_menu_0">
-					<i class="icon-home"></i>
-					<span class="title">Home</span>
+						<i class="icon-home"></i>
+						<span class="title">Home</span>
 					</a>
 				</li>
-                <?php
+				<?php
 				$i=2;
-					foreach($multilevel as $data){
+				foreach($multilevel as $data){
 					echo '<li class="menu_root" id="menu_root_'.$data['id'].'">';
 					echo '<a href="javascript:;"><i class="icon-folder"></i>';
 					echo '<span class="title">'.$data['nama'].'</span>' ;
@@ -185,7 +187,7 @@
 					echo '</ul>';
 					echo '</li>';
 					$i++;
-					}
+				}
 				?>
 			</ul>
 			<!-- END SIDEBAR MENU -->
@@ -204,7 +206,7 @@
 							<h4 class="modal-title">Modal title</h4>
 						</div>
 						<div class="modal-body">
-							 Widget settings form goes here
+							Widget settings form goes here
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn blue">Save changes</button>
@@ -219,4 +221,3 @@
 			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 			<!-- BEGIN PAGE HEADER-->
 			<!-- BEGIN PAGE HEAD -->
-			

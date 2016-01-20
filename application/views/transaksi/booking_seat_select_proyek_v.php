@@ -64,14 +64,7 @@
                             <div class="form-actions">
 
                                 <button name="btnSimpan" class="btn blue" id="id_btnSimpan">
-                                    <!--<i class="fa fa-check"></i>--> Simpan
-                                </button>
-                                <button name="btnUbah" onclick="" class="btn yellow" id="id_btnUbah">
-                                    <!--<i class="fa fa-edit"></i>--> Ubah
-                                </button>
-                                <button name="btnHapus" class="btn red" id="id_btnHapus">
-                                    <!--<i class="fa fa-trash"></i>-->
-                                    Hapus
+                                    <!--<i class="fa fa-check"></i>--> Submit
                                 </button>
                                 <button id="id_btnBatal" type="reset" class="btn default">Batal</button>
                             </div>

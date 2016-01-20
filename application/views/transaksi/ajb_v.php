@@ -33,7 +33,7 @@
                     
                     </span>
                 </div>
-                <ul class="nav nav-tabs">
+                <ul class="nav  nav-pills">
                     <li class="active">
                         <a href="#tab_2_1" data-toggle="tab" id="navitab_2_1">
                             Info Rumah & Customer </a>

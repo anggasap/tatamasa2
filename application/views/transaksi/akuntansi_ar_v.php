@@ -57,8 +57,8 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label>Tgl Jurnal</label>
-                                                    <input id="id_tgltrans" class="form-control  input-sm"
-                                                           type="text" name="tgltrans" readonly/>
+                                                    <input id="id_tgltrans" class="form-control date-picker  input-sm"
+                                                           type="text" name="tgltrans" data-date-format="dd-mm-yyyy" readonly/>
 
                                                 </div>
                                                 <div class="col-md-6">
@@ -381,7 +381,7 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="text" id="idTxtTempLoop" name="txtTempLoop"
-                                               class="form-control nomor1 ">
+                                               class="form-control nomor1 hidden">
                                         <input type="text" id="idTxtTempJnsKode" name="txtTempJnsKode"
                                                class="form-control nomor1 hidden">
                                         <input type="text" id="idTempUbahCPA" name="txtTempUbahCPA"
@@ -1366,7 +1366,7 @@
                 }
                 initTableBk();
                 initTableRm();
-                initTableAJB();
+                //initTableAJB();
                 initTablePerk();
                 initTableCf();
             }
@@ -1378,6 +1378,11 @@
     readyToStart();
     tglTransStart();
     btnCpaStart();
+    $(document).keyup(function(e) {
+        if(e.which == 120) {
+            $('#id_tgltrans').attr("readonly", false);
+        }
+    });
     $('.request_in').hide();
     $("#id_kodeJurnal").change(function () {
         var kodeJurnal = $(this).val();
