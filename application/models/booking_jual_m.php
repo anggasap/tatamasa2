@@ -33,7 +33,7 @@ class Booking_jual_m extends CI_Model {
 	{
 		$this->db->select('r.*');
 		$this->db->from('master_customer r');
-		$this->db->where ( 'r.id_cust', $idRumah );
+		$this->db->where ( 'r.id_cust', $idcust );
 //		$this->db->where ( 'T.STATUS_AKTIF <>', 3 );
 		$query = $this->db->get ();
 		if($query->num_rows()== '1'){
@@ -62,6 +62,15 @@ class Booking_jual_m extends CI_Model {
 	public function getRumahAll()
 	{
 		$sql="SELECT r.*,p.nama_proyek from master_rumah r left join master_proyek p on r.id_proyek = p.id_proyek where status_jual = 0 or status_jual = 1 order by r.harga desc";
+		$query=$this->db->query($sql);
+		return $query->result(); // returning rows, not row
+	}
+	public function getPenjAll()
+	{
+		$sql="select mj.master_id,mr.id_rumah,mc.id_cust,mj.tgl_trans,mj.harga,mj.booking,mj.status_jual,mj.keterangan,mc.nama_cust,
+			  mr.nama_rumah,mp.nama_proyek from master_jual mj left join master_customer mc on mj.id_cust = mc.id_cust
+			  left join master_rumah mr on mj.id_rumah = mr.id_rumah left join master_proyek mp on mr.id_proyek = mp.id_proyek
+			  where mj.status_jual = '1'";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}
@@ -133,6 +142,19 @@ class Booking_jual_m extends CI_Model {
 		$this->db->trans_begin();
 		$query1 = $this->db->where('master_id', $idPenj);
 		$query2 = $this->db->update('master_jual', $data);
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return false;
+		}
+		else{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+	function ubahRumah($data,$idRumah){
+		$this->db->trans_begin();
+		$query1 = $this->db->where('id_rumah', $idRumah);
+		$query2 = $this->db->update('master_rumah', $data);
 		if ($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
 			return false;

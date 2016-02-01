@@ -10,6 +10,7 @@ class Akuntansi extends CI_Controller
         $this->load->model('home_m');
         $this->load->model('master_advance_m');
         $this->load->model('akuntansi_m');
+        $this->load->model('setting_laporan_m');
         session_start();
     }
 
@@ -428,18 +429,22 @@ class Akuntansi extends CI_Controller
             redirect('main/index');
         }else{
             if($type == 'RP'){
+                $data['info'] = $this->setting_laporan_m->getAllSetting();
                 $data['all'] = $this->akuntansi_m->getAp($idJurnal);
                 $data['detail'] = $this->akuntansi_m->getDetailAp($idJurnal);
                 $this->load->view('cetak/cetak_ap', $data);
             }elseif($type == 'RM'){
+                $data['info'] = $this->setting_laporan_m->getAllSetting();
                 $data['all'] = $this->akuntansi_m->getApRp($idJurnal);
                 $data['detail'] = $this->akuntansi_m->getDetailAp($idJurnal);
                 $this->load->view('cetak/cetak_ap_reimpay', $data);
             }elseif($type == 'ST'){
+                $data['info'] = $this->setting_laporan_m->getAllSetting();
                 $data['all'] = $this->akuntansi_m->getApSt($idJurnal);
                 $data['detail'] = $this->akuntansi_m->getDetailAp($idJurnal);
                 $this->load->view('cetak/cetak_ap_sp', $data);
             }else{
+                $data['info'] = $this->setting_laporan_m->getAllSetting();
                 $data['all'] = $this->akuntansi_m->getAp($idJurnal);
                 $data['detail'] = $this->akuntansi_m->getDetailAp($idJurnal);
                 $this->load->view('cetak/cetak_ap', $data);

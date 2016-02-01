@@ -9,7 +9,7 @@ class Booking_jual extends CI_Controller
 
         $this->load->model('home_m');
         $this->load->model('booking_jual_m');
-        //$this->load->model('booking_m');
+        $this->load->model('master_rumah_m');
         $this->load->library('fpdf');
         session_start();
     }
@@ -95,7 +95,28 @@ class Booking_jual extends CI_Controller
 
         $this->output->set_output(json_encode($array));
     }
-
+    public function getPenjAll(){
+        $this->CI =& get_instance();//and a.kcab_id<>'1100'
+        $rows = $this->booking_jual_m->getPenjAll();
+        $data['data'] = array();
+        foreach( $rows as $row ) {
+            $harga = number_format(trim($row->harga),2);
+            $booking = number_format(trim($row->booking),2);
+            $tgl = date('d-m-Y', strtotime($row->tgl_trans));
+            $array = array(
+                'kode_penj' => trim($row->master_id),
+                'id_rumah' => trim($row->id_rumah),
+                'id_cust' => trim($row->id_cust),
+                'nama_proyek' => trim($row->nama_proyek),
+                'nama_rumah' => trim($row->nama_rumah),
+                'nama_customer' => trim($row->nama_cust),
+                'harga' => $harga,
+                'booking' => $booking
+            );
+            array_push($data['data'],$array);
+        }
+        $this->output->set_output(json_encode($data));
+    }
     public function getRumahAll()
     {
         $this->CI =& get_instance();//and a.kcab_id<>'1100'
@@ -150,6 +171,29 @@ class Booking_jual extends CI_Controller
             $this->template->load('template/template3', 'transaksi/booking_jual_v', $data);
         }
     }
+    function booked($idRumah){
+        $menuId = $this->home_m->get_menu_id('booking/home');
+        $data['menu_id'] = $menuId[0]->menu_id;
+        $data['menu_parent'] = $menuId[0]->parent;
+        $data['menu_nama'] = $menuId[0]->menu_nama;
+        $this->auth->restrict ($data['menu_id']);
+        $this->auth->cek_menu ( $data['menu_id'] );
+        $data['info_rumah'] = $this->master_rumah_m->getDescRumah( $idRumah );
+
+        if(isset($_POST["btnSimpan"])){
+            $this->simpan();
+        }elseif(isset($_POST["btnUbah"])){
+            $this->ubah();
+        }elseif(isset($_POST["btnHapus"])){
+            $this->hapus();
+        }else{
+            $data['multilevel'] = $this->user_m->get_data(0,$this->session->userdata('usergroup'));
+            $data['menu_all'] = $this->user_m->get_menu_all(0);
+
+            $this->template->set ( 'title', $data['menu_nama'] );
+            $this->template->load ( 'template/template3', 'transaksi/booking_jual_seat_selected_home_v',$data );
+        }
+    }
 
     function simpan()
     {
@@ -186,6 +230,21 @@ class Booking_jual extends CI_Controller
                 'pesan' =>'Rumah gagal dibooking.<br>Silahkan lengkapi data master rumah terlebih dahulu.'
             );
         }else{
+            // 1. Ubah status master Rumah
+            $data_master_rumah = array(
+                //'booking'		    =>$hargaBooking,
+                'status_jual'		=>'1'
+                /*
+                 * 0 default non aktif
+                 * 1 booking
+                 * 2 aktif
+                 * 3 lunas
+                 * 4 batal
+                 * */
+            );
+
+            $model_master = $this->booking_jual_m->ubahRumah($data_master_rumah,$rumahId);
+
             if ($tipePembayaran == '3') {
                 $data_master_jual = array(
                     'master_id' => $idPenj,
@@ -295,6 +354,26 @@ class Booking_jual extends CI_Controller
             $data['laporan'] = 'Laporan Penjualan Tanggal ' . $tglTrans;
             $data['user'] = $this->session->userdata('username');
             $this->load->view('cetak/cetak_laporan_penjualan', $data);
+        }
+    }
+    function cetakSPR($kodePenj, $idCust, $idRumah)
+    {
+        if ($this->auth->is_logged_in() == false) {
+            redirect('main/index');
+        } else {
+
+            $tglTrans = date('d-m-Y');
+            $data['penj'] = $this->booking_jual_m->getDescRumahBooked($idRumah);
+            $data['tglTrans'] = $this->session->userdata('tgl_y');;
+            $data['rows3'] = $this->booking_jual_m->getAngsInfo($kodePenj);
+            define('FPDF_FONTPATH', $this->config->item('fonts_path'));
+            $data['image1'] = base_url('metronic/img/tatamasa_logo.jpg');
+            $data['nama'] = 'PT BERKAH GRAHA MANDIRI';
+            $data['tower'] = 'Beltway Office Park Tower Lt. 5';
+            $data['alamat'] = 'Jl. TB Simatupang No. 41 - Pasar Minggu - Jakarta Selatan';
+            $data['laporan'] = 'SURAT PEMESANAN UNIT RUMAH ';
+            $data['user'] = $this->session->userdata('username');
+            $this->load->view('cetak/cetak_laporan_spr', $data);
         }
     }
 }

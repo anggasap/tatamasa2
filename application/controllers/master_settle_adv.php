@@ -10,6 +10,7 @@ class Master_settle_adv extends CI_Controller
 		$this->load->model('home_m');
 		$this->load->model('master_settle_adv_m');
 		$this->load->model('master_advance_m');
+		$this->load->model('setting_laporan_m');
 		session_start ();
 	}
 	public function index(){
@@ -507,24 +508,26 @@ class Master_settle_adv extends CI_Controller
         $this->output->set_output(json_encode($array));
     }
 	function cetak($idSettle)
-    {
-        if ($this->auth->is_logged_in() == false) {
-            redirect('main/index');
-        } else {
-            $data['settle'] = $this->master_settle_adv_m->getDescSettle($idSettle);
-            $this->load->view('cetak/cetak_settlement', $data);
-        }
-    }
+	{
+		if ($this->auth->is_logged_in() == false) {
+			redirect('main/index');
+		} else {
+			$data['info'] = $this->setting_laporan_m->getAllSetting();
+			$data['settle'] = $this->master_settle_adv_m->getDescSettle($idSettle);
+			$this->load->view('cetak/cetak_settlement', $data);
+		}
+	}
 	function cetak_cpa($idSettle)
-    {
-        if($this->auth->is_logged_in() == false){
-            redirect('main/index');
-        }else{
-            $data['settle'] = $this->master_settle_adv_m->cetak_cpa($idSettle);
-            $data['detail'] = $this->master_settle_adv_m->cetak_cpa_detail($idSettle);
-            $this->load->view('cetak/cetak_cpa_settle', $data);
-        }
-    }
+	{
+		if($this->auth->is_logged_in() == false){
+			redirect('main/index');
+		}else{
+			$data['info'] = $this->setting_laporan_m->getAllSetting();
+			$data['settle'] = $this->master_settle_adv_m->cetak_cpa($idSettle);
+			$data['detail'] = $this->master_settle_adv_m->cetak_cpa_detail($idSettle);
+			$this->load->view('cetak/cetak_cpa_settle', $data);
+		}
+	}
 }
 
 /* End of file sec_user.php */

@@ -9,6 +9,7 @@ class Budgeti_perk extends CI_Controller
 
 		$this->load->model('home_m');
 		$this->load->model('budgeti_perk_m');
+		$this->load->model('setting_laporan_m');
         $this->load->library('fpdf');
 		session_start ();
 	}
@@ -119,22 +120,29 @@ class Budgeti_perk extends CI_Controller
     	}
     	$this->output->set_output(json_encode($array));
     }
-    function cetak($tahun,$idProyek){
+	function cetak($tahun,$idProyek){
 		if($this->auth->is_logged_in() == false){
-    		redirect('main/index');
-    	}else{
+			redirect('main/index');
+		}else{
+			$info = $this->setting_laporan_m->getAllSetting();
+			foreach($info as $i){
+				$nama = $i->pt;
+				$kantor = $i->kantor;
+				$alamat = $i->alamat;
+			}
+
 			define('FPDF_FONTPATH',$this->config->item('fonts_path'));
-			$data['image1'] = base_url('metronic/img/tatamasa_logo.jpg');	
-			$data['nama'] = 'PT BERKAH GRAHA MANDIRI';
-			$data['tower'] = 'Beltway Office Park Tower Lt. 5';
-			$data['alamat'] = 'Jl. TB Simatupang No. 41 - Pasar Minggu - Jakarta Selatan';
-            $proyek = $this->budgeti_perk_m->getNamaProyek2($idProyek);
+			$data['image1'] = base_url('metronic/img/tatamasa_logo.jpg');
+			$data['nama'] = trim($nama);
+			$data['tower'] = trim($kantor);
+			$data['alamat'] = trim($alamat);
+			$proyek = $this->budgeti_perk_m->getNamaProyek2($idProyek);
 			$data['laporan'] = 'Laporan Budget Perkiraan - '.$proyek.' - '.$tahun;
 			$data['user'] = $this->session->userdata('username');
 			$data['all'] = $this->budgeti_perk_m->getBudgetPerk($tahun,$idProyek);
 			$data['total'] = $this->budgeti_perk_m->getTotalPerk($tahun,$idProyek);
 			$this->load->view('cetak/cetak_budget_perkiraan',$data);
-    	}
+		}
 	}
 }
 

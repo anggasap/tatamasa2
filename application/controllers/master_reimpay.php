@@ -10,6 +10,7 @@ class Master_reimpay extends CI_Controller
 		$this->load->model('home_m');
 		$this->load->model('master_reimpay_m');
 		$this->load->model('master_advance_m');
+		$this->load->model('setting_laporan_m');
 		session_start ();
 	}
 	function index(){
@@ -435,14 +436,15 @@ class Master_reimpay extends CI_Controller
     	$this->output->set_output(json_encode($array));
     }
 	function cetak($idReimPay)
-    {
-    	if($this->auth->is_logged_in() == false){
-    		redirect('main/index');
-    	}else{
-    		$data['reimpay'] = $this->master_reimpay_m->getDescReimpay($idReimPay);
-    		$this->load->view('cetak/reimbursment',$data);
-    	}
-    }
+	{
+		if($this->auth->is_logged_in() == false){
+			redirect('main/index');
+		}else{
+			$data['info'] = $this->setting_laporan_m->getAllSetting();
+			$data['reimpay'] = $this->master_reimpay_m->getDescReimpay($idReimPay);
+			$this->load->view('cetak/reimbursment',$data);
+		}
+	}
 	function sign(){
         $this->CI 	=& get_instance();
         $idReimpay	= trim($this->input->post('idReimpay'));
@@ -468,15 +470,16 @@ class Master_reimpay extends CI_Controller
         $this->output->set_output(json_encode($array));
     }
 	function cetak_cpa($idReimPay)
-    {
-        if($this->auth->is_logged_in() == false){
-            redirect('main/index');
-        }else{
-            $data['advance'] = $this->master_reimpay_m->cetak_cpa($idReimPay);
-            $data['detail'] = $this->master_reimpay_m->cetak_cpa_detail($idReimPay);
-            $this->load->view('cetak/cetak_cpa_reimpay', $data);
-        }
-    }
+	{
+		if($this->auth->is_logged_in() == false){
+			redirect('main/index');
+		}else{
+			$data['info'] = $this->setting_laporan_m->getAllSetting();
+			$data['advance'] = $this->master_reimpay_m->cetak_cpa($idReimPay);
+			$data['detail'] = $this->master_reimpay_m->cetak_cpa_detail($idReimPay);
+			$this->load->view('cetak/cetak_cpa_reimpay', $data);
+		}
+	}
 }
 
 /* End of file sec_user.php */

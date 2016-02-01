@@ -10,6 +10,7 @@ class Jurnal_adv extends CI_Controller
 		$this->load->model('home_m');
 		$this->load->model('master_advance_m');
 		$this->load->model('jurnal_adv_m');
+		$this->load->model('setting_laporan_m');
 		session_start ();
 	}
 	public function index(){
@@ -321,6 +322,7 @@ class Jurnal_adv extends CI_Controller
     	if($this->auth->is_logged_in() == false){
     		redirect('main/index');
     	}else{
+			$data['info'] = $this->setting_laporan_m->getAllSetting();
     		$data ['Jadvance'] = $this->jurnal_adv_m->getJadvById($idJadv);
     		$this->load->view('cetak/cetak_perintah_pembayaran_advance',$data);
     	}

@@ -10,6 +10,7 @@ class Master_perkiraan extends CI_Controller
 
 		$this->load->model('home_m');
 		$this->load->model('master_perkiraan_m');
+		$this->load->model('setting_laporan_m');
         $this->load->library('fpdf');
 		session_start ();
 	}
@@ -18,11 +19,9 @@ class Master_perkiraan extends CI_Controller
 			$this->login();
 		}else{
 			$data['multilevel'] = $this->user_m->get_data(0,$this->session->userdata('usergroup'));
-			
 			$this->template->set ( 'title', 'Home' );
 			$this->template->load ( 'template/template1', 'global/index',$data );
 		}
-		
 	}
 	
 	function home(){
@@ -211,20 +210,26 @@ class Master_perkiraan extends CI_Controller
     function updatekodeinduk(){
     	$this->master_perkiraan_m->updatekodeinduk();
     }
-    function cetak(){
+	function cetak(){
 		if($this->auth->is_logged_in() == false){
-    		redirect('main/index');
-    	}else{
+			redirect('main/index');
+		}else{
+			$info = $this->setting_laporan_m->getAllSetting();
+			foreach($info as $i){
+				$nama = $i->pt;
+				$kantor = $i->kantor;
+				$alamat = $i->alamat;
+			}
 			define('FPDF_FONTPATH',$this->config->item('fonts_path'));
-			$data['image1'] = base_url('metronic/img/tatamasa_logo.jpg');	
-			$data['nama'] = 'PT BERKAH GRAHA MANDIRI';
-			$data['tower'] = 'Beltway Office Park Tower Lt. 5';
-			$data['alamat'] = 'Jl. TB Simatung No. 41 - Pasar Minggu - Jakarta Selatan';
+			$data['image1'] = base_url('metronic/img/logo_berkah.png');
+			$data['nama'] = trim($nama);
+			$data['tower'] = trim($kantor);
+			$data['alamat'] = trim($alamat);
 			$data['laporan'] = 'Laporan Perkiraan';
 			$data['user'] = $this->session->userdata('username');
 			$data['all'] = $this->master_perkiraan_m->getAllPerkiraan();
 			$this->load->view('cetak/cetak_perkiraan_b',$data);
-    	}
+		}
 	}
 }
 

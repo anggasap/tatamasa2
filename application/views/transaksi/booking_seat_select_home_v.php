@@ -56,7 +56,7 @@
                                     <div class="tile bg-grey-cascade client-item" title="This is my tooltip">
                                         <input value="<?php echo $row->status_jual; ?>" class="hidden">
                                         <div class="tile-body">
-                                            <img href="<?php echo base_url('booking/booked/') . '/' . $row->id_rumah; ?>"
+                                            <img href="<?php echo base_url('booking_jual/booked/') . '/' . $row->id_rumah; ?>"
                                                  src="<?php echo base_url('metronic/img/home_av.png'); ?>"
                                                  alt="index.html" class="pull-right">
                                             <h5><?php echo $row->id_rumah; ?></h5>

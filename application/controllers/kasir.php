@@ -11,6 +11,7 @@ class Kasir extends CI_Controller
         $this->load->model('master_advance_m');
         $this->load->model('kasir_m');
         $this->load->model('akuntansi_m');
+        $this->load->model('setting_laporan_m');
         session_start();
     }
 
@@ -467,18 +468,22 @@ class Kasir extends CI_Controller
             redirect('main/index');
         }else{
             if($type == 'AV'){
+                $data['info'] = $this->setting_laporan_m->getAllSetting();
                 $data['all'] = $this->kasir_m->getDataCetak($idJurnal);
                 $data['detail'] = $this->kasir_m->getDetailDataCetak($idJurnal);
                 $this->load->view('cetak/cetak_pembayaran', $data);
             }elseif($type == 'RP'){
+                $data['info'] = $this->setting_laporan_m->getAllSetting();
                 $data['all'] = $this->kasir_m->getDataCetakRp($idJurnal);
                 $data['detail'] = $this->kasir_m->getDetailDataCetak($idJurnal);
                 $this->load->view('cetak/cetak_pembayaran_rp', $data);
             }elseif($type == 'RM'){
+                $data['info'] = $this->setting_laporan_m->getAllSetting();
                 $data['all'] = $this->kasir_m->getDataCetakRm($idJurnal);
                 $data['detail'] = $this->kasir_m->getDetailDataCetak($idJurnal);
                 $this->load->view('cetak/cetak_pembayaran_rm', $data);
             }else{
+                $data['info'] = $this->setting_laporan_m->getAllSetting();
                 $data['all'] = $this->kasir_m->getDataCetakSt($idJurnal);
                 $data['detail'] = $this->kasir_m->getDetailDataCetak($idJurnal);
                 $this->load->view('cetak/cetak_pembayaran_st', $data);

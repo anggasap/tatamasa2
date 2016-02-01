@@ -10,6 +10,7 @@ class Master_reqpay extends CI_Controller
 		$this->load->model('home_m');
 		$this->load->model('master_reqpay_m');
 		$this->load->model('master_advance_m');
+		$this->load->model('setting_laporan_m');
 		session_start ();
 	}
 	public function index(){
@@ -17,11 +18,9 @@ class Master_reqpay extends CI_Controller
 			$this->login();
 		}else{
 			$data['multilevel'] = $this->user_m->get_data(0,$this->session->userdata('usergroup'));
-			
 			$this->template->set('title','Home');
 			$this->template->load('template/template1','global/index',$data );
 		}
-		
 	}
 	
 	function home(){
@@ -281,7 +280,6 @@ class Master_reqpay extends CI_Controller
 		$bulan = date('m', strtotime($tglTrans));//$tglTrans->format("m");
 		$tahun = date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
 
-
 		$modelidReqpay = $this->master_reqpay_m->getIdReqpay($bulan,$tahun);
         $data = array(
             'id_reqpay'		      		=> $modelidReqpay,
@@ -496,24 +494,26 @@ class Master_reqpay extends CI_Controller
         $this->output->set_output(json_encode($array));
     }
 	function cetak($idReqPay)
-    {
-    	if($this->auth->is_logged_in() == false){
-    		redirect('main/index');
-    	}else{
-    		$data['reqpay'] = $this->master_reqpay_m->getDescReqpay($idReqPay);
-    		$this->load->view('cetak/request_for_payment',$data);
-    	}
-    }
+	{
+		if($this->auth->is_logged_in() == false){
+			redirect('main/index');
+		}else{
+			$data['info'] = $this->setting_laporan_m->getAllSetting();
+			$data['reqpay'] = $this->master_reqpay_m->getDescReqpay($idReqPay);
+			$this->load->view('cetak/request_for_payment',$data);
+		}
+	}
 	function cetak_cpa($idReqPay)
-    {
-        if ($this->auth->is_logged_in() == false) {
-            redirect('main/index');
-        }else{
-            $data['advance'] = $this->master_reqpay_m->cetak_cpa($idReqPay);
-            $data['detail'] = $this->master_reqpay_m->cetak_cpa_detail($idReqPay);
-            $this->load->view('cetak/cetak_cpa_rfp', $data);
-        }
-    }
+	{
+		if ($this->auth->is_logged_in() == false) {
+			redirect('main/index');
+		}else{
+			$data['info'] = $this->setting_laporan_m->getAllSetting();
+			$data['advance'] = $this->master_reqpay_m->cetak_cpa($idReqPay);
+			$data['detail'] = $this->master_reqpay_m->cetak_cpa_detail($idReqPay);
+			$this->load->view('cetak/cetak_cpa_rfp', $data);
+		}
+	}
 
 }
 

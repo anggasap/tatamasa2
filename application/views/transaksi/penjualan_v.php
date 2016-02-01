@@ -1194,6 +1194,16 @@
             window.open("<?php echo base_url('penjualan/cetak/'); ?>/" + idPenj +"/"+idCust+"/"+idrumah, '_blank');
         }
     });
+    $('#id_btnCetak').click(function(){
+        var idPenj = $('#id_idPenj').val();
+        var idCust = $('#id_customerId').val();
+        var idrumah = $('#id_rumahId').val();
+        if (idPenj == ''){
+            alert('Tidak ada kode penjualan');
+        }else{
+            window.open("<?php echo base_url('penjualan/cetak/'); ?>/" + idPenj +"/"+idCust+"/"+idrumah, '_blank');
+        }
+    });
 </script>
 
 

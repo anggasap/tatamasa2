@@ -10,6 +10,7 @@ class Master_cflow extends CI_Controller
 
 		$this->load->model('home_m');
 		$this->load->model('master_cflow_m');
+		$this->load->model('setting_laporan_m');
         $this->load->library('fpdf');
 		session_start ();
 	}
@@ -206,20 +207,26 @@ class Master_cflow extends CI_Controller
     function updatekodeinduk(){
     	$this->master_cflow_m->updatekodeinduk();
     }
-    function cetak(){
+	function cetak(){
 		if($this->auth->is_logged_in() == false){
-    		redirect('main/index');
-    	}else{
+			redirect('main/index');
+		}else{
+			$info = $this->setting_laporan_m->getAllSetting();
+			foreach($info as $i){
+				$nama = $i->pt;
+				$kantor = $i->kantor;
+				$alamat = $i->alamat;
+			}
 			define('FPDF_FONTPATH',$this->config->item('fonts_path'));
-			$data['image1'] = base_url('metronic/img/tatamasa_logo.jpg');	
-			$data['nama'] = 'PT BERKAH GRAHA MANDIRI';
-			$data['tower'] = 'Beltway Office Park Tower Lt. 5';
-			$data['alamat'] = 'Jl. TB Simatung No. 41 - Pasar Minggu - Jakarta Selatan';
+			$data['image1'] = base_url('metronic/img/tatamasa_logo.jpg');
+			$data['nama'] = trim($nama);
+			$data['tower'] = trim($kantor);
+			$data['alamat'] = trim($alamat);
 			$data['laporan'] = 'Laporan Cash Flow';
 			$data['user'] = $this->session->userdata('username');
 			$data['all'] = $this->master_cflow_m->getAllCflow();
 			$this->load->view('cetak/cetak_cashflow',$data);
-    	}
+		}
 	}
 }
 

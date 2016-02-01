@@ -9,6 +9,7 @@ class Master_advance extends CI_Controller
 
         $this->load->model('home_m');
         $this->load->model('master_advance_m');
+        $this->load->model('setting_laporan_m');
         session_start();
     }
 
@@ -513,6 +514,7 @@ class Master_advance extends CI_Controller
         if ($this->auth->is_logged_in() == false) {
             redirect('main/index');
         } else {
+            $data['info'] = $this->setting_laporan_m->getAllSetting();
             $data['advance'] = $this->master_advance_m->getDescAdv($idAdv);
             $this->load->view('cetak/cetak_advance', $data);
         }
@@ -523,6 +525,7 @@ class Master_advance extends CI_Controller
         if($this->auth->is_logged_in() == false){
             redirect('main/index');
         }else{
+            $data['info'] = $this->setting_laporan_m->getAllSetting();
             $data['advance'] = $this->master_advance_m->cetak_cpa($idAdv);
             $data['detail'] = $this->master_advance_m->cetak_cpa_detail($idAdv);
             $this->load->view('cetak/cetak_cpa', $data);

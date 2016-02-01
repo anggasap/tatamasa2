@@ -30,7 +30,7 @@
             <div class="portlet-body">
                 <div>
                 	<span id="event_result">
-                    
+
                     </span>
                 </div>
                 <ul class="nav nav-pills">
@@ -68,8 +68,8 @@
                                                         <input id="id_kodeTr" class="form-control hidden input-sm"
                                                                type="text" name="kodeTr" />
                                                 <span class="input-group-btn">
-                                                    <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelPenj"
-                                                       id="id_btnModalPenj" data-toggle="modal">
+                                                    <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelBooking"
+                                                       id="id_btnModalBooking" data-toggle="modal">
                                                         <i class="fa fa-search fa-fw"/></i>
                                                     </a>
                                                 </span>
@@ -78,13 +78,11 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
-
                                                     <label>Id rumah </label>
-
                                                     <div class="input-group">
                                                         <input id="id_rumahId" required="required"
                                                                class="form-control input-sm"
-                                                               type="text" name="rumahId" readonly/>
+                                                               type="text" name="rumahId" value="<?php echo $info_rumah[0]->id_rumah; ?>" readonly/>
                                                 <span class="input-group-btn">
                                                     <a href="#" class="btn btn-success btn-sm"
                                                        data-target="#idDivTabelRumah"
@@ -111,13 +109,15 @@
                                                     <label>Nama Rumah </label>
                                                     <input id="id_namaRumah" required="required"
                                                            class="form-control  input-sm"
-                                                           type="text" name="namaRumah" placeholder="" readonly/>
+                                                           type="text" name="namaRumah"  value="<?php echo $info_rumah[0]->nama_rumah; ?>" readonly/>
                                                 </div>
                                                 <div class="col-md-6">
+                                                    <input id="id_proyek" required="required" class="form-control  input-sm hidden"
+                                                           type="text" name="proyek" value="<?php echo $info_rumah[0]->id_proyek; ?>" readonly/>
                                                     <label>Nama proyek</label>
                                                     <input id="id_namaProyek" required="required"
                                                            class="form-control  input-sm"
-                                                           type="text" name="namaProyek" placeholder="" readonly/>
+                                                           type="text" name="namaProyek"  value="<?php echo $info_rumah[0]->nama_proyek; ?>" readonly/>
                                                 </div>
                                             </div>
                                         </div>
@@ -125,21 +125,18 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label>Tipe rumah</label>
-                                                    <input id="id_typeRumah" required="required"
-                                                           class="form-control input-sm"
-                                                           type="text" name="typeRumah" placeholder="" readonly/>
+                                                    <input id="id_typeRumah" required="required" class="form-control input-sm"
+                                                           type="text" name="typeRumah" value="<?php echo $info_rumah[0]->tipe; ?>" readonly/>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label>Blok</label>
-                                                    <input id="id_blokRumah" required="required"
-                                                           class="form-control input-sm"
-                                                           type="text" name="blokRumah" placeholder="" readonly/>
+                                                    <input id="id_blokRumah" required="required" class="form-control input-sm"
+                                                           type="text" name="blokRumah" value="<?php echo $info_rumah[0]->blok; ?>" readonly/>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label>Luas</label>
-                                                    <input id="id_luasRumah" required="required"
-                                                           class="form-control input-sm kanan"
-                                                           type="text" name="luasRumah" placeholder="" readonly/>
+                                                    <input id="id_luasRumah" required="required" class="form-control input-sm kanan"
+                                                           type="text" name="luasRumah" value="<?php echo number_format($info_rumah[0]->luas,2); ?>" readonly/>
                                                 </div>
                                             </div>
                                         </div>
@@ -147,9 +144,8 @@
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <label>Harga</label>
-                                                    <input id="id_hargaRumah" required="required"
-                                                           class="form-control input-sm kanan"
-                                                           type="text" name="hargaRumah" placeholder="" readonly/>
+                                                    <input id="id_hargaRumah" required="required" class="form-control input-sm kanan"
+                                                           type="text" name="hargaRumah" value="<?php echo number_format($info_rumah[0]->harga,2); ?>" readonly/>
                                                 </div>
                                             </div>
                                         </div>
@@ -437,7 +433,7 @@
                                         <button id="id_btnBatal" type="button" class="btn default">Batal</button>
                                         <button id="id_btnCetakInv" type="button" class="btn green">Cetak Invoice</button>
                                         <button id="id_btnCetakInfoPenj" type="button" class="btn green">Cetak Info</button>
-                                        <button id="id_btnCetakSPR" type="button" class="btn green">Cetak SPR</button>
+
                                     </div>
                                 </div>
 
@@ -460,74 +456,6 @@
 </div>
 
 <!-- END PAGE CONTENT-->
-<div class="modal fade draggable-modal" id="idDivTabelPenj" tabindex="-1" role="basic" aria-hidden="true">
-    <div class="modal-dialog  modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Data Penjualan</h4>
-            </div>
-            <div class="modal-body">
-                <div class="scroller" style="height:400px; ">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button id="id_ReloadPenj" style="display: none;"></button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-body">
-                                <table class="table table-striped table-bordered table-hover text_kanan"
-                                       id="idTabelPenj">
-                                    <thead>
-                                    <tr>
-                                        <th>
-                                            Kode Penj
-                                        </th>
-                                        <th>
-                                            Id Rumah
-                                        </th>
-                                        <th>
-                                            Id Customer
-                                        </th>
-                                        <th>
-                                            Nama Rumah
-                                        </th>
-                                        <th>
-                                            Nama Customer
-                                        </th>
-                                        <th>
-                                            Harga
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-
-
-                                    </tbody>
-                                    <tfoot>
-
-
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- end col-12 -->
-                    </div>
-                    <!-- END ROW-->
-                </div>
-                <!-- END SCROLLER-->
-            </div>
-            <!-- END MODAL BODY-->
-            <div class="modal-footer">
-                <button type="button" class="btn default" data-dismiss="modal" id="btnCloseModalDataPenj">Close
-                </button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
 <!--  MODAL Data Karyawan -->
 <div class="modal fade draggable-modal" id="idDivTabelCustomer" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog  modal-lg">
@@ -935,98 +863,7 @@
             });
             tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
         }
-        var initTablePenj = function () {
-            var table = $('#idTabelPenj');
-            // begin first table
-            table.dataTable({
-                "ajax": "<?php  echo base_url("/booking_jual/getPenjAll"); ?>",
-                "columns": [
-                    { "data": "kode_penj" },
-                    { "data": "id_rumah" },
-                    { "data": "id_cust" },
-                    { "data": "nama_rumah" },
-                    { "data": "nama_customer" },
-                    { "data": "harga" }
-                ],
-                // Internationalisation. For more info refer to http://datatables.net/manual/i18n
-                "language": {
-                    "aria": {
-                        "sortAscending": ": activate to sort column ascending",
-                        "sortDescending": ": activate to sort column descending"
-                    },
-                    "emptyTable": "No data available in table",
-                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-                    "infoEmpty": "No entries found",
-                    "infoFiltered": "(filtered1 from _MAX_ total entries)",
-                    "lengthMenu": "Show _MENU_ entries",
-                    "search": "Search:",
-                    "zeroRecords": "No matching records found"
-                },
-                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-                "lengthMenu": [
-                    [5, 10,15, 20, -1],
-                    [5, 10,15, 20, "All"] // change per page values here
-                ],
-                // set the initial value
-                "pageLength": 5,
-                "pagingType": "bootstrap_full_number",
-                "language": {
-                    "search": "Cari: ",
-                    "lengthMenu": "  _MENU_ records",
-                    "paginate": {
-                        "previous":"Prev",
-                        "next": "Next",
-                        "last": "Last",
-                        "first": "First"
-                    }
-                },
-                "aaSorting": [[0,'asc']/*, [5,'desc']*/],
-                "columnDefs": [{  // set default column settings
-                    'orderable': true,
-                    "searchable": true,
-                    'targets': [0]
-                }],
-                "order": [
-                    [0, "asc"]
-                ] // set first column as a default sort by asc
-            });
-            $('#id_ReloadRumah').click(function () {
-                table.api().ajax.reload();
-            });
-            var tableWrapper = jQuery('#example_wrapper');
-            table.find('.group-checkable').change(function () {
-                var set = jQuery(this).attr("data-set");
-                var checked = jQuery(this).is(":checked");
-                jQuery(set).each(function () {
-                    if (checked) {
-                        $(this).attr("checked", true);
-                        $(this).parents('tr').addClass("active");
-                    } else {
-                        $(this).attr("checked", false);
-                        $(this).parents('tr').removeClass("active");
-                    }
-                });
-                jQuery.uniform.update(set);
-            });
-            table.on('change', 'tbody tr .checkboxes', function () {
-                $(this).parents('tr').toggleClass("active");
-            });
-            table.on('click', 'tbody tr', function () {
-                var masterId = $(this).find("td").eq(0).html();
-                $('#id_kodePenj').val(masterId);
-                var rumahId = $(this).find("td").eq(1).html();
-                $('#id_rumahId').val(rumahId);
-                var custId = $(this).find("td").eq(2).html();
-                $('#id_customerId').val(custId);
-                /*var nominal = $(this).find("td").eq(5).html();
-                 $('#id_nominal').val(nominal);*/
-                $('#btnCloseModalDataPenj').trigger('click');
-                //var idJurnalPend = '1';
-                getDescRumah(rumahId);
-                getDescCust(custId);
-            });
-            tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
-        }
+
         return {
             //main function to initiate the module
             init: function () {
@@ -1035,7 +872,6 @@
                 }
                 initTable1();
                 initTable2();
-                initTablePenj();
             }
         };
     }();
@@ -1265,47 +1101,6 @@
                 }, "json");
         }//if kd<>''
     }
-    function getDescCust(idCust) {
-        ajaxModal();
-        if (idCust != '') {
-            $.post("<?php echo site_url('/master_customer/getDescCust'); ?>",
-                {
-                    'idCust': idCust
-                }, function (data) {
-                    if (data.baris == 1) {
-                        $('#id_customerId').val(data.id_cust);
-                        $('#id_noId').val(data.no_id);
-                        $('#id_namaCustomer').val(data.nama_cust);
-                        $('#id_alamat').val(data.alamat);
-                        $('#id_email').val(data.email);
-                        $('#id_noHp').val(data.no_hp);
-                        $('#id_noTelp').val(data.no_telp);
-                        $('#id_noNpwp').val(data.no_npwp);
-                        $('#id_namaNpwp').val(data.nama_npwp);
-                        $('#id_alamatNpwp').val(data.alamat_npwp);
-                        $('#id_noRek').val(data.no_akun_bank);
-                        $('#id_bankRek').val(data.bank_akun_bank);
-                        $('#id_GL').val(data.kode_perk);
-                        $('#id_namaGL').val(data.nama_perk);
-                        $('#id_noVA').val(data.no_va);
-                        $('#id_namaVA').val(data.nama_va);
-                        $('#id_bankVA').val(data.bank_va);
-
-                        var kodeJurnal = $('#id_kodeJurnal').val();
-                        if (kodeJurnal == 'BK'){
-                            var Db = $('#id_nominal').val();
-                            var Kr = 0;
-                            //addRowDb(data.kode_perk, data.nama_perk, Db, Kr);
-                        }
-                        /*
-                         $('#').val(data.); */
-                    } else {
-                        alert('Data tidak ditemukan!');
-                        $('#id_btnBatal').trigger('click');
-                    }
-                }, "json");
-        }//if kd<>''
-    }
     function getDescRumahBooked(idRumah) {
         ajaxModal();
         if (idRumah != '') {
@@ -1463,16 +1258,6 @@
             alert('Tidak ada kode penjualan');
         } else {
             window.open("<?php echo base_url('booking_jual/cetakInfoPenj/'); ?>/" + idPenj + "/" + idCust + "/" + idrumah, '_blank');
-        }
-    });
-    $('#id_btnCetakSPR').click(function () {
-        var idPenj = $('#id_kodePenj').val();
-        var idCust = $('#id_customerId').val();
-        var idrumah = $('#id_rumahId').val();
-        if (idPenj == '') {
-            alert('Tidak ada kode penjualan');
-        } else {
-            window.open("<?php echo base_url('booking_jual/cetakSPR/'); ?>/" + idPenj + "/" + idCust + "/" + idrumah, '_blank');
         }
     });
 </script>
