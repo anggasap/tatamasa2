@@ -74,7 +74,7 @@ foreach($neraca as $n)
 		$l = str_replace('-','',$l);
 		$saldo = '('.$l.')';
 	}elseif($saldo == 0){
-		$saldo = '';
+		$saldo = '0.00';
 	}else{
 		$saldo = number_format($saldo,2,'.',',');
 	}
@@ -84,7 +84,7 @@ foreach($neraca as $n)
 		$l = str_replace('-','',$l);
 		$saldob = '('.$l.')';
 	}elseif($saldob == 0){
-		$saldob = '';
+		$saldob = '0.00';
 	}else{
 		$saldob = number_format($saldob,2,'.',',');
 	}
@@ -96,6 +96,9 @@ foreach($neraca as $n)
 		$this->fpdf->Cell(2.5 , 0.5, $saldo, 'R', 'LR', 'R');
 		if($n->kode_perk_psv == ''){
 			$this->fpdf->SetFont('Times','B',8);
+		}
+		if($n->kode_perk_psv == '' && $n->nama_perk_psv == ''){
+			$saldob = '';
 		}
 		$this->fpdf->Cell(2.5 , 0.5, $n->kode_perk_psv, 'L', 'LR', 'L');
 		$this->fpdf->Cell(2.5 , 0.5, $n->kode_alt_psv, 0, 'LR', 'L');	

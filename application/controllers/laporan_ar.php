@@ -9,6 +9,7 @@ class Laporan_ar extends CI_Controller
 
 		$this->load->model('home_m');
 		$this->load->model('laporan_ar_m');
+		$this->load->model('setting_laporan_m');
 		$this->load->library('fpdf');
 		session_start();
 	}
@@ -71,12 +72,17 @@ class Laporan_ar extends CI_Controller
 			
 			$data['rumah'] = $this->laporan_ar_m->getRumahById($rumah);
 			$data['list'] = $this->laporan_ar_m->getAllArAdv($rumah);
-			
+			$info = $this->setting_laporan_m->getAllSetting();
+			foreach($info as $i){
+				$nama = $i->pt;
+				$kantor = $i->kantor;
+				$alamat = $i->alamat;
+			}
 			define('FPDF_FONTPATH',$this->config->item('fonts_path'));
 			$data['image1'] = base_url('metronic/img/tatamasa_logo.jpg');	
-			$data['nama'] = 'PT BERKAH GRAHA MANDIRI';
-			$data['tower'] = 'Beltway Office Park Tower Lt. 5';
-			$data['alamat'] = 'Jl. TB Simatung No. 41 - Pasar Minggu - Jakarta Selatan';
+			$data['nama'] = trim($nama);
+			$data['tower'] = trim($kantor);
+			$data['alamat'] = trim($alamat);
 			$data['laporan'] = 'Jadwal Angsuran';
 			$data['user'] = $this->session->userdata('username');
     		$this->load->view('cetak/cetak_laporan_ar',$data);

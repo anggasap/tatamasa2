@@ -9,6 +9,7 @@ class Laporan_spk extends CI_Controller
 
 		$this->load->model('home_m');
 		$this->load->model('laporan_spk_m');
+		$this->load->model('setting_laporan_m');
 		$this->load->library('fpdf');
 		session_start();
 	}
@@ -45,13 +46,18 @@ class Laporan_spk extends CI_Controller
     	}else{
 			$tanggal 		= $this->uri->segment(3);
 			$tglAwal		= date('Y-m-d', strtotime($tanggal));
-			
+			$info = $this->setting_laporan_m->getAllSetting();
+			foreach($info as $i){
+				$nama = $i->pt;
+				$kantor = $i->kantor;
+				$alamat = $i->alamat;
+			}
 			$data['list'] = $this->laporan_spk_m->getAllSpk($tglAwal);
 			define('FPDF_FONTPATH',$this->config->item('fonts_path'));
 			$data['image1'] = base_url('metronic/img/tatamasa_logo.jpg');	
-			$data['nama'] = 'PT BERKAH GRAHA MANDIRI';
-			$data['tower'] = 'Beltway Office Park Tower Lt. 5';
-			$data['alamat'] = 'Jl. TB Simatupang No. 41 - Pasar Minggu - Jakarta Selatan';
+			$data['nama'] = trim($nama);
+			$data['tower'] = trim($kantor);
+			$data['alamat'] = trim($alamat);
 			$data['laporan'] = 'Laporan Surat Perintah Kerja per '.$tanggal;
 			$data['user'] = $this->session->userdata('username');
     		$this->load->view('cetak/cetak_laporan_spk',$data);

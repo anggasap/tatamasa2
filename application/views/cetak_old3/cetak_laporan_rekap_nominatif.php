@@ -45,7 +45,12 @@ $this->fpdf->Cell(4 , 0.5, number_format($l->harga,2,".",",") , 1, 'LR', 'R');
 $this->fpdf->Cell(3 , 0.5, number_format($l->booking,2,".",",") , 1, 'LR', 'R');
 $this->fpdf->Cell(4 , 0.5, number_format($l->sdhdibayar,2,".",",") , 1, 'LR', 'R');
 $this->fpdf->Cell(3 , 0.5, number_format($l->sisaAngs,2,".",",") , 1, 'LR', 'R');
-$this->fpdf->Cell(3 , 0.5, number_format($l->sisa_dp,2,".",",") , 1, 'LR', 'R');
+if($l->tipe_bayar == "3"){
+	$kpr = number_format($l->kpr,2,".",",");
+}else{
+	$kpr = number_format(0,2,".",",");;
+}
+$this->fpdf->Cell(3 , 0.5, $kpr , 1, 'LR', 'R');
 $no++;
 }
 /* setting posisi footer 3 cm dari bawah */

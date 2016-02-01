@@ -15,26 +15,27 @@ class Akuntansi_ar_m extends CI_Model {
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}
-	public function getReimpayAll()
+	public function getPenjLunas()
 	{
-		$sql="SELECT mr.id_reimpay,mk.nama_kyw, mr.jml_uang,mk.kode_perk,p.nama_perk
-			  from master_reimpay mr left join master_karyawan mk on mr.id_kyw = mk.id_kyw
-			  left join perkiraan p on mk.kode_perk = p.kode_perk
-			  where mr.status_akuntansi = 0";
+		$sql="SELECT mj.master_id,mj.id_rumah,mj.id_cust,mr.nama_rumah,mc.nama_cust,mj.harga
+			  from master_jual mj
+			  left join master_rumah mr on mj.id_rumah = mr.id_rumah
+			  left join master_customer mc on mj.id_cust = mc.id_cust
+			  where  mj.status_jual = 3 and mj.status_ajb = 0 ";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}
-	function getSettleAll()
+	public function getSkpr()
 	{
-		$sql="SELECT ms.id_settle_adv,ma.id_advance,pp.type_adv,mk.nama_kyw, ma.jml_uang,ms.jml_uang_paid
-			  from master_settle_adv ms
-			  left join master_advance ma on ms.id_adv = ma.id_advance
-			  left join master_karyawan mk on ms.id_kyw = mk.id_kyw
-			  left join perintah_pembayaran pp on ma.id_advance = pp.id_advance
-			  where ms.status_akuntansi = 0";
+		$sql="SELECT mj.master_id,mj.id_rumah,mj.id_cust,mr.nama_rumah,mc.nama_cust,mj.harga
+			  from master_jual mj
+			  left join master_rumah mr on mj.id_rumah = mr.id_rumah
+			  left join master_customer mc on mj.id_cust = mc.id_cust
+			  where  mj.status_jual = 3 and mj.status_skpr = 0 ";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}
+
 	public function getJurnalPend($idJurnalPend)
 	{
 		$this->db->select ( 'ij.kode_perk,p.nama_perk' );
@@ -99,11 +100,24 @@ class Akuntansi_ar_m extends CI_Model {
 			return true;
 		}
 	}
-	function updateBooking_statusAkuntansi($data_model2,$id_master){
+	function updateBooking_statusAkuntansi($dataModelStAkuntansi,$id_master){
 		$this->db->trans_begin();
 		$query0 = $this->db->where('kode_trans', '100');
 		$query1 = $this->db->where('master_id', $id_master);
-		$query2 = $this->db->update('trans_jual', $data_model2);
+		$query2 = $this->db->update('trans_jual', $dataModelStAkuntansi);
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return false;
+		}
+		else{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+	function update_statusAjb($dataModelStAjb,$masterId){
+		$this->db->trans_begin();
+		$query1 = $this->db->where('master_id', $masterId);
+		$query2 = $this->db->update('master_jual', $dataModelStAjb);
 		if ($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
 			return false;

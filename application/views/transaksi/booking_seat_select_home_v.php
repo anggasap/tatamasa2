@@ -12,7 +12,7 @@
             <div class="portlet-title">
                 <div class="caption">
                     <i class="fa fa-cogs  font-red-sunglo"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase">Daftar Rumah Proyek <?php echo $nama_proyek; ?></span>
+                    <span class="caption-subject font-red-sunglo bold uppercase">Daftar Rumah Proyek</span>
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -35,6 +35,8 @@
                     <div class="row">
                         <div class="form-body">
                             <div class="col-md-12">
+
+
                                 <div class="tiles">
                                     <!--<div class="tile image selected">
                                         <div class="tile-body">
@@ -51,7 +53,7 @@
                                 foreach ($rumah as $row):
                                 ?>
                                     <?php if($row->status_jual =='0') { ?>
-                                    <div class="tile bg-grey-cascade client-item">
+                                    <div class="tile bg-grey-cascade client-item" title="This is my tooltip">
                                         <input value="<?php echo $row->status_jual; ?>" class="hidden">
                                         <div class="tile-body">
                                             <img href="<?php echo base_url('booking/booked/') . '/' . $row->id_rumah; ?>"
@@ -70,7 +72,7 @@
                                     <?php
                                         }else{
                                     ?>
-                                    <div class="tile bg-grey-cascade client-item">
+                                    <div class="tile bg-grey-cascade client-item" title="This is my tooltip">
                                         <input value="<?php echo $row->status_jual; ?>"  class="hidden">
                                         <div class="tile-body">
                                             <img href="<?php echo base_url('booking/booked/') . '/' . $row->id_rumah; ?>"
@@ -185,7 +187,7 @@
         btnStart();
     });
     $('#id_tools_reload').click(function () {
-        location.reload();
+        btnStart();
     });
 
     function ajaxSubmit() {

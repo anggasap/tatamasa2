@@ -9,8 +9,9 @@ class Laporan_laba_rugi extends CI_Controller
 
 		$this->load->model('home_m');
 		$this->load->model('lap_laba_rugi_m');
+		$this->load->model('setting_laporan_m');
 		$this->load->library('fpdf');
-		session_start ();
+		session_start();
 	}
 
 	public function index(){
@@ -55,6 +56,13 @@ class Laporan_laba_rugi extends CI_Controller
 			$timestamp  = strtotime($tgl);
 			$tgl_trans  = date('Y-m-d', $timestamp);
 			
+			$info = $this->setting_laporan_m->getAllSetting();
+			foreach($info as $i){
+				$nama = $i->pt;
+				$kantor = $i->kantor;
+				$alamat = $i->alamat;
+			}
+			
 			$data ['total_pendapatan'] = $this->lap_laba_rugi_m->get_total_pendapatan($tgl_trans,$this->session->userdata('id_user'));
 			$data ['total_biaya'] = $this->lap_laba_rugi_m->get_total_biaya($tgl_trans,$this->session->userdata('id_user'));
 			if($nol == '1'){
@@ -69,13 +77,13 @@ class Laporan_laba_rugi extends CI_Controller
 			}	
 			
 			define('FPDF_FONTPATH',$this->config->item('fonts_path'));
-			$data['image1'] = base_url('metronic/img/tatamasa_logo.jpg');	
-			$data['nama'] 	= 'PT BERKAH GRAHA MANDIRI';
-			$data['tower'] 	= 'Beltway Office Park Tower Lt. 5';
-			$data['alamat'] = 'Jl. TB Simatung No. 41 - Pasar Minggu - Jakarta Selatan';
-			$data['laporan']= 'Laporan Laba Rugi komprehensif per ';
-			$data['user'] 	= $this->session->userdata('username');
-			$data['tgl'] 	= $tgl_trans;
+			$data['image1']  = base_url('metronic/img/tatamasa_logo.jpg');	
+			$data['nama'] 	 = trim($nama);
+			$data['tower'] 	 = trim($kantor);
+			$data['alamat']  = trim($alamat);
+			$data['laporan'] = 'Laporan Laba Rugi komprehensif per ';
+			$data['user'] 	 = $this->session->userdata('username');
+			$data['tgl'] 	 = $tgl_trans;
     		$this->load->view('cetak/cetak_laporan_laba_rugi',$data);
 		}
 	}

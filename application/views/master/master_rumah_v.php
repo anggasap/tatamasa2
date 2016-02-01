@@ -581,6 +581,7 @@ table#idTabelRumah td:nth-child(5) {
 				'idRumah': idRumah
 			},function (data) {
 				if (data.baris == 1) {
+                    $('#id_statusJual').val(data.status_jual);
 					$('#id_proyekId').val(data.id_proyek);
 					$('#id_namaProyek').val(data.nama_proyek);
 					$('#id_namaRumah').val(data.nama_rumah);

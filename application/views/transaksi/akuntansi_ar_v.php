@@ -73,40 +73,51 @@
                                                 <option value=""></option>
                                                 <option value="BK">Booking</option>
                                                 <option value="AJB">AJB</option>
-                                                <option value="JU">Sisa KPR</option>
+                                                <option value="SKPR">Sisa KPR</option>
                                             </select>
                                         </div>
 
                                         <div class="form-group request_in" id="div_idBooking">
                                             <label>Id master </label>
-
                                             <div class="input-group">
                                                 <input id="id_masterId" required="required"
                                                        class="form-control  input-sm"
                                                        type="text" name="masterId" readonly/>
-                                    <span class="input-group-btn">
-                                        <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelBooking"
-                                           id="id_btnModal" data-toggle="modal">
-                                            <i class="fa fa-search fa-fw"/></i>
+                                                <span class="input-group-btn">
+                                                    <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelBooking"
+                                                    id="id_btnModal" data-toggle="modal">
+                                                        <i class="fa fa-search fa-fw"/></i>
 
-                                        </a>
-                                    </span>
+                                                    </a>
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="form-group request_in" id="div_idAJB">
                                             <label>Id Master</label>
-
                                             <div class="input-group">
-                                                <input id="id_idAJB" required="required"
+                                                <input id="id_masterIdAjb" required="required"
                                                        class="form-control  input-sm"
-                                                       type="text" name="idAJB" readonly/>
-                                    <span class="input-group-btn">
-                                        <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelAJB"
-                                           id="id_btnModal" data-toggle="modal">
-                                            <i class="fa fa-search fa-fw"/></i>
-
-                                        </a>
-                                    </span>
+                                                       type="text" name="masterIdAjb" readonly/>
+                                                <span class="input-group-btn">
+                                                <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelAJB"
+                                                id="id_btnModal" data-toggle="modal">
+                                                <i class="fa fa-search fa-fw"/></i>
+                                                </a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group request_in" id="div_idSkpr">
+                                            <label>Id Master</label>
+                                            <div class="input-group">
+                                                <input id="id_masterIdSkpr" required="required"
+                                                       class="form-control  input-sm"
+                                                       type="text" name="masterIdSkpr" readonly/>
+                                                <span class="input-group-btn">
+                                                <a href="#" class="btn btn-success btn-sm" data-target="#idDivTabelSkpr"
+                                                   id="id_btnModal" data-toggle="modal">
+                                                    <i class="fa fa-search fa-fw"/></i>
+                                                </a>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -180,7 +191,6 @@
                                         </div>
                                     </div>
                                     <div class="col-md-5">
-
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -243,25 +253,6 @@
                                                    type="text" name="namaGL"/>
                                         </div>
                                     </div>
-                                    <!--<div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Dibayarkan ke</label>
-                                            <input id="id_splId" required="required" class="form-control input-sm "
-                                                   type="text" name="splId" readonly/>
-                                            <input id="id_namaPayTo" required="required" class="form-control input-sm"
-                                                   type="text" name="namapayTo" readonly/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>GL</label>
-                                            <input id="id_kodePerk" class="form-control input-sm"
-                                                   type="text" name="kodePerk" readonly/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Perkiraan</label>
-                                            <input id="id_namaPerk" class="form-control input-sm"
-                                                   type="text" name="namaPerk" readonly/>
-                                        </div>
-                                    </div>-->
                                 </div>
                                 <!-- HIDDEN INPUT -->
                                 <input type="text" id="idTmpAksiBtn" class="hidden">
@@ -557,8 +548,8 @@
     <!-- /.modal-dialog -->
 </div>
 <!--  END  MODAL Data Booking -->
-<!--  MODAL Data Reimpay -->
-<div class="modal fade draggable-modal" id="idDivTabelReimpay" tabindex="-1" role="basic" aria-hidden="true">
+<!--  MODAL Data SisaKpr -->
+<div class="modal fade draggable-modal" id="idDivTabelSkpr" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog  modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -569,30 +560,33 @@
                 <div class="scroller" style="height:400px; ">
                     <div class="row">
                         <div class="col-md-12">
-                            <button id="id_ReloadReimpay" style="display: none;"></button>
+                            <button id="id_ReloadSkpr" style="display: none;"></button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-body">
                                 <table class="table table-striped table-bordered table-hover text_kanan"
-                                       id="idTabelReimpay">
+                                       id="idTabelSkpr">
                                     <thead>
                                     <tr>
                                         <th>
-                                            Id Reimpay
+                                            Id Penjualan
                                         </th>
                                         <th>
-                                            Nama Karyawan
+                                            Id rumah
                                         </th>
                                         <th>
-                                            Jumlah uang
+                                            Id Customer
                                         </th>
                                         <th>
-                                            Kode GL
+                                            Nama Rumah
                                         </th>
                                         <th>
-                                            GL
+                                            Nama Customer
+                                        </th>
+                                        <th>
+                                            Jml Harga
                                         </th>
                                     </tr>
                                     </thead>
@@ -615,7 +609,7 @@
             </div>
             <!-- END MODAL BODY-->
             <div class="modal-footer">
-                <button type="button" class="btn default" data-dismiss="modal" id="btnCloseModalDataReimpay">Close
+                <button type="button" class="btn default" data-dismiss="modal" id="btnCloseModalDataSkpr">Close
                 </button>
             </div>
         </div>
@@ -623,14 +617,14 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<!--  END  MODAL Data Reimpay -->
+<!--  END  MODAL Data Skpr -->
 <!--  MODAL Data AJBment Advance -->
 <div class="modal fade draggable-modal" id="idDivTabelAJB" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog  modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Data AJBment Of Advance</h4>
+                <h4 class="modal-title">Data AJB</h4>
             </div>
             <div class="modal-body">
                 <div class="scroller" style="height:400px; ">
@@ -647,22 +641,22 @@
                                     <thead>
                                     <tr>
                                         <th>
-                                            Id AJBment
+                                            Id Penjualan
                                         </th>
                                         <th>
-                                            Id Advance
+                                            Id rumah
                                         </th>
                                         <th>
-                                            Nama Karyawan
+                                            Id Customer
                                         </th>
                                         <th>
-                                            Jumlah Advance
+                                            Nama Rumah
                                         </th>
                                         <th>
-                                            Jumlah AJBment
+                                            Nama Customer
                                         </th>
                                         <th>
-                                            Kode UM
+                                            Jml Harga
                                         </th>
                                     </tr>
                                     </thead>
@@ -962,111 +956,18 @@
 
             tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
         }
-        var initTableRm = function () {
-            var table = $('#idTabelReimpay');
-            // begin first table
-            table.dataTable({
-                "ajax": "<?php  echo base_url("/akuntansi/getReimpayAll"); ?>",
-                "columns": [
-                    {"data": "idReimpay"},
-                    {"data": "namaReq"},
-                    {"data": "jmlUang"},
-                    {"data": "kodePerk"},
-                    {"data": "namaPerk"}
-                ],
-                // Internationalisation. For more info refer to http://datatables.net/manual/i18n
-                "language": {
-                    "aria": {
-                        "sortAscending": ": activate to sort column ascending",
-                        "sortDescending": ": activate to sort column descending"
-                    },
-                    "emptyTable": "No data available in table",
-                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-                    "infoEmpty": "No entries found",
-                    "infoFiltered": "(filtered1 from _MAX_ total entries)",
-                    "lengthMenu": "Show _MENU_ entries",
-                    "search": "Search:",
-                    "zeroRecords": "No matching records found"
-                },
-
-                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-                "lengthMenu": [
-                    [5, 10, 15, 20, -1],
-                    [5, 10, 15, 20, "All"] // change per page values here
-                ],
-                // set the initial value
-                "pageLength": 5,
-                "pagingType": "bootstrap_full_number",
-                "language": {
-                    "search": "Cari: ",
-                    "lengthMenu": "  _MENU_ records",
-                    "paginate": {
-                        "previous": "Prev",
-                        "next": "Next",
-                        "last": "Last",
-                        "first": "First"
-                    }
-                },
-                "aaSorting": [[0, 'asc']/*, [5,'desc']*/],
-                "columnDefs": [{  // set default column settings
-                    'orderable': true,
-                    "searchable": true,
-                    'targets': [0]
-                }],
-                "order": [
-                    [0, "asc"]
-                ] // set first column as a default sort by asc
-            });
-            $('#id_ReloadReimpay').click(function () {
-                table.api().ajax.reload();
-            });
-
-            var tableWrapper = jQuery('#example_wrapper');
-
-            table.find('.group-checkable').change(function () {
-                var set = jQuery(this).attr("data-set");
-                var checked = jQuery(this).is(":checked");
-                jQuery(set).each(function () {
-                    if (checked) {
-                        $(this).attr("checked", true);
-                        $(this).parents('tr').addClass("active");
-                    } else {
-                        $(this).attr("checked", false);
-                        $(this).parents('tr').removeClass("active");
-                    }
-                });
-                jQuery.uniform.update(set);
-            });
-
-            table.on('change', 'tbody tr .checkboxes', function () {
-                $(this).parents('tr').toggleClass("active");
-            });
-            table.on('click', 'tbody tr', function () {
-                var idReimpay = $(this).find("td").eq(0).html();
-                $('#id_idReimpay').val(idReimpay);
-                var namaPerk = $(this).find("td").eq(4).html();
-                $('#id_namaPerk').val(namaPerk);
-                var kodePerk = $(this).find("td").eq(3).html();
-                $('#id_kodePerk').val(kodePerk);
-                $('#id_idReimpay').focus();
-                $('#btnCloseModalDataReimpay').trigger('click');
-                getDescCpa(idReimpay);
-            });
-
-            tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
-        }
         var initTableAJB = function () {
             var table = $('#idTabelAJB');
             // begin first table
             table.dataTable({
-                "ajax": "<?php  echo base_url("/akuntansi/getAJBment"); ?>",
+                "ajax": "<?php  echo base_url("/akuntansi_ar/getPenjLunas"); ?>",
                 "columns": [
-                    {"data": "idAJB"},
-                    {"data": "idAdv"},
-                    {"data": "namaReq"},
-                    {"data": "jmlUangAdv"},
-                    {"data": "jmlUangPaid"},
-                    {"data": "typeAdv"}
+                    {"data": "master_id"},
+                    {"data": "id_rumah"},
+                    {"data": "id_cust"},
+                    {"data": "nama_rumah"},
+                    {"data": "nama_cust"},
+                    {"data": "harga"}
                 ],
                 // Internationalisation. For more info refer to http://datatables.net/manual/i18n
                 "language": {
@@ -1136,32 +1037,115 @@
                 $(this).parents('tr').toggleClass("active");
             });
             table.on('click', 'tbody tr', function () {
-                var idAJB = $(this).find("td").eq(0).html();
-                var idAdv = $(this).find("td").eq(1).html();
-                var jmlAdv = $(this).find("td").eq(3).html();
-                var jmlAJB = $(this).find("td").eq(4).html();
-                var kdBayar = $(this).find("td").eq(5).html();
-                idAdv = idAdv.trim();
-                $('#id_idAJB').val(idAJB);
-                $('#id_idAJB').focus();
-                //alert(idAdv);
-
-                njmlAdv = parseFloat(CleanNumber(jmlAdv));
-                njmlAJB = parseFloat(CleanNumber(jmlAJB));
-                var krglbhAdv = Math.abs(njmlAJB - njmlAdv);
-                krglbhAdv = number_format(krglbhAdv, 2);
-                if (njmlAdv > njmlAJB) {
-                    getDescCpa(idAJB);
-                    getCpaAJBLbh(idAdv, jmlAJB);
-                    getDescUM(kdBayar, jmlAdv);
-                } else {
-                    getCpaAJBLbh(idAdv, jmlAJB);
-                    getDescUM(kdBayar, jmlAdv);
-                    getCpaAJBKrg(idAJB, krglbhAdv);
-                }
-
+                var masterId = $(this).find("td").eq(0).html();
+                $('#id_masterIdAjb').val(masterId);
+                var rumahId = $(this).find("td").eq(1).html();
+                $('#id_rumahId').val(rumahId);
+                var custId = $(this).find("td").eq(2).html();
+                $('#id_customerId').val(custId);
+                /*var nominal = $(this).find("td").eq(5).html();
+                $('#id_nominal').val(nominal);*/
                 $('#btnCloseModalDataAJB').trigger('click');
+                getDescRumah(rumahId);
+                getDescCust(custId);
+
             });
+            tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+        }
+        var initTableSkpr = function () {
+            var table = $('#idTabelSkpr');
+            // begin first table
+            table.dataTable({
+                "ajax": "<?php  echo base_url("/akuntansi_ar/getSkpr"); ?>",
+                "columns": [
+                    {"data": "master_id"},
+                    {"data": "id_rumah"},
+                    {"data": "id_cust"},
+                    {"data": "nama_rumah"},
+                    {"data": "nama_cust"},
+                    {"data": "harga"}
+                ],
+                // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+                "language": {
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    },
+                    "emptyTable": "No data available in table",
+                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                    "infoEmpty": "No entries found",
+                    "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                    "lengthMenu": "Show _MENU_ entries",
+                    "search": "Search:",
+                    "zeroRecords": "No matching records found"
+                },
+
+                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+                "lengthMenu": [
+                    [5, 10, 15, 20, -1],
+                    [5, 10, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "pageLength": 5,
+                "pagingType": "bootstrap_full_number",
+                "language": {
+                    "search": "Cari: ",
+                    "lengthMenu": "  _MENU_ records",
+                    "paginate": {
+                        "previous": "Prev",
+                        "next": "Next",
+                        "last": "Last",
+                        "first": "First"
+                    }
+                },
+                "aaSorting": [[0, 'asc']/*, [5,'desc']*/],
+                "columnDefs": [{  // set default column settings
+                    'orderable': true,
+                    "searchable": true,
+                    'targets': [0]
+                }],
+                "order": [
+                    [0, "asc"]
+                ] // set first column as a default sort by asc
+            });
+            $('#id_ReloadSkpr').click(function () {
+                table.api().ajax.reload();
+            });
+
+            var tableWrapper = jQuery('#example_wrapper');
+
+            table.find('.group-checkable').change(function () {
+                var set = jQuery(this).attr("data-set");
+                var checked = jQuery(this).is(":checked");
+                jQuery(set).each(function () {
+                    if (checked) {
+                        $(this).attr("checked", true);
+                        $(this).parents('tr').addClass("active");
+                    } else {
+                        $(this).attr("checked", false);
+                        $(this).parents('tr').removeClass("active");
+                    }
+                });
+                jQuery.uniform.update(set);
+            });
+
+            table.on('change', 'tbody tr .checkboxes', function () {
+                $(this).parents('tr').toggleClass("active");
+            });
+            table.on('click', 'tbody tr', function () {
+                var masterId = $(this).find("td").eq(0).html();
+                $('#id_masterIdSkpr').val(masterId);
+                var rumahId = $(this).find("td").eq(1).html();
+                $('#id_rumahId').val(rumahId);
+                var custId = $(this).find("td").eq(2).html();
+                $('#id_customerId').val(custId);
+                /*var nominal = $(this).find("td").eq(5).html();
+                 $('#id_nominal').val(nominal);*/
+                $('#btnCloseModalDataSkpr').trigger('click');
+                getDescRumah(rumahId);
+                getDescCust(custId);
+            });
+
             tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
         }
         var initTablePerk = function () {
@@ -1365,8 +1349,8 @@
                     return;
                 }
                 initTableBk();
-                initTableRm();
-                //initTableAJB();
+                initTableSkpr();
+                initTableAJB();
                 initTablePerk();
                 initTableCf();
             }
@@ -1389,8 +1373,8 @@
         $('.request_in').slideUp();
         if (kodeJurnal == 'BK') {
             $('#div_idBooking').slideDown();
-        } else if (kodeJurnal == 'RM') {
-            $('#div_idReimpay').slideDown();
+        } else if (kodeJurnal == 'SKPR') {
+            $('#div_idSkpr').slideDown();
         } else if (kodeJurnal == 'AJB') {
             $('#div_idAJB').slideDown();
         }
@@ -1600,10 +1584,12 @@
                         $('#id_namaVA').val(data.nama_va);
                         $('#id_bankVA').val(data.bank_va);
 
-
-                        var Db = $('#id_nominal').val();
-                        var Kr = 0;
-                        addRowDb(data.kode_perk, data.nama_perk, Db, Kr);
+                        var kodeJurnal = $('#id_kodeJurnal').val();
+                        if (kodeJurnal == 'BK'){
+                            var Db = $('#id_nominal').val();
+                            var Kr = 0;
+                            //addRowDb(data.kode_perk, data.nama_perk, Db, Kr);
+                        }
                         /*
                          $('#').val(data.); */
                     } else {
@@ -1636,7 +1622,6 @@
         $('#id_body_data').append(tr);
         $('#idTxtTempLoop').val(i);
     }
-
     function getDescCpa(idMaster) {
         ajaxModal();
         if (idMaster != '') {
@@ -1748,7 +1733,7 @@
                 } else if (data.kodeJurnal == 'BK') {
                     $('#id_ReloadBooking').trigger('click');
                 } else if (data.kodeJurnal == 'RM') {
-                    $('#id_ReloadReimpay').trigger('click');
+                    $('#id_ReloadSkpr').trigger('click');
                 }
                 $('#id_idJurnal').val(data.idAR);
                 UIToastr.init(data.tipePesan, data.pesan);

@@ -74,19 +74,40 @@ class Akuntansi_ar extends CI_Controller
         $this->output->set_output(json_encode($data));
     }
 
-    function getReimpayAll()
+    public function getPenjLunas()
     {
         $this->CI =& get_instance();//and a.kcab_id<>'1100'
-        $rows = $this->akuntansi_ar_m->getReimpayAll();
+        $rows = $this->akuntansi_ar_m->getPenjLunas();
         $data['data'] = array();
         foreach ($rows as $row) {
-            $jmlUang = number_format($row->jml_uang, 2);
+            $jmlUang = number_format($row->harga, 2);
             $array = array(
-                'idReimpay' => trim($row->id_reimpay),
-                'namaReq' => trim($row->nama_kyw),
-                'jmlUang' => $jmlUang,
-                'kodePerk' => trim($row->kode_perk),
-                'namaPerk' => trim($row->nama_perk)
+                'master_id' => trim($row->master_id),
+                'id_rumah' => trim($row->id_rumah),
+                'id_cust' => $row->id_cust,
+                'nama_rumah' => trim($row->nama_rumah),
+                'nama_cust' => trim($row->nama_cust),
+                'harga' => $jmlUang
+            );
+
+            array_push($data['data'], $array);
+        }
+        $this->output->set_output(json_encode($data));
+    }
+    public function getSkpr()
+    {
+        $this->CI =& get_instance();//and a.kcab_id<>'1100'
+        $rows = $this->akuntansi_ar_m->getSkpr();
+        $data['data'] = array();
+        foreach ($rows as $row) {
+            $jmlUang = number_format($row->harga, 2);
+            $array = array(
+                'master_id' => trim($row->master_id),
+                'id_rumah' => trim($row->id_rumah),
+                'id_cust' => $row->id_cust,
+                'nama_rumah' => trim($row->nama_rumah),
+                'nama_cust' => trim($row->nama_cust),
+                'harga' => $jmlUang
             );
 
             array_push($data['data'], $array);
@@ -94,27 +115,7 @@ class Akuntansi_ar extends CI_Controller
         $this->output->set_output(json_encode($data));
     }
 
-    public function getSettlement()
-    {
-        $this->CI =& get_instance();//and a.kcab_id<>'1100'
-        $rows = $this->akuntansi_ar_m->getSettleAll();
-        $data['data'] = array();
-        foreach ($rows as $row) {
-            $jmlUangPaid = number_format($row->jml_uang_paid, 2);
-            $jmlUangAdv = number_format($row->jml_uang, 2);
-            $array = array(
-                'idSettle' => trim($row->id_settle_adv),
-                'idAdv' => trim($row->id_advance),
-                'namaReq' => trim($row->nama_kyw),
-                'jmlUangAdv' => $jmlUangAdv,
-                'jmlUangPaid' => $jmlUangPaid,
-                'typeAdv' => $row->type_adv
-            );
 
-            array_push($data['data'], $array);
-        }
-        $this->output->set_output(json_encode($data));
-    }
 
     function getJurnalPend()
     {
@@ -143,7 +144,7 @@ class Akuntansi_ar extends CI_Controller
     function simpan()
     {
         $idProyek = trim($this->input->post('proyek'));
-        $masterId = trim($this->input->post('masterId'));
+
 
         //$ket = trim($this->input->post('keterangan'));
         $tglTrans = trim($this->input->post('tgltrans'));
@@ -151,13 +152,24 @@ class Akuntansi_ar extends CI_Controller
         $bulan = date('m', strtotime($tglTrans));//$tglTrans->format("m");
         $tahun = date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
 
-        //$kodeJurnal = trim($this->input->post('kodeJurnal'));
+        $kodeJurnal = trim($this->input->post('kodeJurnal'));
         // $jml_uang = str_replace(',', '', trim($this->input->post('uang')));
+        if($kodeJurnal=='BK'){
+            $masterId = trim($this->input->post('masterId'));
+            $dataModelStAkuntansi = array(
+                'status_akuntansi' => 1
+            );
+            $modelStAkuntansi = $this->akuntansi_ar_m->updateBooking_statusAkuntansi($dataModelStAkuntansi,$masterId);// update trans jual
+        }else if($kodeJurnal=='AJB'){
+            $masterId = trim($this->input->post('masterIdAjb'));
+            $dataModelStAjb = array(
+                'status_ajb' => 1
+            );
+            $modelStAjb = $this->akuntansi_ar_m->update_statusAjb($dataModelStAjb,$masterId);// update master jual
+        }
 
-        $data_model2 = array(
-            'status_akuntansi' => 1
-        );
-        $model2 = $this->akuntansi_ar_m->updateBooking_statusAkuntansi($data_model2,$masterId);
+
+
         $modelidJrAR = $this->akuntansi_ar_m->getIdJrAR($bulan, $tahun);
         $modelNoVoucher = '';
         $totJurnal = trim($this->input->post('txtTempLoop'));

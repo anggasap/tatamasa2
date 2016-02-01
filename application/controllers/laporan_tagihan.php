@@ -9,6 +9,7 @@ class Laporan_tagihan extends CI_Controller
 
 		$this->load->model('home_m');
 		$this->load->model('laporan_tagihan_m');
+		$this->load->model('setting_laporan_m');
 		$this->load->library('fpdf');
 		session_start();
 	}
@@ -54,12 +55,19 @@ class Laporan_tagihan extends CI_Controller
 			$date1 			= new DateTime($tanggal);
 			$tglAwal 		= '2015-12-31';
 			
+			$info = $this->setting_laporan_m->getAllSetting();
+			foreach($info as $i){
+				$nama = $i->pt;
+				$kantor = $i->kantor;
+				$alamat = $i->alamat;
+			}
+			
 			$data['list'] = $this->laporan_tagihan_m->getAllArAdv($tglAwal);
 			define('FPDF_FONTPATH',$this->config->item('fonts_path'));
 			$data['image1'] = base_url('metronic/img/tatamasa_logo.jpg');	
-			$data['nama'] = 'PT BERKAH GRAHA MANDIRI';
-			$data['tower'] = 'Beltway Office Park Tower Lt. 5';
-			$data['alamat'] = 'Jl. TB Simatung No. 41 - Pasar Minggu - Jakarta Selatan';
+			$data['nama'] = trim($nama);
+			$data['tower'] = trim($kantor);
+			$data['alamat'] = trim($alamat);
 			$data['laporan'] = 'Rekap Tagihan Per Tanggal '.$tanggal;
 			$data['user'] = $this->session->userdata('username');
     		$this->load->view('cetak/cetak_laporan_tagihan',$data);

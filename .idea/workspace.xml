@@ -34,125 +34,7 @@
     <favorites_list name="tatamasa" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ajb_v.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/transaksi/ajb_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.038462">
-              <caret line="35" column="41" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="accrue_jadwal_v.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/laporan/accrue_jadwal_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.153846">
-              <caret line="14" column="103" selection-start-line="14" selection-start-column="103" selection-end-line="14" selection-end-column="103" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="akuntansi_ar_v.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/transaksi/akuntansi_ar_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.8727272">
-              <caret line="60" column="116" selection-start-line="60" selection-start-column="87" selection-end-line="60" selection-end-column="116" />
-              <folding>
-                <element signature="e#48657#48874#0#HTML" expanded="false" />
-                <element signature="e#49236#53605#0#HTML" expanded="false" />
-                <element signature="e#53644#57708#0#HTML" expanded="false" />
-                <element signature="e#57748#62480#0#HTML" expanded="false" />
-                <element signature="e#62521#66738#0#HTML" expanded="false" />
-                <element signature="e#66777#70963#0#HTML" expanded="false" />
-                <element signature="e#72332#72597#0#HTML" expanded="false" />
-                <element signature="e#75042#76054#0#HTML" expanded="false" />
-                <element signature="e#76082#76235#0#HTML" expanded="false" />
-                <element signature="e#76280#77472#0#HTML" expanded="false" />
-                <element signature="e#77519#78274#0#HTML" expanded="false" />
-                <element signature="e#78320#78371#0#HTML" expanded="false" />
-                <element signature="e#78409#79326#0#HTML" expanded="false" />
-                <element signature="e#79360#81111#0#HTML" expanded="false" />
-                <element signature="e#81162#82731#0#HTML" expanded="false" />
-                <element signature="e#82767#86374#0#HTML" expanded="false" />
-                <element signature="e#86425#88864#0#HTML" expanded="false" />
-                <element signature="e#88891#89705#0#HTML" expanded="false" />
-                <element signature="e#89757#90560#0#HTML" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="akuntansi_v.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/views/transaksi/akuntansi_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36431226">
-              <caret line="150" column="116" selection-start-line="150" selection-start-column="116" selection-end-line="150" selection-end-column="116" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="kasir_ar_v.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/transaksi/kasir_ar_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.8727272">
-              <caret line="299" column="78" selection-start-line="299" selection-start-column="66" selection-end-line="299" selection-end-column="78" />
-              <folding>
-                <element signature="e#48660#52982#0#HTML" expanded="false" />
-                <element signature="e#56744#60501#0#HTML" expanded="false" />
-                <element signature="e#60540#64726#0#HTML" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="kasir_v.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/transaksi/kasir_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.8846154">
-              <caret line="32" column="40" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ajb.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/ajb.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ajb_m.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/models/ajb_m.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.461538">
-              <caret line="28" column="41" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="41" />
-              <folding>
-                <marker date="1451289688000" expanded="true" signature="156:387" placeholder="SELECT r.*,p..master_rumah..." />
-                <marker date="1451289688000" expanded="true" signature="1006:1596" placeholder="select queri..round..." />
-                <marker date="1451289688000" expanded="true" signature="1137:1579" placeholder="select round..." />
-                <marker date="1451289688000" expanded="true" signature="1167:1222" placeholder="select harga..master_jual..." />
-                <marker date="1451289688000" expanded="true" signature="1233:1331" placeholder="select coale..trans_jual..." />
-                <marker date="1451289688000" expanded="true" signature="1482:1567" placeholder="select count..trans_jual..." />
-                <marker date="1451289688000" expanded="true" signature="1788:2503" placeholder="select queri..harga..." />
-                <marker date="1451289688000" expanded="true" signature="1852:2486" placeholder="select ( ( (..." />
-                <marker date="1451289688000" expanded="true" signature="1877:1932" placeholder="select harga..master_jual..." />
-                <marker date="1451289688000" expanded="true" signature="2085:2210" placeholder="select coale..trans_jual..." />
-                <marker date="1451289688000" expanded="true" signature="2220:2345" placeholder="select coale..trans_jual..." />
-                <marker date="1451289688000" expanded="true" signature="2373:2471" placeholder="select coale..trans_jual..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -175,31 +57,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/models/master_reimpay_m.php" />
-        <option value="$PROJECT_DIR$/application/controllers/akuntansi.php" />
-        <option value="$PROJECT_DIR$/application/models/akuntansi_m.php" />
-        <option value="$PROJECT_DIR$/application/controllers/master_advance.php" />
-        <option value="$PROJECT_DIR$/application/controllers/master_reqpay.php" />
-        <option value="$PROJECT_DIR$/application/controllers/master_reimpay.php" />
-        <option value="$PROJECT_DIR$/application/views/master/master_reimpay_v.php" />
-        <option value="$PROJECT_DIR$/application/models/kasir_m.php" />
-        <option value="$PROJECT_DIR$/application/models/master_customer_m.php" />
-        <option value="$PROJECT_DIR$/application/views/master/master_customer_v.php" />
-        <option value="$PROJECT_DIR$/application/controllers/master_customer.php" />
-        <option value="$PROJECT_DIR$/metronic/additional/start.js" />
-        <option value="$PROJECT_DIR$/application/views/master/master_rumah_v.php" />
-        <option value="$PROJECT_DIR$/application/models/penjualan_m.php" />
-        <option value="$PROJECT_DIR$/application/views/template/template3.php" />
-        <option value="$PROJECT_DIR$/application/models/integrasi_jurnal_m.php" />
         <option value="$PROJECT_DIR$/application/controllers/integrasi_jurnal.php" />
         <option value="$PROJECT_DIR$/application/views/transaksi/kasir_v.php" />
         <option value="$PROJECT_DIR$/application/views/admin/integrasi_jurnal_v.php" />
         <option value="$PROJECT_DIR$/application/views/transaksi/booking_v.php" />
-        <option value="$PROJECT_DIR$/application/models/akuntansi_ar_m.php" />
-        <option value="$PROJECT_DIR$/application/controllers/akuntansi_ar.php" />
         <option value="$PROJECT_DIR$/application/models/kasir_ar_m.php" />
         <option value="$PROJECT_DIR$/application/controllers/kasir_ar.php" />
-        <option value="$PROJECT_DIR$/application/views/transaksi/penjualan_v.php" />
         <option value="$PROJECT_DIR$/application/models/accrue_jadwal_m.php" />
         <option value="$PROJECT_DIR$/application/controllers/accrue_jadwal.php" />
         <option value="$PROJECT_DIR$/application/controllers/pembayaran.php" />
@@ -210,12 +73,9 @@
         <option value="$PROJECT_DIR$/application/controllers/sitemap.php" />
         <option value="$PROJECT_DIR$/application/models/sitemap_m.php" />
         <option value="$PROJECT_DIR$/application/views/transaksi/booking_seat_v.php" />
-        <option value="$PROJECT_DIR$/application/models/booking_seat_m.php" />
-        <option value="$PROJECT_DIR$/application/controllers/master_rumah.php" />
         <option value="$PROJECT_DIR$/application/controllers/booking.php" />
         <option value="$PROJECT_DIR$/application/models/master_rumah_m.php" />
         <option value="$PROJECT_DIR$/application/views/transaksi/booking_seat_selected_home_v.php" />
-        <option value="$PROJECT_DIR$/application/views/transaksi/booking_seat_select_home_v.php" />
         <option value="$PROJECT_DIR$/application/controllers/booking_seat.php" />
         <option value="$PROJECT_DIR$/application/views/transaksi/booking_seat_select_proyek_v.php" />
         <option value="$PROJECT_DIR$/application/views/template/tempA.inc.php" />
@@ -224,8 +84,30 @@
         <option value="$PROJECT_DIR$/application/views/master/master_advance_v.php" />
         <option value="$PROJECT_DIR$/application/views/master/master_reqpay_v.php" />
         <option value="$PROJECT_DIR$/application/views/transaksi/kasir_ar_v.php" />
-        <option value="$PROJECT_DIR$/application/views/transaksi/akuntansi_ar_v.php" />
         <option value="$PROJECT_DIR$/application/views/transaksi/akuntansi_v.php" />
+        <option value="$PROJECT_DIR$/application/views/transaksi/booking_seat_select_home_v.php" />
+        <option value="$PROJECT_DIR$/metronic/global/css/components-rounded.css" />
+        <option value="$PROJECT_DIR$/application/models/booking_seat_m.php" />
+        <option value="$PROJECT_DIR$/application/controllers/master_rumah.php" />
+        <option value="$PROJECT_DIR$/application/views/master/master_rumah_v.php" />
+        <option value="$PROJECT_DIR$/application/views/transaksi/pembatalan_v.php" />
+        <option value="$PROJECT_DIR$/application/controllers/pembatalan.php" />
+        <option value="$PROJECT_DIR$/application/models/pembatalan_m.php" />
+        <option value="$PROJECT_DIR$/application/views/transaksi/penjualan_v.php" />
+        <option value="$PROJECT_DIR$/application/models/riwayat_m.php" />
+        <option value="$PROJECT_DIR$/application/controllers/riwayat.php" />
+        <option value="$PROJECT_DIR$/application/views/laporan/riwayat_v.php" />
+        <option value="$PROJECT_DIR$/application/controllers/penjualan.php" />
+        <option value="$PROJECT_DIR$/application/views/grafik/grafik_penj_v.php" />
+        <option value="$PROJECT_DIR$/application/models/grafik_penj_m.php" />
+        <option value="$PROJECT_DIR$/application/controllers/grafik_penj.php" />
+        <option value="$PROJECT_DIR$/application/views/grafik/grafikshow_penj_v.php" />
+        <option value="$PROJECT_DIR$/application/controllers/akuntansi_ar.php" />
+        <option value="$PROJECT_DIR$/application/models/akuntansi_ar_m.php" />
+        <option value="$PROJECT_DIR$/application/views/transaksi/akuntansi_ar_v.php" />
+        <option value="$PROJECT_DIR$/application/models/booking_jual_m.php" />
+        <option value="$PROJECT_DIR$/application/controllers/booking_jual.php" />
+        <option value="$PROJECT_DIR$/application/views/transaksi/booking_jual_v.php" />
       </list>
     </option>
   </component>
@@ -239,10 +121,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="754" />
+    <option name="width" value="1366" />
+    <option name="height" value="738" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -272,8 +152,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -320,6 +198,46 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="global" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tatamasa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tatamasa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="metronic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="global" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tatamasa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tatamasa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="metronic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="additional" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -338,53 +256,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tatamasa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tatamasa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tatamasa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tatamasa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="transaksi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../konveksi" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="recentsLimit" value="5" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
@@ -393,16 +273,16 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\tatamasa\application\views\transaksi" />
-      <recent name="C:\xampp\htdocs\tatamasa\application\controllers" />
-      <recent name="C:\xampp\htdocs\tatamasa\application\models" />
-      <recent name="C:\xampp\htdocs\tatamasa\application\views\layout" />
-      <recent name="C:\xampp\htdocs\tatamasa\application\views\admin" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\tatamasa\application\views\admin" />
       <recent name="C:\xampp\htdocs\tatamasa\application\views\transaksi" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\tatamasa\application\models" />
+      <recent name="C:\xampp\htdocs\tatamasa\application\controllers" />
+      <recent name="C:\xampp\htdocs\tatamasa\application\views\transaksi" />
+      <recent name="C:\xampp\htdocs\tatamasa\application\views\grafik" />
+      <recent name="C:\xampp\htdocs\tatamasa\application\views\laporan" />
     </key>
   </component>
   <component name="RunManager">
@@ -449,10 +329,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="0" width="1366" height="738" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2065053" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20597243" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295107" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -512,358 +392,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/master/master_customer_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.0363636">
-          <caret line="157" column="38" selection-start-line="153" selection-start-column="32" selection-end-line="157" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/integrasi_jurnal_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5">
-          <caret line="76" column="44" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/akuntansi.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9230769">
-          <caret line="254" column="29" selection-start-line="254" selection-start-column="16" selection-end-line="254" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/kasir.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.5">
-          <caret line="232" column="9" selection-start-line="232" selection-start-column="9" selection-end-line="232" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/kasir_m.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.65384614">
-          <caret line="63" column="46" selection-start-line="63" selection-start-column="46" selection-end-line="63" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/penjualan_m.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6923077">
-          <caret line="41" column="59" selection-start-line="41" selection-start-column="59" selection-end-line="41" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/transaksi/penjualan_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.192307">
-          <caret line="980" column="0" selection-start-line="980" selection-start-column="0" selection-end-line="980" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/penjualan.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.5">
-          <caret line="106" column="43" selection-start-line="106" selection-start-column="43" selection-end-line="106" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/accrue_jadwal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.22777778">
-          <caret line="116" column="37" selection-start-line="116" selection-start-column="37" selection-end-line="116" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/accrue_jadwal_m.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37777779">
-          <caret line="33" column="48" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/kasir_ar_m.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.5769231">
-          <caret line="360" column="40" selection-start-line="360" selection-start-column="40" selection-end-line="360" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/pembayaran_m.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.09434">
-          <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/kasir_ar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.1538463">
-          <caret line="31" column="62" selection-start-line="31" selection-start-column="62" selection-end-line="31" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/transaksi/pembayaran_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.8727272">
-          <caret line="1491" column="45" selection-start-line="1491" selection-start-column="45" selection-end-line="1491" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/pembayaran.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23985891">
-          <caret line="248" column="74" selection-start-line="248" selection-start-column="74" selection-end-line="248" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/akuntansi_ar_m.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.923077">
-          <caret line="16" column="5" selection-start-line="6" selection-start-column="4" selection-end-line="16" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/akuntansi_ar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.65384614">
-          <caret line="74" column="5" selection-start-line="55" selection-start-column="4" selection-end-line="74" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/sitemap_m.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23333333">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/sitemap.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.5167286">
-          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/layout/sitemap_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22045855">
-          <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/master_proyek_m.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/master/master_proyek_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.109091">
-          <caret line="36" column="62" selection-start-line="0" selection-start-column="0" selection-end-line="455" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/master_proyek.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/master_advance.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.653847">
-          <caret line="35" column="63" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/konfigurasi_menu_status_user_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/metronic/additional/start.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="23" selection-start-line="67" selection-start-column="13" selection-end-line="67" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/transaksi/booking_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.65384614">
-          <caret line="727" column="66" selection-start-line="727" selection-start-column="66" selection-end-line="727" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/booking_m.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.029982364">
-          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-          <folding>
-            <marker date="1453194387563" expanded="true" signature="162:517" placeholder="select mj.ma..master_jual..." />
-            <marker date="1453194387563" expanded="true" signature="652:847" placeholder="SELECT r.*,p..master_rumah..." />
-            <marker date="1453194387563" expanded="true" signature="652:848" placeholder="SELECT r.id_..master_rumah..." />
-            <marker date="1453194387563" expanded="true" signature="989:1527" placeholder="select mj.ma..master_jual..." />
-            <marker date="1453194387563" expanded="true" signature="1639:2226" placeholder="select mj.ma..master_jual..." />
-            <marker date="1453194387563" expanded="true" signature="2342:2433" placeholder="select invoi..trans_jual..." />
-            <marker date="1453194387563" expanded="true" signature="2645:2705" placeholder="select max(s..trans_jual..." />
-            <marker date="1453194387563" expanded="true" signature="2933:2970" placeholder="select kode_..trans_jual..." />
-            <marker date="1453194387563" expanded="true" signature="3139:3205" placeholder="select max(s..trans_jual..." />
-            <marker date="1453194387563" expanded="true" signature="3854:3948" placeholder="select maste..master_jual..." />
-            <marker date="1453194387563" expanded="true" signature="4162:4225" placeholder="select max(s..master_jual..." />
-            <marker date="1453194387563" expanded="true" signature="5357:5496" placeholder="select trans..trans_detail_perk..." />
-            <marker date="1453194387563" expanded="true" signature="5712:5883" placeholder="select max(s..trans_detail_perk..." />
-            <marker date="1453194387563" expanded="true" signature="6129:6271" placeholder="select vouch..trans_detail_perk..." />
-            <marker date="1453194387563" expanded="true" signature="6487:6660" placeholder="select max(s..trans_detail_perk..." />
-            <marker date="1453194387563" expanded="true" signature="6960:7192" placeholder="select id_se..trans_detail_perk..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/booking_seat_m.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29982364">
-          <caret line="19" column="67" selection-start-line="19" selection-start-column="67" selection-end-line="19" selection-end-column="67" />
-          <folding>
-            <marker date="1453265726655" expanded="true" signature="167:522" placeholder="select mj.ma..master_jual..." />
-            <marker date="1453265726655" expanded="true" signature="664:878" placeholder="SELECT r.id_..master_rumah..." />
-            <marker date="1453265726655" expanded="true" signature="664:902" placeholder="SELECT r.id_..master_rumah..." />
-            <marker date="1453265726655" expanded="true" signature="1043:1581" placeholder="select mj.ma..master_jual..." />
-            <marker date="1453265726655" expanded="true" signature="1693:2280" placeholder="select mj.ma..master_jual..." />
-            <marker date="1453265726655" expanded="true" signature="2396:2487" placeholder="select invoi..trans_jual..." />
-            <marker date="1453265726655" expanded="true" signature="2699:2759" placeholder="select max(s..trans_jual..." />
-            <marker date="1453265726655" expanded="true" signature="2987:3024" placeholder="select kode_..trans_jual..." />
-            <marker date="1453265726655" expanded="true" signature="3193:3259" placeholder="select max(s..trans_jual..." />
-            <marker date="1453265726655" expanded="true" signature="3908:4002" placeholder="select maste..master_jual..." />
-            <marker date="1453265726655" expanded="true" signature="4216:4279" placeholder="select max(s..master_jual..." />
-            <marker date="1453265726655" expanded="true" signature="5411:5550" placeholder="select trans..trans_detail_perk..." />
-            <marker date="1453265726655" expanded="true" signature="5766:5937" placeholder="select max(s..trans_detail_perk..." />
-            <marker date="1453265726655" expanded="true" signature="6183:6325" placeholder="select vouch..trans_detail_perk..." />
-            <marker date="1453265726655" expanded="true" signature="6541:6714" placeholder="select max(s..trans_detail_perk..." />
-            <marker date="1453265726655" expanded="true" signature="7014:7246" placeholder="select id_se..trans_detail_perk..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/master_rumah.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.230769">
-          <caret line="78" column="55" selection-start-line="78" selection-start-column="55" selection-end-line="78" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/master_rumah_m.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35978836">
-          <caret line="39" column="29" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
-          <folding>
-            <marker date="1453268882513" expanded="true" signature="167:266" placeholder="SELECT r.*,p..master_rumah..." />
-            <marker date="1453268882513" expanded="true" signature="870:932" placeholder="select id_ru..master_rumah..." />
-            <marker date="1453268882513" expanded="true" signature="1106:1198" placeholder="select max(s..master_rumah..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/budget/budgeti_perk_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41975307">
-          <caret line="14" column="165" selection-start-line="14" selection-start-column="138" selection-end-line="14" selection-end-column="165" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/transaksi/booking_seat_selected_home_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.4179895">
-          <caret line="114" column="131" selection-start-line="114" selection-start-column="131" selection-end-line="114" selection-end-column="131" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#3;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#3;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/booking.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3148148">
-          <caret line="121" column="61" selection-start-line="121" selection-start-column="61" selection-end-line="121" selection-end-column="61" />
-          <folding>
-            <element signature="e#367#682#0#PHP" expanded="false" />
-            <element signature="e#684#1284#0#PHP" expanded="false" />
-            <element signature="e#1286#1980#0#PHP" expanded="false" />
-            <element signature="e#2865#3682#0#PHP" expanded="false" />
-            <element signature="e#4551#7614#0#PHP" expanded="false" />
-            <element signature="e#7616#8184#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/transaksi/booking_seat_select_home_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41975307">
-          <caret line="14" column="112" selection-start-line="14" selection-start-column="112" selection-end-line="14" selection-end-column="118" />
-          <folding>
-            <marker date="1453270886703" expanded="true" signature="5063:5106" placeholder="..." />
-            <marker date="1453270886703" expanded="true" signature="5173:5219" placeholder="..." />
-            <marker date="1453270886703" expanded="true" signature="5200:5212" placeholder="..." />
-            <marker date="1453270886703" expanded="true" signature="5369:5413" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/booking_seat.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.29074073">
-          <caret line="131" column="72" selection-start-line="131" selection-start-column="72" selection-end-line="131" selection-end-column="72" />
-          <folding>
-            <element signature="e#1336#2030#0#PHP" expanded="false" />
-            <element signature="e#2032#2912#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/template/templateKoneksi.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.5873017">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/budgeti_perk.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.769231">
-          <caret line="60" column="64" selection-start-line="58" selection-start-column="8" selection-end-line="60" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/template/template3.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9982363">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/transaksi/booking_seat_select_proyek_v.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.26984128">
           <caret line="66" column="77" selection-start-line="66" selection-start-column="77" selection-end-line="66" selection-end-column="77" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -871,11 +403,240 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4722222">
           <caret line="66" column="33" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/transaksi/kasir_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26984128">
+          <caret line="32" column="40" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/master/master_advance_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.5636363">
+          <caret line="356" column="138" selection-start-line="356" selection-start-column="138" selection-end-line="356" selection-end-column="138" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/master/master_reqpay_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.8727272">
+          <caret line="389" column="138" selection-start-line="389" selection-start-column="138" selection-end-line="389" selection-end-column="138" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/transaksi/akuntansi_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1747212">
+          <caret line="313" column="80" selection-start-line="313" selection-start-column="80" selection-end-line="313" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/metronic/global/css/plugins.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/master_rumah_m.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.115385">
+          <caret line="39" column="29" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/master_rumah.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.707317">
+          <caret line="72" column="18" selection-start-line="72" selection-start-column="18" selection-end-line="72" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/transaksi/booking_seat_select_home_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029982364">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/booking_seat.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029982364">
+          <caret line="135" column="44" selection-start-line="135" selection-start-column="44" selection-end-line="135" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/booking_seat_m.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.659612">
+          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/transaksi/kasir_ar_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.076923">
+          <caret line="296" column="60" selection-start-line="296" selection-start-column="60" selection-end-line="296" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/kasir_ar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.65384614">
+          <caret line="31" column="62" selection-start-line="31" selection-start-column="62" selection-end-line="31" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/kasir_ar_m.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.65384614">
+          <caret line="360" column="40" selection-start-line="360" selection-start-column="40" selection-end-line="360" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/master/master_customer_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.090909">
+          <caret line="698" column="5" selection-start-line="665" selection-start-column="4" selection-end-line="698" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/master/master_rumah_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.2727273">
+          <caret line="593" column="51" selection-start-line="593" selection-start-column="51" selection-end-line="593" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/pembayaran_m.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.153846">
+          <caret line="59" column="21" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/pembayaran.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="88.65385">
+          <caret line="74" column="28" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/pembatalan.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.153846">
+          <caret line="119" column="92" selection-start-line="119" selection-start-column="38" selection-end-line="119" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/pembatalan_m.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.610687">
+          <caret line="56" column="44" selection-start-line="56" selection-start-column="44" selection-end-line="56" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/transaksi/pembatalan_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-34.692307">
+          <caret line="566" column="5" selection-start-line="534" selection-start-column="4" selection-end-line="566" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/accrue_jadwal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.692307">
+          <caret line="63" column="5" selection-start-line="50" selection-start-column="4" selection-end-line="63" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/accrue_jadwal_m.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.038462">
+          <caret line="32" column="5" selection-start-line="7" selection-start-column="4" selection-end-line="32" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/laporan/accrue_jadwal_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.076923">
+          <caret line="42" column="53" selection-start-line="35" selection-start-column="32" selection-end-line="59" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/riwayat_m.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.769231">
+          <caret line="20" column="86" selection-start-line="20" selection-start-column="77" selection-end-line="20" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/riwayat.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-40.963856">
+          <caret line="225" column="5" selection-start-line="71" selection-start-column="4" selection-end-line="225" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/laporan/riwayat_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.363636">
+          <caret line="207" column="42" selection-start-line="207" selection-start-column="42" selection-end-line="207" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/libraries/auth.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="13.730769">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/budgetc_cflow.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/grafik_penj_m.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.8846154">
+          <caret line="9" column="58" selection-start-line="9" selection-start-column="58" selection-end-line="9" selection-end-column="58" />
+          <folding>
+            <marker date="1454040272835" expanded="true" signature="219:436" placeholder="SELECT a.ata..cabang..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/grafik_penj.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.528302">
+          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/ajb.php">
+    <entry file="file://$PROJECT_DIR$/application/views/grafik/grafikshow_penj_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/grafik/grafik_penj_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.70961887">
+          <caret line="47" column="67" selection-start-line="47" selection-start-column="67" selection-end-line="47" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/budget/budgetc_cflow_v.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -883,9 +644,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/metronic/global/css/components-rounded.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.7023594">
+          <caret line="5346" column="25" selection-start-line="5346" selection-start-column="25" selection-end-line="5346" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/ajb_m.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.461538">
+        <state vertical-scroll-proportion="0.5027223">
           <caret line="28" column="41" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="41" />
           <folding>
             <marker date="1451289688000" expanded="true" signature="156:387" placeholder="SELECT r.*,p..master_rumah..." />
@@ -904,91 +673,215 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/transaksi/kasir_v.php">
+    <entry file="file://$PROJECT_DIR$/application/controllers/ajb.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.8846154">
-          <caret line="32" column="40" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="40" />
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/transaksi/ajb_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.038462">
-          <caret line="35" column="41" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/laporan/accrue_jadwal_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.153846">
-          <caret line="14" column="103" selection-start-line="14" selection-start-column="103" selection-end-line="14" selection-end-column="103" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/master/master_advance_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5636363">
-          <caret line="356" column="138" selection-start-line="356" selection-start-column="138" selection-end-line="356" selection-end-column="138" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/master/master_reqpay_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.8727272">
-          <caret line="389" column="138" selection-start-line="389" selection-start-column="138" selection-end-line="389" selection-end-column="138" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/transaksi/kasir_ar_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.8727272">
-          <caret line="299" column="78" selection-start-line="299" selection-start-column="66" selection-end-line="299" selection-end-column="78" />
+        <state vertical-scroll-proportion="3.9764066">
+          <caret line="995" column="34" selection-start-line="995" selection-start-column="34" selection-end-line="995" selection-end-column="34" />
           <folding>
-            <element signature="e#48660#52982#0#HTML" expanded="false" />
-            <element signature="e#56744#60501#0#HTML" expanded="false" />
-            <element signature="e#60540#64726#0#HTML" expanded="false" />
+            <element signature="e#45331#49544#0#HTML" expanded="false" />
+            <element signature="e#49583#53765#0#HTML" expanded="false" />
+            <element signature="e#54463#55971#0#HTML" expanded="false" />
+            <element signature="e#56006#56548#0#HTML" expanded="false" />
+            <element signature="e#56592#57356#0#HTML" expanded="false" />
+            <element signature="e#57399#57666#0#HTML" expanded="false" />
+            <element signature="e#57708#59032#0#HTML" expanded="false" />
+            <element signature="e#59087#60359#0#HTML" expanded="false" />
+            <element signature="e#60387#60602#0#HTML" expanded="false" />
+            <element signature="e#60642#62758#0#HTML" expanded="false" />
+            <element signature="e#62825#63887#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/akuntansi_ar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4446461">
+          <caret line="99" column="46" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="46" />
+          <folding>
+            <element signature="e#4805#9079#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/akuntansi_ar_m.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.83778626">
+          <caret line="33" column="58" selection-start-line="33" selection-start-column="58" selection-end-line="33" selection-end-column="58" />
+          <folding>
+            <marker date="1454104265289" expanded="true" signature="167:516" placeholder="SELECT tj.ma..trans_jual..." />
+            <marker date="1454104265289" expanded="true" signature="652:929" placeholder="SELECT mj.ma..master_jual..." />
+            <marker date="1454104265289" expanded="true" signature="1061:1339" placeholder="SELECT mj.ma..master_jual..." />
+            <marker date="1454104265289" expanded="true" signature="1886:2025" placeholder="select trans..trans_detail_perk..." />
+            <marker date="1454104265289" expanded="true" signature="2241:2412" placeholder="select max(s..trans_detail_perk..." />
+            <marker date="1454104265289" expanded="true" signature="2712:2944" placeholder="select id_se..trans_detail_perk..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/transaksi/akuntansi_ar_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.8727272">
-          <caret line="60" column="116" selection-start-line="60" selection-start-column="87" selection-end-line="60" selection-end-column="116" />
+        <state vertical-scroll-proportion="0.7631579">
+          <caret line="1143" column="41" selection-start-line="1143" selection-start-column="41" selection-end-line="1143" selection-end-column="41" />
           <folding>
-            <element signature="e#48657#48874#0#HTML" expanded="false" />
-            <element signature="e#49236#53605#0#HTML" expanded="false" />
-            <element signature="e#53644#57708#0#HTML" expanded="false" />
-            <element signature="e#57748#62480#0#HTML" expanded="false" />
-            <element signature="e#62521#66738#0#HTML" expanded="false" />
-            <element signature="e#66777#70963#0#HTML" expanded="false" />
-            <element signature="e#72332#72597#0#HTML" expanded="false" />
-            <element signature="e#75042#76054#0#HTML" expanded="false" />
-            <element signature="e#76082#76235#0#HTML" expanded="false" />
-            <element signature="e#76280#77472#0#HTML" expanded="false" />
-            <element signature="e#77519#78274#0#HTML" expanded="false" />
-            <element signature="e#78320#78371#0#HTML" expanded="false" />
-            <element signature="e#78409#79326#0#HTML" expanded="false" />
-            <element signature="e#79360#81111#0#HTML" expanded="false" />
-            <element signature="e#81162#82731#0#HTML" expanded="false" />
-            <element signature="e#82767#86374#0#HTML" expanded="false" />
-            <element signature="e#86425#88864#0#HTML" expanded="false" />
-            <element signature="e#88891#89705#0#HTML" expanded="false" />
-            <element signature="e#89757#90560#0#HTML" expanded="false" />
+            <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#!!top" expanded="false" />
+            <element signature="n#div#5;n#!!top" expanded="false" />
+            <element signature="n#div#6;n#!!top" expanded="false" />
+            <element signature="e#49142#53511#0#HTML" expanded="false" />
+            <element signature="e#53551#57750#0#HTML" expanded="false" />
+            <element signature="e#54165#54827#0#HTML" expanded="false" />
+            <element signature="e#54954#55088#0#HTML" expanded="false" />
+            <element signature="e#55247#55581#0#HTML" expanded="false" />
+            <element signature="e#56211#56785#0#HTML" expanded="false" />
+            <element signature="e#58003#58273#0#HTML" expanded="false" />
+            <element signature="e#62031#66248#0#HTML" expanded="false" />
+            <element signature="e#66287#70473#0#HTML" expanded="false" />
+            <element signature="e#70985#71086#0#HTML" expanded="false" />
+            <element signature="e#71161#71501#0#HTML" expanded="false" />
+            <element signature="e#71579#71623#0#HTML" expanded="false" />
+            <element signature="e#71666#71710#0#HTML" expanded="false" />
+            <element signature="e#71753#71797#0#HTML" expanded="false" />
+            <element signature="e#71841#72106#0#HTML" expanded="false" />
+            <element signature="e#72137#72353#0#HTML" expanded="false" />
+            <element signature="e#72395#74483#0#HTML" expanded="false" />
+            <element signature="e#74551#75563#0#HTML" expanded="false" />
+            <element signature="e#75591#75744#0#HTML" expanded="false" />
+            <element signature="e#75789#76981#0#HTML" expanded="false" />
+            <element signature="e#77028#77783#0#HTML" expanded="false" />
+            <element signature="e#77829#77880#0#HTML" expanded="false" />
+            <element signature="e#77918#78835#0#HTML" expanded="false" />
+            <element signature="e#78869#80776#0#HTML" expanded="false" />
+            <element signature="e#80827#82396#0#HTML" expanded="false" />
+            <element signature="e#82431#86038#0#HTML" expanded="false" />
+            <element signature="e#86089#88528#0#HTML" expanded="false" />
+            <element signature="e#88555#89366#0#HTML" expanded="false" />
+            <element signature="e#89418#90221#0#HTML" expanded="false" />
+            <element signature="e#90245#90565#0#HTML" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/transaksi/akuntansi_v.php">
+    <entry file="file://$PROJECT_DIR$/application/views/transaksi/penjualan_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36431226">
-          <caret line="150" column="116" selection-start-line="150" selection-start-column="116" selection-end-line="150" selection-end-column="116" />
+        <state vertical-scroll-proportion="-0.65384614">
+          <caret line="931" column="67" selection-start-line="931" selection-start-column="34" selection-end-line="931" selection-end-column="67" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/penjualan.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.65384614">
+          <caret line="291" column="18" selection-start-line="291" selection-start-column="18" selection-end-line="291" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/penjualan_m.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.8461537">
+          <caret line="93" column="5" selection-start-line="81" selection-start-column="4" selection-end-line="93" selection-end-column="5" />
+          <folding>
+            <marker date="1453327293793" expanded="true" signature="1864:2026" placeholder="SELECT r.*,p..master_rumah..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/transaksi/booking_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.090909">
+          <caret line="856" column="7" selection-start-line="848" selection-start-column="4" selection-end-line="856" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/booking.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.26923">
+          <caret line="255" column="5" selection-start-line="239" selection-start-column="4" selection-end-line="255" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/booking_m.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.2545457">
+          <caret line="43" column="5" selection-start-line="33" selection-start-column="4" selection-end-line="43" selection-end-column="5" />
+          <folding>
+            <marker date="1453194387563" expanded="true" signature="162:517" placeholder="select mj.ma..master_jual..." />
+            <marker date="1453194387563" expanded="true" signature="652:848" placeholder="SELECT r.id_..master_rumah..." />
+            <marker date="1453194387563" expanded="true" signature="989:1527" placeholder="select mj.ma..master_jual..." />
+            <marker date="1453194387563" expanded="true" signature="1639:2226" placeholder="select mj.ma..master_jual..." />
+            <marker date="1453194387563" expanded="true" signature="2342:2433" placeholder="select invoi..trans_jual..." />
+            <marker date="1453194387563" expanded="true" signature="2645:2705" placeholder="select max(s..trans_jual..." />
+            <marker date="1453194387563" expanded="true" signature="2933:2970" placeholder="select kode_..trans_jual..." />
+            <marker date="1453194387563" expanded="true" signature="3139:3205" placeholder="select max(s..trans_jual..." />
+            <marker date="1453194387563" expanded="true" signature="3854:3948" placeholder="select maste..master_jual..." />
+            <marker date="1453194387563" expanded="true" signature="4162:4225" placeholder="select max(s..master_jual..." />
+            <marker date="1453194387563" expanded="true" signature="5357:5496" placeholder="select trans..trans_detail_perk..." />
+            <marker date="1453194387563" expanded="true" signature="5712:5883" placeholder="select max(s..trans_detail_perk..." />
+            <marker date="1453194387563" expanded="true" signature="6129:6271" placeholder="select vouch..trans_detail_perk..." />
+            <marker date="1453194387563" expanded="true" signature="6487:6660" placeholder="select max(s..trans_detail_perk..." />
+            <marker date="1453194387563" expanded="true" signature="6960:7192" placeholder="select id_se..trans_detail_perk..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/transaksi/booking_jual_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.1636364">
+          <caret line="65" column="78" selection-start-line="65" selection-start-column="67" selection-end-line="65" selection-end-column="78" />
+          <folding>
+            <element signature="n#div#1;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#!!top" expanded="false" />
+            <element signature="e#38836#43213#0#HTML" expanded="false" />
+            <element signature="e#47480#47737#0#HTML" expanded="false" />
+            <element signature="e#50000#50758#0#HTML" expanded="false" />
+            <element signature="e#57025#57366#0#HTML" expanded="false" />
+            <element signature="e#57410#57598#0#HTML" expanded="false" />
+            <element signature="e#62882#63772#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/booking_jual.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2891567">
+          <caret line="274" column="61" selection-start-line="274" selection-start-column="61" selection-end-line="274" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/booking_jual_m.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33756804">
+          <caret line="111" column="14" selection-start-line="111" selection-start-column="14" selection-end-line="111" selection-end-column="14" />
+          <folding>
+            <marker date="1454178336782" expanded="true" signature="1867:2029" placeholder="SELECT r.*,p..master_rumah..." />
+            <marker date="1454178336782" expanded="true" signature="2167:2261" placeholder="select maste..master_jual..." />
+            <marker date="1454178336782" expanded="true" signature="2475:2538" placeholder="select max(s..master_jual..." />
+            <marker date="1454178336782" expanded="true" signature="2766:2803" placeholder="select kode_..trans_jual..." />
+            <marker date="1454178336782" expanded="true" signature="2972:3038" placeholder="select max(s..trans_jual..." />
+            <marker date="1454178336782" expanded="true" signature="3265:3356" placeholder="select invoi..trans_jual..." />
+            <marker date="1454178336782" expanded="true" signature="3568:3628" placeholder="select max(s..trans_jual..." />
+            <marker date="1454178336782" expanded="true" signature="3867:4454" placeholder="select mj.ma..master_jual..." />
+          </folding>
         </state>
       </provider>
     </entry>

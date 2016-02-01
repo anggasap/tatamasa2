@@ -39,12 +39,16 @@
                             Info Rumah & Customer </a>
                     </li>
                     <li>
-                        <a href="#tab_2_2" data-toggle="tab" id="navitab_2_1">
+                        <a href="#tab_2_2" data-toggle="tab" id="navitab_2_2">
                             Pembayaran </a>
                     </li>
                     <li>
                         <a href="#tab_2_3" data-toggle="tab" id="navitab_2_3">
                             Jadwal </a>
+                    </li>
+                    <li>
+                        <a href="#tab_2_4" data-toggle="tab" id="navitab_2_4">
+                            Form Kesepakatan </a>
                     </li>
 
                 </ul>
@@ -320,7 +324,7 @@
                         </div>
                         <div class="tab-pane fade" id="tab_2_3">
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-12">
                                     <div class="form-body">
                                         <table class="table table-striped table-hover table-bordered"
                                                id="id_tabelJadwalBayar">
@@ -345,18 +349,27 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <label class="hidden">Jadwal Focus :</label>
                                             <input type="text" name="tempJadwalFocus"
                                                    class="form-control nomor input-sm hidden" id="id_tempJadwalFocus"
                                                    readonly>
+                                            <input type="text" name="tempRefreshJadwal"
+                                                   class="form-control nomor input-sm hidden" id="id_tempRefreshJadwal">
+                                            <button id="id_refreshJadwal" type="button" class="btn yellow">Refresh Jadwal</button>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4 ">
+                                            <label>Selisih :</label>
+                                            <input type="text" name="selisihJadwal"
+                                                   class="form-control nomor input-sm " id="idSelisihJadwal"
+                                                   readonly>
+                                        </div>
+                                        <div class="col-md-4 ">
                                             <label>Total :</label>
                                             <input type="text" name="totalJadwal"
-                                                   class="form-control nomor input-sm" id="idTotalJadwal"
+                                                   class="form-control nomor input-sm " id="idTotalJadwal"
                                                    readonly>
                                         </div>
                                     </div>
@@ -364,6 +377,19 @@
                                 <div class="col-md-6">
                                     <input type="text" id="idTmpAksiBtn" class="hidden">
 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab_2_4">
+                            <div class="row">
+                                <div class="form-body">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Kesepakatan : </label>
+                                            <textarea rows="6" cols="" name="kesepakatan" id="id_kesepakatan"
+                                                      class="form-control input-sm" placeholder="" maxlength="255"></textarea>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -374,11 +400,11 @@
                                             <!--<i class="fa fa-check"></i>--> Simpan
                                         </button>
                                         <button id="id_btnBatal" type="button" class="btn default">Batal</button>
+                                        <button id="id_btnCetak" type="button" class="btn green">Cetak</button>
                                     </div>
                                 </div>
 
                             </div>
-
                         </div>
 
                     </div>
@@ -810,106 +836,9 @@
     readyToStart();
     tglTransStart();
     $("#id_rumah").focus();
-
-    /*$("#navitab_2_1").click(function () {
-        $('#idTmpAksiTab').val('1');
-    });
-
-    $('#navitab_2_2').click(function () {
-        $('#idTmpAksiTab').val('2');
-    });
-    $('#navitab_2_3').click(function () {
-        $('#idTmpAksiTab').val('3');
-    });*/
-    $('#id_btnBatal').click(function () {
-        btnStart();
-        resetForm();
-        readyToStart();
-        tglTransStart();
+    $('#id_refreshJadwal').click(function () {
+        $('#idSelisihJadwal').val('0.00');
         $('#id_body_data').empty();
-        $('#id_btnModalCust').attr('disabled', false);
-    });
-    function getDescRumah(idRumah) {
-        ajaxModal();
-        if (idRumah != '') {
-            $.post("<?php echo site_url('/penjualan/getDescRumah'); ?>",
-                {
-                    'idRumah': idRumah
-                }, function (data) {
-                    if (data.baris == 1) {
-                        //$('#id_proyekId').val(data.id_proyek);
-                        $('#id_namaProyek').val(data.nama_proyek);
-                        $('#id_namaRumah').val(data.nama_rumah);
-                        $('#id_typeRumah').val(data.type);
-                        $('#id_blokRumah').val(data.blok);
-                        $('#id_luasRumah').val(data.luas);
-                        $('#id_hargaRumah').val(data.harga);
-                        $('#id_statusJual').val(data.status_jual);
-                        hitungHargaStlBooking();
-                    } else {
-                        alert('Data tidak ditemukan!');
-                        $('#id_btnBatal').trigger('click');
-                    }
-                }, "json");
-        }//if kd<>''
-    }
-    function getDescRumahBooked(idRumah) {
-        ajaxModal();
-        if (idRumah != '') {
-            $.post("<?php echo site_url('/penjualan/getDescRumahBooked'); ?>",
-                {
-                    'idRumah': idRumah
-                }, function (data) {
-                    if (data.baris == 1) {
-                        //$('#id_proyekId').val(data.id_proyek);
-                        $('#id_namaProyek').val(data.nama_proyek);
-                        $('#id_namaRumah').val(data.nama_rumah);
-                        $('#id_typeRumah').val(data.type);
-                        $('#id_blokRumah').val(data.blok);
-                        $('#id_luasRumah').val(data.luas);
-                        $('#id_hargaRumah').val(data.harga);
-                        $('#id_statusJual').val(data.status_jual);
-                        $('#id_idPenj').val(data.id_penj);
-                        $('#id_hargaBooking').val(data.booking);
-                        $('#id_tglBooking').val(data.tgl_booking);
-
-                        $('#id_customerId').val(data.id_cust);
-                        $('#id_namaCustomer').val(data.nama_cust);
-                        $('#id_alamat').val(data.alamat);
-                        $('#id_noId').val(data.no_id);
-                        $('#id_noHp').val(data.no_hp);
-                        $('#id_noTelp').val(data.no_telp);
-                        $('#id_btnModalCust').attr('disabled', true);
-                        hitungHargaStlBooking();
-                    } else {
-                        alert('Data tidak ditemukan!');
-                        $('#id_btnBatal').trigger('click');
-                    }
-                }, "json");
-        }//if kd<>''
-    }
-
-    function ajaxSubmit() {
-        ajaxModal();
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            url: "<?php echo base_url(); ?>penjualan/simpan",
-            data: dataString,
-
-            success: function (data) {
-                $('#id_btnBatal').trigger('click');
-                $('#id_ReloadRumah').trigger('click');
-                $("#navitab_2_1").trigger('click');
-                UIToastr.init(data.tipePesan, data.pesan);
-            }
-
-        });
-        event.preventDefault();
-    }
-    $('#navitab_2_3').click(function () {
-        $('#id_body_data').empty();
-
         var table = $('#id_tabelJadwalBayar');
         table.on('focus', '.nomor', function (e) {
             if ($(this).val() == '0.00') {
@@ -933,6 +862,14 @@
                 nilaiSbl = parseFloat(CleanNumber(nilaiSbl));
                 totalJadwal = totalJadwal - nilaiSbl + nilaiSkrg;
                 $('#idTotalJadwal').val(number_format(totalJadwal, 2));
+
+                var tipePembayaran = $('#id_tipePembayaran').val();
+                if (tipePembayaran == '2'){
+                    var realPrice = parseFloat(CleanNumber($('#id_hargaStlBooking').val()));
+                    var totalJadwal = parseFloat(CleanNumber($('#idTotalJadwal').val()));
+                    var selisih = realPrice - totalJadwal;
+                    $('#idSelisihJadwal').val(number_format(selisih, 2));
+                }
                 //totalJadwal     =
 
             }
@@ -1077,6 +1014,113 @@
             $('#id_tipePembayaran').focus();
         }
     });
+    $('#navitab_2_3').click(function () {
+        var tempJadwalRefresh = $('#id_tempRefreshJadwal').val();
+        tempJadwalRefresh = parseInt(tempJadwalRefresh);
+        if (tempJadwalRefresh < 1) {
+        $('#id_refreshJadwal').trigger('click');
+        }
+        tempJadwalRefresh = tempJadwalRefresh+1;
+        $('#id_tempRefreshJadwal').val(tempJadwalRefresh);
+
+    });
+    /*$("#navitab_2_1").click(function () {
+        $('#idTmpAksiTab').val('1');
+    });
+
+    $('#navitab_2_2').click(function () {
+        $('#idTmpAksiTab').val('2');
+    });
+    $('#navitab_2_3').click(function () {
+        $('#idTmpAksiTab').val('3');
+    });*/
+    $('#id_btnBatal').click(function () {
+        btnStart();
+        resetForm();
+        readyToStart();
+        tglTransStart();
+        $('#id_body_data').empty();
+        $('#id_btnModalCust').attr('disabled', false);
+    });
+    function getDescRumah(idRumah) {
+        ajaxModal();
+        if (idRumah != '') {
+            $.post("<?php echo site_url('/penjualan/getDescRumah'); ?>",
+                {
+                    'idRumah': idRumah
+                }, function (data) {
+                    if (data.baris == 1) {
+                        //$('#id_proyekId').val(data.id_proyek);
+                        $('#id_namaProyek').val(data.nama_proyek);
+                        $('#id_namaRumah').val(data.nama_rumah);
+                        $('#id_typeRumah').val(data.type);
+                        $('#id_blokRumah').val(data.blok);
+                        $('#id_luasRumah').val(data.luas);
+                        $('#id_hargaRumah').val(data.harga);
+                        $('#id_statusJual').val(data.status_jual);
+                        hitungHargaStlBooking();
+                    } else {
+                        alert('Data tidak ditemukan!');
+                        $('#id_btnBatal').trigger('click');
+                    }
+                }, "json");
+        }//if kd<>''
+    }
+    function getDescRumahBooked(idRumah) {
+        ajaxModal();
+        if (idRumah != '') {
+            $.post("<?php echo site_url('/penjualan/getDescRumahBooked'); ?>",
+                {
+                    'idRumah': idRumah
+                }, function (data) {
+                    if (data.baris == 1) {
+                        //$('#id_proyekId').val(data.id_proyek);
+                        $('#id_namaProyek').val(data.nama_proyek);
+                        $('#id_namaRumah').val(data.nama_rumah);
+                        $('#id_typeRumah').val(data.type);
+                        $('#id_blokRumah').val(data.blok);
+                        $('#id_luasRumah').val(data.luas);
+                        $('#id_hargaRumah').val(data.harga);
+                        $('#id_statusJual').val(data.status_jual);
+                        $('#id_idPenj').val(data.id_penj);
+                        $('#id_hargaBooking').val(data.booking);
+                        $('#id_tglBooking').val(data.tgl_booking);
+
+                        $('#id_customerId').val(data.id_cust);
+                        $('#id_namaCustomer').val(data.nama_cust);
+                        $('#id_alamat').val(data.alamat);
+                        $('#id_noId').val(data.no_id);
+                        $('#id_noHp').val(data.no_hp);
+                        $('#id_noTelp').val(data.no_telp);
+                        $('#id_btnModalCust').attr('disabled', true);
+                        hitungHargaStlBooking();
+                    } else {
+                        alert('Data tidak ditemukan!');
+                        $('#id_btnBatal').trigger('click');
+                    }
+                }, "json");
+        }//if kd<>''
+    }
+
+    function ajaxSubmit() {
+        ajaxModal();
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "<?php echo base_url(); ?>penjualan/simpan",
+            data: dataString,
+
+            success: function (data) {
+                //$('#id_btnBatal').trigger('click');
+                $('#id_ReloadRumah').trigger('click');
+                $("#navitab_2_1").trigger('click');
+                UIToastr.init(data.tipePesan, data.pesan);
+            }
+
+        });
+        event.preventDefault();
+    }
+
     function hitungHargaStlBooking() {
         var hargaAwal = $('#id_hargaRumah').val();
         hargaAwal = parseFloat(CleanNumber(hargaAwal));
@@ -1127,16 +1171,29 @@
     $('#id_formPenjualan').submit(function (event) {
         dataString = $("#id_formPenjualan").serialize();
         //var aksiTab = $('#idTmpAksiTab').val();
-        var r = confirm('Anda yakin menyimpan data ini?');
-        if (r == true) {
-            ajaxSubmit();
-        } else {//if(r)
+        var selisih = $('#idSelisihJadwal').val();
+        if(selisih != '0.00'){
+            alert("Total harga tidak sama dengan total jadwal.");
             return false;
+        }else{
+            var r = confirm('Anda yakin menyimpan data ini?');
+            if (r == true) {
+                ajaxSubmit();
+            } else {//if(r)
+                return false;
+            }
         }
-
-
     });
-
+	$('#id_btnCetak').click(function(){
+        var idPenj = $('#id_idPenj').val();
+		var idCust = $('#id_customerId').val();
+		var idrumah = $('#id_rumahId').val();        
+		if (idPenj == ''){
+            alert('Tidak ada kode penjualan');
+        }else{
+            window.open("<?php echo base_url('penjualan/cetak/'); ?>/" + idPenj +"/"+idCust+"/"+idrumah, '_blank');
+        }
+    });
 </script>
 
 

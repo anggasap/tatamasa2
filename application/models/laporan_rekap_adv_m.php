@@ -19,7 +19,7 @@ class Laporan_rekap_adv_m extends CI_Model {
 		$sql="select a.id_advance,a.id_kyw,a.jml_uang,a.tgl_trans,a.tgl_jt,a.keterangan,b.*,c.* from master_advance a 
 			  left join master_karyawan b on a.id_kyw = b.id_kyw
 			  left join master_dept c on  b.dept_kyw= c.id_dept
-			  where a.id_kyw = ".$idKyw." and tgl_jt between '".$tanggal1."' and '".$tanggal2."'";
+			  where a.id_kyw = '".$idKyw."' and tgl_jt between '".$tanggal1."' and '".$tanggal2."'";
 		$query=$this->db->query($sql);
 		return $query->result(); // returning rows, not row
 	}

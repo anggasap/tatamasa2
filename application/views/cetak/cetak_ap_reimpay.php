@@ -77,9 +77,12 @@
   </head>
   <body style="width:100%;">
 	<table class="judul">
-		<tr><td rowspan="3" align="center"><img id="logo" src="<?php echo base_url('metronic/img/logo_berkah.png'); ?>"></td><td style="font-size: 16px;font-weight: bold;">PT BERKAH GRAHA MANDIRI</td></tr>
-		<tr><td>Beltway Office Park Tower Lt. 5</td></tr>
-		<tr><td>Jl. TB Simatupang No. 41 - Pasar Minggu - Jakarta Selatan</td></tr>
+		<?php foreach($info as $i){?>
+		<tr><td rowspan="3" align="center"><img id="logo" src="<?php echo base_url('metronic/img/logo_berkah.png'); ?>"></td>
+		<td style="font-size: 14px;font-weight: bold;"><?php echo $i->pt; ?></td></tr>
+		<tr><td><?php echo $i->kantor; ?></td></tr>
+		<tr><td><?php echo $i->alamat; ?></td></tr>
+		<?php } ?>
 	</table>
 	<br/>
 	<table class="tableizer-table">
@@ -137,7 +140,7 @@
 	</table>
 	<br/>
 	<table class="tableizer-table5">
-	 <tr><td>Prepared by,
+	 <tr><td>Prepared by, <?php echo  $this->session->userdata('nama_kyw'); ?>
 	 </td><td>Reviewed by,
 	 </td><td>Approved by,
 	 </td><td>Received by,
@@ -153,7 +156,8 @@
 	 <tr></tr>
 	 <tr><td>Date : <?php echo $date; ?></td>
 	 <td>Date : </td>
-	 <td>Date : </td><td>Date :</td></tr>
+	 <td>Date : </td>
+	 <td>Date :</td></tr>
 	</table>
   </body>
 </html>

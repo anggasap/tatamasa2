@@ -83,7 +83,8 @@ class Master_rumah extends CI_Controller
 						'type'=>$row->tipe,
 						'blok'=>$row->blok,
 						'luas' => $luas,
-                        'harga' =>$harga
+                        'harga' =>$harga,
+						'status_jual' => $row->status_jual
 						//'' => $row->
 				);
 		}else{

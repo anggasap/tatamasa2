@@ -19,9 +19,33 @@ class Penjualan_m extends CI_Model {
 		}
 
 	}
+	function getAngsInfo($idPenj)
+	{
+		//$sql ="select * from trans_jual tj where tj.master_id = 'BG-0000001-0216' and tj.kode_trans = '200'";
+		$this->db->select('r.*');
+		$this->db->from('trans_jual r');
+		$this->db->where ( 'r.master_id', $idPenj );
+		$this->db->where ( 'r.kode_trans', 200);
+		$query = $this->db->get();
+		return $query->result ();		
+	}
+	public function getCostumer($idcust)
+	{
+		$this->db->select('r.*');
+		$this->db->from('master_customer r');
+		$this->db->where ( 'r.id_cust', $idRumah );
+//		$this->db->where ( 'T.STATUS_AKTIF <>', 3 );
+		$query = $this->db->get ();
+		if($query->num_rows()== '1'){
+			return $query->result ();
+		}else{
+			return false;
+		}
+
+	}
 	public function getDescRumahBooked($idRumah)
 	{
-		$this->db->select ( 'r.*,c.*, p.nama_proyek,mj.master_id, mj.tgl_trans,mj.booking' );
+		$this->db->select ( 'r.*,c.*, p.nama_proyek,mj.master_id, mj.tgl_trans,mj.booking,mj.harga as hargamj,mj.dp,mj.sisa_dp' );
 		$this->db->from('master_rumah r');
 		$this->db->join('master_proyek p', 'r.id_proyek=p.id_proyek', 'LEFT');
 		$this->db->join('master_jual mj', 'r.id_rumah=mj.id_rumah', 'LEFT');
@@ -33,9 +57,7 @@ class Penjualan_m extends CI_Model {
 		}else{
 			return false;
 		}
-
 	}
-
 
 	public function getRumahAll()
 	{

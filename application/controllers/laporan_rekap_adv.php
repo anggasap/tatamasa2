@@ -9,6 +9,7 @@ class Laporan_rekap_adv extends CI_Controller
 
 		$this->load->model('home_m');
 		$this->load->model('laporan_rekap_adv_m');
+		$this->load->model('setting_laporan_m');
 		$this->load->library('fpdf');
 		session_start ();
 	}
@@ -52,6 +53,12 @@ class Laporan_rekap_adv extends CI_Controller
     	if($this->auth->is_logged_in() == false){
     		redirect('main/index');
     	}else{
+			$info = $this->setting_laporan_m->getAllSetting();
+			foreach($info as $i){
+				$nama = $i->pt;
+				$kantor = $i->kantor;
+				$alamat = $i->alamat;
+			}
 			$checkGroup = $this->session->userdata('usergroup_desc');
 			$tanggal1 	= $this->uri->segment(3);
 			$date1 = new DateTime($tanggal1);
@@ -71,14 +78,14 @@ class Laporan_rekap_adv extends CI_Controller
 					$data['all'] = array();
 				}else{
 					$data['all'] = $this->laporan_rekap_adv_m->getAllRekapAdvByID($tglAwal,$tglAkhir,$idkyw);
-					$data['datatanggal'] = 'Data Tanggal : '.$date1.' s/d '.$date2.', Kelompok Advance'.$idkyw;	
+					$data['datatanggal'] = 'Data Tanggal : '.$tanggal1.' s/d '.$tanggal2.', Kelompok Advance '.$idkyw;	
 				}	
 			}
 			define('FPDF_FONTPATH',$this->config->item('fonts_path'));
 			$data['image1'] = base_url('metronic/img/tatamasa_logo.jpg');	
-			$data['nama'] = 'PT BERKAH GRAHA MANDIRI';
-			//$data['tower'] = 'Beltway Office Park Tower Lt. 5';
-			//$data['alamat'] = 'Jl. TB Simatung No. 41 - Pasar Minggu - Jakarta Selatan';
+			$data['nama'] = trim($nama);
+			$data['tower'] = trim($kantor);
+			$data['alamat'] = trim($alamat);
 			$data['laporan'] = 'Daftar Advance Request';
 			$data['user'] = $this->session->userdata('username');
     		$this->load->view('cetak/cetak_laporan_rekap_adv',$data);
@@ -99,16 +106,16 @@ class Laporan_rekap_adv extends CI_Controller
 			$idkyw 	= $this->session->userdata('id_kyw');
 			if($checkGroup == "Admin"){
 				$data ['all'] 	= $this->laporan_rekap_adv_m->getAllRekapAdvExcel($tglAwal,$tglAkhir);
-				$data['datatanggal'] = 'Data Tanggal : '.$tanggal1.' s/d '.$tanggal2.', Semua Kelompok Advance';	
+				$data ['datatanggal'] = 'Data Tanggal : '.$tanggal1.' s/d '.$tanggal2.', Semua Kelompok Advance';	
 			}elseif($checkGroup == "Akutansi"){
 				$data ['all'] 	= $this->laporan_rekap_adv_m->getAllRekapAdvExcel($tglAwal,$tglAkhir);
-				$data['datatanggal'] = 'Data Tanggal : '.$tanggal1.' s/d '.$tanggal2.', Semua Kelompok Advance';	
+				$data ['datatanggal'] = 'Data Tanggal : '.$tanggal1.' s/d '.$tanggal2.', Semua Kelompok Advance';	
 			}else{
 				if($idkyw == 0){
-					$data['all'] = array();
+					$data ['all'] = array();
 				}else{
-					$data['all'] = $this->laporan_rekap_adv_m->getAllRekapAdvByID_excel($tglAwal,$tglAkhir,$idkyw);
-					$data['datatanggal'] = 'Data Tanggal : '.$date1.' s/d '.$date2.', Kelompok Advance'.$idkyw;	
+					$data ['all'] = $this->laporan_rekap_adv_m->getAllRekapAdvByID_excel($tglAwal,$tglAkhir,$idkyw);
+					$data ['datatanggal'] = 'Data Tanggal : '.$date1.' s/d '.$date2.', Kelompok Advance '.$idkyw;	
 				}	
 			}
 		}	

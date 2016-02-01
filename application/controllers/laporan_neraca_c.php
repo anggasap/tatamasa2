@@ -9,6 +9,7 @@ class Laporan_neraca_c extends CI_Controller
 
 		$this->load->model('home_m');
 		$this->load->model('lapneracamodel');
+		$this->load->model('setting_laporan_m');
 		$this->load->library('fpdf');
 		//$this->load->library('mc_table');
 		session_start ();
@@ -57,6 +58,13 @@ class Laporan_neraca_c extends CI_Controller
 			$timestamp  = strtotime($tgl);
 			$tgl_trans  = date('Y-m-d', $timestamp);
 			
+			$info = $this->setting_laporan_m->getAllSetting();
+			foreach($info as $i){
+				$nama = $i->pt;
+				$kantor = $i->kantor;
+				$alamat = $i->alamat;
+			}
+			
 			/*============= DEBET + ====================*/
 			$delete = $this->lapneracamodel->deleteTempPerk($tgl_trans,$this->session->userdata('id_user'));
 			$temp_perkiraan_aktiva = $this->lapneracamodel->insert_temp_perkiraan_aktiva( $tgl_trans,$this->session->userdata('id_user'));
@@ -98,9 +106,9 @@ class Laporan_neraca_c extends CI_Controller
 			}
 			define('FPDF_FONTPATH',$this->config->item('fonts_path'));
 			$data['image1'] = base_url('metronic/img/tatamasa_logo.jpg');	
-			$data['nama'] 	= 'PT BERKAH GRAHA MANDIRI';
-			$data['tower'] 	= 'Beltway Office Park Tower Lt. 5';
-			$data['alamat'] = 'Jl. TB Simatupang No. 41 - Pasar Minggu - Jakarta Selatan';
+			$data['nama'] = trim($nama);
+			$data['tower'] = trim($kantor);
+			$data['alamat'] = trim($alamat);
 			$data['laporan']= 'Laporan Posisi Keuangan per ';
 			$data['user'] 	= $this->session->userdata('username');
 			$data['tgl'] 	= $tgl_trans;
@@ -524,11 +532,17 @@ class Laporan_neraca_c extends CI_Controller
 			}else{
 				$data ['neraca'] = $this->lapneracamodel->get_data_neraca_bukan_nol($tgl_trans,$this->session->userdata('id_user'));
 			}*/
+			$info = $this->setting_laporan_m->getAllSetting();
+			foreach($info as $i){
+				$nama = $i->pt;
+				$kantor = $i->kantor;
+				$alamat = $i->alamat;
+			}
 			define('FPDF_FONTPATH',$this->config->item('fonts_path'));
 			$data['image1'] = base_url('metronic/img/tatamasa_logo.jpg');	
-			$data['nama'] 	= 'PT BERKAH GRAHA MANDIRI';
-			$data['tower'] 	= 'Beltway Office Park Tower Lt. 5';
-			$data['alamat'] = 'Jl. TB Simatupang No. 41 - Pasar Minggu - Jakarta Selatan';
+			$data['nama'] = trim($nama);
+			$data['tower'] = trim($kantor);
+			$data['alamat'] = trim($alamat);
 			$data['laporan']= 'Laporan Posisi Keuangan per ';
 			$data['user'] 	= $this->session->userdata('username');
 			$data['tgl'] 	= $tgl_trans;

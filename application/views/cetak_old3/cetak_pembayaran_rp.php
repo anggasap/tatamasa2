@@ -83,17 +83,17 @@
 	</table>
 	<br/>
 	<table class="tableizer-table">
-	<tr class="tableizer-firstrow"><th colspan="14">BANK PAYMENT - ADVANCE</th></tr>
+	<tr class="tableizer-firstrow"><th colspan="14">BANK PAYMENT - REQUEST PAYMENT</th></tr>
 	</table>
 	<br/>
 	<?php 
 	foreach ($all as $j){
 	?>
 	<table class="tableizer-table2">
-	 <tr><td>&nbsp;</td><td width="10%" align="left">Voucher No.</td><td width="2%" align="left">:</td><td width="13%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"></td>
+	 <tr><td>&nbsp;</td><td width="10%" align="left">Voucher No.</td><td width="2%" align="left">:</td><td width="13%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->voucher_no; ?></td>
 	 <td width="50%">&nbsp;</td><td width="10%" align="left">Kode Proyek</td><td width="2%" align="left">:</td><td width="13%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo $j->id_proyek; ?></td></tr>
-	 <tr><td>&nbsp;</td><td width="10%" align="left">Voucher Date</td><td width="2%" align="left">:</td><td width="13%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"></td>
-	 <td width="50%">&nbsp;</td><td width="10%" align="left">Apply to</td><td width="2%" align="left">:</td><td width="13%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">ADVANCE</td></tr>
+	 <tr><td>&nbsp;</td><td width="10%" align="left">Voucher Date</td><td width="2%" align="left">:</td><td width="13%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;"><?php echo tgl_indo($j->tgl_voucher); ?></td>
+	 <td width="50%">&nbsp;</td><td width="10%" align="left">Apply to</td><td width="2%" align="left">:</td><td width="13%" style="border-bottom: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;">Request For Payment</td></tr>
 	</table>
 	<br/>
 	<table class="tableizer-table3">

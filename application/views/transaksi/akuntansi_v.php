@@ -311,7 +311,7 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="text" id="idTxtTempLoop" name="txtTempLoop"
-                                               class="form-control nomor1 ">
+                                               class="form-control nomor1 hidden">
                                         <input type="text" id="idTxtTempJnsKode" name="txtTempJnsKode"
                                                class="form-control nomor1 hidden">
                                         <input type="text" id="idTempUbahCPA" name="txtTempUbahCPA"

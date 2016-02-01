@@ -10,6 +10,7 @@ class Penjualan extends CI_Controller
         $this->load->model('home_m');
         $this->load->model('penjualan_m');
         $this->load->model('booking_m');
+		$this->load->library('fpdf');
         session_start();
     }
 
@@ -153,7 +154,7 @@ class Penjualan extends CI_Controller
     function simpan()
     {
         $idCustomer = trim($this->input->post('customerId'));
-        $rumahId = trim($this->input->post('rumahId'));
+        $rumahId    = trim($this->input->post('rumahId'));
 
         $tglTrans = trim($this->input->post('tglTrans'));
         $tglTrans = date('Y-m-d', strtotime($tglTrans));
@@ -168,6 +169,7 @@ class Penjualan extends CI_Controller
         $sisaDP		        = str_replace(',', '', trim($this->input->post('sisaDP')));
         $KPR                = (100 - $DPPersen)/100 * $hargaRumah;
         $hargaStlBooking		    = str_replace(',', '', trim($this->input->post('hargaStlBooking')));
+        $kesepakatan    = trim($this->input->post('kesepakatan'));
         //1. jika belum booking maka insert 1 row
         if($idPenj == ''){
 
@@ -187,7 +189,9 @@ class Penjualan extends CI_Controller
                     'sisa_dp'       =>$KPR,
                     'tgl_trans'		=>$tglTrans,
                     'harga'			=>$sisaDP,
-                    'status_jual'   =>2
+                    'status_jual'   =>2,
+                    'id_kyw'        =>$this->session->userdata('id_kyw'),
+                    'kesepakatan'   =>$kesepakatan
 
                 );
             }else{
@@ -198,7 +202,9 @@ class Penjualan extends CI_Controller
                     'tipe_bayar'    =>$tipePembayaran,
                     'tgl_trans'		=>$tglTrans,
                     'harga'			=>$hargaStlBooking,
-                    'status_jual'   =>2
+                    'status_jual'   =>2,
+                    'id_kyw'        =>$this->session->userdata('id_kyw'),
+                    'kesepakatan'   =>$kesepakatan
 
                 );
             }
@@ -231,7 +237,9 @@ class Penjualan extends CI_Controller
                     'dp'            =>$DPPersen,
                     'sisa_dp'       =>$KPR,
                     'harga'			=>$sisaDP,
-                    'status_jual' => '2'
+                    'status_jual' => '2',
+                    'id_kyw'        =>$this->session->userdata('id_kyw'),
+                    'kesepakatan'   =>$kesepakatan
                 );
 
             }else{
@@ -239,7 +247,9 @@ class Penjualan extends CI_Controller
                     'tipe_bayar'    =>$tipePembayaran,
                     'tgl_trans'		=>$tglTrans,
                     'harga'			=>$hargaStlBooking,
-                    'status_jual' => '2'
+                    'status_jual' => '2',
+                    'id_kyw'        =>$this->session->userdata('id_kyw'),
+                    'kesepakatan'   =>$kesepakatan
                 );
             }
             $model_masterJual = $this->penjualan_m->ubahMasterJual($data_master_jual, $idPenj);
@@ -270,14 +280,15 @@ class Penjualan extends CI_Controller
                 $tmpTglJdw 	    = trim($this->input->post($tTglJdw));
                 $tmpTglJdw 		= date('Y-m-d', strtotime($tmpTglJdw));
                 $tmpJumlah 		= str_replace(',', '', trim($this->input->post($tJumlah)));
-
+				$modelidTrans = $this->booking_m->getKodeTrans();
+				
                 $data_trans = array(
-                    'master_id'		=>$idPenj,
-                    'tgl_trans'		=>$tmpTglJdw,
-                    'kode_trans'	=>'200',
-                    'jml_trans'		=>$tmpJumlah,
-                    'keterangan'	=>''
-
+					'kode_transaksi' => $modelidTrans,
+                    'master_id'		 => $idPenj,
+                    'tgl_trans'	 	 => $tmpTglJdw,
+                    'kode_trans'	 => '200',
+                    'jml_trans'		 => $tmpJumlah,
+                    'keterangan'	 => ''
                 );
 
                 $model_trans = $this->penjualan_m->simpan_trans($data_trans);
@@ -299,9 +310,26 @@ class Penjualan extends CI_Controller
         }
         $this->output->set_output(json_encode($array));
     }
-
-
-
+	
+	function cetak($kodePenj,$idCust,$idRumah)
+    {
+        if ($this->auth->is_logged_in() == false) {
+            redirect('main/index');
+        }else{
+				
+			$tglTrans = date('d-m-Y');
+			$data['rows1'] 	= $this->penjualan_m->getDescRumahBooked($idRumah);
+			$data['rows3']  = $this->penjualan_m->getAngsInfo($kodePenj);
+			define('FPDF_FONTPATH',$this->config->item('fonts_path'));
+			$data['image1'] = base_url('metronic/img/tatamasa_logo.jpg');	
+			$data['nama'] = 'PT BERKAH GRAHA MANDIRI';
+			$data['tower'] = 'Beltway Office Park Tower Lt. 5';
+			$data['alamat'] = 'Jl. TB Simatupang No. 41 - Pasar Minggu - Jakarta Selatan';
+			$data['laporan'] = 'Laporan Penjualan Tanggal '.$tglTrans;
+			$data['user'] = $this->session->userdata('username');
+			$this->load->view('cetak/cetak_laporan_penjualan', $data);
+        }
+    }
 }
 
 /* End of file sec_user.php */

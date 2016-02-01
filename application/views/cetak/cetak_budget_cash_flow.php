@@ -24,8 +24,8 @@ $this->fpdf->Line(0.5,3.20,29.5,3.20);
 //$this->fpdf->Cell(19,1,'Header',0,0,'C');
 /* setting header table */
 $this->fpdf->SetFont('Times','B',10);
-$this->fpdf->Cell(1.3 , 0.5, 'Kode' , 0, 'LR', 'L');
-$this->fpdf->Cell(5.9 , 0.5, 'Nama Cash Flow' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.8 , 0.5, 'Kode' , 0, 'LR', 'L');
+$this->fpdf->Cell(5.4 , 0.5, 'Nama Cash Flow' , 0, 'LR', 'L');
 $this->fpdf->Cell(1.7 , 0.5, 'Jan' , 0, 'LR', 'L');
 $this->fpdf->Cell(1.7 , 0.5, 'Feb' , 0, 'LR', 'L');
 $this->fpdf->Cell(1.7 , 0.5, 'Mar' , 0, 'LR', 'L');
@@ -46,7 +46,7 @@ $this->fpdf->Ln();
 foreach($all as $b){
 $this->fpdf->Ln();
 $this->fpdf->SetFont('Times','',7);
-$this->fpdf->Cell(1.1, 0.5, $b->kode_cflow, 0, 'LR', 'L');
+$this->fpdf->Cell(1.8, 0.5, $b->kode_cflow, 0, 'LR', 'L');
 $this->fpdf->Cell(5.2, 0.5, $b->nama_cflow, 0, 'LR', 'L');
 $this->fpdf->Cell(1.7 , 0.5, number_format(round($b->jan)/1000,2,",",".") , 0, 'LR', 'R');
 $this->fpdf->Cell(1.7 , 0.5, number_format(round($b->feb)/1000,2,",",".") , 0, 'LR', 'R');
@@ -65,7 +65,7 @@ $this->fpdf->Cell(1.7 , 0.5, number_format($b->total_right/1000,2,",",".") , 0, 
 foreach($total as $t){
 $this->fpdf->Ln();
 $this->fpdf->SetFont('Times','B',8);
-$this->fpdf->Cell(1.5 , 0.5, '' , 0, 'LR', 'L');
+$this->fpdf->Cell(1.8 , 0.5, '' , 0, 'LR', 'L');
 $this->fpdf->Cell(5.2 , 0.5, 'Total' , 0, 'LR', 'L');
 $this->fpdf->Cell(1.7 , 0.5, number_format(round($t->jan)/1000,2,",",".") , 0, 'LR', 'R');
 $this->fpdf->Cell(1.7 , 0.5, number_format(round($t->feb)/1000,2,",",".") , 0, 'LR', 'R');

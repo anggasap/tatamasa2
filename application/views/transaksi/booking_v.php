@@ -877,7 +877,37 @@
                 }, "json");
         }//if kd<>''
     }
-
+	
+	function getDescBooking(kodeBooking){
+        ajaxModal();
+        if (kodeBooking != '') {
+            $.post("<?php echo site_url('/booking/getDescBooking'); ?>",
+                {
+                    'kodeBooking': kodeBooking
+                },function (data) {
+                    if (data.baris == 1) {
+                        var idRumah = data.idRumah;
+                        getDescRumah(idRumah);
+						$('#id_rumahId').val(idRumah);
+						$('#id_customerId').val(data.idCustomer);
+						$('#id_namaCustomer').val(data.namaCustomer);
+						$('#id_noId').val(data.noId);
+						$('#id_alamat').val(data.alamat);
+						$('#id_noHp').val(data.noHp);
+						$('#id_noTelp').val(data.noTelp);
+						$('#id_tgltrans').val(data.tglTrans);
+						$('#id_kodeTr').val(data.kode_transaksi);
+						$('#id_hargaBooking').val(data.hargaBooking);
+						$('#id_keterangan').val(data.keterangan);
+						
+                    }else{
+                        alert('Data tidak ditemukan!');
+                        $('#id_btnBatal').trigger('click');
+                    }
+                }, "json");
+        }//if kd<>''
+    }
+	
     function ajaxSubmit(){
         ajaxModal();
         $.ajax({

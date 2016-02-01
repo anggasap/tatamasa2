@@ -5336,8 +5336,8 @@ Tiles(new in v1.1.1)
   display: block;
   letter-spacing: 0.02em;
   float: left;
-  height: 135px;
-  width: 135px !important;
+  height: 135px;/*135*/
+  width: 135px !important;/*135*/
   cursor: pointer;
   text-decoration: none;
   color: #ffffff;
