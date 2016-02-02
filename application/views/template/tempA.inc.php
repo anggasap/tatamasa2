@@ -15,7 +15,8 @@
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
 			<a href="index.html" style="">
-				<img src="<?php echo base_url('metronic/img/logo_berkah.png'); ?>" style="" alt="logo"/>
+				<img src="<?php echo base_url('metronic/img/logo_berkah.jpg'); ?>" style="" alt="logo" class="logo-default"/>
+
 			</a>
 			<div class="menu-toggler sidebar-toggler">
 				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->

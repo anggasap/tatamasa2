@@ -218,6 +218,15 @@
                         </div>
                         <div class="tab-pane fade" id="tab_2_2">
                             <div class="row">
+                                <div class="col-md-8">
+                                    <label>Harga Jadi</label>
+                                    <input id="id_hargaJadi" required="required"
+                                           class="form-control input-sm kanan nomor"
+                                           type="text" name="hargaJadi" placeholder="" />
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
                                 <div class="form-body">
                                     <div class="col-md-3">
                                         <label>Nominal diskon </label>
@@ -229,6 +238,46 @@
                                         <label>Harga setelah diskon</label>
                                         <input id="id_hargaStlDiskon" class="form-control nomor input-sm"
                                                type="text" name="hargaStlDiskon" placeholder="" readonly/>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Cara Pembayaran</label>
+                                            <?php
+                                            $data = array();
+                                            $data[''] = '';
+                                            foreach ($carabayar as $row):
+                                                $data[$row['id_carabayar']] = $row['nama_carabayar'];
+                                            endforeach;
+                                            echo form_dropdown('carabayar', $data, '',
+                                                'id="id_carabayar" class="form-control input-sm select2me " required');
+                                            ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group divkodebayar" id="id_divkodebayartunai">
+                                            <label>Kode Pembayaran</label>
+                                            <?php
+                                            $data = array();
+                                            $data[''] = '';
+                                            foreach ($kodebayartunai as $row):
+                                                $data[$row['kode_bayar']] = $row['nama_kdbayar'];
+                                            endforeach;
+                                            echo form_dropdown('kodebayartunai', $data, '',
+                                                'id="id_kodebayartunai" class="form-control input-sm select2me " ');
+                                            ?>
+                                        </div>
+                                        <div class="form-group divkodebayar" id="id_divkodebayarnontunai">
+                                            <label>Kode Pembayaran</label>
+                                            <?php
+                                            $data = array();
+                                            $data[''] = '';
+                                            foreach ($kodebayarnontunai as $row):
+                                                $data[$row['kode_bayar']] = $row['nama_kdbayar'];
+                                            endforeach;
+                                            echo form_dropdown('kodebayarnontunai', $data, '',
+                                                'id="id_kodebayarnontunai" class="form-control input-sm select2me " ');
+                                            ?>
+                                        </div>
                                     </div>
                                     <!--end <div class="col-md-6"> 1 -->
                                 </div>
@@ -337,7 +386,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <!--<div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -348,11 +397,12 @@
 
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                     <!--end <div class="col-md-6"> 1 -->
                                 </div>
                             </div>
+
                         </div>
                         <div class="tab-pane fade" id="tab_2_3">
                             <div class="row">
@@ -436,8 +486,9 @@
                                         </button>
                                         <button id="id_btnBatal" type="button" class="btn default">Batal</button>
                                         <button id="id_btnCetakInv" type="button" class="btn green">Cetak Invoice</button>
-                                        <button id="id_btnCetakInfoPenj" type="button" class="btn green">Cetak Info</button>
+                                        <!--<button id="id_btnCetakInfoPenj" type="button" class="btn green">Cetak Info</button>-->
                                         <button id="id_btnCetakSPR" type="button" class="btn green">Cetak SPR</button>
+                                        <!--<button id="id_btnCetakKesepakatan" type="button" class="btn green">Cetak Kesepakatan</button>-->
                                     </div>
                                 </div>
 
@@ -1022,8 +1073,9 @@
                  $('#id_nominal').val(nominal);*/
                 $('#btnCloseModalDataPenj').trigger('click');
                 //var idJurnalPend = '1';
-                getDescRumah(rumahId);
-                getDescCust(custId);
+                /*getDescRumah(rumahId);
+                getDescCust(custId);*/
+                getDescBooking(masterId);
             });
             tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
         }
@@ -1238,7 +1290,44 @@
         readyToStart();
         tglTransStart();
         $('#id_body_data').empty();
+
+        $("#id_kodebayartunai").select2("val", "");
+        $("#id_kodebayarnontunai").select2("val", "");
+        $("#id_carabayar").select2("val", "");
+
         $('#id_btnModalCust').attr('disabled', false);
+    });
+    $('.divkodebayar').hide();
+    $("#id_carabayar").change(function () {
+        var caraBayar = $(this).val();
+        $('.divkodebayar').slideUp();
+        if (caraBayar == '5') {
+            $('#id_divkodebayartunai').slideDown();
+            $("#id_kodebayarnontunai").select2("val", "");
+        } else {
+            $('#id_divkodebayarnontunai').slideDown();
+            $("#id_kodebayartunai").select2("val", "");
+        }
+    });
+    $('#id_kodebayartunai').change(function () {
+        var kdBayar = $(this).val();
+        if (kdBayar == '') {
+            $('#id_kodebayar').val('');
+            $('#id_kodePerkBayar').val('');
+            $('#id_namaPerkBayar').val('');
+        } else {
+            //getDescKodeBayar(kdBayar);
+        }
+    });
+    $('#id_kodebayarnontunai').change(function () {
+        var kdBayar = $(this).val();
+        if (kdBayar == '') {
+            $('#id_kodebayar').val('');
+            $('#id_kodePerkBayar').val('');
+            $('#id_namaPerkBayar').val('');
+        } else {
+            //getDescKodeBayar(kdBayar);
+        }
     });
     function getDescRumah(idRumah) {
         ajaxModal();
@@ -1255,6 +1344,7 @@
                         $('#id_blokRumah').val(data.blok);
                         $('#id_luasRumah').val(data.luas);
                         $('#id_hargaRumah').val(data.harga);
+                        $('#id_hargaJadi').val(data.harga);
                         $('#id_statusJual').val(data.status_jual);
                         hitungHargaStlDiskon();
                         hitungHargaStlBooking();
@@ -1306,6 +1396,35 @@
                 }, "json");
         }//if kd<>''
     }
+    function getDescBooking(kodeBooking){
+        ajaxModal();
+        if (kodeBooking != '') {
+            $.post("<?php echo site_url('/booking/getDescBooking'); ?>",
+                {
+                    'kodeBooking': kodeBooking
+                },function (data) {
+                    if (data.baris == 1) {
+                        var idRumah = data.idRumah;
+                        getDescRumah(idRumah);
+                        $('#id_rumahId').val(idRumah);
+                        $('#id_customerId').val(data.idCustomer);
+                        $('#id_namaCustomer').val(data.namaCustomer);
+                        $('#id_noId').val(data.noId);
+                        $('#id_alamat').val(data.alamat);
+                        $('#id_noHp').val(data.noHp);
+                        $('#id_noTelp').val(data.noTelp);
+                        $('#id_tgltrans').val(data.tglTrans);
+                        $('#id_kodeTr').val(data.kode_transaksi);
+                        $('#id_hargaBooking').val(data.hargaBooking);
+                        $('#id_keterangan').val(data.keterangan);
+
+                    }else{
+                        alert('Data tidak ditemukan!');
+                        $('#id_btnBatal').trigger('click');
+                    }
+                }, "json");
+        }//if kd<>''
+    }
     function getDescRumahBooked(idRumah) {
         ajaxModal();
         if (idRumah != '') {
@@ -1321,6 +1440,7 @@
                         $('#id_blokRumah').val(data.blok);
                         $('#id_luasRumah').val(data.luas);
                         $('#id_hargaRumah').val(data.harga);
+                        $('#id_hargaJadi').val(data.harga);
                         $('#id_statusJual').val(data.status_jual);
                         $('#id_idPenj').val(data.id_penj);
                         $('#id_hargaBooking').val(data.booking);
@@ -1342,6 +1462,10 @@
         }//if kd<>''
     }
     $('#id_hargaBooking').change(function () {
+        hitungHargaStlBooking();
+    });
+    $('#id_hargaJadi').change(function () {
+        hitungHargaStlDiskon();
         hitungHargaStlBooking();
     });
     $("#id_ppn").change(function () {
@@ -1372,7 +1496,7 @@
         event.preventDefault();
     }
     function hitungHargaStlDiskon() {
-        var hargaAwal = $('#id_hargaRumah').val();
+        var hargaAwal = $('#id_hargaJadi').val();
         hargaAwal = parseFloat(CleanNumber(hargaAwal));
         var diskon = $('#id_diskon').val();
         diskon = parseFloat(CleanNumber(diskon));
@@ -1473,6 +1597,16 @@
             alert('Tidak ada kode penjualan');
         } else {
             window.open("<?php echo base_url('booking_jual/cetakSPR/'); ?>/" + idPenj + "/" + idCust + "/" + idrumah, '_blank');
+        }
+    });
+    $('#id_btnCetakKesepakatan').click(function () {
+        var idPenj = $('#id_kodePenj').val();
+        var idCust = $('#id_customerId').val();
+        var idrumah = $('#id_rumahId').val();
+        if (idPenj == '') {
+            alert('Tidak ada kode penjualan');
+        } else {
+            window.open("<?php echo base_url('booking_jual/cetakKspt/'); ?>/" + idPenj + "/" + idCust + "/" + idrumah, '_blank');
         }
     });
 </script>

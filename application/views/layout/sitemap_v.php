@@ -30,7 +30,7 @@
                 <!-- BEGIN PAGE CONTENT-->
                 <div class="row">
                     <div class="col-md-12">
-                        <img src="<?php echo base_url('metronic/img/siteplan_cempaka.jpg'); ?>" alt="">
+                        <img src="<?php echo base_url('metronic/img/siteplan_cempaka2.jpg'); ?>" alt="">
                     </div>
                 </div>
                 <!--<div class="tiles">

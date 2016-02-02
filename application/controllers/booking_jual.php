@@ -10,7 +10,8 @@ class Booking_jual extends CI_Controller
         $this->load->model('home_m');
         $this->load->model('booking_jual_m');
         $this->load->model('master_rumah_m');
-        $this->load->library('fpdf');
+        $this->load->model('kasir_ar_m');
+        $this->load->library('fpdfspr');
         session_start();
     }
 
@@ -155,6 +156,9 @@ class Booking_jual extends CI_Controller
         $data['menu_nama'] = $menuId[0]->menu_nama;
         $this->auth->restrict($data['menu_id']);
         $this->auth->cek_menu($data['menu_id']);
+        $data['kodebayartunai'] = $this->kasir_ar_m->getKodeBayarTunai();
+        $data['kodebayarnontunai'] = $this->kasir_ar_m->getKodeBayarNonTunai();
+        $data['carabayar'] = $this->kasir_ar_m->getCaraBayar();
 
 
         if (isset($_POST["btnSimpan"])) {
@@ -172,13 +176,16 @@ class Booking_jual extends CI_Controller
         }
     }
     function booked($idRumah){
-        $menuId = $this->home_m->get_menu_id('booking/home');
+        $menuId = $this->home_m->get_menu_id('booking_jual/home');
         $data['menu_id'] = $menuId[0]->menu_id;
         $data['menu_parent'] = $menuId[0]->parent;
         $data['menu_nama'] = $menuId[0]->menu_nama;
         $this->auth->restrict ($data['menu_id']);
         $this->auth->cek_menu ( $data['menu_id'] );
         $data['info_rumah'] = $this->master_rumah_m->getDescRumah( $idRumah );
+        $data['kodebayartunai'] = $this->kasir_ar_m->getKodeBayarTunai();
+        $data['kodebayarnontunai'] = $this->kasir_ar_m->getKodeBayarNonTunai();
+        $data['carabayar'] = $this->kasir_ar_m->getCaraBayar();
 
         if(isset($_POST["btnSimpan"])){
             $this->simpan();
@@ -211,18 +218,21 @@ class Booking_jual extends CI_Controller
         $hargaRumah = str_replace(',', '', trim($this->input->post('hargaRumah')));
         $diskon = str_replace(',', '', trim($this->input->post('diskon')));
         $hargaStlDiskon = str_replace(',', '', trim($this->input->post('hargaStlDiskon')));
-        //$hargaBooking		    = str_replace(',', '', trim($this->input->post('hargaBooking')));
+        $hargaBooking		    = str_replace(',', '', trim($this->input->post('hargaBooking')));
+        $hargaJadi		    = str_replace(',', '', trim($this->input->post('hargaJadi')));
         $DPPersen = str_replace(',', '', trim($this->input->post('DPPersen')));
         $sisaDP = str_replace(',', '', trim($this->input->post('sisaDP')));
         $KPR = (100 - $DPPersen) / 100 * $hargaStlDiskon;
         $hargaStlBooking = str_replace(',', '', trim($this->input->post('hargaStlBooking')));
 
         $kesepakatan = trim($this->input->post('kesepakatan'));
+        $keterangan = trim($this->input->post('keterangan'));
 
         $bulan = date('m', strtotime($tglTrans));//$tglTrans->format("m");
         $tahun = date('Y', strtotime($tglTrans)); //$tglTrans->format("Y");
 
         $idPenj = $this->booking_jual_m->getIdPenj($bulan, $tahun);
+        $noSPR = $this->booking_jual_m->getNoSPR($bulan,$tahun);
         if($namaRumah =='' || $hargaRumah <= 0 || $idCustomer ==''){
             $array = array(
                 'act'	=>0,
@@ -254,9 +264,14 @@ class Booking_jual extends CI_Controller
                     'dp' => $DPPersen,
                     'sisa_dp' => $KPR,// sisa dp akan di kpr kan
                     'tgl_trans' => $tglTrans,
+                    'harga_jadi'=>$hargaJadi,
                     'harga' => $sisaDP,//bener = harga dp(dari harga stl diskon*%dp) - booking
+                    'booking'=>$hargaBooking,
+                    'diskon'=>$diskon,
                     'status_jual' => 1,
                     'id_kyw' => $this->session->userdata('id_kyw'),
+                    'no_spr' =>$noSPR,
+                    'keterangan'=>$keterangan,
                     'kesepakatan' => $kesepakatan
 
                 );
@@ -267,9 +282,14 @@ class Booking_jual extends CI_Controller
                     'id_cust' => $idCustomer,
                     'tipe_bayar' => $tipePembayaran,
                     'tgl_trans' => $tglTrans,
+                    'harga_jadi'=>$hargaJadi,
                     'harga' => $hargaStlBooking,
+                    'booking'=>$hargaBooking,
+                    'diskon'=>$diskon,
                     'status_jual' => 1,
                     'id_kyw' => $this->session->userdata('id_kyw'),
+                    'no_spr' =>$noSPR,
+                    'keterangan'=>$keterangan,
                     'kesepakatan' => $kesepakatan
 
                 );
@@ -376,6 +396,27 @@ class Booking_jual extends CI_Controller
             $this->load->view('cetak/cetak_laporan_spr', $data);
         }
     }
+    function cetakKspt($kodePenj, $idCust, $idRumah)
+    {
+        if ($this->auth->is_logged_in() == false) {
+            redirect('main/index');
+        } else {
+
+            $tglTrans = date('d-m-Y');
+            $data['penj'] = $this->booking_jual_m->getDescRumahBooked($idRumah);
+            $data['tglTrans'] = $this->session->userdata('tgl_y');;
+            $data['rows3'] = $this->booking_jual_m->getAngsInfo($kodePenj);
+            define('FPDF_FONTPATH', $this->config->item('fonts_path'));
+            $data['image1'] = base_url('metronic/img/tatamasa_logo.jpg');
+            $data['nama'] = 'PT BERKAH GRAHA MANDIRI';
+            $data['tower'] = 'Beltway Office Park Tower Lt. 5';
+            $data['alamat'] = 'Jl. TB Simatupang No. 41 - Pasar Minggu - Jakarta Selatan';
+            $data['laporan'] = 'SURAT PEMESANAN UNIT RUMAH ';
+            $data['user'] = $this->session->userdata('username');
+            $this->load->view('cetak/cetak_laporan_kspt', $data);
+        }
+    }
+
 }
 
 /* End of file sec_user.php */

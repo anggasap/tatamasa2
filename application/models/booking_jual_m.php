@@ -45,7 +45,7 @@ class Booking_jual_m extends CI_Model {
 	}
 	public function getDescRumahBooked($idRumah)
 	{
-		$this->db->select ( 'r.*,c.*, p.nama_proyek,mj.master_id, mj.tgl_trans,mj.booking,mj.harga as hargamj,mj.dp,mj.sisa_dp' );
+		$this->db->select ( 'r.*,c.*, p.nama_proyek,mj.master_id,mj.no_spr,mj.tipe_bayar,mj.dp,mj.jkw_kpr,mj.kesepakatan, mj.tgl_trans,mj.booking,mj.harga_jadi,mj.diskon,mj.harga as hargamj,mj.dp,mj.sisa_dp' );
 		$this->db->from('master_rumah r');
 		$this->db->join('master_proyek p', 'r.id_proyek=p.id_proyek', 'LEFT');
 		$this->db->join('master_jual mj', 'r.id_rumah=mj.id_rumah', 'LEFT');
@@ -127,11 +127,55 @@ class Booking_jual_m extends CI_Model {
 			return $kode."-".$id_adv."-".$bulan.$th;
 		}
 	}
+	function getNoSPR($bulan,$tahun){
+		$sql= "select master_id from master_jual where MONTH(tgl_trans)='$bulan' and YEAR(tgl_trans)='$tahun'";
+		$query = $this->db->query($sql);
+		$jml = $query->num_rows();
+		$kode = "Sales";//bg
+		$th = substr($tahun,-2);
+		if($bulan == 1){
+			$romawi = 'I';
+		}else if($bulan == 2){
+			$romawi = 'II';
+		}else if($bulan == 3){
+			$romawi = 'III';
+		}else if($bulan == 4){
+			$romawi = 'IV';
+		}else if($bulan == 5){
+			$romawi = 'V';
+		}else if($bulan == 6){
+			$romawi = 'VI';
+		}else if($bulan == 7){
+			$romawi = 'VII';
+		}else if($bulan == 8){
+			$romawi = 'VIII';
+		}else if($bulan == 9){
+			$romawi = 'IX';
+		}else if($bulan == 10){
+			$romawi = 'X';
+		}else if($bulan == 11){
+			$romawi = 'XI';
+		}else if($bulan == 12){
+			$romawi = 'XII';
+		}
+		if($jml == 0){
+			$id_adv = "001";
+			return $kode."-".$id_adv."-".$romawi.'-'.$th;
+		}else{
+			$sql= "select max(substring(no_spr,7,3)) as id_adv from master_jual";
+			$query = $this->db->query($sql);
+			$hasil = $query->result();
+			$id_adv =  $hasil[0]->id_adv;
+			$id_adv = sprintf('%03u',$id_adv+1);
+			return $kode."-".$id_adv."-".$romawi.'-'.$th;
+		}
+	}
+
 	function getDataCetak($kodeBooking){
-		$sql="select mj.master_id,mj.tgl_trans,mj.harga,mj.booking,mj.status_jual,tj.keterangan,mc.nama_cust,
+		$sql="select mj.master_id,mj.tgl_trans,mj.harga,mj.booking,mj.status_jual,mc.nama_cust,
 			  mr.nama_rumah,mp.nama_proyek,mc.id_cust,mr.id_rumah,mc.no_id,mc.alamat,mc.no_hp,mc.no_telp,mc.alamat,
 			  mc.email,mc.no_npwp,mc.no_va,mc.nama_va,mc.bank_va
-			  from master_jual mj left join trans_jual tj on mj.master_id = tj.master_id
+			  from master_jual mj
 			  left join master_customer mc on mj.id_cust = mc.id_cust
 			  left join master_rumah mr on mj.id_rumah = mr.id_rumah
 			  left join master_proyek mp on mr.id_proyek = mp.id_proyek where mj.status_jual = '1' and mj.master_id = '".$kodeBooking."'";
