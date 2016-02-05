@@ -93,6 +93,9 @@ foreach($neraca as $n)
 		$this->fpdf->Cell(2.5 , 0.5, $n->kode_perk, 'L', 'LR', 'L');
 		$this->fpdf->Cell(2.5 , 0.5, $n->kode_alt, 0, 'LR', 'L');	
 		$this->fpdf->Cell(7 , 0.5, $a, 0, 'LR', 'L');
+		if($n->kode_perk == '' && $n->nama_perk == ''){
+			$saldo = '';
+		}
 		$this->fpdf->Cell(2.5 , 0.5, $saldo, 'R', 'LR', 'R');
 		if($n->kode_perk_psv == ''){
 			$this->fpdf->SetFont('Times','B',8);

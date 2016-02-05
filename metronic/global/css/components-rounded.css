@@ -5336,14 +5336,14 @@ Tiles(new in v1.1.1)
   display: block;
   letter-spacing: 0.02em;
   float: left;
-  height: 135px;/*135*/
-  width: 135px !important;/*135*/
+  height: 80px;/*135*/
+  width: 80px !important;/*135*/
   cursor: pointer;
   text-decoration: none;
   color: #ffffff;
   position: relative;
   font-weight: 300;
-  font-size: 12px;
+  font-size: 12px;/**/
   letter-spacing: 0.02em;
   line-height: 20px;
   overflow: hidden;
@@ -5500,7 +5500,7 @@ Tiles(new in v1.1.1)
   margin-left: 10px;
   margin-right: 15px;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 10px;/*13*/
   color: #ffffff;
 }
 .tiles .tile .tile-object > .name > i {

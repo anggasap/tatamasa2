@@ -22,88 +22,56 @@ $this->fpdf->Line(0.5,3.20,20.5,3.20);
 //$this->fpdf->SetFont('Times','B',12);
 //$this->fpdf->Cell(19,1,'Header',0,0,'C');
 /* setting header table */
-$this->fpdf->SetFont('Times','B',10);
-$this->fpdf->Cell(4 , 0.5, 'Kode Perkiraan' , 1, 'LR', 'C');
-$this->fpdf->Cell(4 , 0.5, 'Kode Alt' , 1, 'LR', 'C');
-$this->fpdf->Cell(8 , 0.5, 'Nama' , 1, 'LR', 'C');
-$this->fpdf->Cell(4 , 0.5, 'Rupiah' , 1, 'LR', 'C');
+$this->fpdf->SetFont('Times','B',12);
+$this->fpdf->Cell(14 , 0.5, 'Nama' , 1, 'LR', 'C');
+$this->fpdf->Cell(6 , 0.5, 'Saldo' , 1, 'LR', 'C');
 /* generate hasil query disini */
 $no = 1;
-foreach($pendapatan as $p)
+foreach($all as $n)
 {
+	if($n->level == 1){
+		$a = $n->nama_perk;
+	}elseif($n->level == 2){
+		$a = ' '.$n->nama_perk;
+	}elseif($n->level == 3){
+		$a = '  '.$n->nama_perk;
+	}elseif($n->level == 4){
+		$a = '   '.$n->nama_perk;
+	}elseif($n->level == 5){
+		$a = '    '.$n->nama_perk;
+	}elseif($n->level == 6){
+		$a = '     '.$n->nama_perk;
+	}elseif($n->level == 7){
+		$a = '      '.$n->nama_perk;
+	}else{
+		$a = '       '.$n->nama_perk;
+	}	
 	$this->fpdf->Ln();
-	$saldo_akhir = $p->saldo_akhir;
+	$saldo_akhir = $n->saldo_akhir;
 	if ($saldo_akhir < 0){
 		$s = number_format($saldo_akhir,2,'.',',');
 		$s = str_replace('-','',$s);
 		$saldo = '('.$s.')';
 	}else{
-		$saldo = number_format($p->saldo_akhir,2,'.',',');
+		$saldo = number_format($n->saldo_akhir,2,'.',',');
 	}
-	$this->fpdf->SetFont('Times','',8);
-	$this->fpdf->Cell(4 , 0.5, $p->kode_perk, 1, 'LR', 'L');
-	$this->fpdf->Cell(4 , 0.5, $p->kode_alt, 1, 'LR', 'L');	
-	$this->fpdf->Cell(8 , 0.5, $p->nama_perk, 1, 'LR', 'L');
-	$this->fpdf->Cell(4 , 0.5, $saldo, 1, 'LR', 'R');
+	$this->fpdf->SetFont('Times','',12);
+	$this->fpdf->Cell(14 , 0.5, $a, 1, 'LR', 'L');
+	$this->fpdf->Cell(6 , 0.5, $saldo, 1, 'LR', 'R');
+	$no++;
 }
 	$this->fpdf->Ln();
-	if ($total_pendapatan < 0){
-		$p = number_format($total_pendapatan,2,'.',',');
-		$p = str_replace('-','',$p);
-		$saldo = '('.$p.')';
-	}else{
-		$saldo = number_format($total_pendapatan,2,'.',',');
-	}
-	$this->fpdf->SetFont('Times','B',8);
-	$this->fpdf->Cell(16 , 0.5, 'Total Pendapatan', 1, 'LR', 'L');
-	$this->fpdf->Cell(4 , 0.5, $saldo, 1, 'LR', 'R');
-foreach($biaya as $b)
-{	
-	$this->fpdf->Ln();
-	$saldo_akhir = $b->saldo_akhir;
-	if ($saldo_akhir < 0){
-		$s = number_format($saldo_akhir,2,'.',',');
+	$saldo_besih = $bersih;
+	if ($saldo_besih < 0){
+		$s = number_format($saldo_bersih,2,'.',',');
 		$s = str_replace('-','',$s);
-		$saldo = '('.$s.')';
+		$saldob = '('.$s.')';
 	}else{
-		$saldo = number_format($b->saldo_akhir,2,'.',',');
+		$saldob = number_format($saldo_besih,2,'.',',');
 	}
-	$this->fpdf->SetFont('Times','',8);
-	$this->fpdf->Cell(4 , 0.5, $b->kode_perk, 1, 'LR', 'L');
-	$this->fpdf->Cell(4 , 0.5, $b->kode_alt, 1, 'LR', 'L');
-	$this->fpdf->Cell(8 , 0.5, $b->nama_perk, 1, 'LR', 'L');
-	$this->fpdf->Cell(4 , 0.5, $saldo, 1, 'LR', 'R');
-			
-}
-	$this->fpdf->Ln();
-	if($total_biaya < 0){
-		$t = number_format($total_biaya,2,'.',',');
-		$t = str_replace('-','',$t);
-		$biaya = '('.$t.')';
-	}else{
-		$biaya = number_format($total_biaya,2,'.',',');
-	}
-	$this->fpdf->SetFont('Times','B',8);
-	$this->fpdf->Cell(16 , 0.5, 'Total Biaya', 1, 'LR', 'L');
-	$this->fpdf->Cell(4 , 0.5, $biaya, 1, 'LR', 'R');
-	$laba = $total_pendapatan - $total_biaya;
-	if($laba < 0){
-		$l = number_format($laba,2,'.',',');
-		$l = str_replace('-','',$l);
-		$laba = '('.$l.')';
-	}else{
-		$laba = number_format($laba,2,'.',',');
-	}
-	$this->fpdf->Ln();
-	$this->fpdf->Cell(16 , 0.5, 'Laba Rugi', 1, 'LR', 'L');
-	$this->fpdf->Cell(4 , 0.5, $laba, 1, 'LR', 'R');
-	$this->fpdf->Ln();
-	$this->fpdf->Cell(16 , 0.5, 'Taksiran Pph', 1, 'LR', 'L');
-	$this->fpdf->Cell(4 , 0.5, '0.00', 1, 'LR', 'R');
-	$this->fpdf->Ln();
-	$this->fpdf->Cell(16 , 0.5, 'Laba rugi setelah pajak', 1, 'LR', 'L');
-	$this->fpdf->Cell(4 , 0.5, $laba, 1, 'LR', 'R');
-	
+	$this->fpdf->SetFont('Times','',12);
+	$this->fpdf->Cell(14 , 0.5, 'Laba(Rugi) bersih', 1, 'LR', 'L');
+	$this->fpdf->Cell(6 , 0.5, $saldob, 1, 'LR', 'R');
 /* setting posisi footer 3 cm dari bawah */
 /* generate pdf jika semua konstruktor, data yang akan ditampilkan, dll sudah selesai */
 $this->fpdf->Output($laporan."_".date('d-m-Y h:i:sa').".pdf","I");

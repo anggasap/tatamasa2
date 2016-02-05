@@ -63,7 +63,7 @@ class Laporan_laba_rugi extends CI_Controller
 				$alamat = $i->alamat;
 			}
 			
-			$data ['total_pendapatan'] = $this->lap_laba_rugi_m->get_total_pendapatan($tgl_trans,$this->session->userdata('id_user'));
+			/*$data ['total_pendapatan'] = $this->lap_laba_rugi_m->get_total_pendapatan($tgl_trans,$this->session->userdata('id_user'));
 			$data ['total_biaya'] = $this->lap_laba_rugi_m->get_total_biaya($tgl_trans,$this->session->userdata('id_user'));
 			if($nol == '1'){
 				$data ['pendapatan'] = $this->lap_laba_rugi_m->get_data_laba_rugi_pendapatan($tgl_trans,$this->session->userdata('id_user'));
@@ -74,8 +74,14 @@ class Laporan_laba_rugi extends CI_Controller
 				$data ['biaya'] = $this->lap_laba_rugi_m->get_data_laba_rugi_biaya($tgl_trans,$this->session->userdata('id_user'));	
 			}else{
 				$data ['biaya'] = $this->lap_laba_rugi_m->get_data_laba_rugi_biaya_bukan_nol($tgl_trans,$this->session->userdata('id_user'));
-			}	
+			}*/	
 			
+			if($nol == '1'){
+				$data ['all'] = $this->lap_laba_rugi_m->get_data_labarugi($tgl_trans,$this->session->userdata('id_user'));
+			}else{
+				$data ['all'] = $this->lap_laba_rugi_m->get_data_labarugi_tanpa_0($tgl_trans,$this->session->userdata('id_user'));	
+			}
+			$data ['bersih'] = $this->lap_laba_rugi_m->get_labarugi_bersih($tgl_trans,$this->session->userdata('id_user'));
 			define('FPDF_FONTPATH',$this->config->item('fonts_path'));
 			$data['image1']  = base_url('metronic/img/tatamasa_logo.jpg');	
 			$data['nama'] 	 = trim($nama);

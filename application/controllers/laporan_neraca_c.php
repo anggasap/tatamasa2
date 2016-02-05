@@ -73,11 +73,11 @@ class Laporan_neraca_c extends CI_Controller
 			foreach($saldo_aktiva->result() as $row){
 				$this->lapneracamodel->update_saldo_temp_perkiraan($row->kode_perk,$row->jumlah_ak,$this->session->userdata('id_user'));
 			}
-			$saldo_pasiva = $this->lapneracamodel->get_saldo_pasiva( $tgl_trans,$this->session->userdata('id_user'));
+			$saldo_pasiva = $this->lapneracamodel->get_saldo_pasiva($tgl_trans,$this->session->userdata('id_user'));
 			foreach($saldo_pasiva->result() as $row){
 				$this->lapneracamodel->update_saldo_temp_perkiraan($row->kode_perk,$row->jumlah_psv,$this->session->userdata('id_user'));
 			}
-			$get_kode_induk = $this->lapneracamodel->get_kode_induk( $tgl_trans,$this->session->userdata('id_user'));
+			$get_kode_induk = $this->lapneracamodel->get_kode_induk($tgl_trans,$this->session->userdata('id_user'));
 			foreach($get_kode_induk->result() as $row1){
 				$jsu = 0;
 				$get_saldo_induk = $this->lapneracamodel->get_saldo_induk($row1->kode_perk,$this->session->userdata('id_user'));
@@ -305,6 +305,8 @@ class Laporan_neraca_c extends CI_Controller
 							}
 							$idT = $id+1;
 							$dataTM = array(
+								'user_id'  => $this->session->userdata('id_user'),
+								'tanggal'  => $tgl_trans,
 								'kode_perk'  => '',
 								'kode_alt' => '',
 								'nama_perk' => '',
@@ -323,6 +325,8 @@ class Laporan_neraca_c extends CI_Controller
 							$this->db->insert('web_temp', $dataTM);
 							$idlr = $idT+1;
 							$datalr = array(
+								'user_id'  => $this->session->userdata('id_user'),
+								'tanggal'  => $tgl_trans,
 								'kode_perk'  => '',
 								'kode_alt' => '',
 								'nama_perk' => '',
@@ -456,17 +460,64 @@ class Laporan_neraca_c extends CI_Controller
 							$id++;	
 						}
 						$idT = $id+1;
+						$total_row = $this->lapneracamodel->get_total_row($tgl_trans,$this->session->userdata('id_user'));
 						$dataTM = array(
 							'nama_perk_psv' => 'Total Modal',
 							'saldo_akhir_psv' => $total_modal
 						);
-						$update_temp = $this->lapneracamodel->update_temp($dataTM,$idT);
+						if($total_row < $idT){
+							$dataTM = array(
+								'user_id'  => $this->session->userdata('id_user'),
+								'tanggal'  => $tgl_trans,
+								'kode_perk'  => '',
+								'kode_alt' => '',
+								'nama_perk' => '',
+								'type' => '',
+								'level' => '0',
+								'kode_induk' => '',
+								'saldo_akhir' => '0',
+								'kode_perk_psv'  => '',
+								'kode_alt_psv' => '',
+								'nama_perk_psv' => 'Total Modal',
+								'type_psv' => '',
+								'level_psv' => '0',
+								'kode_induk_psv' => '',	
+								'saldo_akhir_psv' => $total_modal
+							);
+							$this->db->insert('web_temp', $dataTM);
+						}else{
+							$update_temp = $this->lapneracamodel->update_temp($dataTM,$idT);
+						}
+						
 						$idlr = $idT+1;
+						$total_rowr = $this->lapneracamodel->get_total_row($tgl_trans,$this->session->userdata('id_user'));
 						$datalr = array(
 							'nama_perk_psv' => 'Laba Rugi Berjalan',
 							'saldo_akhir_psv' => $laba_rugi_berjalan
 						);
-						$update_temp = $this->lapneracamodel->update_temp($datalr,$idlr);				
+						if($total_row < $idlr){
+							$dataTM = array(
+								'user_id'  => $this->session->userdata('id_user'),
+								'tanggal'  => $tgl_trans,
+								'kode_perk'  => '',
+								'kode_alt' => '',
+								'nama_perk' => '',
+								'type' => '',
+								'level' => '0',
+								'kode_induk' => '',
+								'saldo_akhir' => '0',
+								'kode_perk_psv'  => '',
+								'kode_alt_psv' => '',
+								'nama_perk_psv' => 'Laba Rugi Berjalan',
+								'type_psv' => '',
+								'level_psv' => '0',
+								'kode_induk_psv' => '',	
+								'saldo_akhir_psv' => $laba_rugi_berjalan
+							);
+							$this->db->insert('web_temp', $dataTM);
+						}else{	
+							$update_temp = $this->lapneracamodel->update_temp($datalr,$idlr);
+						}
 					}else{
 						$temp_pasiva = $this->lapneracamodel->insert_temp_pasiva_tanpa_0( $tgl_trans,$this->session->userdata('id_user'));
 						$total_modal  = $this->lapneracamodel->get_total_modal($tgl_trans);
@@ -488,6 +539,8 @@ class Laporan_neraca_c extends CI_Controller
 						}
 						$idT = $id+1;
 						$dataTM = array(
+							'user_id'  => $this->session->userdata('id_user'),
+							'tanggal'  => $tgl_trans,
 							'kode_perk'  => '',
 							'kode_alt' => '',
 							'nama_perk' => '',
@@ -506,6 +559,8 @@ class Laporan_neraca_c extends CI_Controller
 						$this->db->insert('web_temp', $dataTM);
 						$idlr = $idT+1;
 						$datalr = array(
+							'user_id'  => $this->session->userdata('id_user'),
+							'tanggal'  => $tgl_trans,
 							'kode_perk'  => '',
 							'kode_alt' => '',
 							'nama_perk' => '',

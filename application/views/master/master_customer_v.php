@@ -189,7 +189,7 @@ table#idTabelRumah td:nth-child(5) {
                                         <div class="col-md-8">
                                             <label>Atas Nama</label>
                                             <input id="id_namaVA" required="required" class="form-control  input-sm"
-                                                   type="text" name="namaVA" />
+                                                   type="text" name="namaVA" value="PT Berkah Graha Mandiri" />
                                         </div>
                                         <div class="col-md-4">
 
@@ -201,7 +201,7 @@ table#idTabelRumah td:nth-child(5) {
                                         <div class="col-md-8">
                                             <label>Bank</label>
                                             <input id="id_bankVA" required="required" class="form-control  input-sm"
-                                                   type="text" name="bankVA" />
+                                                   type="text" name="bankVA" value="Mandiri Cab Kemang Jakarta" />
                                         </div>
                                         <div class="col-md-4">
 
@@ -661,6 +661,8 @@ table#idTabelRumah td:nth-child(5) {
 		btnStart();
         resetForm();
         readyToStart();
+        $('#id_namaVA').val('PT Berkah Graha Mandiri');
+        $('#id_bankVA').val('Mandiri Cab Kemang Jakarta');
         $('#id_btnModalProyek').attr('disabled',false);
 	});
     function getDescCust(idCust) {

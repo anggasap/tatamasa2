@@ -300,7 +300,7 @@
                                     <!--end <div class="col-md-6"> 1 -->
                                 </div>
                             </div>
-                            <div class="row">
+                            <!--<div class="row">
                                 <div class="col-md-3">
                                     <label>PPN</label>
                                     <select id="id_ppn" class="form-control input-sm select2me" name="ppn">
@@ -321,7 +321,7 @@
                                 <div class="col-md-4">
 
                                 </div>
-                            </div>
+                            </div>-->
                             <hr>
                             <div class="row">
                                 <div class="form-body">
